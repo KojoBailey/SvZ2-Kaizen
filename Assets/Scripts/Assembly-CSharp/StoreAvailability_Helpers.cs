@@ -18,53 +18,50 @@ public class StoreAvailability_Helpers
 
 	public static void Get(HelperSchema helper, bool force, List<StoreData.Item> items)
 	{
-		if (helper.hideInStore && !force)
-		{
-			return;
-		}
+		if (helper.hideInStore && !force) return;
 		string id = helper.id;
 		bool flag = false;
-		int num = Singleton<Profile>.Instance.GetHelperLevel(id);
-		int num2 = helper.Levels.Length;
+		int helperLevel = Singleton<Profile>.Instance.GetHelperLevel(id);
+		int helperMaxLevel = helper.Levels.Length;
 		if (helper.Locked)
 		{
 			flag = true;
 		}
 		else
 		{
-			num = Singleton<HelpersDatabase>.Instance.EnsureProperInitialHelperLevel(id);
+			helperLevel = Singleton<HelpersDatabase>.Instance.EnsureProperInitialHelperLevel(id);
 		}
-		int num3 = ((num >= num2) ? num : (num + 1));
+		int nextNonMaxLevel = (helperLevel >= helperMaxLevel) ? helperLevel : (helperLevel + 1);
 		HelperLevelSchema curLevel = helper.CurLevel;
 		HelperLevelSchema nextLevel = helper.NextLevel;
 		string text = nextLevel.health.ToString();
-		string text2 = ((nextLevel.meleeDamage <= nextLevel.bowDamage) ? nextLevel.bowDamage.ToString() : nextLevel.meleeDamage.ToString());
+		string text2 = (nextLevel.meleeDamage <= nextLevel.bowDamage) ? nextLevel.bowDamage.ToString() : nextLevel.meleeDamage.ToString();
 		float salePercentage = SaleItemSchema.FindActiveSaleForItem(id);
 		Cost itemCost = new Cost(nextLevel.cost, salePercentage);
 		string delegateArg = id;
-		bool isLastUpgrade = num3 == num2;
+		bool isLastUpgrade = nextNonMaxLevel == helperMaxLevel;
 		StoreData.Item item = new StoreData.Item(delegate
 		{
 			LevelUpHelper(itemCost, delegateArg, isLastUpgrade);
 		});
 		item.cost = itemCost;
 		bool flag2 = string.Equals(id, "Mount_Balanced");
-		if (num3 == 1)
+		if (nextNonMaxLevel == 1)
 		{
 			item.details.AddStat("health_stats", text, text);
 			item.details.AddStat("strength_stats", (!flag2) ? text2 : (text2 + "%"), (!flag2) ? text2 : (text2 + "%"));
-			item.details.SetColumns(num3, num3);
+			item.details.SetColumns(nextNonMaxLevel, nextNonMaxLevel);
 		}
 		else
 		{
-			string text3 = ((curLevel.meleeDamage <= curLevel.bowDamage) ? curLevel.bowDamage.ToString() : curLevel.meleeDamage.ToString());
+			string text3 = (curLevel.meleeDamage <= curLevel.bowDamage) ? curLevel.bowDamage.ToString() : curLevel.meleeDamage.ToString();
 			item.details.AddStat("health_stats", curLevel.health.ToString(), text);
 			item.details.AddStat("strength_stats", (!flag2) ? text3 : (text3 + "%"), (!flag2) ? text2 : (text2 + "%"));
-			item.details.SetColumns(num, num3);
+			item.details.SetColumns(helperLevel, nextNonMaxLevel);
 		}
-		item.details.MaxLevel = num2;
+		item.details.MaxLevel = helperMaxLevel;
 		item.id = id;
-		if (flag && !string.IsNullOrEmpty(helper.LockedIconPath))
+		if (helper.Locked && !string.IsNullOrEmpty(helper.LockedIconPath))
 		{
 			item.LoadIcon(helper.LockedIconPath);
 		}
@@ -76,7 +73,7 @@ public class StoreAvailability_Helpers
 		{
 			item.LoadIcon(helper.IconPath);
 		}
-		item.locked = flag;
+		item.locked = helper.Locked;
 		item.unlockAtWave = helper.waveToUnlock;
 		item.availableAtWave = helper.availableAtWave;
 		item.isNew = Singleton<Profile>.Instance.highestUnlockedWave == helper.waveToUnlock && (!SingletonMonoBehaviour<StoreMenuImpl>.Exists || !SingletonMonoBehaviour<StoreMenuImpl>.Instance.HasViewedNewItem(item.id));
@@ -85,7 +82,7 @@ public class StoreAvailability_Helpers
 			item.secondIcon = helper.championIcon;
 		}
 		string stringFromStringRef = StringUtils.GetStringFromStringRef(helper.displayName);
-		if (flag)
+		if (helper.Locked)
 		{
 			if (!DataBundleRecordKey.IsNullOrEmpty(nextLevel.specialUnlockText))
 			{
@@ -96,18 +93,18 @@ public class StoreAvailability_Helpers
 				item.unlockCondition = string.Format(StringUtils.GetStringFromStringRef("LocalizedStrings", "store_unlockatwave"), item.unlockAtWave);
 			}
 		}
-		if (num3 == 1)
+		if (nextNonMaxLevel == 1)
 		{
 			item.title = string.Format(StringUtils.GetStringFromStringRef("LocalizedStrings", "store_format_recruit"), stringFromStringRef);
 		}
-		else if (num3 == num)
+		else if (nextNonMaxLevel == helperLevel)
 		{
 			item.maxlevel = true;
 			item.title = string.Format(StringUtils.GetStringFromStringRef("LocalizedStrings", "store_upgrades_complete"), stringFromStringRef);
 		}
 		else
 		{
-			item.title = string.Format(StringUtils.GetStringFromStringRef("LocalizedStrings", "store_format_levelup"), stringFromStringRef, num3);
+			item.title = string.Format(StringUtils.GetStringFromStringRef("LocalizedStrings", "store_format_levelup"), stringFromStringRef, nextNonMaxLevel);
 		}
 		item.unlockTitle = stringFromStringRef;
 		item.details.AddSmallDescription(StringUtils.GetStringFromStringRef(helper.desc));
@@ -115,7 +112,7 @@ public class StoreAvailability_Helpers
 		item.analyticsEvent = "UpgradePurchased";
 		item.analyticsParams = new Dictionary<string, object>();
 		item.analyticsParams["ItemName"] = "Helper_" + item.id;
-		item.analyticsParams["UpgradeLevel"] = num3;
+		item.analyticsParams["UpgradeLevel"] = nextNonMaxLevel;
 		items.Add(item);
 	}
 

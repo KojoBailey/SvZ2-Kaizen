@@ -130,9 +130,14 @@ public class StoreAvailability
 		item.analyticsParams = new Dictionary<string, object>();
 		item.analyticsParams["ItemName"] = heroID + ".HeroLevel";
 		item.analyticsParams["UpgradeLevel"] = num;
-		if (heroLevel < heroSchema.Levels.Length) {
-			items.Add(item);
+		string stringFromStringRef = StringUtils.GetStringFromStringRef(heroSchema.displayName);
+		if (heroLevel >= heroSchema.Levels.Length)
+		{
+			item.maxlevel = true;
+			item.title = string.Format(StringUtils.GetStringFromStringRef("LocalizedStrings", "store_upgrades_complete"), stringFromStringRef);
+			item.details.Name = stringFromStringRef;
 		}
+		items.Add(item);
 		GetLeadership(heroID, items);
 		GetWeapon(heroSchema.MeleeWeapon, Singleton<Profile>.Instance.GetMeleeWeaponLevel(heroID), heroID, items);
 		if (heroSchema.ArmorLevels != null)
