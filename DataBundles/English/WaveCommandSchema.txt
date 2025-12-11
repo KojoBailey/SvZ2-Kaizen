@@ -2546,77 +2546,37 @@
     command = NULL
 [Wave_001]
   1:
-    index = 1
     enemy = Enemies.CrawlingTorso_Tutorial
-    command = NULL
   2:
-    index = 2
-    enemy = 
     command = 8,8
   3:
-    index = 3
     enemy = Enemies.CrawlingTorso_Tutorial
-    command = NULL
   15:
-    index = 15
-    enemy = 
     command = 4,4
   4:
-    index = 4
     enemy = Enemies.l_zombie_melee_tutorial
-    command = NULL
   5:
-    index = 5
-    enemy = 
-    command = (
+    command = HOLD
   6:
-    index = 6
     enemy = Enemies.CrawlingTorso_Tutorial
-    command = NULL
-  16:
-    index = 16
-    enemy = 
-    command = )
   7:
-    index = 7
-    enemy = 
     command = 3,3
   8:
-    index = 8
     enemy = Enemies.CrawlingTorso_Tutorial
-    command = NULL
   9:
-    index = 9
-    enemy = 
     command = 3,3
   10:
-    index = 10
     enemy = Enemies.CrawlingTorso_Tutorial
-    command = NULL
   17:
-    index = 17
-    enemy = 
-    command = (
+    command = HOLD
   11:
-    index = 11
-    enemy = 
     command = 1,1
   12:
-    index = 12
     enemy = Enemies.l_zombie_melee_tutorial
-    command = NULL
   13:
-    index = 13
-    enemy = 
     command = 2,2
   14:
-    index = 14
     enemy = Enemies.l_zombie_melee_tutorial
-    command = NULL
-  18:
-    index = 18
-    enemy = 
-    command = )
 [Wave_002]
   1:
     index = 1

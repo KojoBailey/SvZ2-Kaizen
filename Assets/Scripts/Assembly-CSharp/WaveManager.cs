@@ -9,6 +9,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 	{
 		Spawn = 0,
 		Delay = 1,
+		DeathDelay = 6,
 		LegionTag = 2,
 		UserDefined = 3,
 		Num = 4,
@@ -476,6 +477,25 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		case CommandType.UserDefined:
 			WeakGlobalMonoBehavior<InGameImpl>.Instance.RunSpecialWaveCommand(command.ToLower());
 			break;
+		case CommandType.DeathDelay:
+			if (mSkipNextLegion)
+			{
+				SkipToEndOfLegion();
+				mSkipNextLegion = false;
+			}
+			else if (mSpawnedEnemiesSoFar == mEnemiesKilledSoFar)
+			{
+				WeakGlobalMonoBehavior<InGameImpl>.Instance.RunSpecialWaveCommand("@legionalert");
+				if (this.onLegionStart != null)
+				{
+					this.onLegionStart();
+				}
+			}
+			else
+			{
+				mNextCommandToRun--;
+			}
+			break;
 		case CommandType.Delay:
 		{
 			KeyValuePair<float, float> keyValuePair = ExtractTimer(command);
@@ -499,29 +519,6 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 			}
 			break;
 		}
-		case CommandType.LegionTag:
-			if (command[0] != '(')
-			{
-				break;
-			}
-			if (mSkipNextLegion)
-			{
-				SkipToEndOfLegion();
-				mSkipNextLegion = false;
-			}
-			else if (mSpawnedEnemiesSoFar == mEnemiesKilledSoFar)
-			{
-				WeakGlobalMonoBehavior<InGameImpl>.Instance.RunSpecialWaveCommand("@legionalert");
-				if (this.onLegionStart != null)
-				{
-					this.onLegionStart();
-				}
-			}
-			else
-			{
-				mNextCommandToRun--;
-			}
-			break;
 		}
 	}
 
@@ -568,24 +565,27 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	private void SkipToEndOfLegion()
 	{
-		while (mNextCommandToRun < waveRootData.Commands.Length)
-		{
-			string command = GetCommand(mNextCommandToRun);
-			CommandType commandType = GetCommandType(command);
-			mNextCommandToRun++;
-			switch (commandType)
-			{
-			case CommandType.Spawn:
-				mEnemiesKilledSoFar++;
-				break;
-			case CommandType.LegionTag:
-				if (command[0] == ')')
-				{
-					return;
-				}
-				break;
-			}
-		}
+		// while (mNextCommandToRun < waveRootData.Commands.Length)
+		// {
+		// 	string command = GetCommand(mNextCommandToRun);
+		// 	CommandType commandType = GetCommandType(command);
+		// 	mNextCommandToRun++;
+		// 	switch (commandType)
+		// 	{
+		// 	case CommandType.Spawn:
+		// 		mEnemiesKilledSoFar++;
+		// 		break;
+		// 	case CommandType.LegionTag:
+		// 		if (command[0] == ')')
+		// 		{
+		// 			return;
+		// 		}
+		// 		break;
+		// 	}
+		// }
+
+		mNextCommandToRun++;
+		mEnemiesKilledSoFar++;
 	}
 
 	private KeyValuePair<float, float> ExtractTimer(string cmd)
@@ -696,7 +696,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	private void AnalyseWaveCommandsForStats()
 	{
-		mTotalNumEnemies = ((Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive() && Singleton<Profile>.Instance.MultiplayerData.MultiplayerGameSessionData.defensiveBuffs[0] > 0) ? 1 : 0);
+		mTotalNumEnemies = (Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive() && Singleton<Profile>.Instance.MultiplayerData.MultiplayerGameSessionData.defensiveBuffs[0] > 0) ? 1 : 0;
 		mAllDifferentEnemies.Clear();
 		for (int i = 0; i < waveRootData.Commands.Length; i++)
 		{
@@ -730,10 +730,14 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		{
 			return CommandType.UserDefined;
 		}
-		if (cmd[0] == '(' || cmd[0] == ')')
-		{
-			return CommandType.LegionTag;
-		}
+		// if (cmd[0] == '(' || cmd[0] == ')')
+		// {
+		// 	return CommandType.LegionTag;
+		// }
+		if (cmd == "HOLD")
+        {
+            return CommandType.DeathDelay;
+        }
 		if (ExtractTimer(cmd).Key != -1f)
 		{
 			return CommandType.Delay;
