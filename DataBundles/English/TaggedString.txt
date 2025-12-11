@@ -80,43 +80,43 @@
     stringValue = Oni
   helper_farmer_name:
     tag = helper_farmer_name
-    stringValue = Farmer
+    stringValue = Ashigaru
   helper_farmer_desc:
     tag = helper_farmer_desc
-    stringValue = Weak health and damage, but great for massed attacks.
+    stringValue = As farmers of the village, not very strong, but oh so loyal.
   helper_ninja_girl:
     tag = helper_ninja_girl
-    stringValue = Assassin
+    stringValue = Kunominichi
   helper_ninja_girl_desc:
     tag = helper_ninja_girl_desc
-    stringValue = Stealthy Assasins! They strike fast with both melee and ranged attacks!
+    stringValue = Speedy assassins, striking fast with both melee and ranged attacks!
   helper_Nobunaga:
     tag = helper_Nobunaga
-    stringValue = Nobunaga
+    stringValue = Oda Nobunaga
   helper_Nobunaga_desc:
     tag = helper_Nobunaga_desc
-    stringValue = A Legendary Warrior, Nobunaga is a powerful fighter with high health.
+    stringValue = Ruthless leader of the Oda clan, come to make legend.
   helper_swordsmith:
     tag = helper_swordsmith
-    stringValue = Swordsmith
+    stringValue = Date Masamune
   helper_takeda:
     tag = helper_takeda
     stringValue = Takeda Shingen
   helper_takeda_desc:
     tag = helper_takeda_desc
-    stringValue = A hero of Legend! Takeda is a mighty warrior on horseback; fast with a powerful attack.
+    stringValue = The legendary Tiger of Kai, defeating the hordes on horseback!
   helper_heavy_samurai:
     tag = helper_heavy_samurai
-    stringValue = Panzer Samurai
+    stringValue = O-Yoroi Samurai
   helper_heavy_samurai_desc:
     tag = helper_heavy_samurai_desc
-    stringValue = The Panzer Samurai are extremely tough but are slowed by their heavy armor.
+    stringValue = Extremely tough, but slowed by heavy armour.
   helper_ice_archer:
     tag = helper_ice_archer
-    stringValue = Frostie the Bowman
+    stringValue = Frosty the Bowman
   helper_ice_archer_desc:
     tag = helper_ice_archer_desc
-    stringValue = The coolest Ally! His icy arrows slow enemies.
+    stringValue = Stone-cold chiller, slowing the hordes with his frozen arrows!
   store_find_frostie:
     tag = store_find_frostie
     stringValue = Find Frostie the Bowman!
@@ -125,10 +125,10 @@
     stringValue = Find the Assassin!
   helper_priest:
     tag = helper_priest
-    stringValue = Priest
+    stringValue = Kannushi
   helper_priest_desc:
     tag = helper_priest_desc
-    stringValue = Heals the Hero and other Allies with the power of the divine.
+    stringValue = Heal allies with miracles of the divine!
   store_find_rifleman:
     tag = store_find_rifleman
     stringValue = Find the Riflesmith!
@@ -137,34 +137,34 @@
     stringValue = Riflesmith
   helper_rifleman_desc:
     tag = helper_rifleman_desc
-    stringValue = The Riflesmith upgrades Samurai Archers to use Rifles!
+    stringValue = Upgrades all Kyudo Samurai to fire hinawaju rifles for much greater damage!
   helper_samurai_name:
     tag = helper_samurai_name
-    stringValue = Sword Warrior
+    stringValue = Katana Samurai
   helper_samurai_desc:
     tag = helper_samurai_desc
-    stringValue = Sworn protectors of the Village, these swordsmen are solid melee troops.
+    stringValue = Sworn protectors of the village, armed to repel the invasion!
   helper_samurai_archer:
     tag = helper_samurai_archer
-    stringValue = Bowman
+    stringValue = Kyudo Samurai
   helper_samurai_archer_desc:
     tag = helper_samurai_archer_desc
-    stringValue = Bowmen have a long range and can attack flyers, but they do have low defense.
+    stringValue = Long ranged, but can't take a hit up close.
   helper_horseman:
     tag = helper_horseman
-    stringValue = Spear Horseman
+    stringValue = Bajutsu Yari Samurai
   helper_horseman_desc:
     tag = helper_horseman_desc
-    stringValue = Attacking from horseback, these troops are fast with high damage.
+    stringValue = The cavalry, charging into battle but keeping their distance!
   helper_samurai_spearman:
     tag = helper_samurai_spearman
-    stringValue = Spear Warrior
+    stringValue = Yari Samurai
   helper_samurai_spearman_desc:
     tag = helper_samurai_spearman_desc
-    stringValue = Fighting with a spear allows these Samurai to have a long reach with their melee attacks.
+    stringValue = Fight from the rear, but do not mistake them for cowards.
   helper_swordsmith_desc:
     tag = helper_swordsmith_desc
-    stringValue = Master Swordsmith upgrades all Farmers on the field of battle!
+    stringValue = Japan's greatest swordsmith, upgrading bladed weapons on the field of battle!
   store_find_swordsmith:
     tag = store_find_swordsmith
     stringValue = Find the Swordsmith!
@@ -530,7 +530,7 @@
     stringValue = Now with lifesteal!
   helper_nobunaga:
     tag = helper_nobunaga
-    stringValue = Nobunaga
+    stringValue = Oda Nobunaga
   helper_crawler_name:
     tag = helper_crawler_name
     stringValue = Hopping Torso
@@ -575,7 +575,7 @@
     stringValue = The Village's bravest warrior. Use his strength to guide his people to victory!
   helper_nobunaga_desc:
     tag = helper_nobunaga_desc
-    stringValue = A Legendary Warrior, Nobunaga is a powerful fighter with high health.
+    stringValue = Ruthless leader of the Oda clan, come to make legend.
   helper_crawler_desc:
     tag = helper_crawler_desc
     stringValue = Legs are a crutch...
@@ -1598,16 +1598,16 @@
     stringValue = Necromancer
   New_Helper_FarmerOnStilts_name:
     tag = New_Helper_FarmerOnStilts_name
-    stringValue = Farmer on Stilts
+    stringValue = Takeuma Farmer
   New_Helper_FarmerOnStilts_description:
     tag = New_Helper_FarmerOnStilts_description
-    stringValue = Only the craziest of fighters would use stilts to battle flying enemies.  High power, but low health.
+    stringValue = Once the playthings of children, stilts protect these farmers from the demon hordes.
   New_Helper_SamuraiShield_name:
     tag = New_Helper_SamuraiShield_name
-    stringValue = Shield Samurai
+    stringValue = Shield Trooper
   New_Helper_SamuraiShield_description:
     tag = New_Helper_SamuraiShield_description
-    stringValue = A defensive warrior with very high health, the Shield Samurai will hold the line at all cost.
+    stringValue = Although shields are uncommon, they are ever effective in blocking away the hordes.
   HeroDefense_name:
     tag = HeroDefense_name
     stringValue = Ronin
@@ -1748,13 +1748,13 @@
     stringValue = A brave peasant with an arsenal of deadly rockets.  Ranged attack with area damage.
   New_Helper_Rocky_name:
     tag = New_Helper_Rocky_name
-    stringValue = Rocky T'man
+    stringValue = Kamikaze Rocketeer
   New_Helper_Rocky_description:
     tag = New_Helper_Rocky_description
     stringValue = A Hero of the people, Rocky T'man soars through the sky smashing into all enemies he flies through.
   New_Helper_Zato_name:
     tag = New_Helper_Zato_name
-    stringValue = Zato Swordsman
+    stringValue = Zatoichi
   New_Helper_Zato_description:
     tag = New_Helper_Zato_description
     stringValue = Blind swordmasters, Zato are deadly with a blade, deflecting ranged attacks from enemies.
@@ -3182,10 +3182,10 @@
     stringValue = Not for the faint of heart!  A new Challenge Wave will appear each day to test your skills as a warrior.  Overcome today's challenge to earn a great prize!
   New_Ally_Horse_Archer_name:
     tag = New_Ally_Horse_Archer_name
-    stringValue = Horse Archer
+    stringValue = Yabusame Samurai
   New_Ally_Horse_Archer_desc:
     tag = New_Ally_Horse_Archer_desc
-    stringValue = Expert at hit and run attacks, Horse Archers strike like lightning.
+    stringValue = Experts at hit and run attacks, Horse Archers strike like lightning.
   New_Ally_Horse_Master_name:
     tag = New_Ally_Horse_Master_name
     stringValue = Horse Master

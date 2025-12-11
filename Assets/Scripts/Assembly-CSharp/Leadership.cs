@@ -673,7 +673,7 @@ public class Leadership : WeakGlobalInstance<Leadership>
 			num = data.data.swordAttackRange;
 		}
 		num *= 0.5f;
-		float zTarget = ((!mIsLeftToRightGameplay) ? (mHelpersZTarget + num) : (mHelpersZTarget - num));
+		float zTarget = (!mIsLeftToRightGameplay) ? (mHelpersZTarget + num) : (mHelpersZTarget - num);
 		spawnPos.x = WeakGlobalInstance<CharactersManager>.Instance.GetBestSpawnXPos(spawnPos, sizeOfSpawnArea, data.data.lanePref, false, false, data.data.bowAttackRange > 0f);
 		Character character = null;
 		if (data.data.isEnemy)
