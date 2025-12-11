@@ -63,6 +63,8 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	private int mNextCommandToRun;
 
+	private bool mIsHolding = false;
+
 	private float mSpawnDelayTimer;
 
 	private bool mSkipNextLegion;
@@ -471,7 +473,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 			return;
 		}
 
-		if (!DataBundleRecordKey.IsNullOrEmpty(waveRootData.Commands[mNextCommandToRun].enemy))
+		if (!mIsHolding && !DataBundleRecordKey.IsNullOrEmpty(waveRootData.Commands[mNextCommandToRun].enemy))
         {
             string enemy = waveRootData.Commands[mNextCommandToRun].enemy.Key;
 			bool flag = false;
@@ -497,18 +499,14 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 			WeakGlobalMonoBehavior<InGameImpl>.Instance.RunSpecialWaveCommand(command.ToLower());
 			break;
 		case CommandType.DeathDelay:
-			if (mSkipNextLegion)
+			if (mSpawnedEnemiesSoFar != mEnemiesKilledSoFar)
 			{
-				SkipToEndOfLegion();
-				mSkipNextLegion = false;
-			}
-			else if (mSpawnedEnemiesSoFar == mEnemiesKilledSoFar)
-			{
-				// do nothing
+				mIsHolding = true;
+				mNextCommandToRun--;
 			}
 			else
 			{
-				mNextCommandToRun--;
+				mIsHolding = false;
 			}
 			break;
 		case CommandType.Delay:
@@ -578,31 +576,6 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		return (!DataBundleRecordKey.IsNullOrEmpty(waveRootData.Commands[index].enemy))
 			? waveRootData.Commands[index].enemy.Key
 			: waveRootData.Commands[index].command;
-	}
-
-	private void SkipToEndOfLegion()
-	{
-		// while (mNextCommandToRun < waveRootData.Commands.Length)
-		// {
-		// 	string command = GetCommand(mNextCommandToRun);
-		// 	CommandType commandType = GetCommandType(command);
-		// 	mNextCommandToRun++;
-		// 	switch (commandType)
-		// 	{
-		// 	case CommandType.Spawn:
-		// 		mEnemiesKilledSoFar++;
-		// 		break;
-		// 	case CommandType.LegionTag:
-		// 		if (command[0] == ')')
-		// 		{
-		// 			return;
-		// 		}
-		// 		break;
-		// 	}
-		// }
-
-		mNextCommandToRun++;
-		mEnemiesKilledSoFar++;
 	}
 
 	private KeyValuePair<float, float> ExtractTimer(string cmd)
