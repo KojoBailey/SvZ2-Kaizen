@@ -26,6 +26,7 @@ public class HUDWaveInfo : UIHandlerComponent
 	{
 		float num = 0f;
 		int num2 = 0;
+		int enemiesRemaining = WeakGlobalInstance<WaveManager>.Instance.totalEnemies - WeakGlobalInstance<WaveManager>.Instance.enemiesKilledSoFar;
 		if (WeakGlobalInstance<WaveManager>.Instance != null)
 		{
 			num = Mathf.Clamp((float)WeakGlobalInstance<WaveManager>.Instance.enemiesKilledSoFar / (float)WeakGlobalInstance<WaveManager>.Instance.totalEnemies, 0f, 1f);
@@ -52,7 +53,8 @@ public class HUDWaveInfo : UIHandlerComponent
 		if (num2 != mPreviousPercent)
 		{
 			mPreviousPercent = num2;
-			mPercentCompletedLabel.Text = string.Format(StringUtils.GetStringFromStringRef("MenuFixedStrings", "percent"), num2);
+			// mPercentCompletedLabel.Text = string.Format(StringUtils.GetStringFromStringRef("MenuFixedStrings", "percent"), num2);
+			mPercentCompletedLabel.Text = enemiesRemaining.ToString();
 			mMeter.Value = num;
 		}
 	}
