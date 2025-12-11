@@ -2563,7 +2563,7 @@
     command = 4,4
   4:
     index = 4
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.l_zombie_melee_tutorial
     command = NULL
   5:
     index = 5
@@ -2603,7 +2603,7 @@
     command = 1,1
   12:
     index = 12
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.l_zombie_melee_tutorial
     command = NULL
   13:
     index = 13
@@ -2611,7 +2611,7 @@
     command = 2,2
   14:
     index = 14
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.l_zombie_melee_tutorial
     command = NULL
   18:
     index = 18
