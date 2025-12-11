@@ -149,7 +149,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		}
 	}
 
-	public List<int> legionMarkers
+	public List<int> legionMarkers // unused
 	{
 		get
 		{
@@ -470,7 +470,26 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 			}
 			return;
 		}
-		string command = GetCommand(mNextCommandToRun);
+
+		if (!DataBundleRecordKey.IsNullOrEmpty(waveRootData.Commands[mNextCommandToRun].enemy))
+        {
+            string enemy = waveRootData.Commands[mNextCommandToRun].enemy.Key;
+			bool flag = false;
+			foreach (string mAllDifferentEnemy in mAllDifferentEnemies)
+			{
+				if (string.Compare(mAllDifferentEnemy, enemy, true) == 0)
+				{
+					flag = true;
+					break;
+				}
+			}
+			if (flag)
+			{
+				WeakGlobalInstance<CharactersManager>.Instance.AddCharacter(ConstructEnemy(enemy));
+			}
+        }
+
+		string command = waveRootData.Commands[mNextCommandToRun].command;
 		mNextCommandToRun++;
 		switch (GetCommandType(command))
 		{
@@ -485,11 +504,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 			}
 			else if (mSpawnedEnemiesSoFar == mEnemiesKilledSoFar)
 			{
-				WeakGlobalMonoBehavior<InGameImpl>.Instance.RunSpecialWaveCommand("@legionalert");
-				if (this.onLegionStart != null)
-				{
-					this.onLegionStart();
-				}
+				// do nothing
 			}
 			else
 			{
@@ -560,7 +575,9 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	private string GetCommand(int index)
 	{
-		return (!DataBundleRecordKey.IsNullOrEmpty(waveRootData.Commands[index].enemy)) ? waveRootData.Commands[index].enemy.Key : waveRootData.Commands[index].command;
+		return (!DataBundleRecordKey.IsNullOrEmpty(waveRootData.Commands[index].enemy))
+			? waveRootData.Commands[index].enemy.Key
+			: waveRootData.Commands[index].command;
 	}
 
 	private void SkipToEndOfLegion()
@@ -710,12 +727,12 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 					mAllDifferentEnemies.Add(data);
 				}
 				break;
-			case CommandType.LegionTag:
-				if (data[0] == '(')
-				{
-					mLegionMarkers.Add(mTotalNumEnemies);
-				}
-				break;
+			// case CommandType.LegionTag:
+			// 	if (data[0] == '(')
+			// 	{
+			// 		mLegionMarkers.Add(mTotalNumEnemies);
+			// 	}
+			// 	break;
 			}
 		}
 	}

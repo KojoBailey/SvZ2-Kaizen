@@ -2547,11 +2547,9 @@
 [Wave_001]
   1:
     enemy = Enemies.CrawlingTorso_Tutorial
-  2:
     command = 8,8
   3:
     enemy = Enemies.CrawlingTorso_Tutorial
-  15:
     command = 4,4
   4:
     enemy = Enemies.l_zombie_melee_tutorial
@@ -2559,21 +2557,18 @@
     command = HOLD
   6:
     enemy = Enemies.CrawlingTorso_Tutorial
-  7:
     command = 3,3
   8:
     enemy = Enemies.CrawlingTorso_Tutorial
-  9:
     command = 3,3
   10:
     enemy = Enemies.CrawlingTorso_Tutorial
-  17:
+  15:
     command = HOLD
   11:
     command = 1,1
   12:
     enemy = Enemies.l_zombie_melee_tutorial
-  13:
     command = 2,2
   14:
     enemy = Enemies.l_zombie_melee_tutorial
