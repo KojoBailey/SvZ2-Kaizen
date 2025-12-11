@@ -21,7 +21,15 @@ public class BannerStartWave : Banner
 		}
 		else
 		{
-			mWaveText = string.Format(StringUtils.GetStringFromStringRef("MenuFixedStrings", "add_wave"), waveNumber);
+			WaveSchema waveData = WaveManager.GetWaveData(waveNumber, Singleton<Profile>.Instance.waveTypeToPlay);
+			if (waveData.title != "")
+            {
+                mWaveText = waveData.title;
+            }
+			else
+            {
+                mWaveText = string.Format(StringUtils.GetStringFromStringRef("MenuFixedStrings", "add_wave"), waveNumber);
+            }
 		}
 	}
 

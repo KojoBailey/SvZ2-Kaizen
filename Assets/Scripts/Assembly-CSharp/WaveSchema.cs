@@ -38,6 +38,8 @@ public class WaveSchema
 	[DataBundleKey]
 	public int index;
 
+	public string title;
+
 	public string scene;
 
 	public string tutorial;
