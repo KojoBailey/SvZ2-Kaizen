@@ -547,14 +547,11 @@
     index = 2
     title = Attack of the Ashigaru
     scene = ZenGarden_day
-    tutorial = NULL
-    bell = 0
-    villageArchers = 0
     music = MusicEvents.BGM_ZenGarden_Day
     rewards = 
     commands = Wave_002
     recommendedHero = Heroes.HeroBalanced
-    recommendedHeroIsRequired = False
+    recommendedHeroIsRequired = True
     VsModeAIOpponent = CollectionEnemies.EasyBalanced
   3:
     index = 3
