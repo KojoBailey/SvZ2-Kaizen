@@ -6,8 +6,9 @@ public class WaveCommandSchema
 
 	public enum Type
 	{
-		Delay = 0,
+		Default = 0,
 		Spawn,
+		Delay,
 	};
 	[DataBundleField(ColumnWidth = 200)]
 	public Type type;
