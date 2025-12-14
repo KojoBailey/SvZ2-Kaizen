@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
@@ -35,12 +36,6 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	public delegate void OnLegionCallback();
 
-	private const float kSpawnDelayTimerMin = 1f;
-
-	private const float kSpawnDelayTimerMax = 4f;
-
-	private const int kEnemiesMax = 10;
-
 	private string specialBossName = string.Empty;
 
 	private int mWaveIndex;
@@ -65,7 +60,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	private bool mIsHolding = false;
 
-	private float mSpawnDelayTimer;
+	private float mSpawnDelayTimer = 0f;
 
 	private bool mSkipNextLegion;
 
@@ -90,6 +85,14 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		get
 		{
 			return mNextCommandToRun >= waveRootData.Commands.Length && specialBossName == string.Empty;
+		}
+	}
+
+	public bool isWaveComplete
+	{
+		get
+		{
+			return isDone && mEnemiesKilledSoFar == mTotalNumEnemies;
 		}
 	}
 
@@ -462,77 +465,73 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	private void RunNextCommand()
 	{
-		if (mNextCommandToRun >= waveRootData.Commands.Length)
-		{
-			if (specialBossName != string.Empty)
-			{
-				WeakGlobalInstance<CharactersManager>.Instance.AddCharacter(ConstructEnemy(specialBossName));
-				specialBossName = string.Empty;
-				WeakGlobalMonoBehavior<BannerManager>.Instance.OpenBanner(new BannerBoss(5f * WeakGlobalMonoBehavior<InGameImpl>.Instance.timeScalar));
-			}
-			return;
-		}
+		// if (mNextCommandToRun >= waveRootData.Commands.Length)
+		// {
+		// 	if (specialBossName != string.Empty)
+		// 	{
+		// 		WeakGlobalInstance<CharactersManager>.Instance.AddCharacter(ConstructEnemy(specialBossName));
+		// 		specialBossName = string.Empty;
+		// 		WeakGlobalMonoBehavior<BannerManager>.Instance.OpenBanner(new BannerBoss(5f * WeakGlobalMonoBehavior<InGameImpl>.Instance.timeScalar));
+		// 	}
+		// 	return;
+		// }
 
-		if (!mIsHolding && !DataBundleRecordKey.IsNullOrEmpty(waveRootData.Commands[mNextCommandToRun].enemy))
-        {
-            string enemy = waveRootData.Commands[mNextCommandToRun].enemy.Key;
-			bool flag = false;
-			foreach (string mAllDifferentEnemy in mAllDifferentEnemies)
-			{
-				if (string.Compare(mAllDifferentEnemy, enemy, true) == 0)
-				{
-					flag = true;
-					break;
-				}
-			}
-			if (flag)
+		var waveCommandData = waveRootData.Commands[mNextCommandToRun];
+		switch (waveCommandData.type)
+		{
+		case WaveCommandSchema.Type.Spawn:
+            string enemy = waveCommandData.enemy.Key;
+			if (enemy != string.Empty)
 			{
 				WeakGlobalInstance<CharactersManager>.Instance.AddCharacter(ConstructEnemy(enemy));
 			}
+			break;
+		default: break;
         }
 
-		string command = waveRootData.Commands[mNextCommandToRun].command;
 		mNextCommandToRun++;
-		switch (GetCommandType(command))
-		{
-		case CommandType.UserDefined:
-			WeakGlobalMonoBehavior<InGameImpl>.Instance.RunSpecialWaveCommand(command.ToLower());
-			break;
-		case CommandType.DeathDelay:
-			if (mSpawnedEnemiesSoFar != mEnemiesKilledSoFar)
-			{
-				mIsHolding = true;
-				mNextCommandToRun--;
-			}
-			else
-			{
-				mIsHolding = false;
-			}
-			break;
-		case CommandType.Delay:
-		{
-			KeyValuePair<float, float> keyValuePair = ExtractTimer(command);
-			mSpawnDelayTimer += UnityEngine.Random.value * (keyValuePair.Value - keyValuePair.Key) + keyValuePair.Key;
-			break;
-		}
-		case CommandType.Spawn:
-		{
-			bool flag = false;
-			foreach (string mAllDifferentEnemy in mAllDifferentEnemies)
-			{
-				if (string.Compare(mAllDifferentEnemy, command, true) == 0)
-				{
-					flag = true;
-					break;
-				}
-			}
-			if (flag)
-			{
-				WeakGlobalInstance<CharactersManager>.Instance.AddCharacter(ConstructEnemy(command));
-			}
-			break;
-		}
-		}
+
+		// string command = waveRootData.Commands[mNextCommandToRun].command;
+		// switch (GetCommandType(command))
+		// {
+		// case CommandType.UserDefined:
+		// 	WeakGlobalMonoBehavior<InGameImpl>.Instance.RunSpecialWaveCommand(command.ToLower());
+		// 	break;
+		// case CommandType.DeathDelay:
+		// 	if (mSpawnedEnemiesSoFar != mEnemiesKilledSoFar)
+		// 	{
+		// 		mIsHolding = true;
+		// 		mNextCommandToRun--;
+		// 	}
+		// 	else
+		// 	{
+		// 		mIsHolding = false;
+		// 	}
+		// 	break;
+		// case CommandType.Delay:
+		// {
+		// 	KeyValuePair<float, float> keyValuePair = ExtractTimer(command);
+		// 	mSpawnDelayTimer += UnityEngine.Random.value * (keyValuePair.Value - keyValuePair.Key) + keyValuePair.Key;
+		// 	break;
+		// }
+		// case CommandType.Spawn:
+		// {
+		// 	bool flag = false;
+		// 	foreach (string mAllDifferentEnemy in mAllDifferentEnemies)
+		// 	{
+		// 		if (string.Compare(mAllDifferentEnemy, command, true) == 0)
+		// 		{
+		// 			flag = true;
+		// 			break;
+		// 		}
+		// 	}
+		// 	if (flag)
+		// 	{
+		// 		WeakGlobalInstance<CharactersManager>.Instance.AddCharacter(ConstructEnemy(command));
+		// 	}
+		// 	break;
+		// }
+		// }
 	}
 
 	public void SpawnRandomEnemy(Vector3 position, float spawnRange)
@@ -590,18 +589,15 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	private void UpdateDelayTimer()
 	{
-		if (isDone)
-		{
-			return;
-		}
+		if (isDone) return;
+
 		mSpawnDelayTimer -= Time.deltaTime;
-		if (!(mSpawnDelayTimer > 0f))
+		if (mSpawnDelayTimer > 0f) return;
+
+		mSpawnDelayTimer = 0f;
+		if (WeakGlobalInstance<CharactersManager>.Instance.enemiesCount < 10)
 		{
-			mSpawnDelayTimer = 0f;
-			if (WeakGlobalInstance<CharactersManager>.Instance.enemiesCount < 10)
-			{
-				RunNextCommand();
-			}
+			RunNextCommand();
 		}
 	}
 
@@ -686,26 +682,25 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	private void AnalyseWaveCommandsForStats()
 	{
-		mTotalNumEnemies = (Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive() && Singleton<Profile>.Instance.MultiplayerData.MultiplayerGameSessionData.defensiveBuffs[0] > 0) ? 1 : 0;
+		mTotalNumEnemies = (Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive() && Singleton<Profile>.Instance.MultiplayerData.MultiplayerGameSessionData.defensiveBuffs[0] > 0)
+			? 1
+			: 0;
+		
 		mAllDifferentEnemies.Clear();
+
 		for (int i = 0; i < waveRootData.Commands.Length; i++)
 		{
-			string data = GetCommand(i);
-			switch (GetCommandType(data))
+			string enemy = waveRootData.Commands[i].enemy.Key;
+			switch (waveRootData.Commands[i].type)
 			{
-			case CommandType.Spawn:
+			case WaveCommandSchema.Type.Spawn:
 				mTotalNumEnemies++;
-				if (Singleton<EnemiesDatabase>.Instance.Contains(data) && !mAllDifferentEnemies.Exists((string element) => element == data))
+				if (Singleton<EnemiesDatabase>.Instance.Contains(enemy) && !mAllDifferentEnemies.Exists((string element) => element == enemy))
 				{
-					mAllDifferentEnemies.Add(data);
+					mAllDifferentEnemies.Add(enemy);
 				}
 				break;
-			// case CommandType.LegionTag:
-			// 	if (data[0] == '(')
-			// 	{
-			// 		mLegionMarkers.Add(mTotalNumEnemies);
-			// 	}
-			// 	break;
+			default: break;
 			}
 		}
 	}

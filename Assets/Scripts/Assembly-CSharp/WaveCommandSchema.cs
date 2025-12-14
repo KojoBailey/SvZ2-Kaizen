@@ -6,8 +6,8 @@ public class WaveCommandSchema
 
 	public enum Type
 	{
+		Delay = 0,
 		Spawn,
-		Delay,
 	};
 	[DataBundleField(ColumnWidth = 200)]
 	public Type type;
@@ -28,6 +28,9 @@ public class WaveCommandSchema
 	};
 	[DataBundleField(ColumnWidth = 200)]
 	public Spacing spacing;
+
+	[DataBundleField(ColumnWidth = 200)]
+	public float duration;
 
 	public enum StartMode
 	{

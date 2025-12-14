@@ -1304,7 +1304,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 				Win();
 			}
 		}
-		else if (mWaveManager.isDone && mCharactersManager.enemiesCount == 0)
+		else if (mWaveManager.isWaveComplete)
 		{
 			Win();
 		}

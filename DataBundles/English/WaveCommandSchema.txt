@@ -2552,10 +2552,12 @@
   2:
     command = 8,8
   3:
+    type = Spawn
     enemy = Enemies.CrawlingTorso_Tutorial
   4:
     command = 8,8
   5:
+    type = Spawn
     enemy = Enemies.CrawlingTorso_Tutorial
   6:
     command = 4,4
