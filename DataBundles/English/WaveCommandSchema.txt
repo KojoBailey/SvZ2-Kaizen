@@ -2546,7 +2546,9 @@
     command = NULL
 [Wave_001]
   1:
+    type = Spawn
     enemy = Enemies.CrawlingTorso_Tutorial
+    count = 3
   2:
     command = 8,8
   3:
