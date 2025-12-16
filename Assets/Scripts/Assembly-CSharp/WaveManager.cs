@@ -643,31 +643,33 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	private void QueueNextWave()
 	{
-		do
+		if (isDone) return;
+
+		var waveCommandData = waveRootData.Commands[mNextCommandToRun];
+		switch (waveCommandData.type)
 		{
-			if (isDone) return;
-
-			var waveCommandData = waveRootData.Commands[mNextCommandToRun];
-			switch (waveCommandData.type)
+		case WaveCommandSchema.Type.Spawn:
+			string enemy = waveCommandData.enemy.Key;
+			if (enemy != string.Empty)
 			{
-			case WaveCommandSchema.Type.Spawn:
-				string enemy = waveCommandData.enemy.Key;
-				if (enemy != string.Empty)
+				int count = (waveCommandData.count > 1) ? waveCommandData.count : 1;
+				float delay = waveCommandData.spacingDuration;
+				for (int i = 0; i < count - 1; i++)
 				{
-					int count = (waveCommandData.count > 1) ? waveCommandData.count : 1;
-					float delay = waveCommandData.spacingDuration;
-					for (int i = 0; i < count - 1; i++)
-					{
-						mWaveQueue.Enqueue(new QueueItem(enemy, delay));
-					}
-					mWaveQueue.Enqueue(new QueueItem(enemy, MinimumWaveDelay));
+					mWaveQueue.Enqueue(new QueueItem(enemy, delay));
 				}
-				break;
-			default: break;
+				mWaveQueue.Enqueue(new QueueItem(enemy, MinimumWaveDelay));
 			}
+			break;
+		default: break;
+		}
 
-			mNextCommandToRun++;
-		} while (waveRootData.Commands[mNextCommandToRun].startMode == WaveCommandSchema.StartMode.Overlap);
+		mNextCommandToRun++;
+
+		if (waveRootData.Commands[mNextCommandToRun].startMode == WaveCommandSchema.StartMode.Overlap)
+		{
+			QueueNextWave();
+		}
 	}
 
 	public Enemy ConstructEnemy(string enemyID)

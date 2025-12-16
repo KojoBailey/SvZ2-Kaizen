@@ -2547,52 +2547,25 @@
 [Wave_001]
   1:
     type = Spawn
-    enemy = Enemies.l_zombie_melee_tutorial
+    enemy = Enemies.CrawlingTorso_Tutorial
     count = 3
     spacing = Loose
   2:
     type = Spawn
-    enemy = Enemies.CrawlingTorso_Tutorial
-    count = 1
+    enemy = Enemies.l_zombie_melee_tutorial
+    count = 2
     spacing = Loose
-    startMode = Overlap
   3:
     type = Spawn
     enemy = Enemies.l_zombie_melee_tutorial
+    count = 2
+    spacing = Tight
+  4:
+    type = Spawn
+    enemy = Enemies.CrawlingTorso_Tutorial
     count = 3
     spacing = Moderate
-  5:
-    type = Spawn
-    enemy = Enemies.l_zombie_melee_tutorial
-    count = 3
-    spacing = Tight
-  7:
-    type = Spawn
-    enemy = Enemies.CrawlingTorso_Tutorial
-  8:
-    command = 3,3
-  9:
-    enemy = Enemies.l_zombie_melee_tutorial
-  10:
-    command = HOLD
-  11:
-    enemy = Enemies.CrawlingTorso_Tutorial
-  12:
-    command = 2,2
-  13:
-    enemy = Enemies.l_zombie_melee_tutorial
-  14:
-    command = 2,2
-  15:
-    enemy = Enemies.CrawlingTorso_Tutorial
-  16:
-    command = 2,2
-  17:
-    enemy = Enemies.l_zombie_melee_tutorial
-  18:
-    command = 2,2
-  19:
-    enemy = Enemies.CrawlingTorso_Tutorial
+    startMode = Overlap
 [Wave_002]
   1:
     enemy = Enemies.CrawlingTorso_Tutorial
