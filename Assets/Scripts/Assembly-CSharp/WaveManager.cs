@@ -264,7 +264,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 	public void Update()
 	{
 		// [TODO] Make dependent on remaining health of previous enemies.
-		if (!isDone && mEnemiesKilledSoFar >= mEnemiesToKillBeforeNextWave)
+		if (!isDone && mEnemiesKilledSoFar >= mEnemiesToKillBeforeNextWave - 2)
 		{
 			QueueNextWave();
 		}
