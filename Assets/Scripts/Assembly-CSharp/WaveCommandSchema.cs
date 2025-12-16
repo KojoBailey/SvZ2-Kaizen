@@ -52,7 +52,7 @@ public class WaveCommandSchema
 
 	public enum StartMode
 	{
-		After,
+		After = 0,
 		Overlap,
 	};
 	[DataBundleField(ColumnWidth = 200)]

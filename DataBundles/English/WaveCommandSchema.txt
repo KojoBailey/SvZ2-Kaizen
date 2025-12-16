@@ -2550,6 +2550,12 @@
     enemy = Enemies.l_zombie_melee_tutorial
     count = 3
     spacing = Loose
+  2:
+    type = Spawn
+    enemy = Enemies.CrawlingTorso_Tutorial
+    count = 1
+    spacing = Loose
+    startMode = Overlap
   3:
     type = Spawn
     enemy = Enemies.l_zombie_melee_tutorial
