@@ -56,7 +56,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	private WaveRecyclingMultipliers mLevelMultipliers = new WaveRecyclingMultipliers();
 
-	private const float MinimumWaveDelay = 3.0f;
+	private const float MinimumWaveDelay = 2.0f;
 
 	private class QueueItem
 	{
@@ -86,6 +86,8 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 	private int mSpawnedEnemiesSoFar;
 
 	private int mEnemiesKilledSoFar;
+
+	private int mEnemiesToKillBeforeNextWave;
 
 	private List<string> mAllDifferentEnemies = new List<string>();
 
@@ -244,6 +246,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		AnalyseWaveCommandsForStats();
 		mNextCommandToRun = 0;
 		mEnemiesKilledSoFar = 0;
+		mEnemiesToKillBeforeNextWave = 0;
 		if (Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive())
 		{
 			int level = Singleton<Profile>.Instance.MultiplayerData.MultiplayerGameSessionData.defensiveBuffs[0];
@@ -281,7 +284,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 	public void Update()
 	{
 		// [TODO] Make dependent on remaining health of previous enemies.
-		if (WeakGlobalInstance<CharactersManager>.Instance.enemiesCount < 2)
+		if (!isDone && mEnemiesToKillBeforeNextWave < 1)
 		{
 			QueueNextWave();
 		}
@@ -292,6 +295,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 	public void registerEnemyKilled(string enemyID)
 	{
 		mEnemiesKilledSoFar++;
+		mEnemiesToKillBeforeNextWave--;
 		Singleton<Profile>.Instance.IncNumKillsOfEnemyType(enemyID);
 	}
 
@@ -615,7 +619,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	private void UpdateDelayTimer()
 	{
-		if (isDone) return;
+		if (isWaveComplete) return;
 
 		mSpawnDelayTimer -= Time.deltaTime;
 		if (mSpawnDelayTimer > 0f) return;
@@ -643,8 +647,6 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	private void QueueNextWave()
 	{
-		if (isDone) return;
-
 		var waveCommandData = waveRootData.Commands[mNextCommandToRun];
 		switch (waveCommandData.type)
 		{
@@ -657,8 +659,12 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 				for (int i = 0; i < count - 1; i++)
 				{
 					mWaveQueue.Enqueue(new QueueItem(enemy, delay));
+					UnityEngine.Debug.Log("Added " + enemy + " to queue.");
 				}
 				mWaveQueue.Enqueue(new QueueItem(enemy, MinimumWaveDelay));
+				UnityEngine.Debug.Log("Added " + enemy + " to queue.");
+
+				mEnemiesToKillBeforeNextWave += count;
 			}
 			break;
 		default: break;
@@ -666,7 +672,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 		mNextCommandToRun++;
 
-		if (waveRootData.Commands[mNextCommandToRun].startMode == WaveCommandSchema.StartMode.Overlap)
+		if (!isDone && waveRootData.Commands[mNextCommandToRun].startMode == WaveCommandSchema.StartMode.Overlap)
 		{
 			QueueNextWave();
 		}
