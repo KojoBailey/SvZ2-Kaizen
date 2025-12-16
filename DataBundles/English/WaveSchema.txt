@@ -534,7 +534,6 @@
     BossEnemy = 
 [Waves]
   1:
-    index = 1
     title = Dawn of the Dead
     scene = ZenGarden_day
     music = MusicEvents.BGM_ZenGarden_Day
@@ -544,7 +543,6 @@
     recommendedHeroIsRequired = True
     VsModeAIOpponent = CollectionEnemies.EasyBalanced
   2:
-    index = 2
     title = Attack of the Ashigaru
     scene = ZenGarden_day
     music = MusicEvents.BGM_ZenGarden_Day
@@ -554,27 +552,17 @@
     recommendedHeroIsRequired = True
     VsModeAIOpponent = CollectionEnemies.EasyBalanced
   3:
-    index = 3
-    title = 
+    title = From Behind
     scene = ZenGarden_day
-    tutorial = NULL
-    bell = 0
-    villageArchers = 0
     music = MusicEvents.BGM_ZenGarden_Day
     rewards = Reward_Table.Reward_Wave_03
     commands = Wave_003
     recommendedHero = Heroes.HeroBalanced
     recommendedHeroIsRequired = False
     VsModeAIOpponent = CollectionEnemies.EasyBalanced
-    showRateMe = True
-    awardMysteryBox = True
   4:
-    index = 4
-    title = 
+    title = Flying Squirrels
     scene = ZenGarden_day
-    tutorial = NULL
-    bell = 0
-    villageArchers = 0
     music = MusicEvents.BGM_ZenGarden_Day
     rewards = 
     commands = Wave_004
@@ -582,33 +570,23 @@
     recommendedHeroIsRequired = False
     VsModeAIOpponent = CollectionEnemies.EasyBalanced
   5:
-    index = 5
-    title = 
-    scene = MountainLookout
-    tutorial = NULL
-    bell = 0
-    villageArchers = 0
+    title = Quiver
+    scene = ZenGarden_day
     music = MusicEvents.BGM_MountainOutlook_Day
     rewards = Reward_Table.Reward_Wave_05
     commands = Wave_005
-    recommendedHero = Heroes.HeroAttack
-    recommendedHeroIsRequired = True
-    VsModeAIOpponent = CollectionEnemies.EasyBalanced
-    showRateMe = False
-  6:
-    index = 6
-    title = Gate Rushers
-    scene = MountainLookout
-    tutorial = NULL
-    bell = 0
-    villageArchers = 0
-    music = MusicEvents.BGM_MountainOutlook_Day
-    rewards = 
-    commands = Wave_006
-    recommendedHero = Heroes.HeroAttack
+    recommendedHero = Heroes.HeroBalanced
     recommendedHeroIsRequired = False
     VsModeAIOpponent = CollectionEnemies.EasyBalanced
-    showRateMe = True
+  6:
+    title = Gate Rushers
+    scene = ZenGarden_day
+    music = MusicEvents.BGM_MountainOutlook_Day
+    rewards = Reward_Table.Reward_Wave_06
+    commands = Wave_006
+    recommendedHero = Heroes.HeroBalanced
+    recommendedHeroIsRequired = True
+    VsModeAIOpponent = CollectionEnemies.EasyBalanced
   7:
     index = 7
     title = 

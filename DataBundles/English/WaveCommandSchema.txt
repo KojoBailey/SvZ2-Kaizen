@@ -2568,469 +2568,253 @@
     startMode = Overlap
 [Wave_002]
   1:
+    type = Spawn
     enemy = Enemies.CrawlingTorso_Tutorial
-    command = 9,9
+    count = 2
+    spacing = Loose
   2:
-    enemy = Enemies.CrawlingTorso_Tutorial
-    command = 2,2
+    type = Spawn
+    enemy = Enemies.l_zombie_melee_tutorial
+    count = 2
+    spacing = Loose
   3:
-    enemy = Enemies.l_zombie_melee_tutorial
-    command = 8,8
+    type = Spawn
+    enemy = Enemies.l_zombie_sword
+    count = 2
+    spacing = Moderate
   4:
+    type = Spawn
     enemy = Enemies.l_zombie_melee_tutorial
-    command = 8,8
+    count = 2
+    spacing = Moderate
   5:
-    enemy = Enemies.l_zombie_sword
-  6:
-    enemy = Enemies.l_zombie_sword
-    command = 6,6
-  7:
+    type = Spawn
     enemy = Enemies.CrawlingTorso_Tutorial
-    command = 5,5
-  8:
-    enemy = Enemies.l_zombie_melee_tutorial
-    command = 1,1
-  9:
-    enemy = Enemies.l_zombie_melee_tutorial
-    command = 5,5
-  10:
+    count = 1
+    spacing = Moderate
+    startMode = Overlap
+  6:
+    type = Spawn
     enemy = Enemies.l_zombie_ax
-    command = 2,2
-  11:
-    enemy = Enemies.l_zombie_ax
+    count = 2
+    spacing = Tight
 [Wave_003]
   1:
+    type = Spawn
+    enemy = Enemies.crawling_torso
+    count = 2
+    spacing = Loose
+  2:
+    type = Spawn
     enemy = Enemies.l_zombie_melee
-    command = 2,2
+    count = 3
+    spacing = Loose
+    startMode = Overlap
   3:
-    enemy = Enemies.CrawlingTorso_Tutorial
+    type = Spawn
+    enemy = Enemies.l_zombie_ax
+    count = 2
+    spacing = Moderate
   4:
-    enemy = Enemies.l_zombie_ax
-    command = 2,2
+    type = Spawn
+    enemy = Enemies.l_zombie_melee
+    count = 3
+    spacing = Tight
+  5:
+    type = Spawn
+    enemy = Enemies.l_zombie_spear
+    count = 3
+    spacing = Tight
+    startMode = Overlap
   6:
-    enemy = Enemies.CrawlingTorso_Tutorial
-    command = 2,2
+    type = Spawn
+    enemy = Enemies.l_zombie_sword
+    count = 2
+    spacing = Moderate
+  7:
+    type = Spawn
+    enemy = Enemies.l_zombie_ax
+    count = 2
+    spacing = Moderate
   8:
-    enemy = Enemies.l_zombie_melee
-    command = 2,2
+    type = Spawn
+    enemy = Enemies.l_zombie_spear
+    count = 3
+    spacing = Loose
+  9:
+    type = Spawn
+    enemy = Enemies.l_zombie_sword
+    count = 3
+    spacing = Tight
   10:
-    enemy = Enemies.l_zombie_ax
+    type = Spawn
+    enemy = Enemies.l_zombie_spear
+    count = 3
+    spacing = Tight
+    startMode = Overlap
   11:
-    enemy = Enemies.CrawlingTorso_Tutorial
-    command = 2,2
-  13:
-    enemy = Enemies.CrawlingTorso_Tutorial
-    command = 1,2
-  15:
-    enemy = Enemies.l_zombie_sword
-    command = HOLD
-  17:
-    enemy = Enemies.l_zombie_ax 
-    command = 1,1
-  19:
-    enemy = Enemies.l_zombie_sword
-    command = 1,1
-  21:
+    type = Spawn
     enemy = Enemies.l_zombie_ax
-    command = 1,1
-  23:
-    enemy = Enemies.l_zombie_sword
-    command = 1,1
-  25:
-    enemy = Enemies.CrawlingTorso_Tutorial
-    command = 1,1
-  27:
-    enemy = Enemies.l_zombie_ax
-    command = 1,1
-  29:
-    enemy = Enemies.l_zombie_ax
-    command = 1,1
-  31:
-    enemy = Enemies.l_zombie_sword
-    command = 1,1
-  33:
-    enemy = Enemies.l_zombie_ax
-    command = 1,1
-  35:
-    enemy = Enemies.l_zombie_sword
-  37:
-    enemy = Enemies.CrawlingTorso_Tutorial
-  38:
-    enemy = Enemies.CrawlingTorso_Tutorial
-    command = 1,3
-  40:
-    enemy = Enemies.l_zombie_ax
-    command = 1,3
-  42:
-    enemy = Enemies.CrawlingTorso_Tutorial
-  43:
-    enemy = Enemies.l_zombie_ax
-    command = 1,3
-  45:
-    enemy = Enemies.l_zombie_melee
-    command = 1,1
-  47:
-    enemy = Enemies.l_zombie_sword
-    command = 1,1
-  49:
-    enemy = Enemies.l_zombie_sword
-    command = 1,1
-  51:
-    enemy = Enemies.CrawlingTorso_Tutorial
+    count = 2
+    spacing = Tight
+    startMode = Overlap
 [Wave_004]
   1:
-    index = 1
+    type = Spawn
     enemy = Enemies.nobusuma
-    command = NULL
+    count = 3
+    spacing = Loose
   2:
-    index = 2
-    enemy = 
-    command = 3,3
+    type = Spawn
+    enemy = Enemies.crawling_torso
+    count = 2
+    spacing = Loose
   3:
-    index = 3
-    enemy = Enemies.l_zombie_ax
-    command = NULL
+    type = Spawn
+    enemy = Enemies.nobusuma
+    count = 2
+    spacing = Loose
+    startMode = Overlap
   4:
-    index = 4
-    enemy = 
-    command = 1,2
+    type = Spawn
+    enemy = Enemies.l_zombie_sword
+    count = 3
+    spacing = Moderate
+    startMode = Overlap
   5:
-    index = 5
+    type = Spawn
     enemy = Enemies.l_zombie_ax
-    command = NULL
+    count = 3
+    spacing = Tight
   6:
-    index = 6
-    enemy = Enemies.CrawlingTorso_Tutorial
-    command = NULL
+    type = Spawn
+    enemy = Enemies.l_zombie_spear
+    count = 4
+    spacing = Tight
+    startMode = Overlap
   7:
-    index = 7
-    enemy = 
-    command = 1,2
+    type = Spawn
+    enemy = Enemies.nobusuma
+    count = 3
+    spacing = Moderate
+    startMode = Overlap
   8:
-    index = 8
-    enemy = Enemies.nobusuma
-    command = NULL
+    type = Spawn
+    enemy = Enemies.l_zombie_melee
+    count = 4
+    spacing = Tight
   9:
-    index = 9
-    enemy = 
-    command = 1,2
+    type = Spawn
+    enemy = Enemies.nobusuma
+    count = 2
+    spacing = Loose
   10:
-    index = 10
-    enemy = Enemies.CrawlingTorso_Tutorial
-    command = NULL
+    type = Spawn
+    enemy = Enemies.l_zombie_spear
+    count = 3
+    spacing = Moderate
   11:
-    index = 11
-    enemy = 
-    command = 1,2
-  12:
-    index = 12
-    enemy = Enemies.l_zombie_sword
-    command = NULL
-  13:
-    index = 13
-    enemy = Enemies.l_zombie_ax
-    command = NULL
-  14:
-    index = 14
-    enemy = 
-    command = 1,2
-  15:
-    index = 15
-    enemy = Enemies.CrawlingTorso_Tutorial
-    command = NULL
-  16:
-    index = 16
-    enemy = 
-    command = 1,2
-  17:
-    index = 17
+    type = Spawn
     enemy = Enemies.nobusuma
-    command = NULL
-  18:
-    index = 18
-    enemy = 
-    command = 1,2
-  19:
-    index = 19
-    enemy = Enemies.l_zombie_ax
-    command = NULL
-  20:
-    index = 20
-    enemy = 
-    command = (
-  21:
-    index = 21
-    enemy = Enemies.l_zombie_melee
-    command = NULL
-  22:
-    index = 22
-    enemy = 
-    command = 1,1
-  23:
-    index = 23
-    enemy = Enemies.l_zombie_melee
-    command = NULL
-  24:
-    index = 24
-    enemy = 
-    command = 1,1
-  25:
-    index = 25
-    enemy = Enemies.CrawlingTorso_Tutorial
-    command = NULL
-  26:
-    index = 26
-    enemy = 
-    command = 1,1
-  27:
-    index = 27
-    enemy = Enemies.l_zombie_sword
-    command = NULL
-  28:
-    index = 28
-    enemy = 
-    command = 1,1
-  29:
-    index = 29
-    enemy = Enemies.l_zombie_ax
-    command = NULL
-  30:
-    index = 30
-    enemy = 
-    command = 1,1
-  31:
-    index = 31
-    enemy = Enemies.nobusuma
-    command = NULL
-  32:
-    index = 32
-    enemy = 
-    command = 1,1
-  33:
-    index = 33
-    enemy = Enemies.l_zombie_sword
-    command = NULL
-  34:
-    index = 34
-    enemy = 
-    command = 1,1
-  35:
-    index = 35
-    enemy = Enemies.nobusuma
-    command = NULL
-  36:
-    index = 36
-    enemy = 
-    command = 1,1
-  39:
-    index = 39
-    enemy = Enemies.l_zombie_spear
-    command = NULL
-  40:
-    index = 40
-    enemy = 
-    command = 1,2
-  41:
-    index = 41
-    enemy = Enemies.l_zombie_spear
-    command = NULL
-  42:
-    index = 42
-    enemy = 
-    command = )
-  43:
-    index = 43
-    enemy = 
-    command = 4,4
-  44:
-    index = 44
-    enemy = Enemies.CrawlingTorso_Tutorial
-    command = NULL
-  45:
-    index = 45
-    enemy = 
-    command = 1,3
-  46:
-    index = 46
-    enemy = Enemies.l_zombie_sword
-    command = NULL
-  47:
-    index = 47
-    enemy = Enemies.l_zombie_ax
-    command = NULL
-  48:
-    index = 48
-    enemy = 
-    command = 1,1
-  49:
-    index = 49
-    enemy = Enemies.nobusuma
-    command = NULL
-  50:
-    index = 50
-    enemy = 
-    command = 1,1
-  51:
-    index = 51
-    enemy = Enemies.l_zombie_spear
-    command = NULL
-  52:
-    index = 52
-    enemy = 
-    command = 1,3
-  53:
-    index = 53
-    enemy = Enemies.l_zombie_sword
-    command = NULL
-  54:
-    index = 54
-    enemy = Enemies.CrawlingTorso_Tutorial
-    command = NULL
-  55:
-    index = 55
-    enemy = 
-    command = 1,1
-  56:
-    index = 56
-    enemy = Enemies.l_zombie_spear
-    command = NULL
+    count = 4
+    spacing = Tight
+    startMode = Overlap
 [Wave_005]
   1:
-    index = 1
-    enemy = Enemies.l_zombie_ax
-    command = NULL
+    type = Spawn
+    enemy = Enemies.l_zombie_melee
+    count = 3
+    spacing = Loose
   2:
-    index = 2
-    enemy = 
-    command = 2,2
-  10:
-    index = 10
-    enemy = Enemies.l_zombie_sword
-    command = NULL
-  11:
-    index = 11
-    enemy = 
-    command = 1,1
-  9:
-    index = 9
-    enemy = Enemies.l_zombie_sword
-    command = NULL
-  13:
-    index = 13
-    enemy = 
-    command = 1,1
-  16:
-    index = 16
-    enemy = Enemies.komusou
-    command = NULL
-  17:
-    index = 17
-    enemy = 
-    command = (
-  18:
-    index = 18
-    enemy = Enemies.CrawlingTorso_Tutorial
-    command = NULL
-  19:
-    index = 19
-    enemy = 
-    command = 3,4
-  20:
-    index = 20
-    enemy = Enemies.CrawlingTorso_Tutorial
-    command = NULL
-  21:
-    index = 21
-    enemy = 
-    command = 3,4
-  22:
-    index = 22
-    enemy = Enemies.CrawlingTorso_Tutorial
-    command = NULL
-  4:
-    index = 4
-    enemy = 
-    command = )
-  23:
-    index = 23
-    enemy = 
-    command = 12,12
-  24:
-    index = 24
-    enemy = Enemies.h_zombie_ax
-    command = NULL
-  25:
-    index = 25
-    enemy = 
-    command = 1,1
-  26:
-    index = 26
-    enemy = Enemies.h_zombie_ax
-    command = NULL
-  27:
-    index = 27
-    enemy = 
-    command = 1,1
-  28:
-    index = 28
-    enemy = Enemies.h_zombie_ax
-    command = NULL
-  30:
-    index = 30
-    enemy = 
-    command = 2,2
-  31:
-    index = 31
-    enemy = Enemies.komusou
-    command = NULL
-  36:
-    index = 36
-    enemy = 
-    command = 6,6
-  39:
-    index = 39
-    enemy = Enemies.l_zombie_sword
-    command = NULL
-  40:
-    index = 40
-    enemy = 
-    command = 3,3
-  41:
-    index = 41
-    enemy = Enemies.h_zombie_ax
-    command = NULL
+    type = Spawn
+    enemy = Enemies.nobusuma
+    count = 3
+    spacing = Loose
+    startMode = Overlap
   3:
-    index = 3
-    enemy = 
-    command = 2,3
-  42:
-    index = 42
-    enemy = Enemies.CrawlingTorso_Tutorial
-    command = NULL
+    type = Spawn
+    enemy = Enemies.l_zombie_bow
+    count = 4
+    spacing = Moderate
+  4:
+    type = Spawn
+    enemy = Enemies.crawling_torso
+    count = 2
+    spacing = Moderate
   5:
-    index = 5
-    enemy = 
-    command = 2,3
+    type = Spawn
+    enemy = Enemies.nobusuma
+    count = 2
+    spacing = Tight
+    startMode = Overlap
   6:
-    index = 6
-    enemy = Enemies.h_zombie_ax
-    command = NULL
+    type = Spawn
+    enemy = Enemies.l_zombie_ax
+    count = 2
+    spacing = Tight
   7:
-    index = 7
-    enemy = 
-    command = 2,2
+    type = Spawn
+    enemy = Enemies.l_zombie_bow
+    count = 3
+    spacing = Tight
+    startMode = Overlap
   8:
-    index = 8
-    enemy = Enemies.h_zombie_ax
-    command = NULL
-  14:
-    index = 14
-    enemy = 
-    command = 1,1
+    type = Spawn
+    enemy = Enemies.l_zombie_sword
+    count = 2
+    spacing = Moderate
+  9:
+    type = Spawn
+    enemy = Enemies.l_zombie_spear
+    count = 3
+    spacing = Tight
+    startMode = Overlap
+  10:
+    type = Spawn
+    enemy = Enemies.l_zombie_bow
+    count = 5
+    spacing = Moderate
+    startMode = Overlap
+  11:
+    type = Spawn
+    enemy = Enemies.l_zombie_melee
+    count = 4
+    spacing = Loose
   12:
-    index = 12
-    enemy = Enemies.h_zombie_ax
-    command = NULL
+    type = Spawn
+    enemy = Enemies.crawling_torso
+    count = 2
+    spacing = Moderate
+  13:
+    type = Spawn
+    enemy = Enemies.l_zombie_sword
+    count = 3
+    spacing = Tight
+    startMode = Overlap
+  14:
+    type = Spawn
+    enemy = Enemies.nobusuma
+    count = 4
+    spacing = Tight
+    startMode = Overlap
+  15:
+    type = Spawn
+    enemy = Enemies.l_zombie_ax
+    count = 3
+    spacing = Tight
+    startMode = Overlap
+  16:
+    type = Spawn
+    enemy = Enemies.l_zombie_bow
+    count = 4
+    spacing = Tight
+    startMode = Overlap
+  17:
+    type = Spawn
+    enemy = Enemies.l_zombie_spear
+    count = 3
+    spacing = Tight
+    startMode = Overlap
 [Wave_006]
   27:
     index = 27
