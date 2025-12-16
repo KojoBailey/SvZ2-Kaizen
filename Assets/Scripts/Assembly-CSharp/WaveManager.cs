@@ -6,17 +6,6 @@ using UnityEngine;
 
 public class WaveManager : WeakGlobalInstance<WaveManager>
 {
-	private enum CommandType
-	{
-		Spawn = 0,
-		Delay = 1,
-		DeathDelay = 6,
-		LegionTag = 2,
-		UserDefined = 3,
-		Num = 4,
-		Unknown = 5
-	}
-
 	public enum WaveType
 	{
 		Wave_SinglePlayer = 0,
@@ -73,8 +62,6 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	private int mNextCommandToRun;
 
-	private bool mIsHolding = false;
-
 	private float mSpawnDelayTimer = 0f;
 
 	private bool mSkipNextLegion;
@@ -92,8 +79,6 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 	private int mEnemiesQueuedSoFar;
 
 	private List<string> mAllDifferentEnemies = new List<string>();
-
-	private List<int> mLegionMarkers = new List<int>();
 
 	private int mVillageArchersLevel;
 
@@ -170,14 +155,6 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		get
 		{
 			return mEnemiesSpawnArea;
-		}
-	}
-
-	public List<int> legionMarkers // unused
-	{
-		get
-		{
-			return mLegionMarkers;
 		}
 	}
 
@@ -490,80 +467,11 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		}
 	}
 
-	// [TODO] Unused method. Extract useful stuff and delete.
-	private void RunNextCommand()
+	private void FlashBossBanner()
 	{
-		// if (mNextCommandToRun >= waveRootData.Commands.Length)
-		// {
-		// 	if (specialBossName != string.Empty)
-		// 	{
-		// 		WeakGlobalInstance<CharactersManager>.Instance.AddCharacter(ConstructEnemy(specialBossName));
-		// 		specialBossName = string.Empty;
-		// 		WeakGlobalMonoBehavior<BannerManager>.Instance.OpenBanner(new BannerBoss(5f * WeakGlobalMonoBehavior<InGameImpl>.Instance.timeScalar));
-		// 	}
-		// 	return;
-		// }
-
-		var waveCommandData = waveRootData.Commands[mNextCommandToRun];
-		switch (waveCommandData.type)
-		{
-		case WaveCommandSchema.Type.Spawn:
-            string enemy = waveCommandData.enemy.Key;
-			if (enemy != string.Empty)
-			{
-				int count = (waveCommandData.count > 1) ? waveCommandData.count : 1;
-				for (int i = 0; i < count; i++)
-				{
-					WeakGlobalInstance<CharactersManager>.Instance.AddCharacter(ConstructEnemy(enemy));
-				}
-			}
-			break;
-		default: break;
-        }
-
-		mNextCommandToRun++;
-
-		// string command = waveRootData.Commands[mNextCommandToRun].command;
-		// switch (GetCommandType(command))
-		// {
-		// case CommandType.UserDefined:
-		// 	WeakGlobalMonoBehavior<InGameImpl>.Instance.RunSpecialWaveCommand(command.ToLower());
-		// 	break;
-		// case CommandType.DeathDelay:
-		// 	if (mSpawnedEnemiesSoFar != mEnemiesKilledSoFar)
-		// 	{
-		// 		mIsHolding = true;
-		// 		mNextCommandToRun--;
-		// 	}
-		// 	else
-		// 	{
-		// 		mIsHolding = false;
-		// 	}
-		// 	break;
-		// case CommandType.Delay:
-		// {
-		// 	KeyValuePair<float, float> keyValuePair = ExtractTimer(command);
-		// 	mSpawnDelayTimer += UnityEngine.Random.value * (keyValuePair.Value - keyValuePair.Key) + keyValuePair.Key;
-		// 	break;
-		// }
-		// case CommandType.Spawn:
-		// {
-		// 	bool flag = false;
-		// 	foreach (string mAllDifferentEnemy in mAllDifferentEnemies)
-		// 	{
-		// 		if (string.Compare(mAllDifferentEnemy, command, true) == 0)
-		// 		{
-		// 			flag = true;
-		// 			break;
-		// 		}
-		// 	}
-		// 	if (flag)
-		// 	{
-		// 		WeakGlobalInstance<CharactersManager>.Instance.AddCharacter(ConstructEnemy(command));
-		// 	}
-		// 	break;
-		// }
-		// }
+		WeakGlobalMonoBehavior<BannerManager>.Instance.OpenBanner(
+			new BannerBoss(5f * WeakGlobalMonoBehavior<InGameImpl>.Instance.timeScalar)
+		);
 	}
 
 	public void SpawnRandomEnemy(Vector3 position, float spawnRange)
@@ -600,23 +508,6 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		{
 			WeakGlobalInstance<CharactersManager>.Instance.AddCharacter(ConstructEnemy(cmd, spawnRange, position, true));
 		}
-	}
-
-	private string GetCommand(int index)
-	{
-		return (!DataBundleRecordKey.IsNullOrEmpty(waveRootData.Commands[index].enemy))
-			? waveRootData.Commands[index].enemy.Key
-			: waveRootData.Commands[index].command;
-	}
-
-	private KeyValuePair<float, float> ExtractTimer(string cmd)
-	{
-		string[] array = cmd.Split(',');
-		if (array.Length != 2)
-		{
-			return new KeyValuePair<float, float>(-1f, -1f);
-		}
-		return new KeyValuePair<float, float>(float.Parse(array[0]), float.Parse(array[1]));
 	}
 
 	private void UpdateDelayTimer()
@@ -787,31 +678,6 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 			default: break;
 			}
 		}
-	}
-
-	private CommandType GetCommandType(string cmd)
-	{
-		if (cmd.Length == 0)
-		{
-			return CommandType.Unknown;
-		}
-		if (cmd[0] == '@')
-		{
-			return CommandType.UserDefined;
-		}
-		// if (cmd[0] == '(' || cmd[0] == ')')
-		// {
-		// 	return CommandType.LegionTag;
-		// }
-		if (cmd == "HOLD")
-        {
-            return CommandType.DeathDelay;
-        }
-		if (ExtractTimer(cmd).Key != -1f)
-		{
-			return CommandType.Delay;
-		}
-		return CommandType.Spawn;
 	}
 
 	private CharacterData GetCharacterData(string id)
