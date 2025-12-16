@@ -2547,22 +2547,22 @@
 [Wave_001]
   1:
     type = Spawn
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.l_zombie_melee_tutorial
     count = 3
-  2:
-    command = 8,8
+    spacing = Loose
   3:
     type = Spawn
-    enemy = Enemies.CrawlingTorso_Tutorial
-  4:
-    command = 8,8
+    enemy = Enemies.l_zombie_melee_tutorial
+    count = 3
+    spacing = Moderate
   5:
     type = Spawn
-    enemy = Enemies.CrawlingTorso_Tutorial
-  6:
-    command = 4,4
-  7:
     enemy = Enemies.l_zombie_melee_tutorial
+    count = 3
+    spacing = Tight
+  7:
+    type = Spawn
+    enemy = Enemies.CrawlingTorso_Tutorial
   8:
     command = 3,3
   9:

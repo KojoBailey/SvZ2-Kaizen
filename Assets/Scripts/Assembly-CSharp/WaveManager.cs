@@ -56,6 +56,21 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	private WaveRecyclingMultipliers mLevelMultipliers = new WaveRecyclingMultipliers();
 
+	private const float MinimumWaveDelay = 3.0f;
+
+	private class QueueItem
+	{
+		public string enemy;
+		public float delay;
+
+		public QueueItem(string _enemy, float _delay)
+		{
+			enemy = _enemy;
+			delay = _delay;
+		}
+	}
+	private Queue<QueueItem> mWaveQueue = new Queue<QueueItem>();
+
 	private int mNextCommandToRun;
 
 	private bool mIsHolding = false;
@@ -265,6 +280,12 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	public void Update()
 	{
+		// [TODO] Make dependent on remaining health of previous enemies.
+		if (WeakGlobalInstance<CharactersManager>.Instance.enemiesCount < 1)
+		{
+			QueueNextWave();
+		}
+
 		UpdateDelayTimer();
 	}
 
@@ -463,6 +484,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		}
 	}
 
+	// [TODO] Unused method. Extract useful stuff and delete.
 	private void RunNextCommand()
 	{
 		// if (mNextCommandToRun >= waveRootData.Commands.Length)
@@ -483,7 +505,11 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
             string enemy = waveCommandData.enemy.Key;
 			if (enemy != string.Empty)
 			{
-				WeakGlobalInstance<CharactersManager>.Instance.AddCharacter(ConstructEnemy(enemy));
+				int count = (waveCommandData.count > 1) ? waveCommandData.count : 1;
+				for (int i = 0; i < count; i++)
+				{
+					WeakGlobalInstance<CharactersManager>.Instance.AddCharacter(ConstructEnemy(enemy));
+				}
 			}
 			break;
 		default: break;
@@ -595,10 +621,50 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		if (mSpawnDelayTimer > 0f) return;
 
 		mSpawnDelayTimer = 0f;
-		if (WeakGlobalInstance<CharactersManager>.Instance.enemiesCount < 10)
+		if (WeakGlobalInstance<CharactersManager>.Instance.enemiesCount < 10) // [TODO] Remove hard limit?
 		{
-			RunNextCommand();
+			RunNextQueueItem();
 		}
+	}
+
+	private void RunNextQueueItem()
+	{
+		if (mWaveQueue.Count == 0) return;
+
+		var queueItem = mWaveQueue.Dequeue();
+
+		if (queueItem.enemy != string.Empty)
+		{
+			WeakGlobalInstance<CharactersManager>.Instance.AddCharacter(ConstructEnemy(queueItem.enemy));
+		}
+
+		mSpawnDelayTimer += queueItem.delay;
+	}
+
+	private void QueueNextWave()
+	{
+		if (isDone) return;
+
+		var waveCommandData = waveRootData.Commands[mNextCommandToRun];
+		switch (waveCommandData.type)
+		{
+		case WaveCommandSchema.Type.Spawn:
+            string enemy = waveCommandData.enemy.Key;
+			if (enemy != string.Empty)
+			{
+				int count = (waveCommandData.count > 1) ? waveCommandData.count : 1;
+				float delay = waveCommandData.SpacingDuration();
+				for (int i = 0; i < count - 1; i++)
+				{
+					mWaveQueue.Enqueue(new QueueItem(enemy, delay));
+				}
+				mWaveQueue.Enqueue(new QueueItem(enemy, MinimumWaveDelay));
+			}
+			break;
+		default: break;
+        }
+
+		mNextCommandToRun++;
 	}
 
 	public Enemy ConstructEnemy(string enemyID)
@@ -682,7 +748,8 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	private void AnalyseWaveCommandsForStats()
 	{
-		mTotalNumEnemies = (Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive() && Singleton<Profile>.Instance.MultiplayerData.MultiplayerGameSessionData.defensiveBuffs[0] > 0)
+		var multiplayerData = Singleton<Profile>.Instance.MultiplayerData;
+		mTotalNumEnemies = (multiplayerData.IsMultiplayerGameSessionActive() && multiplayerData.MultiplayerGameSessionData.defensiveBuffs[0] > 0)
 			? 1
 			: 0;
 		
@@ -690,15 +757,19 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 		for (int i = 0; i < waveRootData.Commands.Length; i++)
 		{
-			string enemy = waveRootData.Commands[i].enemy.Key;
-			switch (waveRootData.Commands[i].type)
+			var waveCommandData = waveRootData.Commands[i];
+
+			switch (waveCommandData.type)
 			{
 			case WaveCommandSchema.Type.Spawn:
-				mTotalNumEnemies++;
+				mTotalNumEnemies += (waveCommandData.count > 1) ? waveCommandData.count : 1;
+
+				string enemy = waveCommandData.enemy.Key;
 				if (Singleton<EnemiesDatabase>.Instance.Contains(enemy) && !mAllDifferentEnemies.Exists((string element) => element == enemy))
 				{
 					mAllDifferentEnemies.Add(enemy);
 				}
+
 				break;
 			default: break;
 			}

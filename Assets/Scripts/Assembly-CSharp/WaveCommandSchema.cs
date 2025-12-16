@@ -23,12 +23,29 @@ public class WaveCommandSchema
 
 	public enum Spacing
 	{
-		Loose,
+		Loose = 0,
 		Moderate,
 		Tight,
 	};
+
+	public static float SpacingToDuration(Spacing spacing)
+	{
+		switch (spacing)
+		{
+		case Spacing.Loose		: return 3.0f;
+		case Spacing.Moderate	: return 1.5f;
+		case Spacing.Tight		: return 0.3f;
+		default: return 0;
+		}
+	}
+
 	[DataBundleField(ColumnWidth = 200)]
 	public Spacing spacing;
+
+	public float SpacingDuration()
+	{
+		return SpacingToDuration(spacing);
+	}
 
 	[DataBundleField(ColumnWidth = 200)]
 	public float duration;
