@@ -40,7 +40,7 @@
     PotentialAbilties = AbilitiesHeroAttack
     allySlots = 4
     abilitySlots = 2
-    waveToUnlock = 5
+    waveToUnlock = 11
     unlockAchievement = Achievements.KunoichiUnlock
     upgradeAchievement = Achievements.KunoichiUpgrade
     meleeAchievement = Achievements.Kunoichi_Melee
@@ -69,7 +69,7 @@
     allySlots = 4
     abilitySlots = 2
     canMeleeFliers = True
-    waveToUnlock = 11
+    waveToUnlock = 21
     unlockAchievement = Achievements.RoninUnlock
     upgradeAchievement = Achievements.RoninUpgrade
     meleeAchievement = Achievements.Ronin_Melee
@@ -98,7 +98,7 @@
     allySlots = 3
     abilitySlots = 4
     canMeleeFliers = False
-    waveToUnlock = 5
+    waveToUnlock = 41
     purchaseToUnlock = False
     hideUntilUnlocked = True
     overrideRequirements = True
@@ -128,7 +128,7 @@
     allySlots = 6
     abilitySlots = 2
     canMeleeFliers = False
-    waveToUnlock = 5
+    waveToUnlock = 51
     purchaseToUnlock = False
     hideUntilUnlocked = True
     overrideRequirements = True

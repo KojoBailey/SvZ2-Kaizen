@@ -638,7 +638,6 @@
     unlockPlayhavenRequest = NULL
     summonIndex = 0
   FarmerOnStilts:
-    id = FarmerOnStilts
     displayName = LocalizedStrings.New_Helper_FarmerOnStilts_name
     desc = LocalizedStrings.New_Helper_FarmerOnStilts_description
     resources = Character.FarmerOnStilts
@@ -647,7 +646,7 @@
     platinumIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_FarmerOnStilts_Platinum.png
     meleeWeaponPrefab = Assets/Game/Resources/Props/Weapons/farmerfork.fbx
     lane = Lane.back
-    waveToUnlock = 5
+    waveToUnlock = 15
     availableAtWave = 0
     resourcesCost = 10
     cooldownTimer = 3
