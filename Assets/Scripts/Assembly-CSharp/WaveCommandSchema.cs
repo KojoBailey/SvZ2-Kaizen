@@ -34,7 +34,7 @@ public class WaveCommandSchema
 		{
 		case Spacing.Loose		: return 3.0f;
 		case Spacing.Moderate	: return 1.5f;
-		case Spacing.Tight		: return 0.3f;
+		case Spacing.Tight		: return 0.5f;
 		default: return 0;
 		}
 	}
