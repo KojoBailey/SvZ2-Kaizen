@@ -662,11 +662,9 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 				{
 					mWaveQueue.Enqueue(new QueueItem(enemy, delay));
 					mEnemiesQueuedSoFar++;
-					UnityEngine.Debug.Log("Added " + enemy + " to queue.");
 				}
 				mWaveQueue.Enqueue(new QueueItem(enemy, MinimumWaveDelay));
 				mEnemiesQueuedSoFar++;
-				UnityEngine.Debug.Log("Added " + enemy + " to queue.");
 
 				mEnemiesToKillBeforeNextWave = mEnemiesQueuedSoFar - 1;
 			}
