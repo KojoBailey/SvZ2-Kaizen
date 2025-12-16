@@ -89,6 +89,8 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	private int mEnemiesToKillBeforeNextWave;
 
+	private int mEnemiesQueuedSoFar;
+
 	private List<string> mAllDifferentEnemies = new List<string>();
 
 	private List<int> mLegionMarkers = new List<int>();
@@ -247,6 +249,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		mNextCommandToRun = 0;
 		mEnemiesKilledSoFar = 0;
 		mEnemiesToKillBeforeNextWave = 0;
+		mEnemiesQueuedSoFar = 0;
 		if (Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive())
 		{
 			int level = Singleton<Profile>.Instance.MultiplayerData.MultiplayerGameSessionData.defensiveBuffs[0];
@@ -284,7 +287,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 	public void Update()
 	{
 		// [TODO] Make dependent on remaining health of previous enemies.
-		if (!isDone && mEnemiesToKillBeforeNextWave < 1)
+		if (!isDone && mEnemiesKilledSoFar >= mEnemiesToKillBeforeNextWave)
 		{
 			QueueNextWave();
 		}
@@ -295,7 +298,6 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 	public void registerEnemyKilled(string enemyID)
 	{
 		mEnemiesKilledSoFar++;
-		mEnemiesToKillBeforeNextWave--;
 		Singleton<Profile>.Instance.IncNumKillsOfEnemyType(enemyID);
 	}
 
@@ -659,12 +661,14 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 				for (int i = 0; i < count - 1; i++)
 				{
 					mWaveQueue.Enqueue(new QueueItem(enemy, delay));
+					mEnemiesQueuedSoFar++;
 					UnityEngine.Debug.Log("Added " + enemy + " to queue.");
 				}
 				mWaveQueue.Enqueue(new QueueItem(enemy, MinimumWaveDelay));
+				mEnemiesQueuedSoFar++;
 				UnityEngine.Debug.Log("Added " + enemy + " to queue.");
 
-				mEnemiesToKillBeforeNextWave += count;
+				mEnemiesToKillBeforeNextWave = mEnemiesQueuedSoFar - 1;
 			}
 			break;
 		default: break;
