@@ -272,10 +272,10 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		UpdateDelayTimer();
 	}
 
-	public void registerEnemyKilled(string enemyID)
+	public void registerEnemyKilled(string enemyId)
 	{
 		mEnemiesKilledSoFar++;
-		Singleton<Profile>.Instance.IncNumKillsOfEnemyType(enemyID);
+		Singleton<Profile>.Instance.IncNumKillsOfEnemyType(enemyId);
 	}
 
 	public void AddSpecialRewardsToCollectables()
@@ -315,14 +315,14 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		return WaveSchema.Initialize(recordKey, randomizer);
 	}
 
-	public static WaveSchema GetWaveData(int waveID, WaveType waveType)
+	public static WaveSchema GetWaveData(int waveId, WaveType waveType)
 	{
 		switch (waveType)
 		{
 		case WaveType.Wave_Multiplayer:
 		{
 			string recordTable = Singleton<PlayModesManager>.Instance.selectedModeData.waves.RecordTable;
-			WaveSchema waveSchema2 = WaveSchema.Initialize(DataBundleRuntime.TableRecordKey(recordTable, waveID.ToString()));
+			WaveSchema waveSchema2 = WaveSchema.Initialize(DataBundleRuntime.TableRecordKey(recordTable, waveId.ToString()));
 			if (waveSchema2 == null)
 			{
 			}
@@ -339,7 +339,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		}
 		default:
 		{
-			int num = waveID;
+			int num = waveId;
 			while (num > 0)
 			{
 				WaveSchema waveSchema = null;
@@ -571,30 +571,30 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		}
 	}
 
-	public Enemy ConstructEnemy(string enemyID)
+	public Enemy ConstructEnemy(string enemyId)
 	{
-		if (!Singleton<EnemiesDatabase>.Instance.Contains(enemyID))
+		if (!Singleton<EnemiesDatabase>.Instance.Contains(enemyId))
 		{
 			return null;
 		}
-		return ConstructEnemyWithEffect(enemyID, mEnemiesSpawnArea.size.x, mEnemiesSpawnArea.transform.position, false, null);
+		return ConstructEnemyWithEffect(enemyId, mEnemiesSpawnArea.size.x, mEnemiesSpawnArea.transform.position, false, null);
 	}
 
-	public Enemy ConstructEnemy(string enemyID, float sizeOfSpawnArea, Vector3 spawnPos, bool dynamicSpawn)
+	public Enemy ConstructEnemy(string enemyId, float sizeOfSpawnArea, Vector3 spawnPos, bool dynamicSpawn)
 	{
-		if (!Singleton<EnemiesDatabase>.Instance.Contains(enemyID))
+		if (!Singleton<EnemiesDatabase>.Instance.Contains(enemyId))
 		{
 			return null;
 		}
-		return ConstructEnemyWithEffect(enemyID, sizeOfSpawnArea, spawnPos, dynamicSpawn, null);
+		return ConstructEnemyWithEffect(enemyId, sizeOfSpawnArea, spawnPos, dynamicSpawn, null);
 	}
 
-	private Enemy ConstructEnemyWithEffect(string enemyID, float sizeOfSpawnArea, Vector3 spawnPos, bool dynamicSpawn, GameObject effectToSpawn)
+	private Enemy ConstructEnemyWithEffect(string enemyId, float sizeOfSpawnArea, Vector3 spawnPos, bool dynamicSpawn, GameObject effectToSpawn)
 	{
-		return SpawnEnemy(enemyID, GetCharacterData(enemyID), sizeOfSpawnArea, spawnPos, dynamicSpawn, effectToSpawn);
+		return SpawnEnemy(enemyId, GetCharacterData(enemyId), sizeOfSpawnArea, spawnPos, dynamicSpawn, effectToSpawn);
 	}
 
-	private Enemy SpawnEnemy(string uniqueID, CharacterData data, float sizeOfSpawnArea, Vector3 spawnPos, bool dynamicSpawn, GameObject effectToUse)
+	private Enemy SpawnEnemy(string uniqueId, CharacterData data, float sizeOfSpawnArea, Vector3 spawnPos, bool dynamicSpawn, GameObject effectToUse)
 	{
 		spawnPos.x = WeakGlobalInstance<CharactersManager>.Instance.GetBestSpawnXPos(spawnPos, sizeOfSpawnArea, data.lanePref, true, data.isFlying, data.bowAttackRange > 0f);
 		Enemy enemy = new Enemy(data, mZTarget, spawnPos, 1);
@@ -613,10 +613,10 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		if (data.resourceDropAlways != string.Empty)
 		{
 			Character selfPtr = enemy;
-			string resourceID = data.resourceDropAlways;
+			string resourceId = data.resourceDropAlways;
 			enemy.onDeathEvent = (Action)Delegate.Combine(enemy.onDeathEvent, (Action)delegate
 			{
-				SpawnExtraCollectable(resourceID, selfPtr);
+				SpawnExtraCollectable(resourceId, selfPtr);
 			});
 		}
 		if (effectToUse != null)
