@@ -107,7 +107,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 	{
 		get
 		{
-			return isDone && mEnemiesKilledSoFar == mTotalNumEnemies;
+			return isDone && mEnemiesKilledSoFar >= mTotalNumEnemies;
 		}
 	}
 
@@ -655,7 +655,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 				if (enemy != string.Empty)
 				{
 					int count = (waveCommandData.count > 1) ? waveCommandData.count : 1;
-					float delay = waveCommandData.SpacingDuration();
+					float delay = waveCommandData.spacingDuration;
 					for (int i = 0; i < count - 1; i++)
 					{
 						mWaveQueue.Enqueue(new QueueItem(enemy, delay));

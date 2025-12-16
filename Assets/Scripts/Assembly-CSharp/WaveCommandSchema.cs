@@ -42,9 +42,12 @@ public class WaveCommandSchema
 	[DataBundleField(ColumnWidth = 200)]
 	public Spacing spacing;
 
-	public float SpacingDuration()
+	public float spacingDuration
 	{
-		return SpacingToDuration(spacing);
+		get
+		{
+			return SpacingToDuration(spacing);
+		}
 	}
 
 	[DataBundleField(ColumnWidth = 200)]
