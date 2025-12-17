@@ -86,9 +86,6 @@ public class Profile : Singleton<Profile>
 		{
 			return SntpTime.UniversalTime.AddHours(-8.0);
 		}
-		set
-		{
-		}
 	}
 
 	public ProceduralWaveSchema dailyChallengeProceduralWaveSchema
