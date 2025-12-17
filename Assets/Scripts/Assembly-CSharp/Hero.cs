@@ -36,7 +36,7 @@ public class Hero : Character
 
 	private float mRightConstraint;
 
-	private DataBundleRecordHandle<MaterialLookupSchema> matLookupHandle { get; set; }
+	private DataBundleRecordHandle<CostumeSchema> matLookupHandle { get; set; }
 
 	public GameObject HUDBloodEffect
 	{
@@ -212,15 +212,11 @@ public class Hero : Character
 
 	public static string MaterialKey(string heroID, int collectionLevel)
 	{
-		switch (collectionLevel)
+		if (collectionLevel == 3)
 		{
-		case 1:
-		case 2:
-		case 3:
 			return DataBundleRuntime.TableRecordKey("HeroMaterials", heroID + "_ArmorSet");
-		default:
-			return DataBundleRuntime.TableRecordKey("HeroMaterials", heroID + "_Normal");
 		}
+		return DataBundleRuntime.TableRecordKey("HeroMaterials", heroID + "_Normal");
 	}
 
 	private void AddExtraAnims(string id, GameObject character)
@@ -401,9 +397,7 @@ public class Hero : Character
 		Renderer componentInChildren = heroModel.GetComponentInChildren<Renderer>();
 		if (componentInChildren != null)
 		{
-			string key = MaterialKey(heroID, num);
-			var dataBundleRecordKey = new DataBundleRecordKey(key);
-			matLookupHandle = new DataBundleRecordHandle<MaterialLookupSchema>(dataBundleRecordKey);
+			matLookupHandle = new DataBundleRecordHandle<CostumeSchema>("HeroBalanced", "Normal");
 			matLookupHandle.Load(null);
 			if (matLookupHandle.Data != null && matLookupHandle.Data.material != null)
 			{
