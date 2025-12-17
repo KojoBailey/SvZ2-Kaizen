@@ -8,22 +8,6 @@ using UnityEngine;
 
 public class Profile : Singleton<Profile>
 {
-    private const int kMaxCurrencies = 999999999;
-
-	public const int kMaxLevel = 999;
-
-	public const int kMaxWaveLevel = 99;
-
-	private const int kWaveToUnlockZombieMode = 10;
-
-	private const int kDailyChallengeUnlockWave = 12;
-
-	public const string kLocalSaveName = "local";
-
-	public const string kCloudSaveName = "cloud";
-
-	public const string UpgradesUdamanTable = "Upgrades";
-
 	public static bool UseVsMode = true;
 
 	public static bool FastLoseItem = false;
