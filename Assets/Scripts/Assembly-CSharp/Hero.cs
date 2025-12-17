@@ -402,13 +402,15 @@ public class Hero : Character
 
 	private void CheckForUpgradeFXArmor(string heroID)
 	{
-		int num = -1;
-		num = ((base.ownerId != 0) ? Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.armorLevel : Singleton<Profile>.Instance.MultiplayerData.CollectionLevel("Armor"));
+		int num = (base.ownerId != 0)
+			? Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.armorLevel
+			: Singleton<Profile>.Instance.MultiplayerData.CollectionLevel("Armor");
+		
 		Renderer componentInChildren = heroModel.GetComponentInChildren<Renderer>();
 		if (componentInChildren != null)
 		{
 			string key = MaterialKey(heroID, num);
-			DataBundleRecordKey dataBundleRecordKey = new DataBundleRecordKey(key);
+			var dataBundleRecordKey = new DataBundleRecordKey(key);
 			matLookupHandle = new DataBundleRecordHandle<MaterialLookupSchema>(dataBundleRecordKey);
 			matLookupHandle.Load(null);
 			if (matLookupHandle.Data != null && matLookupHandle.Data.material != null)
@@ -420,6 +422,7 @@ public class Hero : Character
 				}
 			}
 		}
+
 		if (num > 0)
 		{
 			DataBundleRecordKey dataBundleRecordKey2 = new DataBundleRecordKey("CollectionSet", num.ToString());
@@ -433,11 +436,10 @@ public class Hero : Character
 				}
 			}
 		}
-		int level = Singleton<Profile>.Instance.armorLevel;
-		if (base.ownerId != 0)
-		{
-			level = Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.armorCollected;
-		}
+
+		int level = (base.ownerId == 0)
+			? Singleton<Profile>.Instance.armorLevel
+			: Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.armorCollected;
 		mCharacterArmorSchema = mainData.GetArmorLevel(level);
 		if (mCharacterArmorSchema != null)
 		{
