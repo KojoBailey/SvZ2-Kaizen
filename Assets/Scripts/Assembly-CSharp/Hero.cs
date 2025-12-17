@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class Hero : Character
 {
-	private const float kChickenSwordDuration = 15f;
-
-	private const float kMinLevel = 0.4f;
-
-	private const float kMaxLevel = 0.6f;
-
-	private const float kPulseSpeed = 1f;
-
 	private static readonly float kEnemyHeroKeepDist = 0.9f;
 
 	private GluiSprite mBloodEffectSprite;
