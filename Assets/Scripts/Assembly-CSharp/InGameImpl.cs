@@ -5,26 +5,6 @@ using UnityEngine;
 
 public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 {
-	private const int kMaxHelpers = 5;
-
-	private const float kDialogPriority = 500f;
-
-	private const float kWinPriority = 1000f;
-
-	private const float kSlowMoEffectStartScale = 0.1f;
-
-	private const float kSlowMoEffectIncrement = 0.8f;
-
-	private const float kCameraZoomInOffset = 2f;
-
-	private const float kCameraZoomOutSpeed = 0.4f;
-
-	private const float kCameraMoveUpSpeed = 0.25f;
-
-	private const float kMinTimeBetweenTutorials = 8f;
-
-	private const int kWaveToShowEndGameNarrative = 70;
-
 	public static readonly int kMaxPlayers = 2;
 
 	public Transform heroSpawnPointLeft;

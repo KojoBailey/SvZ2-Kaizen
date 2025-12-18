@@ -124,10 +124,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	public int enemiesKilledSoFar
 	{
-		get
-		{
-			return mEnemiesKilledSoFar;
-		}
+		get { return mEnemiesKilledSoFar; }
 	}
 
 	public List<string> allDifferentEnemies
@@ -221,12 +218,16 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		mWaveIndex = waveIndex;
 		mEnemiesSpawnArea = enemiesSpawnArea;
 		mZTarget = zTarget;
+		
 		LoadData();
+
 		AnalyseWaveCommandsForStats();
+
 		mNextCommandToRun = 0;
 		mEnemiesKilledSoFar = 0;
 		mEnemiesToKillBeforeNextWave = 0;
 		mEnemiesQueuedSoFar = 0;
+
 		if (Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive())
 		{
 			int level = Singleton<Profile>.Instance.MultiplayerData.MultiplayerGameSessionData.defensiveBuffs[0];
@@ -237,6 +238,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 				allDifferentEnemies.Add(text);
 			}
 		}
+
 		if (helperEnemySwaps.Length > 0)
 		{
 			corruptionSpawnEffect = ResourceCache.GetCachedResource("FX/Corrupt", 1).Resource as GameObject;
