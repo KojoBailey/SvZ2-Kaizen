@@ -13,11 +13,20 @@ public class EquipPageHeroes : EquipPage, UIHandlerComponent
 
 		private HeroSchema mData;
 
-		public string id => mID;
+		public string id
+		{
+			get { return mID; }
+		}
 
-		public HeroSchema data => mData;
+		public HeroSchema data
+		{
+			get { return mData; }
+		}
 
-		public GameObject gameObject => mSlot;
+		public GameObject gameObject
+		{
+			get { return mSlot; }
+		}
 
 		public Card(Transform uiSlot, int index, string heroCmd, string infoCmd)
 		{
