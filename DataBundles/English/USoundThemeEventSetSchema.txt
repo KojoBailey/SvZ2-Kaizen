@@ -6244,3 +6244,25 @@
     isVoice = False
     priority = 128
     bus = SoundEventBuses.UI
+[UI_LegionBannerAppear]
+  Spawn:
+    type = SoundThemeEnum.Spawn
+    singleClip = Assets/Game/Resources/Sounds/UI/UI_LegionBanner_Appear_ST_OS_01.wav
+    clipset = 
+    volume = 1
+    basePitch = 1
+    pitchVariance = 0
+    percentSilent = 0
+    playLimit = 0
+    loop = False
+    minDistanceOverride = 0
+    maxDistanceOverride = 0
+    logarithmicRolloff = False
+    startDelay = 0
+    fadeInTime = 0
+    fadeOutTime = 0
+    stereoSpread = 0
+    dopplerLevel = 1
+    isVoice = False
+    priority = 128
+    bus = 

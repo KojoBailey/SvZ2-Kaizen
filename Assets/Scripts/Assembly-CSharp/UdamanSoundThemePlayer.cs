@@ -16,11 +16,11 @@ public class UdamanSoundThemePlayer : MonoBehaviour
 	protected bool keepSoundsInMemory = true;
 
 	[DataBundleSchemaFilter(typeof(USoundThemeSetSchema), false)]
-	[HideInInspector]
+	// [HideInInspector]
 	public DataBundleRecordKey soundThemeKey;
 
 	[DataBundleSchemaFilter(typeof(DynamicEnum), false)]
-	[HideInInspector]
+	// [HideInInspector]
 	[DataBundleRecordTableFilter("SoundThemeEnum")]
 	public DataBundleRecordKey onLoadedSoundEvent;
 
@@ -147,19 +147,12 @@ public class UdamanSoundThemePlayer : MonoBehaviour
 
 	public USoundThemeEventClip PlaySoundEvent(string eventName, DataBundleRecordKey themeKey)
 	{
-		if (DataBundleRuntime.Instance == null)
-		{
-			return null;
-		}
-		if (themeKey == null || string.IsNullOrEmpty(themeKey))
-		{
-			return null;
-		}
+		if (DataBundleRuntime.Instance == null) return null;
+		if (themeKey == null || string.IsNullOrEmpty(themeKey)) return null;
+
 		USoundThemeSetSchema soundTheme = SingletonSpawningMonoBehaviour<USoundThemeManager>.Instance.GetSoundTheme(themeKey);
-		if (!soundTheme)
-		{
-			return null;
-		}
+		if (!soundTheme) return null;
+		
 		AudioClip clip = null;
 		DataBundleRecordHandle<USoundThemeClipsetSchema>[] value = null;
 		DataBundleRecordHandle<USoundThemeClipsetSchema> dataBundleRecordHandle = null;

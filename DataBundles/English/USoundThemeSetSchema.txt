@@ -330,6 +330,10 @@
     ThemeName = UI_BannerAppear
     parentThemeKey = 
     events = UI_BannerAppear
+  UI_LegionBannerAppear:
+    ThemeName = UI_LegionBannerAppear
+    parentThemeKey = 
+    events = UI_LegionBannerAppear
   EnemyGate:
     ThemeName = EnemyGate
     parentThemeKey = 

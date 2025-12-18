@@ -446,7 +446,7 @@ MonoBehaviour:
   shadowColor: {r: 0, g: 0, b: 0, a: 0.5019608}
   kernText: 0
   ignoreNewlineTags: 0
-  renderedGlyphs: 5
+  renderedGlyphs: 6
   InsertionPoints: 0
   fontScale: {x: 1.9122971, y: 1.9122971, z: 1.9122971}
 --- !u!114 &114203498738248888
@@ -573,7 +573,7 @@ MonoBehaviour:
   defaultMinDistance: 1
   defaultMaxDistance: 500
   soundThemeKey:
-    recordKey: Themes.UI_BannerAppear
+    recordKey: Themes.UI_LegionBannerAppear
   onLoadedSoundEvent:
     recordKey: SoundThemeEnum.Spawn
 --- !u!114 &114473334717140104
@@ -776,6 +776,6 @@ MonoBehaviour:
   shadowColor: {r: 0, g: 0, b: 0, a: 0.5019608}
   kernText: 0
   ignoreNewlineTags: 0
-  renderedGlyphs: 17
+  renderedGlyphs: 11
   InsertionPoints: 0
   fontScale: {x: 1.2748648, y: 1.2748648, z: 1.2748648}
