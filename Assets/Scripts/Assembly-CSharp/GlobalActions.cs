@@ -301,16 +301,6 @@ public class GlobalActions : GluiGlobalActionHandler
 				GluiActionSender.SendGluiAction("POPUP_DEFENSE_RATING", sender, data);
 			}
 			return true;
-		// case "CHANGE_COSTUME":
-		// 	if (Singleton<Profile>.Instance.GetCostume("HeroBalanced") == "Normal")
-		// 	{
-		// 		Singleton<Profile>.Instance.SetCostume("HeroBalanced", "Gold");
-		// 	}
-		// 	else
-		// 	{
-		// 		Singleton<Profile>.Instance.SetCostume("HeroBalanced", "Normal");
-		// 	}
-		// 	return true;
 		}
 		return false;
 	}

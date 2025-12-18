@@ -2580,7 +2580,7 @@ MonoBehaviour:
   anchor: 0
   handler: {fileID: 0}
   gluiTexture:
-    Texture: {fileID: 2800000, guid: e03bface4029a6147918cd690f82a67e, type: 3}
+    Texture: {fileID: 2800000, guid: 9576634f8971f5848a470101f502b828, type: 3}
     UVs:
       serializedVersion: 2
       x: 0

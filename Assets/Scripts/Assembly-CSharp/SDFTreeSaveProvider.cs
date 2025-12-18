@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 
 public class SDFTreeSaveProvider : SaveProvider
 {
@@ -40,14 +42,36 @@ public class SDFTreeSaveProvider : SaveProvider
 	{
 		if (dataStream == null)
 		{
+			UnityEngine.Debug.LogError("SDFTreeSaveProvider.Read: dataStream is null");
 			return false;
 		}
+
 		if (dataHeader.UseDeviceData)
 		{
 			deviceData.DeserializeFromStream(dataStream);
 		}
+
 		data = SDFTree.LoadFromStream(dataStream);
-		return data != null;
+
+		if (data == null)
+		{
+			UnityEngine.Debug.LogError("SDFTree.LoadFromStream returned null!");
+			try
+			{
+				dataStream.Position = 0;
+				using (StreamReader reader = new StreamReader(dataStream))
+				{
+					string content = reader.ReadToEnd();
+					UnityEngine.Debug.Log("Stream content: " + content);
+				}
+			}
+			catch (Exception e)
+			{
+				UnityEngine.Debug.LogError("Error reading stream: " + e.Message);
+			}
+			return false;
+		}
+		return true;
 	}
 
 	public void SetValue(string attrib, string val)
@@ -97,11 +121,8 @@ public class SDFTreeSaveProvider : SaveProvider
 
 	public string GetValue(string attrib, string subSection)
 	{
-		if (!GetSubSection(subSection).hasAttribute(attrib))
-		{
-			return string.Empty;
-		}
-		return GetSubSection(subSection)[attrib];
+		var section = GetSubSection(subSection);
+		return section.hasAttribute(attrib) ? section[attrib] : string.Empty;
 	}
 
 	public int GetValueInt(string attrib)
@@ -295,10 +316,12 @@ public class SDFTreeSaveProvider : SaveProvider
 		{
 			return data;
 		}
+		
 		if (!data.hasChild(subSection))
 		{
 			data.SetChild(subSection, new SDFTreeNode());
 		}
+
 		return data.to(subSection);
 	}
 }

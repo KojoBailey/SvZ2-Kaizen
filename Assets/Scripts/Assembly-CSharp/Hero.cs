@@ -41,10 +41,7 @@ public class Hero : Character
 
 	public GameObject HUDBloodEffect
 	{
-		get
-		{
-			return mHudBloodEffect;
-		}
+		get { return mHudBloodEffect; }
 		set
 		{
 			mHudBloodEffect = value;
@@ -55,18 +52,12 @@ public class Hero : Character
 
 	public string healthBarFileToUse
 	{
-		get
-		{
-			return mHealthBarToShow;
-		}
+		get { return mHealthBarToShow; }
 	}
 
 	public bool canUseSpecialAttack
 	{
-		get
-		{
-			return base.health > 0f && !mPerformingSpecialAttack && !base.controller.isInHurtState;
-		}
+		get { return base.health > 0f && !mPerformingSpecialAttack && !base.controller.isInHurtState; }
 	}
 
 	private float meleeDamageModifier { get; set; }
@@ -75,18 +66,12 @@ public class Hero : Character
 
 	public override float meleeDamage
 	{
-		get
-		{
-			return base.meleeDamage * meleeDamageModifier;
-		}
+		get { return base.meleeDamage * meleeDamageModifier; }
 	}
 
 	public override float bowDamage
 	{
-		get
-		{
-			return base.bowDamage * meleeDamageModifier;
-		}
+		get { return base.bowDamage * meleeDamageModifier; }
 	}
 
 	public GameObject mountObject { get; private set; }
@@ -389,7 +374,7 @@ public class Hero : Character
 		}
 	}
 
-	private void CheckForUpgradeFXArmor(string heroID)
+	private void CheckForUpgradeFXArmor(string heroId)
 	{
 		int num = (base.ownerId != 0)
 			? Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.armorLevel
@@ -398,8 +383,8 @@ public class Hero : Character
 		Renderer componentInChildren = heroModel.GetComponentInChildren<Renderer>();
 		if (componentInChildren != null)
 		{
-			string costume = Singleton<Profile>.Instance.GetCostume("HeroBalanced");
-			matLookupHandle = new DataBundleRecordHandle<CostumeSchema>("HeroBalanced", costume);
+			string costume = Singleton<Profile>.Instance.GetCostume(heroId);
+			matLookupHandle = new DataBundleRecordHandle<CostumeSchema>(heroId, costume);
 			matLookupHandle.Load(null);
 			if (matLookupHandle.Data != null && matLookupHandle.Data.material != null)
 			{
@@ -408,6 +393,11 @@ public class Hero : Character
 				{
 					componentInChildren.sharedMaterial = SchemaFieldAdapter.Deserialize(material);
 				}
+			}
+			else
+			{
+				UnityEngine.Debug.LogError(string.Format(
+					"Could not find material of path \"{0}\".", matLookupHandle.Data.material));
 			}
 		}
 

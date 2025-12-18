@@ -421,10 +421,7 @@ public class Profile : Singleton<Profile>
 
 	public bool tutorialIsComplete
 	{
-		get
-		{
-			return GetWaveLevel(3) > 0;
-		}
+		get { return GetWaveLevel(3) > 0; }
 	}
 
 	public bool hasReportedUser
@@ -588,6 +585,7 @@ public class Profile : Singleton<Profile>
 		set
 		{
 			Singleton<Achievements>.Instance.CheckThresholdAchievement("CollectCoins", value);
+
 			if (WeakGlobalMonoBehavior<InGameImpl>.Instance != null)
 			{
 				int num = value - coins;
@@ -596,6 +594,7 @@ public class Profile : Singleton<Profile>
 					Singleton<PlayStatistics>.Instance.data.inGameGoldGained += num;
 				}
 			}
+
 			int num2 = Mathf.Clamp(value, 0, 999999999);
 			mSavedData.SetValueInt("coins", num2);
 			if (SingletonSpawningMonoBehaviour<GluiPersistentDataCache>.Exists)
@@ -2239,18 +2238,13 @@ public class Profile : Singleton<Profile>
 
 	public string GetCostume(string characterId)
 	{
-		string result = mSavedData.GetValue(characterId + ".Costume", playModeSubSection);
-		if (result == string.Empty)
-		{
-			result = SetCostume(characterId, "Normal");
-		}
-		return result;
+		string result = mSavedData.GetValue(characterId + ".Costume");
+		return (result != string.Empty) ? result : "Normal";
 	}
 
-	public string SetCostume(string characterId, string costumeId)
+	public void SetCostume(string characterId, string costumeId)
 	{
-		mSavedData.SetValue(characterId + ".Costume", costumeId, playModeSubSection);
-		return GetCostume(characterId);
+		mSavedData.SetValue(characterId + ".Costume", costumeId);
 	}
 
 	public bool GetHeroPurchased(string id)
@@ -3076,11 +3070,6 @@ public class Profile : Singleton<Profile>
 	public bool JustUnlockedDailyChallenge()
 	{
 		return highestUnlockedWave == 12;
-	}
-
-	public SDFTreeSaveProvider gameSaveData()
-	{
-		return mSavedData;
 	}
 
 	public void syncCloudDataToLocal(SDFTreeSaveProvider _cloudSaveData)

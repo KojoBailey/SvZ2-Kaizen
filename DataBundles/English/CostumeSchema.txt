@@ -9,3 +9,47 @@
     displayName = LocalizedStrings.hero_balance_name
     icon = Assets/Game/Resources/UI/Textures/DynamicIcons/Upgrades/Samurai_Hero.png
     material = Assets/Game/Resources/Characters/HeroBalanced/Materials/herob_gold_D.mat
+[HeroAttack]
+  Normal:
+    id = Normal
+    displayName = LocalizedStrings.hero_attack_name
+    icon = Assets/Game/Resources/UI/Textures/DynamicIcons/Upgrades/Samurai_Hero.png
+    material = Assets/Game/Resources/Characters/HeroAttack/Materials/heroa_D.mat
+  Gold:
+    id = Normal
+    displayName = LocalizedStrings.hero_attack_name
+    icon = Assets/Game/Resources/UI/Textures/DynamicIcons/Upgrades/Samurai_Hero.png
+    material = Assets/Game/Resources/Characters/HeroAttack/Materials/heroa_gold_D.mat
+[HeroDefense]
+  Normal:
+    id = Normal
+    displayName = LocalizedStrings.hero_attack_name
+    icon = Assets/Game/Resources/UI/Textures/DynamicIcons/Upgrades/Samurai_Hero.png
+    material = Assets/Game/Resources/Characters/HeroDefense/Materials/herod_D.mat
+  Gold:
+    id = Normal
+    displayName = LocalizedStrings.hero_attack_name
+    icon = Assets/Game/Resources/UI/Textures/DynamicIcons/Upgrades/Samurai_Hero.png
+    material = Assets/Game/Resources/Characters/HeroDefense/Materials/herod_gold_D.mat
+[HeroAbility]
+  Normal:
+    id = Normal
+    displayName = LocalizedStrings.hero_attack_name
+    icon = Assets/Game/Resources/UI/Textures/DynamicIcons/Upgrades/Samurai_Hero.png
+    material = Assets/Game/Resources/Characters/HeroAbilities/Materials/heroab_D.mat
+  Gold:
+    id = Normal
+    displayName = LocalizedStrings.hero_attack_name
+    icon = Assets/Game/Resources/UI/Textures/DynamicIcons/Upgrades/Samurai_Hero.png
+    material = Assets/Game/Resources/Characters/HeroAbilities/Materials/heroab_gold_D.mat
+[HeroLeadership]
+  Normal:
+    id = Normal
+    displayName = LocalizedStrings.hero_attack_name
+    icon = Assets/Game/Resources/UI/Textures/DynamicIcons/Upgrades/Samurai_Hero.png
+    material = Assets/Game/Resources/Characters/HeroLeadership/Materials/herol_D.mat
+  Gold:
+    id = Normal
+    displayName = LocalizedStrings.hero_attack_name
+    icon = Assets/Game/Resources/UI/Textures/DynamicIcons/Upgrades/Samurai_Hero.png
+    material = Assets/Game/Resources/Characters/HeroLeadership/Materials/herol_gold_D.mat

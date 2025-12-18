@@ -572,8 +572,8 @@ public class ConsoleFunctions_Game
 		if (args.Length >= 2)
 		{
 			string text = args[1];
-			string text2 = ((args.Length < 3) ? string.Empty : args[2]);
-			string text3 = ((args.Length < 3) ? string.Empty : args[3]);
+			string text2 = (args.Length < 3) ? string.Empty : args[2];
+			string text3 = (args.Length < 3) ? string.Empty : args[3];
 			switch (text)
 			{
 			case "set":
@@ -581,6 +581,13 @@ public class ConsoleFunctions_Game
 				{
 					Singleton<Profile>.Instance.heroID = text3;
 					WeakGlobalMonoBehavior<InGameImpl>.Instance.CreateHero(0, WeakGlobalMonoBehavior<InGameImpl>.Instance.hero.controlledObject.transform);
+				}
+				else if (text2 == "wave")
+				{
+					for (int i = 0; i <= int.Parse(text3); i++)
+					{
+						Singleton<Profile>.Instance.SetWaveLevel(i, 2);
+					}
 				}
 				else
 				{
