@@ -27,22 +27,21 @@ public class DataAdaptor_HeroStats : DataAdaptorBase
 	public override void SetData(object data)
 	{
 		context = data;
-		if (data is HeroSchema)
+		if (!(data is HeroSchema)) return;
+
+		HeroSchema heroSchema = (HeroSchema)data;
+		if (heroSchema != null)
 		{
-			HeroSchema heroSchema = (HeroSchema)data;
-			if (heroSchema != null)
-			{
-				heroName.Text = StringUtils.GetStringFromStringRef(heroSchema.displayName);
-				heroDescription.Text = StringUtils.GetStringFromStringRef(heroSchema.desc);
-				heroPortrait.Texture = heroSchema.storePortrait;
-				HeroStarsSchema heroStarsSchema = heroSchema.HeroStarsSchema;
-				SetStars(statSpeed, heroStarsSchema.speed);
-				SetStars(statRanged, heroStarsSchema.ranged);
-				SetStars(statMelee, heroStarsSchema.melee);
-				SetStars(statHealth, heroStarsSchema.health);
-				SetStars(statAllies, heroStarsSchema.allySlots);
-				SetStars(statAbility, heroStarsSchema.ability);
-			}
+			heroName.Text = StringUtils.GetStringFromStringRef(heroSchema.displayName);
+			heroDescription.Text = StringUtils.GetStringFromStringRef(heroSchema.desc);
+			heroPortrait.Texture = heroSchema.storePortrait;
+			HeroStarsSchema heroStarsSchema = heroSchema.HeroStarsSchema;
+			SetStars(statSpeed, heroStarsSchema.speed);
+			SetStars(statRanged, heroStarsSchema.ranged);
+			SetStars(statMelee, heroStarsSchema.melee);
+			SetStars(statHealth, heroStarsSchema.health);
+			SetStars(statAllies, heroStarsSchema.allySlots);
+			SetStars(statAbility, heroStarsSchema.ability);
 		}
 	}
 
