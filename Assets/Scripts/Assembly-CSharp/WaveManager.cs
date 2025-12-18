@@ -588,9 +588,23 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 			}
 			break;
 		case WaveCommandSchema.Type.Banner:
-			WeakGlobalMonoBehavior<BannerManager>.Instance.OpenBanner(
-				new BannerLegion(5f * WeakGlobalMonoBehavior<InGameImpl>.Instance.timeScalar)
-			);
+			string banner = waveCommandData.banner;
+
+			if (banner == string.Empty) break;
+
+			switch (banner)
+			{
+			case "Legion":
+				WeakGlobalMonoBehavior<BannerManager>.Instance.OpenBanner(
+					new BannerLegion(5f * WeakGlobalMonoBehavior<InGameImpl>.Instance.timeScalar)
+				);
+				break;
+			case "Boss":
+				WeakGlobalMonoBehavior<BannerManager>.Instance.OpenBanner(
+					new BannerBoss(5f * WeakGlobalMonoBehavior<InGameImpl>.Instance.timeScalar)
+				);
+				break;
+			}
 			break;
 		default: break;
 		}
