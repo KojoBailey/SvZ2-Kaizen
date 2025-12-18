@@ -3,4 +3,9 @@
     id = Normal
     displayName = LocalizedStrings.hero_balance_name
     icon = Assets/Game/Resources/UI/Textures/DynamicIcons/Upgrades/Samurai_Hero.png
+    material = Assets/Game/Resources/Characters/HeroBalanced/Materials/herob_D.mat
+  Gold:
+    id = Normal
+    displayName = LocalizedStrings.hero_balance_name
+    icon = Assets/Game/Resources/UI/Textures/DynamicIcons/Upgrades/Samurai_Hero.png
     material = Assets/Game/Resources/Characters/HeroBalanced/Materials/herob_gold_D.mat
