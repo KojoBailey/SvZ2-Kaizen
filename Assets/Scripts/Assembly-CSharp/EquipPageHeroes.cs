@@ -13,29 +13,11 @@ public class EquipPageHeroes : EquipPage, UIHandlerComponent
 
 		private HeroSchema mData;
 
-		public string id
-		{
-			get
-			{
-				return mID;
-			}
-		}
+		public string id => mID;
 
-		public HeroSchema data
-		{
-			get
-			{
-				return mData;
-			}
-		}
+		public HeroSchema data => mData;
 
-		public GameObject gameObject
-		{
-			get
-			{
-				return mSlot;
-			}
-		}
+		public GameObject gameObject => mSlot;
 
 		public Card(Transform uiSlot, int index, string heroCmd, string infoCmd)
 		{
@@ -145,6 +127,18 @@ public class EquipPageHeroes : EquipPage, UIHandlerComponent
 		if (eventID.Length > "HERO:".Length && eventID.Substring(0, "HERO:".Length) == "HERO:")
 		{
 			SelectHero(int.Parse(eventID.Substring("HERO:".Length)), true);
+			return true;
+		}
+		else if (eventID == "CHANGE_COSTUME")
+		{
+			if (Singleton<Profile>.Instance.GetCostume("HeroBalanced") == "Normal")
+			{
+				Singleton<Profile>.Instance.SetCostume("HeroBalanced", "Gold");
+			}
+			else
+			{
+				Singleton<Profile>.Instance.SetCostume("HeroBalanced", "Normal");
+			}
 			return true;
 		}
 		return false;

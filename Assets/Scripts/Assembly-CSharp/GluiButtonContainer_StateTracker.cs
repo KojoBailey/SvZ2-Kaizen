@@ -33,7 +33,7 @@ public class GluiButtonContainer_StateTracker : MonoBehaviour
 
 	public List<GluiButtonAction> GetButtonActions()
 	{
-		List<GluiButtonAction> list = new List<GluiButtonAction>();
+		var list = new List<GluiButtonAction>();
 		Component[] components = base.gameObject.GetComponents(typeof(GluiButtonAction));
 		for (int i = 0; i < components.Length; i++)
 		{
@@ -68,7 +68,7 @@ public class GluiButtonContainer_StateTracker : MonoBehaviour
 
 	public void ButtonStateChanged(string newStateName)
 	{
-		if (!(newStateName == currentState))
+		if (newStateName != currentState)
 		{
 			ReverseState(currentState);
 			ApplyState(newStateName);
@@ -78,10 +78,8 @@ public class GluiButtonContainer_StateTracker : MonoBehaviour
 
 	private void ApplyState(string state)
 	{
-		if (string.IsNullOrEmpty(state) || buttonActions == null)
-		{
-			return;
-		}
+		if (string.IsNullOrEmpty(state) || buttonActions == null) return;
+		
 		for (int i = 0; i < buttonActions.Count; i++)
 		{
 			if (buttonActions[i].State == state)

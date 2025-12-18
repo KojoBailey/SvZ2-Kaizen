@@ -2242,14 +2242,15 @@ public class Profile : Singleton<Profile>
 		string result = mSavedData.GetValue(characterId + ".Costume", playModeSubSection);
 		if (result == string.Empty)
 		{
-			SetCostume(characterId, "Normal");
+			result = SetCostume(characterId, "Normal");
 		}
-		return "Normal";
+		return result;
 	}
 
-	public void SetCostume(string characterId, string costumeId)
+	public string SetCostume(string characterId, string costumeId)
 	{
 		mSavedData.SetValue(characterId + ".Costume", costumeId, playModeSubSection);
+		return GetCostume(characterId);
 	}
 
 	public bool GetHeroPurchased(string id)
