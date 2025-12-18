@@ -47,7 +47,7 @@ public class DataAdaptor_HeroStats : DataAdaptorBase
 
 	private void SetStars(GameObject starsParent, int numStars)
 	{
-		for (int i = 5; i > numStars && i > 1; i--)
+		for (int i = numStars; i > 0; i--)
 		{
 			starsParent.FindChild(string.Format("Art_Star{0}", i)).SetActive(false);
 		}
