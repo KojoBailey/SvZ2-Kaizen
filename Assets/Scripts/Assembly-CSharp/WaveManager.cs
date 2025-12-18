@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Xml.XPath;
 using UnityEngine;
 
 public class WaveManager : WeakGlobalInstance<WaveManager>
@@ -208,6 +210,15 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	private GameObject corruptionSpawnEffect { get; set; }
 
+	private float mRemainingEnemyHealthPercent
+	{
+		get
+		{
+			if (WeakGlobalInstance<CharactersManager>.Instance == null) return 0f;
+			return WeakGlobalInstance<CharactersManager>.Instance.remainingEnemyHealthPercent;
+		}
+	}
+
 	[method: MethodImpl(32)]
 	public event OnLegionCallback onLegionStart;
 
@@ -218,7 +229,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		mWaveIndex = waveIndex;
 		mEnemiesSpawnArea = enemiesSpawnArea;
 		mZTarget = zTarget;
-		
+
 		LoadData();
 
 		AnalyseWaveCommandsForStats();
@@ -266,7 +277,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 	public void Update()
 	{
 		// [TODO] Make dependent on remaining health of previous enemies.
-		if (!isDone && mEnemiesKilledSoFar >= mEnemiesToKillBeforeNextWave - 2)
+		if (!isDone)
 		{
 			QueueNextWave();
 		}
@@ -543,6 +554,20 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 	private void QueueNextWave()
 	{
 		var waveCommandData = waveRootData.Commands[mNextCommandToRun];
+
+		float advanceAt;
+		switch (waveCommandData.startMode)
+		{
+		case WaveCommandSchema.StartMode.Overlap:
+			advanceAt = 1f;
+			break;
+		default:
+			advanceAt = waveCommandData.advanceAt;
+			break;
+		}
+
+		if (mRemainingEnemyHealthPercent > advanceAt) return;
+
 		switch (waveCommandData.type)
 		{
 		case WaveCommandSchema.Type.Spawn:
@@ -562,15 +587,15 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 				mEnemiesToKillBeforeNextWave = mEnemiesQueuedSoFar - 1;
 			}
 			break;
+		case WaveCommandSchema.Type.Banner:
+			WeakGlobalMonoBehavior<BannerManager>.Instance.OpenBanner(
+				new BannerLegion(5f * WeakGlobalMonoBehavior<InGameImpl>.Instance.timeScalar)
+			);
+			break;
 		default: break;
 		}
 
 		mNextCommandToRun++;
-
-		if (!isDone && waveRootData.Commands[mNextCommandToRun].startMode == WaveCommandSchema.StartMode.Overlap)
-		{
-			QueueNextWave();
-		}
 	}
 
 	public Enemy ConstructEnemy(string enemyId)

@@ -4066,9 +4066,12 @@
   Banner_YouWin:
     tag = Banner_YouWin
     stringValue = YOU WIN!
-  Banner_Legions:
-    tag = Banner_Legions
-    stringValue = LEGION ON THE LOOSE!
+  Banner_LegionOnThe:
+    tag = Banner_LegionOnThe
+    stringValue = LEGION ON THE
+  Banner_Loose:
+    tag = Banner_Loose
+    stringValue = LOOSE!
   Banner_HereComes:
     tag = Banner_HereComes
     stringValue = HERE COMES THE

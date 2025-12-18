@@ -3,6 +3,7 @@ using UnityEngine;
 public class BannerStartWave : Banner
 {
 	private string mWaveText;
+	private string mWaveTitle;
 
 	protected override string uiPrefabPath
 	{
@@ -22,25 +23,21 @@ public class BannerStartWave : Banner
 		else
 		{
 			WaveSchema waveData = WaveManager.GetWaveData(waveNumber, Singleton<Profile>.Instance.waveTypeToPlay);
-			if (waveData.title != "")
-            {
-                mWaveText = waveData.title;
-            }
-			else
-            {
-                mWaveText = string.Format(StringUtils.GetStringFromStringRef("MenuFixedStrings", "add_wave"), waveNumber);
-            }
+			mWaveText = string.Format(StringUtils.GetStringFromStringRef("MenuFixedStrings", "add_wave"), waveNumber);
+			mWaveTitle = (waveData.title != "") ? waveData.title : "";
 		}
 	}
 
 	protected override void InitText()
 	{
 		GluiText component = ObjectUtils.FindTransformInChildren(base.bannerInstance.transform, "SwapText_Wave").gameObject.GetComponent<GluiText>();
+		GluiText component5 = ObjectUtils.FindTransformInChildren(base.bannerInstance.transform, "SwapText_WaveTitle").gameObject.GetComponent<GluiText>();
 		GluiText component2 = ObjectUtils.FindTransformInChildren(base.bannerInstance.transform, "SwapText_TopLine").gameObject.GetComponent<GluiText>();
 		GluiText component3 = ObjectUtils.FindTransformInChildren(base.bannerInstance.transform, "SwapText_BottomLine").gameObject.GetComponent<GluiText>();
 		if (Singleton<Profile>.Instance.inMultiplayerWave)
 		{
 			component.gameObject.SetActive(false);
+			component5.gameObject.SetActive(false);
 			if (Singleton<PlayModesManager>.Instance.Attacking)
 			{
 				component2.TaggedStringReference = "MenuFixedStrings.Banner_Attack1";
@@ -62,5 +59,6 @@ public class BannerStartWave : Banner
 			}
 		}
 		component.Text = mWaveText;
+		component5.Text = mWaveTitle;
 	}
 }

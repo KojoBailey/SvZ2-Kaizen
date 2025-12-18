@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using UnityEngine;
 
 public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
@@ -967,7 +966,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 				mHero[0].ForceDeath();
 			}
 		}
-		
+
 		StoreMenuImpl.UpdateTapJoyPoints(base.gameObject);
 	}
 

@@ -9,6 +9,7 @@ public class WaveCommandSchema
 		Default = 0,
 		Spawn,
 		Delay,
+		Banner,
 	};
 	[DataBundleField(ColumnWidth = 200)]
 	public Type type;
@@ -62,8 +63,12 @@ public class WaveCommandSchema
 	public StartMode startMode;
 
 	[DataBundleField(ColumnWidth = 200)]
+	[DataBundleDefaultValueAttribute(0.5f)]
 	public float advanceAt;
 
+	[DataBundleField(ColumnWidth = 200)]
+	public string banner;
+	
 	[DataBundleField(ColumnWidth = 200)]
 	public string command;
 

@@ -2636,23 +2636,28 @@
     enemy = Enemies.l_zombie_ax
     count = 2
     spacing = Moderate
+    advanceAt = 0.0
   8:
+    type = Banner
+    banner = Legion
+    startMode = Overlap
+  9:
     type = Spawn
     enemy = Enemies.l_zombie_spear
     count = 3
     spacing = Loose
-  9:
+  10:
     type = Spawn
     enemy = Enemies.l_zombie_sword
     count = 3
     spacing = Tight
-  10:
+  11:
     type = Spawn
     enemy = Enemies.l_zombie_spear
     count = 3
     spacing = Tight
     startMode = Overlap
-  11:
+  12:
     type = Spawn
     enemy = Enemies.l_zombie_ax
     count = 2

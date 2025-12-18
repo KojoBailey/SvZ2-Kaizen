@@ -32,30 +32,6 @@ public class Character : Weakable
 
 	public delegate float ExplosionRangeDelegate();
 
-	private const float kAutoRecoveryDelay = 2f;
-
-	private const float kImpactPauseTime = 0.12f;
-
-	private const int kMinKnockbackChance = 1;
-
-	private const float kAttackRangeLeeway = 1.3f;
-
-	private const float kMaxMoveDelay = 0.5f;
-
-	private const float kLeniencyTimer = 1.2f;
-
-	private const float kLeniencyTreshold = 0.1f;
-
-	private const float kExplosionRange = 2.5f;
-
-	protected const float kKnockbackTime = 0.5f;
-
-	private const float kMaxHealthPercentToPreferFrontLine = 0.4f;
-
-	private const float kMaxHealthPercentToPreferWeaker = 0.2f;
-
-	private const float kCloseDistRange = 35f;
-
 	public ExplosionRangeDelegate explosionRange = () => 2.5f;
 
 	private static GameObjectPool sObjectPool = new GameObjectPool();

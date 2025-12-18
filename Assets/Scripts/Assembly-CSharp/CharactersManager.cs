@@ -12,14 +12,6 @@ public class CharactersManager : WeakGlobalInstance<CharactersManager>
 		center = 3
 	}
 
-	private const float kCloseDistRange = 0.45f;
-
-	private const float kMinTimeBetweenAttacks = 0.25f;
-
-	private const float kLaneWidth = 0.15f;
-
-	private const float kLaneCharacterValue = 2500f;
-
 	protected Character[] mMount = new Character[InGameImpl.kMaxPlayers];
 
 	private List<Character> mCharacters = new List<Character>();
@@ -93,6 +85,23 @@ public class CharactersManager : WeakGlobalInstance<CharactersManager>
 				}
 			}
 			return list;
+		}
+	}
+
+	public float remainingEnemyHealthPercent
+	{
+		get
+		{
+			float health = 0;
+			float maxHealth = 0;
+
+			foreach (var enemy in allEnemies)
+			{
+				health += enemy.health;
+				maxHealth += enemy.maxHealth;
+			}
+
+			return (maxHealth > 0) ? health / maxHealth : 0f;
 		}
 	}
 
