@@ -78,11 +78,6 @@ public class StartScreenImpl : MonoBehaviour, IGluiActionHandler
 			bool iCloudEnabled = FileManager.CheckCloudStorageAvailability();
 			string iCloudPath = FileManager.GetCloudContainerDirectoryPath();
 		}
-		//if (Facebook.IsInitialized() && Facebook.IsLoggedIn() && FacebookButton != null)
-		//{
-			FacebookButton.Visible = false;
-			UnityEngine.Object.Destroy(FacebookButton.gameObject);
-		//}
 		SingletonSpawningMonoBehaviour<ApplicationUtilities>.Instance.canAwardGems = true;
 		_leaderboardsButton = GameObject.Find("Button_Leaderboard");
 		_achievementsButton = GameObject.Find("Button_Achievement");
@@ -99,29 +94,6 @@ public class StartScreenImpl : MonoBehaviour, IGluiActionHandler
 		_iCloudButton.gameObject.SetActive(false);
 		_gameCenterButton.gameObject.SetActive(false);
 		GameObject _anchor = GameObject.Find("Anchor_LeftBottom");
-		/*_googlePlusButton = (GameObject)UnityEngine.Object.Instantiate(Resources.Load("UI/Prefabs/StartScreen/Button_GooglePlus"));
-		_googlePlusButton.transform.parent = _anchor.transform;
-		_googlePlusButton.transform.localPosition = new Vector3(_currentPosition2.x + 200f, _googlePlusButton.transform.localPosition.y, _googlePlusButton.transform.localPosition.z);
-		_playerButton = (GameObject)UnityEngine.Object.Instantiate(Resources.Load("UI/Prefabs/StartScreen/Button_PGS"));
-		_playerButton.transform.parent = _anchor.transform;
-		_playerButton.transform.localPosition = new Vector3(_currentPosition2.x, _currentPosition2.y + 140f, _currentPosition2.z);
-		_playerButton.SetActive(false);
-		if (AJavaTools.Properties.IsBuildAmazon())
-		{
-			_gameCenterButton.gameObject.SetActive(true);
-			if (_gameCenterButton != null)
-			{
-				_gameCenterButton.FindChildComponent<GluiSprite>("Art_GameCenter").Texture = ResourceCache.GetCachedResource("UI/Textures/DynamicIcons/Misc/Button_GameCircle", 1).Resource as Texture2D;
-				_currentPosition2 = _gameCenterButton.transform.localPosition;
-				_gameCenterButton.transform.localPosition = new Vector3(_currentPosition2.x - 420f, _currentPosition2.y, _currentPosition2.z);
-			}
-		}
-		else if (!AJavaTools.Properties.IsBuildAmazon())
-		{
-			_leaderboardsButton.FindChildComponent<GluiSprite>("Art_Leaderboard").Texture = ResourceCache.GetCachedResource("UI/Textures/DynamicIcons/Misc/Button_Leaderboards_PGS", 1).Resource as Texture2D;
-			_achievementsButton.FindChildComponent<GluiSprite>("Art_Achievement").Texture = ResourceCache.GetCachedResource("UI/Textures/DynamicIcons/Misc/Button_Achievements_PGS", 1).Resource as Texture2D;
-			_googlePlusButton.gameObject.SetActive(true);
-		}*/
 		PlayerPrefs.SetInt("gameLoadedCorrectly", 1);
 		PlayerPrefs.SetString("gameTag", AJavaTools.Properties.GetBuildTag());
 		/*if (PlayerPrefs.GetInt("pgsSignIn", 0) == 0)
