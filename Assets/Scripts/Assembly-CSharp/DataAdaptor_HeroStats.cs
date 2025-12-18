@@ -24,6 +24,8 @@ public class DataAdaptor_HeroStats : DataAdaptorBase
 
 	public GameObject statSpeed;
 
+	private const int MaxStars = 5;
+
 	public override void SetData(object data)
 	{
 		context = data;
@@ -47,7 +49,7 @@ public class DataAdaptor_HeroStats : DataAdaptorBase
 
 	private void SetStars(GameObject starsParent, int numStars)
 	{
-		for (int i = numStars; i > 0; i--)
+		for (int i = numStars + 1; i <= MaxStars; i++)
 		{
 			starsParent.FindChild(string.Format("Art_Star{0}", i)).SetActive(false);
 		}
