@@ -8,7 +8,7 @@ public class GluiActionSender
 		{
 			return;
 		}
-		string senderName = ((!(sender == null)) ? sender.name : "[Destroyed]");
+		string senderName = (sender != null) ? sender.name : "[Destroyed]";
 		if (GluiGlobalActionHandler.Instance != null && GluiGlobalActionHandler.Instance.Filter(action, sender, data))
 		{
 			GluiActionLog_Base.AddActionLog_Handled(action, sender, senderName, GluiGlobalActionHandler.Instance.lastActionHandler);
@@ -21,10 +21,7 @@ public class GluiActionSender
 			do
 			{
 				IGluiActionHandler[] array = FindNextListener(ref nextObject);
-				if (array == null)
-				{
-					continue;
-				}
+				if (array == null) continue;
 				IGluiActionHandler[] array2 = array;
 				foreach (IGluiActionHandler gluiActionHandler in array2)
 				{

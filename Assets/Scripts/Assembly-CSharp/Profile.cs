@@ -1441,31 +1441,28 @@ public class Profile : Singleton<Profile>
 
 	private bool SetupCloudSave()
 	{
-		if (mCloudSavedData == null && GeneralConfig.iCloudEnabled)
-		{
-			mCloudSavedData = SaveProvider.Create<SDFTreeSaveProvider>("cloudProfile");
-			mCloudSavedData.AutoSaveEnabled = false;
-			mCloudSavedData.SaveOnExit = false;
-			mCloudSavedData.Header.UseDeviceData = true;
-			iCloudSaveTarget iCloudSaveTarget2 = mCloudSavedData.AddTarget<iCloudSaveTarget>("cloud");
-			iCloudSaveTarget2.UseBackup = true;
-			mCloudSavedData.RequireCRCMatch = !Debug.isDebugBuild;
-			mCloudSavedData.Header.UseEncoding = !Debug.isDebugBuild;
-			return true;
-		}
-		return false;
+		if (mCloudSavedData != null || !GeneralConfig.iCloudEnabled) return false;
+
+		mCloudSavedData = SaveProvider.Create<SDFTreeSaveProvider>("cloudProfile");
+		mCloudSavedData.AutoSaveEnabled = false;
+		mCloudSavedData.SaveOnExit = false;
+		mCloudSavedData.Header.UseDeviceData = true;
+		iCloudSaveTarget iCloudSaveTarget2 = mCloudSavedData.AddTarget<iCloudSaveTarget>("cloud");
+		iCloudSaveTarget2.UseBackup = true;
+		mCloudSavedData.RequireCRCMatch = !Debug.isDebugBuild;
+		mCloudSavedData.Header.UseEncoding = !Debug.isDebugBuild;
+		return true;
 	}
 
 	public IEnumerator Init()
 	{
-		if (Initialized || Loading)
-		{
-			yield break;
-		}
+		if (Initialized || Loading) yield break;
+
 		if (!GeneralConfig.IsLive)
 		{
 			SingletonSpawningMonoBehaviour<OutputLogFile>.Instance.Initialize();
 		}
+		
 		UnityThreadHelper.Activate();
 		MemoryWarningHandler.CreateInstance();
 		PortableQualitySettings.SetQualityLevelForDevice();
@@ -1794,10 +1791,8 @@ public class Profile : Singleton<Profile>
 
 	public void Save(bool saveScore)
 	{
-		if (Loading)
-		{
-			return;
-		}
+		if (Loading) return;
+
 		if (SingletonSpawningMonoBehaviour<SaveManager>.Exists)
 		{
 			lock (_lock)
@@ -1806,6 +1801,7 @@ public class Profile : Singleton<Profile>
 				AJavaTools.Backup.DataChanged();
 			}
 		}
+
 		if (AJavaTools.Properties.IsBuildAmazon())
 		{
 			Amazon.SubmitScore(kPlayerRatingLeaderboard, mPlayerAttackRating);
@@ -2239,6 +2235,21 @@ public class Profile : Singleton<Profile>
 		mSavedData.SetValueInt(heroStat(id, "heroLevel"), num, playModeSubSection);
 		CalculateAttackRating();
 		return num;
+	}
+
+	public string GetCostume(string characterId)
+	{
+		string result = mSavedData.GetValue(characterId + ".Costume", playModeSubSection);
+		if (result == string.Empty)
+		{
+			SetCostume(characterId, "Normal");
+		}
+		return "Normal";
+	}
+
+	public void SetCostume(string characterId, string costumeId)
+	{
+		mSavedData.SetValue(characterId + ".Costume", costumeId, playModeSubSection);
 	}
 
 	public bool GetHeroPurchased(string id)

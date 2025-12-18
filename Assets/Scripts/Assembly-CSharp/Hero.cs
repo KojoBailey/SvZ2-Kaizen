@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime;
 using UnityEngine;
 
 public class Hero : Character
@@ -397,7 +398,8 @@ public class Hero : Character
 		Renderer componentInChildren = heroModel.GetComponentInChildren<Renderer>();
 		if (componentInChildren != null)
 		{
-			matLookupHandle = new DataBundleRecordHandle<CostumeSchema>("HeroBalanced", "Normal");
+			string costume = Singleton<Profile>.Instance.GetCostume("HeroBalanced");
+			matLookupHandle = new DataBundleRecordHandle<CostumeSchema>("HeroBalanced", costume);
 			matLookupHandle.Load(null);
 			if (matLookupHandle.Data != null && matLookupHandle.Data.material != null)
 			{
