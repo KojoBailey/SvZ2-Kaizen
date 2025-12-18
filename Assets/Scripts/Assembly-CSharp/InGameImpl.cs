@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 
 public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
@@ -105,11 +106,9 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 	{
 		get
 		{
-			if (mGameDirection == PlayModesManager.GameDirection.RightToLeft)
-			{
-				return heroSpawnPointRight;
-			}
-			return heroSpawnPointLeft;
+			return (mGameDirection == PlayModesManager.GameDirection.RightToLeft)
+				? heroSpawnPointRight
+				: heroSpawnPointLeft;
 		}
 	}
 
@@ -117,11 +116,9 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 	{
 		get
 		{
-			if (mGameDirection == PlayModesManager.GameDirection.RightToLeft)
-			{
-				return heroSpawnPointLeft;
-			}
-			return heroSpawnPointRight;
+			return (mGameDirection == PlayModesManager.GameDirection.RightToLeft)
+				? heroSpawnPointLeft
+				: heroSpawnPointRight;
 		}
 	}
 
@@ -129,11 +126,9 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 	{
 		get
 		{
-			if (mGameDirection == PlayModesManager.GameDirection.RightToLeft)
-			{
-				return enemiesTargetRight;
-			}
-			return enemiesTargetLeft;
+			return (mGameDirection == PlayModesManager.GameDirection.RightToLeft)
+				? enemiesTargetRight
+				: enemiesTargetLeft;
 		}
 	}
 
@@ -141,11 +136,9 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 	{
 		get
 		{
-			if (mGameDirection == PlayModesManager.GameDirection.RightToLeft)
-			{
-				return enemiesTargetLeft;
-			}
-			return enemiesTargetRight;
+			return (mGameDirection == PlayModesManager.GameDirection.RightToLeft)
+				? enemiesTargetLeft
+				: enemiesTargetRight;
 		}
 	}
 
@@ -153,11 +146,9 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 	{
 		get
 		{
-			if (mGameDirection == PlayModesManager.GameDirection.RightToLeft)
-			{
-				return helpersSpawnAreaLeft;
-			}
-			return enemiesSpawnAreaRight;
+			return (mGameDirection == PlayModesManager.GameDirection.RightToLeft)
+				? helpersSpawnAreaLeft
+				: enemiesSpawnAreaRight;
 		}
 	}
 
@@ -165,84 +156,56 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 	{
 		get
 		{
-			if (mGameDirection == PlayModesManager.GameDirection.RightToLeft)
-			{
-				return enemiesSpawnAreaRight;
-			}
-			return helpersSpawnAreaLeft;
+			return (mGameDirection == PlayModesManager.GameDirection.RightToLeft)
+				? enemiesSpawnAreaRight
+				: helpersSpawnAreaLeft;
 		}
 	}
 
 	public bool gameOver
 	{
-		get
-		{
-			return mGameOver;
-		}
+		get { return mGameOver; }
 	}
 
 	public bool playerWon
 	{
-		get
-		{
-			return mGameOver && hero.health > 0f;
-		}
+		get { return mGameOver && hero.health > 0f; }
 	}
 
 	public bool enemiesWon
 	{
-		get
-		{
-			return mGameOver && hero.health <= 0f;
-		}
+		get { return mGameOver && hero.health <= 0f; }
 	}
 
 	public bool useSlowMoFinisher
 	{
 		get
 		{
-			if (mStartedSlowMoFinisher)
-			{
-				return true;
-			}
-			if (hero != null && (hero.controller.currentAnimation == "attack" || hero.controller.currentAnimation == "katanaslash"))
-			{
-				return true;
-			}
-			return false;
+			return
+				mStartedSlowMoFinisher ||
+				(hero != null &&
+				(hero.controller.currentAnimation == "attack" || hero.controller.currentAnimation == "katanaslash"));
 		}
 	}
 
 	public Hero hero
 	{
-		get
-		{
-			return mHero[0];
-		}
+		get { return mHero[0]; }
 	}
 
 	public Hero enemyHero
 	{
-		get
-		{
-			return mHero[1];
-		}
+		get { return mHero[1]; }
 	}
 
 	public Gate gate
 	{
-		get
-		{
-			return (mGate[0] == null) ? mGate[1] : mGate[0];
-		}
+		get { return (mGate[0] == null) ? mGate[1] : mGate[0]; }
 	}
 
 	public Gate enemyGate
 	{
-		get
-		{
-			return mGate[1];
-		}
+		get { return mGate[1]; }
 	}
 
 	public string activeCharm { get; private set; }
@@ -260,10 +223,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	public float TimeSinceStart
 	{
-		get
-		{
-			return Time.time - mTimeStarted;
-		}
+		get { return Time.time - mTimeStarted; }
 	}
 
 	public float allAlliesInvincibleTimer
@@ -288,21 +248,21 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		}
 		set
 		{
-			if (value != (Time.timeScale == 0f))
+			if (value == (Time.timeScale == 0f)) return;
+
+			SingletonSpawningMonoBehaviour<USoundThemeManager>.Instance.PauseSoundThemes(value);
+			if (value)
 			{
-				SingletonSpawningMonoBehaviour<USoundThemeManager>.Instance.PauseSoundThemes(value);
-				if (value)
-				{
-					Time.timeScale = 0f;
-				}
-				else
-				{
-					Time.timeScale = mBaseTimeScale;
-				}
-				if (WeakGlobalMonoBehavior<HUD>.Exists)
-				{
-					WeakGlobalMonoBehavior<HUD>.Instance.HandleGamePause(value);
-				}
+				Time.timeScale = 0f;
+			}
+			else
+			{
+				Time.timeScale = mBaseTimeScale;
+			}
+
+			if (WeakGlobalMonoBehavior<HUD>.Exists)
+			{
+				WeakGlobalMonoBehavior<HUD>.Instance.HandleGamePause(value);
 			}
 		}
 	}
@@ -348,53 +308,40 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	public CharactersManager CharacterMgr
 	{
-		get
-		{
-			return mCharactersManager;
-		}
+		get { return mCharactersManager; }
 	}
 
 	public List<string> LegendaryStrikeEnemies
 	{
-		get
-		{
-			return mLegendaryStrikeEnemies;
-		}
+		get { return mLegendaryStrikeEnemies; }
 	}
 
 	public float GameTimer
 	{
-		get
-		{
-			return mGameTimer;
-		}
+		get { return mGameTimer; }
 	}
 
 	public bool CanDoRevolutionAchievement { get; set; }
 
 	public string TagHeroID
 	{
-		get
-		{
-			return mTagHeroID;
-		}
+		get { return mTagHeroID; }
 	}
 
 	public string TagAbilityID
 	{
-		get
-		{
-			return mTagAbilityID;
-		}
+		get { return mTagAbilityID; }
 	}
 
 	private void Awake()
 	{
 		SetUniqueInstance(this);
+
 		if (!Singleton<Profile>.Exists)
 		{
 			StartCoroutine(Singleton<Profile>.Instance.Init());
 		}
+
 		SingletonSpawningMonoBehaviour<USoundThemeManager>.Instance.SetResourceLevel(1);
 	}
 
@@ -404,10 +351,12 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		{
 			yield return null;
 		}
+
 		ApplicationUtilities._allowAutoSave = true;
 		ResourceCache.DefaultCacheLevel = 1;
 		Singleton<Achievements>.Instance.SuppressPartialReporting(true);
 		fireworksResource = ResourceCache.GetCachedResource("FX/Fireworks", 1).Resource as GameObject;
+
 		int currentWave = Singleton<Profile>.Instance.wave_SinglePlayerGame;
 		if (!Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive() && !Singleton<Profile>.Instance.inDailyChallenge)
 		{
@@ -422,13 +371,16 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 				ApplicationUtilities.MakePlayHavenContentRequest("tutorial_start");
 			}
 		}
+
 		LoadingScreen.LogStep("InGame Start BEGIN");
 		List<string> helpersToLoad = new List<string>();
+
 		List<string> abilitiesToLoad = new List<string>();
 		foreach (string ability in Singleton<Profile>.Instance.GetSelectedAbilities())
 		{
 			abilitiesToLoad.Add(ability);
 		}
+
 		activeCharm = Singleton<Profile>.Instance.selectedCharm;
 		if (!string.IsNullOrEmpty(activeCharm))
 		{
@@ -457,6 +409,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 				}
 			}
 		}
+
 		if (Singleton<Profile>.Instance.GetSelectedAbilities().Contains("DivineIntervention") && Singleton<Profile>.Instance.GetSelectedHelpers().FindIndex((string s) => !Singleton<HelpersDatabase>.Instance[s].unique) < 0)
 		{
 			helpersToLoad.Add("Farmer");
@@ -468,6 +421,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 				helpersToLoad.Add(helper);
 			}
 		}
+
 		if (Singleton<Profile>.Instance.inVSMultiplayerWave)
 		{
 			foreach (string ability2 in Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.abilityIdList)
@@ -766,10 +720,8 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 					Singleton<Profile>.Instance.ForceOnboardingStage("OnboardingStep6_AbilityWave1");
 					yield break;
 				}
-				if (mGameOver)
-				{
-					break;
-				}
+
+				if (mGameOver) break;
 			}
 		}
 		SingletonMonoBehaviour<TutorialMain>.Instance.TutorialDone();
@@ -782,6 +734,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 			yield return new WaitForSeconds(0f);
 		}
 		while (!(SingletonMonoBehaviour<TutorialMain>.Instance.GetCurrentTutorial_Key() == "Tutorial_Game03_Ally") || (WeakGlobalInstance<CharactersManager>.Instance.helpersCount <= 0 && !mGameOver));
+		
 		SingletonMonoBehaviour<TutorialMain>.Instance.TutorialDone();
 		Singleton<Profile>.Instance.ForceOnboardingStage("OnboardingStep18_SummonFarmer");
 	}
@@ -935,10 +888,8 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	private void Update()
 	{
-		if (!Singleton<Profile>.Instance.Initialized)
-		{
-			return;
-		}
+		if (!Singleton<Profile>.Instance.Initialized) return;
+
 		if (gamePaused)
 		{
 			if (!mGameOver)
@@ -947,7 +898,9 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 			}
 			return;
 		}
+
 		mHitEffectTimer -= Time.deltaTime;
+
 		if (mGameOver)
 		{
 			if (useSlowMoFinisher)
@@ -967,6 +920,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 			mVillageArchers.Update();
 			return;
 		}
+
 		if (Debug.isDebugBuild && !WeakGlobalMonoBehavior<HUD>.Instance.gameObject.activeInHierarchy && Input.touchCount >= 2)
 		{
 			string text = Singleton<Profile>.Instance.GetSelectedAbilities()[0];
@@ -975,15 +929,18 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 				hero.DoAbility(text);
 			}
 		}
+
 		mLeadership[0].Update();
 		if (mLeadership[1] != null)
 		{
 			mLeadership[1].Update();
 		}
+
 		if (mWaveManager != null)
 		{
 			mWaveManager.Update();
 		}
+
 		mCharactersManager.Update();
 		mCollectableManager.Update();
 		mProjectileManager.Update();
@@ -991,12 +948,16 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		mBell.Update();
 		mPit.Update();
 		mVillageArchers.Update();
+
 		CheckWinLoseConditions();
+
 		if (mAllAlliesInvincibleTimer > 0f)
 		{
 			mAllAlliesInvincibleTimer = Mathf.Max(0f, mAllAlliesInvincibleTimer - Time.deltaTime);
 		}
+
 		Singleton<PlayerWaveEventData>.Instance.Update(Time.deltaTime);
+
 		if (mGameTimer > 0f)
 		{
 			mGameTimer -= Time.deltaTime;
@@ -1006,6 +967,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 				mHero[0].ForceDeath();
 			}
 		}
+		
 		StoreMenuImpl.UpdateTapJoyPoints(base.gameObject);
 	}
 
