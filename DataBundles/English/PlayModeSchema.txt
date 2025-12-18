@@ -4,7 +4,7 @@
     useBell = True
     useVillageArchers = True
     allowBowOnFirstWave1 = False
-    maxBaseWave = 50
+    maxBaseWave = 5
     bonusWaveInterval = 10
     revivePotion = Potions.revivePotion
     waves = Waves
