@@ -1,16 +1,42 @@
 [DataBundleClass(Category = "Design")]
 public class WaveCommandSchema
 {
-	[DataBundleKey]
-	public int index;
-
 	public enum Type
 	{
-		Default = 0,
+		Default, // Default
 		Spawn,
 		Delay,
 		Banner,
-	};
+	}
+
+	public enum Spacing
+	{
+		Loose, // Default
+		Moderate,
+		Tight,
+	}
+
+	public enum SpawnAt
+	{
+		MediumHealth, // Default
+		NoDelay,
+		HighHealth,
+		LowHealth,
+		VeryLowHealth,
+		Death,
+	}
+
+	public enum MaxDelay
+	{
+		Normal, // Default
+		Low,
+		High,
+		Infinite,
+	}
+
+	[DataBundleKey]
+	public int index;
+
 	[DataBundleField(ColumnWidth = 200)]
 	public Type type;
 
@@ -22,49 +48,32 @@ public class WaveCommandSchema
 	[DataBundleField(ColumnWidth = 200)]
 	public int count;
 
-	public enum Spacing
-	{
-		Loose = 0,
-		Moderate,
-		Tight,
-	};
-
-	public static float SpacingToDuration(Spacing spacing)
-	{
-		switch (spacing)
-		{
-		case Spacing.Loose		: return 3.0f;
-		case Spacing.Moderate	: return 1.5f;
-		case Spacing.Tight		: return 0.5f;
-		default: return 0;
-		}
-	}
-
 	[DataBundleField(ColumnWidth = 200)]
 	public Spacing spacing;
 
-	public float spacingDuration
+	public float spacingSeconds
 	{
-		get
-		{
-			return SpacingToDuration(spacing);
-		}
+		get { return SpacingToSeconds(spacing); }
 	}
 
 	[DataBundleField(ColumnWidth = 200)]
 	public float duration;
 
-	public enum StartMode
-	{
-		After = 0,
-		Overlap,
-	};
 	[DataBundleField(ColumnWidth = 200)]
-	public StartMode startMode;
+	public SpawnAt spawnAt;
+
+	public float spawnAtPercent
+	{
+		get { return SpawnAtToPercent(spawnAt); }
+	}
 
 	[DataBundleField(ColumnWidth = 200)]
-	[DataBundleDefaultValueAttribute(0.5f)]
-	public float advanceAt;
+	public MaxDelay maxDelay;
+
+	public float maxDelaySeconds
+	{
+		get { return MaxDelayToSeconds(maxDelay); }
+	}
 
 	[DataBundleField(ColumnWidth = 200)]
 	public string banner;
@@ -75,4 +84,41 @@ public class WaveCommandSchema
 	[DataBundleSchemaFilter(typeof(EnemyGroupSchema), false)]
 	[DataBundleField(ColumnWidth = 200)]
 	public DataBundleRecordTable enemyGroup;
+
+	public static float SpacingToSeconds(Spacing _spacing)
+	{
+		switch (_spacing)
+		{
+		case Spacing.Loose		: return 3.0f;
+		case Spacing.Moderate	: return 1.5f;
+		case Spacing.Tight		: return 0.5f;
+		default: return 0;
+		}
+	}
+
+	public static float SpawnAtToPercent(SpawnAt _spawnAt)
+	{
+		switch (_spawnAt)
+		{
+		case SpawnAt.NoDelay		: return 1f;	// 100%
+		case SpawnAt.HighHealth		: return 0.7f;	// 70%
+		case SpawnAt.MediumHealth	: return 0.5f;	// 50%
+		case SpawnAt.LowHealth		: return 0.3f;	// 30%
+		case SpawnAt.VeryLowHealth 	: return 0.2f;	// 20%
+		case SpawnAt.Death			: return 0f;	// 0%
+		default: return 0;
+		}
+	}
+
+	public static float MaxDelayToSeconds(MaxDelay _maxDelay)
+	{
+		switch (_maxDelay)
+		{
+		case MaxDelay.Low		: return 15.0f;
+		case MaxDelay.Normal	: return 25.0f;
+		case MaxDelay.High		: return 35.0f;
+		case MaxDelay.Infinite	: return float.MaxValue;
+		default: return 0;
+		}
+	}
 }

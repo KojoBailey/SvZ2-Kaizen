@@ -47,8 +47,6 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	private WaveRecyclingMultipliers mLevelMultipliers = new WaveRecyclingMultipliers();
 
-	private const float MinimumWaveDelay = 2.0f;
-
 	private class QueueItem
 	{
 		public string enemy;
@@ -60,13 +58,47 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 			delay = _delay;
 		}
 	}
-	private Queue<QueueItem> mWaveQueue = new Queue<QueueItem>();
+	private Queue<QueueItem> mSpawnQueue = new Queue<QueueItem>();
 
-	private int mNextCommandToRun;
+	private int mNextCommandIndex;
 
-	private float mSpawnDelayTimer = 0f;
+	private WaveCommandSchema mNextCommand
+	{
+		get { return !areCommandsDone ? waveRootData.Commands[mNextCommandIndex] : null; }
+	}
 
-	private bool mSkipNextLegion;
+	private class Timer
+	{
+		private float mTimer = 0f;
+
+		public float Value
+		{
+			get { return Mathf.Max(mTimer, 0f); }
+		}
+
+		public bool IsDone
+		{
+			get { return mTimer <= 0f; }
+		}
+
+		public void Reset()
+		{
+			mTimer = 0f;
+		}
+
+		public void Update()
+		{
+			mTimer -= Time.deltaTime;
+		}
+
+		public void IncreaseBy(float duration)
+		{
+			mTimer += Mathf.Max(0f, duration);
+		}
+	}
+
+	private Timer mSpawnTimer = new Timer();
+	private Timer mQueueTimer = new Timer();
 
 	private string mTutorial = string.Empty;
 
@@ -75,10 +107,6 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 	private int mSpawnedEnemiesSoFar;
 
 	private int mEnemiesKilledSoFar;
-
-	private int mEnemiesToKillBeforeNextWave;
-
-	private int mEnemiesQueuedSoFar;
 
 	private List<string> mAllDifferentEnemies = new List<string>();
 
@@ -90,15 +118,20 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 	{
 		get
 		{
-			return mNextCommandToRun >= waveRootData.Commands.Length && specialBossName == string.Empty;
+			return mNextCommandIndex >= waveRootData.Commands.Length && specialBossName == string.Empty;
 		}
+	}
+
+	public bool areCommandsDone
+	{
+		get { return mNextCommandIndex >= waveRootData.Commands.Length; }
 	}
 
 	public bool isWaveComplete
 	{
 		get
 		{
-			return isDone && mEnemiesKilledSoFar >= mTotalNumEnemies;
+			return areCommandsDone && mEnemiesKilledSoFar >= mTotalNumEnemies;
 		}
 	}
 
@@ -134,18 +167,6 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		get
 		{
 			return mAllDifferentEnemies;
-		}
-	}
-
-	public bool skipNextLegion
-	{
-		get
-		{
-			return mSkipNextLegion;
-		}
-		set
-		{
-			mSkipNextLegion = value;
 		}
 	}
 
@@ -234,10 +255,8 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 		AnalyseWaveCommandsForStats();
 
-		mNextCommandToRun = 0;
+		mNextCommandIndex = 0;
 		mEnemiesKilledSoFar = 0;
-		mEnemiesToKillBeforeNextWave = 0;
-		mEnemiesQueuedSoFar = 0;
 
 		if (Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive())
 		{
@@ -272,17 +291,6 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 			break;
 		}
 		return result;
-	}
-
-	public void Update()
-	{
-		// [TODO] Make dependent on remaining health of previous enemies.
-		if (!isDone)
-		{
-			QueueNextWave();
-		}
-
-		UpdateDelayTimer();
 	}
 
 	public void registerEnemyKilled(string enemyId)
@@ -480,13 +488,6 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		}
 	}
 
-	private void FlashBossBanner()
-	{
-		WeakGlobalMonoBehavior<BannerManager>.Instance.OpenBanner(
-			new BannerBoss(5f * WeakGlobalMonoBehavior<InGameImpl>.Instance.timeScalar)
-		);
-	}
-
 	public void SpawnRandomEnemy(Vector3 position, float spawnRange)
 	{
 		string cmd = mAllDifferentEnemies[UnityEngine.Random.Range(0, mAllDifferentEnemies.Count - 1)];
@@ -523,93 +524,83 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		}
 	}
 
-	private void UpdateDelayTimer()
+	public void Update()
 	{
 		if (isWaveComplete) return;
 
-		mSpawnDelayTimer -= Time.deltaTime;
-		if (mSpawnDelayTimer > 0f) return;
+		mSpawnTimer.Update();
+		mQueueTimer.Update();
 
-		mSpawnDelayTimer = 0f;
-		if (WeakGlobalInstance<CharactersManager>.Instance.enemiesCount < 10) // [TODO] Remove hard limit?
+		if (!mSpawnTimer.IsDone) return;
+
+		if (mNextCommand != null && (mQueueTimer.IsDone || mRemainingEnemyHealthPercent <= mNextCommand.spawnAtPercent))
 		{
-			RunNextQueueItem();
+			mQueueTimer.Reset();
+
+			switch (mNextCommand.type)
+			{
+			case WaveCommandSchema.Type.Spawn:
+				QueueSpawns(mNextCommand);
+				break;
+			case WaveCommandSchema.Type.Banner:
+				FlashBanner(mNextCommand.banner);
+				break;
+			default: break;
+			}
+
+			mNextCommandIndex++;
 		}
+
+		SpawnNext();
 	}
 
-	private void RunNextQueueItem()
+	private void SpawnNext()
 	{
-		if (mWaveQueue.Count == 0) return;
+		if (mSpawnQueue.Count == 0) return;
 
-		var queueItem = mWaveQueue.Dequeue();
+		mSpawnTimer.Reset();
+
+		var queueItem = mSpawnQueue.Dequeue();
 
 		if (queueItem.enemy != string.Empty)
 		{
-			WeakGlobalInstance<CharactersManager>.Instance.AddCharacter(ConstructEnemy(queueItem.enemy));
+			var enemy = ConstructEnemy(queueItem.enemy);
+			WeakGlobalInstance<CharactersManager>.Instance.AddCharacter(enemy);
 		}
 
-		mSpawnDelayTimer += queueItem.delay;
+		mSpawnTimer.IncreaseBy(queueItem.delay);
 	}
 
-	private void QueueNextWave()
+	private void QueueSpawns(WaveCommandSchema command)
 	{
-		var waveCommandData = waveRootData.Commands[mNextCommandToRun];
+		string enemy = command.enemy.Key;
+		if (enemy == string.Empty) return;
 
-		float advanceAt;
-		switch (waveCommandData.startMode)
+		int count = (command.count > 1) ? command.count : 1;
+		float delay = command.spacingSeconds;
+		for (int i = 0; i < count; i++)
 		{
-		case WaveCommandSchema.StartMode.Overlap:
-			advanceAt = 1f;
-			break;
-		default:
-			advanceAt = waveCommandData.advanceAt;
-			break;
+			mSpawnQueue.Enqueue(new QueueItem(enemy, delay));
 		}
 
-		if (mRemainingEnemyHealthPercent > advanceAt) return;
+		mQueueTimer.IncreaseBy(mNextCommand.maxDelaySeconds);
+	}
 
-		switch (waveCommandData.type)
+	private void FlashBanner(string banner)
+	{
+		if (banner == string.Empty) return;
+
+		switch (banner)
 		{
-		case WaveCommandSchema.Type.Spawn:
-			string enemy = waveCommandData.enemy.Key;
-			if (enemy != string.Empty)
-			{
-				int count = (waveCommandData.count > 1) ? waveCommandData.count : 1;
-				float delay = waveCommandData.spacingDuration;
-				for (int i = 0; i < count - 1; i++)
-				{
-					mWaveQueue.Enqueue(new QueueItem(enemy, delay));
-					mEnemiesQueuedSoFar++;
-				}
-				mWaveQueue.Enqueue(new QueueItem(enemy, MinimumWaveDelay));
-				mEnemiesQueuedSoFar++;
-
-				mEnemiesToKillBeforeNextWave = mEnemiesQueuedSoFar - 1;
-			}
+		case "Legion":
+			WeakGlobalMonoBehavior<BannerManager>.Instance.OpenBanner(
+				new BannerLegion(5f * WeakGlobalMonoBehavior<InGameImpl>.Instance.timeScalar));
 			break;
-		case WaveCommandSchema.Type.Banner:
-			string banner = waveCommandData.banner;
-
-			if (banner == string.Empty) break;
-
-			switch (banner)
-			{
-			case "Legion":
-				WeakGlobalMonoBehavior<BannerManager>.Instance.OpenBanner(
-					new BannerLegion(5f * WeakGlobalMonoBehavior<InGameImpl>.Instance.timeScalar)
-				);
-				break;
-			case "Boss":
-				WeakGlobalMonoBehavior<BannerManager>.Instance.OpenBanner(
-					new BannerBoss(5f * WeakGlobalMonoBehavior<InGameImpl>.Instance.timeScalar)
-				);
-				break;
-			}
+		case "Boss":
+			WeakGlobalMonoBehavior<BannerManager>.Instance.OpenBanner(
+				new BannerBoss(5f * WeakGlobalMonoBehavior<InGameImpl>.Instance.timeScalar));
 			break;
-		default: break;
 		}
-
-		mNextCommandToRun++;
 	}
 
 	public Enemy ConstructEnemy(string enemyId)
@@ -702,14 +693,14 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 		for (int i = 0; i < waveRootData.Commands.Length; i++)
 		{
-			var waveCommandData = waveRootData.Commands[i];
+			var mNextCommand = waveRootData.Commands[i];
 
-			switch (waveCommandData.type)
+			switch (mNextCommand.type)
 			{
 			case WaveCommandSchema.Type.Spawn:
-				mTotalNumEnemies += (waveCommandData.count > 1) ? waveCommandData.count : 1;
+				mTotalNumEnemies += (mNextCommand.count > 1) ? mNextCommand.count : 1;
 
-				string enemy = waveCommandData.enemy.Key;
+				string enemy = mNextCommand.enemy.Key;
 				if (Singleton<EnemiesDatabase>.Instance.Contains(enemy) && !mAllDifferentEnemies.Exists((string element) => element == enemy))
 				{
 					mAllDifferentEnemies.Add(enemy);
