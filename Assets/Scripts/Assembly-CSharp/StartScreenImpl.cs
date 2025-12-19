@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class StartScreenImpl : MonoBehaviour, IGluiActionHandler
 {
-	public GluiStandardButtonContainer FacebookButton;
-
 	public GluiSprite spriteGameTitle;
 
 	private string titleLogoFileName = "Assets/Game/Resources/UI/textures/StartScreenTemp/Title_English.png";
@@ -22,8 +20,6 @@ public class StartScreenImpl : MonoBehaviour, IGluiActionHandler
 	public static GameObject _googlePlusButton;
 
 	public static GameObject _playerButton;
-
-	public static GameObject _facebookButton;
 
 	public static GameObject _iCloudButton;
 
@@ -83,12 +79,9 @@ public class StartScreenImpl : MonoBehaviour, IGluiActionHandler
 		_achievementsButton = GameObject.Find("Button_Achievement");
 		_gameCenterButton = GameObject.Find("Button_GameCenter");
 		_iCloudButton = GameObject.Find("Button_iCloud");
-		_facebookButton = GameObject.Find("Button_FaceBook");
-		Vector3 _currentPosition2 = _facebookButton.transform.localPosition;
-		_leaderboardsButton.transform.localPosition = new Vector3(_currentPosition2.x, _currentPosition2.y, _currentPosition2.z);
+		Vector3 _currentPosition2 = _leaderboardsButton.transform.localPosition;
 		_achievementsButton.transform.localPosition = new Vector3(_currentPosition2.x + 140f, _currentPosition2.y, _currentPosition2.z);
 		_iCloudButton.transform.localPosition = new Vector3(_currentPosition2.x + 280f, _currentPosition2.y, _currentPosition2.z);
-		_facebookButton.transform.localPosition = new Vector3(_currentPosition2.x, _currentPosition2.y + 280f, _currentPosition2.z);
 		_leaderboardsButton.gameObject.SetActive(false);
 		_achievementsButton.gameObject.SetActive(false);
 		_iCloudButton.gameObject.SetActive(false);
@@ -120,17 +113,17 @@ public class StartScreenImpl : MonoBehaviour, IGluiActionHandler
 		ResourceCache.UnCache(titleLogoFileName);
 	}
 
-	private void OnFBLogin(bool success)
-	{
-		if (FacebookButton != null)
-		{
-			FacebookButton.Visible = !success;
-			if (success)
-			{
-				UnityEngine.Object.Destroy(FacebookButton.gameObject);
-			}
-		}
-	}
+	// private void OnFBLogin(bool success)
+	// {
+	// 	if (FacebookButton != null)
+	// 	{
+	// 		FacebookButton.Visible = !success;
+	// 		if (success)
+	// 		{
+	// 			UnityEngine.Object.Destroy(FacebookButton.gameObject);
+	// 		}
+	// 	}
+	// }
 
 	public bool HandleAction(string action, GameObject sender, object data)
 	{
@@ -152,17 +145,17 @@ public class StartScreenImpl : MonoBehaviour, IGluiActionHandler
 				GluiActionSender.SendGluiAction("MENU_MAIN_STORE", sender, data);
 			}
 			return true;
-		case "FACEBOOK_LOGIN":
-			FacebookButton.Visible = false;
-			if (Application.internetReachability == NetworkReachability.NotReachable)
-			{
-				AJavaTools.UI.ShowToast(StringUtils.GetStringFromStringRef("LocalizedStrings", "IDS_ICLOUD_REQUIRE_INTERNET_ANDROID"));
-			}
-			else
-			{
-				Glu.Plugins.ASocial.Facebook.Login();
-			}
-			return true;
+		// case "FACEBOOK_LOGIN":
+		// 	FacebookButton.Visible = false;
+		// 	if (Application.internetReachability == NetworkReachability.NotReachable)
+		// 	{
+		// 		AJavaTools.UI.ShowToast(StringUtils.GetStringFromStringRef("LocalizedStrings", "IDS_ICLOUD_REQUIRE_INTERNET_ANDROID"));
+		// 	}
+		// 	else
+		// 	{
+		// 		Glu.Plugins.ASocial.Facebook.Login();
+		// 	}
+		// 	return true;
 		case "GAMECENTER_LOGIN":
 			if (AJavaTools.Properties.IsBuildAmazon())
 			{

@@ -306,13 +306,12 @@ public class GeneralConfig
 		}
 	}
 
-	public static bool IsLive
-	{
-		get
-		{
-			return !UnityEngine.Debug.isDebugBuild;
-		}
-	}
+	public static bool IsLive;
 
 	public static bool EmulateLive { get; set; }
+
+	private void Awake()
+	{
+		IsLive = !UnityEngine.Debug.isDebugBuild;
+	}
 }
