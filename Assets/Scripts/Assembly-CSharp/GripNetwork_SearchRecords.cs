@@ -97,9 +97,9 @@ public class GripNetwork_SearchRecords : DisposableMonoBehaviour
 		AJavaTools.UI.StopIndeterminateProgress();
 		Action<GripNetwork.Result, GripField[,]> action = mSearchRecordCallback;
 		mSearchRecordCallback = null;
-		switch (result)
-		{
-		}
+		// switch (result)
+		// {
+		// }
 		if (action != null)
 		{
 			action(result, gripFields);

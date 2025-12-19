@@ -2565,7 +2565,7 @@
     enemy = Enemies.CrawlingTorsoTutorial
     count = 3
     spacing = Moderate
-    startMode = Overlap
+    spawnAt = NoDelay
 [Wave_002]
   1:
     type = Spawn
@@ -2592,7 +2592,7 @@
     enemy = Enemies.CrawlingTorsoTutorial
     count = 1
     spacing = Moderate
-    startMode = Overlap
+    spawnAt = NoDelay
   6:
     type = Spawn
     enemy = Enemies.LZombieAxe
@@ -2609,7 +2609,7 @@
     enemy = Enemies.LZombieMelee
     count = 3
     spacing = Loose
-    startMode = Overlap
+    spawnAt = NoDelay
   3:
     type = Spawn
     enemy = Enemies.LZombieAxe
@@ -2625,7 +2625,7 @@
     enemy = Enemies.LZombieSpear
     count = 3
     spacing = Tight
-    startMode = Overlap
+    spawnAt = NoDelay
   6:
     type = Spawn
     enemy = Enemies.LZombieSword
@@ -2636,11 +2636,10 @@
     enemy = Enemies.LZombieAxe
     count = 2
     spacing = Moderate
-    advanceAt = 0.0
+    spawnAt = Death
   8:
     type = Banner
     banner = Legion
-    startMode = Overlap
   9:
     type = Spawn
     enemy = Enemies.LZombieSpear
@@ -2656,13 +2655,13 @@
     enemy = Enemies.LZombieSpear
     count = 3
     spacing = Tight
-    startMode = Overlap
+    spawnAt = NoDelay
   12:
     type = Spawn
     enemy = Enemies.LZombieAxe
     count = 2
     spacing = Tight
-    startMode = Overlap
+    spawnAt = NoDelay
 [Wave_004]
   1:
     type = Spawn
@@ -2679,13 +2678,13 @@
     enemy = Enemies.Nobusuma
     count = 2
     spacing = Loose
-    startMode = Overlap
+    spawnAt = NoDelay
   4:
     type = Spawn
     enemy = Enemies.LZombieSword
     count = 3
     spacing = Moderate
-    startMode = Overlap
+    spawnAt = NoDelay
   5:
     type = Spawn
     enemy = Enemies.LZombieAxe
@@ -2696,13 +2695,13 @@
     enemy = Enemies.LZombieSpear
     count = 4
     spacing = Tight
-    startMode = Overlap
+    spawnAt = NoDelay
   7:
     type = Spawn
     enemy = Enemies.Nobusuma
     count = 3
     spacing = Moderate
-    startMode = Overlap
+    spawnAt = NoDelay
   8:
     type = Spawn
     enemy = Enemies.LZombieMelee
@@ -2723,7 +2722,7 @@
     enemy = Enemies.Nobusuma
     count = 4
     spacing = Tight
-    startMode = Overlap
+    spawnAt = NoDelay
 [Wave_005]
   1:
     type = Spawn
@@ -2735,7 +2734,7 @@
     enemy = Enemies.Nobusuma
     count = 3
     spacing = Loose
-    startMode = Overlap
+    spawnAt = NoDelay
   3:
     type = Spawn
     enemy = Enemies.LZombieArcher
@@ -2751,7 +2750,7 @@
     enemy = Enemies.Nobusuma
     count = 2
     spacing = Tight
-    startMode = Overlap
+    spawnAt = NoDelay
   6:
     type = Spawn
     enemy = Enemies.LZombieAxe
@@ -2762,7 +2761,7 @@
     enemy = Enemies.LZombieArcher
     count = 3
     spacing = Tight
-    startMode = Overlap
+    spawnAt = NoDelay
   8:
     type = Spawn
     enemy = Enemies.LZombieSword
@@ -2773,13 +2772,13 @@
     enemy = Enemies.LZombieSpear
     count = 3
     spacing = Tight
-    startMode = Overlap
+    spawnAt = NoDelay
   10:
     type = Spawn
     enemy = Enemies.LZombieArcher
     count = 5
     spacing = Moderate
-    startMode = Overlap
+    spawnAt = NoDelay
   11:
     type = Spawn
     enemy = Enemies.LZombieMelee
@@ -2795,31 +2794,31 @@
     enemy = Enemies.LZombieSword
     count = 3
     spacing = Tight
-    startMode = Overlap
+    spawnAt = NoDelay
   14:
     type = Spawn
     enemy = Enemies.Nobusuma
     count = 4
     spacing = Tight
-    startMode = Overlap
+    spawnAt = NoDelay
   15:
     type = Spawn
     enemy = Enemies.LZombieAxe
     count = 3
     spacing = Tight
-    startMode = Overlap
+    spawnAt = NoDelay
   16:
     type = Spawn
     enemy = Enemies.LZombieArcher
     count = 4
     spacing = Tight
-    startMode = Overlap
+    spawnAt = NoDelay
   17:
     type = Spawn
     enemy = Enemies.LZombieSpear
     count = 3
     spacing = Tight
-    startMode = Overlap
+    spawnAt = NoDelay
 [Wave_006]
   27:
     index = 27

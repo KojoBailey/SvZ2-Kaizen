@@ -68,9 +68,9 @@ public class GripNetwork_CountRecords : DisposableMonoBehaviour
 	{
 		Action<GripNetwork.Result, int> action = mCountRecordCallback;
 		mCountRecordCallback = null;
-		switch (result)
-		{
-		}
+		// switch (result)
+		// {
+		// }
 		if (action != null)
 		{
 			action(result, count);

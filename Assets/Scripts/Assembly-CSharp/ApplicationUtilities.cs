@@ -558,7 +558,7 @@ public class ApplicationUtilities : SingletonSpawningMonoBehaviour<ApplicationUt
 			}
 			catch (Exception ex)
 			{
-				Exception e = ex;
+				UnityEngine.Debug.LogError(ex.Message);
 			}
 			facebookOnDoneLogin = null;
 		}

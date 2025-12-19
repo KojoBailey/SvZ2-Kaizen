@@ -253,12 +253,12 @@ public class DataBundleRuntime
 			{
 				PlayerPrefs.SetString(DataBundleAppVersionPrefsKey, GeneralConfig.Version);
 			}
-			if (false)
-			{
-				((DataBundleRuntimeLegacyUdaman)instDataProvider).GetFieldValue(null, null, null, null, 0, false);
-				((DataBundleRuntimeLegacyUdaman)instDataProvider).GetFieldValue(null, null, null, null, 0f, false);
-				((DataBundleRuntimeLegacyUdaman)instDataProvider).GetFieldValue(null, null, null, null, false, false);
-			}
+			// if (false)
+			// {
+			// 	((DataBundleRuntimeLegacyUdaman)instDataProvider).GetFieldValue(null, null, null, null, 0, false);
+			// 	((DataBundleRuntimeLegacyUdaman)instDataProvider).GetFieldValue(null, null, null, null, 0f, false);
+			// 	((DataBundleRuntimeLegacyUdaman)instDataProvider).GetFieldValue(null, null, null, null, false, false);
+			// }
 		}
 	}
 

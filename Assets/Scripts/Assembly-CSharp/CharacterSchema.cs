@@ -120,7 +120,7 @@ public class CharacterSchema
 			if (string.IsNullOrEmpty(schema.animTagRoot))
 			{
 				string assetPath = SchemaFieldAdapter.GetAssetPath(typeof(CharacterSchema), schema.Table, schema.id, "model");
-				string text = Path.GetDirectoryName(assetPath) + "/" + Path.GetFileNameWithoutExtension(assetPath) + "_anim_tags";
+				// string text = Path.GetDirectoryName(assetPath) + "/" + Path.GetFileNameWithoutExtension(assetPath) + "_anim_tags";
 				resourcePath = FileUtil.GetResourcePath(assetPath);
 			}
 			else

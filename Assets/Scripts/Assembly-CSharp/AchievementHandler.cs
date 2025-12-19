@@ -9,7 +9,6 @@ public class AchievementHandler : MonoBehaviour, IGluiActionHandler
 
 	private void Start()
 	{
-		List<HeroSchema> list = new List<HeroSchema>();
 		string[] allIDs = Singleton<HeroesDatabase>.Instance.AllIDs;
 		foreach (string id in allIDs)
 		{

@@ -15,8 +15,8 @@ public class GluiCamera : GluiBase
 			component.backgroundColor = new Color(0f, 0f, 0f, 0f);
 			component.cullingMask = 1 << GluiSettings.MainLayer;
 			component.orthographic = true;
-			component.near = 0f;
-			component.far = 1000f;
+			component.nearClipPlane = 0f;
+			component.farClipPlane = 1000f;
 			GluiScreen gluiScreen = Object.FindObjectOfType(typeof(GluiScreen)) as GluiScreen;
 			if (gluiScreen != null)
 			{

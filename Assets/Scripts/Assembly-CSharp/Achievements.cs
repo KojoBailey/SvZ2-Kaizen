@@ -334,13 +334,13 @@ public class Achievements : Singleton<Achievements>
 		}
 	}
 
-	public void ReportOfflineProgress()
-	{
-		foreach (KeyValuePair<string, AchievementTracker> mAchievement in mAchievements)
-		{
-			float progress = 100f * (float)mAchievement.Value.completedCount / (float)Mathf.Max(1, mAchievement.Value.achievement.Data.CompletionCount);
-		}
-	}
+	// public void ReportOfflineProgress()
+	// {
+	// 	foreach (KeyValuePair<string, AchievementTracker> mAchievement in mAchievements)
+	// 	{
+	// 		float progress = 100f * (float)mAchievement.Value.completedCount / (float)Mathf.Max(1, mAchievement.Value.achievement.Data.CompletionCount);
+	// 	}
+	// }
 
 	public void Initialize()
 	{

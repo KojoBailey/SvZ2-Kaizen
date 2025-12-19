@@ -87,7 +87,7 @@ public class EffectKiller : MonoBehaviour
 				Cleanup();
 			}
 		}
-		if (mHadChildren && base.transform.GetChildCount() <= 0)
+		if (mHadChildren && base.transform.childCount <= 0)
 		{
 			Cleanup();
 		}

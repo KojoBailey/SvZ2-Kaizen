@@ -168,7 +168,7 @@ public class Enemy : Character
 		{
 			GameObject gameObject = base.controlledObject;
 			Transform transform = gameObject.transform;
-			int childCount = transform.GetChildCount();
+			int childCount = transform.childCount;
 			string text = Singleton<EnemiesDatabase>.Instance.ModelName(base.id);
 			for (int i = 0; i < childCount; i++)
 			{

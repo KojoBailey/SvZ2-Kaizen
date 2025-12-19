@@ -75,17 +75,17 @@ public class StartScreenImpl : MonoBehaviour, IGluiActionHandler
 			string iCloudPath = FileManager.GetCloudContainerDirectoryPath();
 		}
 		SingletonSpawningMonoBehaviour<ApplicationUtilities>.Instance.canAwardGems = true;
-		_leaderboardsButton = GameObject.Find("Button_Leaderboard");
-		_achievementsButton = GameObject.Find("Button_Achievement");
-		_gameCenterButton = GameObject.Find("Button_GameCenter");
-		_iCloudButton = GameObject.Find("Button_iCloud");
-		Vector3 _currentPosition2 = _leaderboardsButton.transform.localPosition;
-		_achievementsButton.transform.localPosition = new Vector3(_currentPosition2.x + 140f, _currentPosition2.y, _currentPosition2.z);
-		_iCloudButton.transform.localPosition = new Vector3(_currentPosition2.x + 280f, _currentPosition2.y, _currentPosition2.z);
-		_leaderboardsButton.gameObject.SetActive(false);
-		_achievementsButton.gameObject.SetActive(false);
-		_iCloudButton.gameObject.SetActive(false);
-		_gameCenterButton.gameObject.SetActive(false);
+		// _leaderboardsButton = GameObject.Find("Button_Leaderboard");
+		// _achievementsButton = GameObject.Find("Button_Achievement");
+		// _gameCenterButton = GameObject.Find("Button_GameCenter");
+		// _iCloudButton = GameObject.Find("Button_iCloud");
+		// Vector3 _currentPosition2 = _leaderboardsButton.transform.localPosition;
+		// _achievementsButton.transform.localPosition = new Vector3(_currentPosition2.x + 140f, _currentPosition2.y, _currentPosition2.z);
+		// _iCloudButton.transform.localPosition = new Vector3(_currentPosition2.x + 280f, _currentPosition2.y, _currentPosition2.z);
+		// _leaderboardsButton.gameObject.SetActive(false);
+		// _achievementsButton.gameObject.SetActive(false);
+		// _iCloudButton.gameObject.SetActive(false);
+		// _gameCenterButton.gameObject.SetActive(false);
 		GameObject _anchor = GameObject.Find("Anchor_LeftBottom");
 		PlayerPrefs.SetInt("gameLoadedCorrectly", 1);
 		PlayerPrefs.SetString("gameTag", AJavaTools.Properties.GetBuildTag());
