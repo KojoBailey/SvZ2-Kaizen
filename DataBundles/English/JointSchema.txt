@@ -371,7 +371,7 @@
 [Chochinobake]
   impact_target:
     label = JointLabel.impact_target
-    jointName = chochinobake:Chino_spine_mid_jnt
+    jointName = Chochinobake:Chino_spine_mid_jnt
     prefab = 
     offsetPositionX = 0
     offsetPositionY = 0
@@ -384,7 +384,7 @@
     offsetScaleZ = 0
   buff_icon:
     label = JointLabel.buff_icon
-    jointName = chochinobake:Chino_Skeleton_grp
+    jointName = Chochinobake:Chino_Skeleton_grp
     prefab = 
     offsetPositionX = 0
     offsetPositionY = 2
@@ -397,7 +397,7 @@
     offsetScaleZ = 0
   body_effect:
     label = JointLabel.body_effect
-    jointName = chochinobake
+    jointName = Chochinobake
     prefab = Assets/Game/Resources/FX/ChochGlow.prefab
     offsetPositionX = 0
     offsetPositionY = 0.4
@@ -411,7 +411,7 @@
 [ChochinobakeAlt]
   body_effect:
     label = JointLabel.body_effect
-    jointName = chochinobake
+    jointName = Chochinobake
     prefab = Assets/Game/Resources/FX/ChochGlow.prefab
     offsetPositionX = 0
     offsetPositionY = 0.4
@@ -424,7 +424,7 @@
     offsetScaleZ = 0
   impact _target:
     label = JointLabel.impact _target
-    jointName = chochinobake:Chino_spine_mid_jnt
+    jointName = Chochinobake:Chino_spine_mid_jnt
     prefab = 
     offsetPositionX = 0
     offsetPositionY = 0
@@ -437,7 +437,7 @@
     offsetScaleZ = 0
   buff_icon:
     label = JointLabel.buff_icon
-    jointName = chochinobake:Chino_Skeleton_grp
+    jointName = Chochinobake:Chino_Skeleton_grp
     prefab = 
     offsetPositionX = 0
     offsetPositionY = 2

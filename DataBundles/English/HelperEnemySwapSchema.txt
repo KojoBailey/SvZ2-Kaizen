@@ -1,5 +1,5 @@
 [CorruptionSwap]
-  chochinobake:
+  Chochinobake:
     helperSwapFrom = Helpers.Farmer
     enemySwapTo = Enemies.Corrupt_Farmer
   FarmerOnStilts:

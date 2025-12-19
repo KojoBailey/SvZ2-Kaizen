@@ -95,7 +95,7 @@
     index = 3
     minWaitTime = 1
     maxWaitTime = 1
-    enemy_1 = Enemies.l_zombie_warhammer
+    enemy_1 = Enemies.LZombieWarHammer
     quantity_1 = 5
     enemy_2 = Enemies.h_zombie_spear
     quantity_2 = 4
@@ -362,7 +362,7 @@
     index = 1
     minWaitTime = 0.1
     maxWaitTime = 0.3
-    enemy_1 = Enemies.chochinobake
+    enemy_1 = Enemies.Chochinobake
     quantity_1 = 3
     enemy_2 = 
     quantity_2 = 0
@@ -382,18 +382,18 @@
     index = 3
     minWaitTime = 1
     maxWaitTime = 2
-    enemy_1 = Enemies.l_zombie_melee
+    enemy_1 = Enemies.LZombieMelee
     quantity_1 = 1
-    enemy_2 = Enemies.l_zombie_bow
+    enemy_2 = Enemies.LZombieArcher
     quantity_2 = 2
-    enemy_3 = Enemies.l_zombie_sword
+    enemy_3 = Enemies.LZombieSword
     quantity_3 = 2
 [GateRushers_Single]
   1:
     index = 1
     minWaitTime = 0.1
     maxWaitTime = 0.1
-    enemy_1 = Enemies.chochinobake
+    enemy_1 = Enemies.Chochinobake
     quantity_1 = 0
     enemy_2 = 
     quantity_2 = 0
@@ -444,7 +444,7 @@
     index = 1
     minWaitTime = 0.1
     maxWaitTime = 0.1
-    enemy_1 = Enemies.chochinobake
+    enemy_1 = Enemies.Chochinobake
     quantity_1 = 3
     enemy_2 = 
     quantity_2 = 0
@@ -456,7 +456,7 @@
     maxWaitTime = 0.1
     enemy_1 = Enemies.chochinobake_alt
     quantity_1 = 0
-    enemy_2 = Enemies.chochinobake
+    enemy_2 = Enemies.Chochinobake
     quantity_2 = 2
     enemy_3 = 
     quantity_3 = 0
@@ -466,7 +466,7 @@
     maxWaitTime = 0.1
     enemy_1 = Enemies.evil_chochinobake
     quantity_1 = 0
-    enemy_2 = Enemies.chochinobake
+    enemy_2 = Enemies.Chochinobake
     quantity_2 = 0
     enemy_3 = 
     quantity_3 = 0
@@ -617,7 +617,7 @@
     index = 1
     minWaitTime = 0.1
     maxWaitTime = 0.1
-    enemy_1 = Enemies.l_zombie_ax
+    enemy_1 = Enemies.LZombieAxe
     quantity_1 = 0
     enemy_2 = 
     quantity_2 = 0
@@ -627,7 +627,7 @@
     index = 2
     minWaitTime = 0.1
     maxWaitTime = 0.1
-    enemy_1 = Enemies.l_zombie_bow
+    enemy_1 = Enemies.LZombieArcher
     quantity_1 = 0
     enemy_2 = 
     quantity_2 = 0
@@ -637,7 +637,7 @@
     index = 3
     minWaitTime = 0.1
     maxWaitTime = 0.1
-    enemy_1 = Enemies.l_zombie_melee
+    enemy_1 = Enemies.LZombieMelee
     quantity_1 = 0
     enemy_2 = 
     quantity_2 = 0
@@ -647,7 +647,7 @@
     index = 4
     minWaitTime = 0.1
     maxWaitTime = 0.1
-    enemy_1 = Enemies.l_zombie_spear
+    enemy_1 = Enemies.LZombieSpear
     quantity_1 = 0
     enemy_2 = 
     quantity_2 = 0
@@ -657,7 +657,7 @@
     index = 5
     minWaitTime = 0.1
     maxWaitTime = 0.1
-    enemy_1 = Enemies.l_zombie_sword
+    enemy_1 = Enemies.LZombieSword
     quantity_1 = 0
     enemy_2 = 
     quantity_2 = 0
@@ -667,7 +667,7 @@
     index = 6
     minWaitTime = 0.1
     maxWaitTime = 0.1
-    enemy_1 = Enemies.l_zombie_warhammer
+    enemy_1 = Enemies.LZombieWarHammer
     quantity_1 = 0
     enemy_2 = 
     quantity_2 = 0
@@ -678,7 +678,7 @@
     index = 1
     minWaitTime = 0.1
     maxWaitTime = 0.1
-    enemy_1 = Enemies.l_zombie_ax
+    enemy_1 = Enemies.LZombieAxe
     quantity_1 = 3
     enemy_2 = 
     quantity_2 = 0
@@ -688,7 +688,7 @@
     index = 2
     minWaitTime = 0.1
     maxWaitTime = 0.1
-    enemy_1 = Enemies.l_zombie_bow
+    enemy_1 = Enemies.LZombieArcher
     quantity_1 = 3
     enemy_2 = 
     quantity_2 = 0
@@ -698,9 +698,9 @@
     index = 3
     minWaitTime = 0.1
     maxWaitTime = 0.1
-    enemy_1 = Enemies.l_zombie_melee
+    enemy_1 = Enemies.LZombieMelee
     quantity_1 = 2
-    enemy_2 = Enemies.l_zombie_sword
+    enemy_2 = Enemies.LZombieSword
     quantity_2 = 0
     enemy_3 = 
     quantity_3 = 0
@@ -708,9 +708,9 @@
     index = 4
     minWaitTime = 0.1
     maxWaitTime = 0.1
-    enemy_1 = Enemies.l_zombie_sword
+    enemy_1 = Enemies.LZombieSword
     quantity_1 = 2
-    enemy_2 = Enemies.l_zombie_bow
+    enemy_2 = Enemies.LZombieArcher
     quantity_2 = 0
     enemy_3 = 
     quantity_3 = 0
@@ -718,11 +718,11 @@
     index = 5
     minWaitTime = 0.1
     maxWaitTime = 0.1
-    enemy_1 = Enemies.l_zombie_warhammer
+    enemy_1 = Enemies.LZombieWarHammer
     quantity_1 = 0
-    enemy_2 = Enemies.l_zombie_sword
+    enemy_2 = Enemies.LZombieSword
     quantity_2 = 0
-    enemy_3 = Enemies.l_zombie_spear
+    enemy_3 = Enemies.LZombieSpear
     quantity_3 = 0
 [RangedDamage_High]
   1:

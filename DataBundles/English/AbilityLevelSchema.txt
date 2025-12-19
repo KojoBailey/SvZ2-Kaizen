@@ -1854,7 +1854,7 @@
   001:
     level = 1
     costCoins = 100
-    damage = 15
+    damage = 10
     DOTDamage = 3
     DOTFrequency = 1
     DOTDuration = 3
@@ -1862,7 +1862,7 @@
   002:
     level = 2
     costCoins = 550
-    damage = 20
+    damage = 16
     DOTDamage = 3
     DOTFrequency = 1
     DOTDuration = 3
@@ -1870,7 +1870,7 @@
   003:
     level = 3
     costCoins = 1500
-    damage = 30
+    damage = 24
     DOTDamage = 3
     DOTFrequency = 1
     DOTDuration = 3
@@ -1878,7 +1878,7 @@
   004:
     level = 4
     costCoins = 3000
-    damage = 40
+    damage = 32
     DOTDamage = 3
     DOTFrequency = 1
     DOTDuration = 5
@@ -1886,7 +1886,7 @@
   005:
     level = 5
     costCoins = 4500
-    damage = 60
+    damage = 40
     DOTDamage = 5
     DOTFrequency = 1
     DOTDuration = 5
@@ -1894,7 +1894,7 @@
   006:
     level = 6
     costGems = 12
-    damage = 80
+    damage = 50
     DOTDamage = 5
     DOTFrequency = 1
     DOTDuration = 5
@@ -1902,7 +1902,7 @@
   007:
     level = 7
     costGems = 14
-    damage = 110
+    damage = 60
     DOTDamage = 5
     DOTFrequency = 1
     DOTDuration = 5
@@ -1910,7 +1910,7 @@
   008:
     level = 8
     costGems = 16
-    damage = 160
+    damage = 72
     DOTDamage = 5
     DOTFrequency = 1
     DOTDuration = 10
@@ -1918,7 +1918,7 @@
   009:
     level = 9
     costGems = 18
-    damage = 220
+    damage = 86
     DOTDamage = 5
     DOTFrequency = 1
     DOTDuration = 10
@@ -1926,7 +1926,7 @@
   010:
     level = 10
     costGems = 22
-    damage = 310
+    damage = 100
     DOTDamage = 5
     DOTFrequency = 1
     DOTDuration = 10

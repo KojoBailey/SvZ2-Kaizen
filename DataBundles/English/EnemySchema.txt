@@ -1,6 +1,6 @@
 [Enemies]
-  chochinobake:
-    id = chochinobake
+  Chochinobake:
+    id = Chochinobake
     displayName = LocalizedStrings.Enemy_Info_15_name
     resources = Character.Chochinobake
     meleeWeaponPrefab = 
@@ -742,8 +742,8 @@
     resourceDropMin = 0
     resourceDropMax = 3
     previewPriority = 1
-  l_zombie_ax:
-    id = l_zombie_ax
+  LZombieAxe:
+    id = LZombieAxe
     displayName = LocalizedStrings.Enemy_Info_02_name
     resources = Character.LZombieAxe
     meleeWeaponPrefab = Assets/Game/Resources/Props/Weapons/axe.fbx
@@ -761,8 +761,8 @@
     resourceDropMax = 3
     previewPriority = 0
     usesBladeWeapon = True
-  l_zombie_bow:
-    id = l_zombie_bow
+  LZombieArcher:
+    id = LZombieArcher
     displayName = LocalizedStrings.Enemy_Info_03_name
     resources = Character.LZombieArcher
     rangedWeaponPrefab = Assets/Game/Resources/Props/Weapons/lzombiebow.fbx
@@ -781,8 +781,8 @@
     resourceDropMin = 0
     resourceDropMax = 3
     previewPriority = 0
-  l_zombie_melee:
-    id = l_zombie_melee
+  LZombieMelee:
+    id = LZombieMelee
     displayName = LocalizedStrings.Enemy_Info_01_name
     resources = Character.LZombie
     meleeWeaponPrefab = 
@@ -799,8 +799,8 @@
     resourceDropMin = 0
     resourceDropMax = 3
     previewPriority = 0
-  l_zombie_melee_tutorial:
-    id = l_zombie_melee_tutorial
+  LZombieMeleeTutorial:
+    id = LZombieMeleeTutorial
     displayName = LocalizedStrings.Enemy_Info_01_name
     resources = Character.LZombieMelee
     meleeWeaponPrefab = 
@@ -817,8 +817,8 @@
     resourceDropMin = 0
     resourceDropMax = 0
     previewPriority = 0
-  l_zombie_spear:
-    id = l_zombie_spear
+  LZombieSpear:
+    id = LZombieSpear
     displayName = LocalizedStrings.Enemy_Info_04_name
     resources = Character.LZombieSpear
     meleeWeaponPrefab = Assets/Game/Resources/Props/Weapons/spear.fbx
@@ -836,8 +836,8 @@
     resourceDropMax = 3
     previewPriority = 0
     usesBladeWeapon = True
-  l_zombie_sword:
-    id = l_zombie_sword
+  LZombieSword:
+    id = LZombieSword
     displayName = LocalizedStrings.Enemy_Info_05_name
     resources = Character.LZombieSword
     meleeWeaponPrefab = Assets/Game/Resources/Props/Weapons/katana.fbx
@@ -855,8 +855,8 @@
     resourceDropMax = 3
     previewPriority = 0
     usesBladeWeapon = True
-  l_zombie_warhammer:
-    id = l_zombie_warhammer
+  LZombieWarHammer:
+    id = LZombieWarHammer
     displayName = LocalizedStrings.Enemy_Info_06_name
     resources = Character.LZombieWarH
     meleeWeaponPrefab = Assets/Game/Resources/Props/Weapons/warhammer.fbx
@@ -873,8 +873,8 @@
     resourceDropMin = 0
     resourceDropMax = 3
     previewPriority = 0
-  nobusuma:
-    id = nobusuma
+  Nobusuma:
+    id = Nobusuma
     displayName = LocalizedStrings.Enemy_Info_21_name
     resources = Character.Nobusuma
     meleeWeaponPrefab = 
@@ -1135,8 +1135,8 @@
     resourceDropMin = 0
     resourceDropMax = 5
     previewPriority = 1
-  crawling_torso:
-    id = crawling_torso
+  CrawlingTorso:
+    id = CrawlingTorso
     displayName = LocalizedStrings.Enemy_Info_13_name
     resources = Character.CrawlingTorso
     meleeWeaponPrefab = Assets/Game/Resources/Props/Weapons/crawlingtorsosword.fbx
@@ -1340,10 +1340,10 @@
     lane = 
     spawnOnDeath = 
     spawnOnDeathCount = 0
-  CrawlingTorso_Tutorial:
-    id = CrawlingTorso_Tutorial
+  CrawlingTorsoTutorial:
+    id = CrawlingTorsoTutorial
     displayName = LocalizedStrings.Enemy_Info_12_name
-    resources = Character.CrawlingTorso_Tutorial
+    resources = Character.CrawlingTorsoTutorial
     rangedWeaponPrefab = 
     meleeWeaponPrefab = Assets/Game/Resources/Props/Weapons/mace.fbx
     projectile = 

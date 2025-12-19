@@ -26,7 +26,7 @@
   Chochinobake:
     id = Chochinobake
     prefab = Assets/Game/Resources/Characters/CharacterPrefab.prefab
-    model = Assets/Game/Resources/Characters/Chochinobake/chochinobake.prefab
+    model = Assets/Game/Resources/Characters/Chochinobake/Chochinobake.prefab
     material = Assets/Game/Resources/Characters/Chochinobake/Materials/chochinobake_D.mat
     scaleX = 1
     scaleY = 1
@@ -38,7 +38,7 @@
   ChochinobakeAlt:
     id = ChochinobakeAlt
     prefab = Assets/Game/Resources/Characters/CharacterPrefab.prefab
-    model = Assets/Game/Resources/Characters/Chochinobake/chochinobake.prefab
+    model = Assets/Game/Resources/Characters/Chochinobake/Chochinobake.prefab
     material = Assets/Game/Resources/Characters/Chochinobake/Materials/chochinobake_alt.mat
     scaleX = 1
     scaleY = 1
@@ -1138,8 +1138,8 @@
     paperdollData = Akaname
     characterModelControllerData = Character.Akaname
     soundTheme = Themes.EnemyAkaname
-  CrawlingTorso_Tutorial:
-    id = CrawlingTorso_Tutorial
+  CrawlingTorsoTutorial:
+    id = CrawlingTorsoTutorial
     prefab = Assets/Game/Resources/Characters/CharacterPrefab.prefab
     model = Assets/Game/Resources/Characters/CrawlingTorso/crawlingtorso.prefab
     material = Assets/Game/Resources/Characters/CrawlingTorso/Materials/crawling_torso_blue_D.mat
@@ -1258,7 +1258,7 @@
   ChochinobakeRed:
     id = ChochinobakeRed
     prefab = Assets/Game/Resources/Characters/CharacterPrefab.prefab
-    model = Assets/Game/Resources/Characters/Chochinobake/chochinobake.prefab
+    model = Assets/Game/Resources/Characters/Chochinobake/Chochinobake.prefab
     material = Assets/Game/Resources/Characters/Chochinobake/Materials/chochinobake_alt_red.mat
     scaleX = 2
     scaleY = 2

@@ -62,7 +62,7 @@
     enemyGroup = 
   4:
     index = 4
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
     enemyGroup = 
   27:
@@ -107,7 +107,7 @@
     enemyGroup = 
   8:
     index = 8
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
     enemyGroup = 
   9:
@@ -117,7 +117,7 @@
     enemyGroup = 
   10:
     index = 10
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
     enemyGroup = 
   33:
@@ -1426,7 +1426,7 @@
 [Wave101]
   1:
     index = 1
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   2:
     index = 2
@@ -1434,11 +1434,11 @@
     command = 1,2
   3:
     index = 3
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   4:
     index = 4
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   5:
     index = 5
@@ -1446,7 +1446,7 @@
     command = 1,1
   6:
     index = 6
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   7:
     index = 7
@@ -1454,7 +1454,7 @@
     command = 3,3
   8:
     index = 8
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   9:
     index = 9
@@ -1462,7 +1462,7 @@
     command = 1,2
   10:
     index = 10
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   11:
     index = 11
@@ -1470,7 +1470,7 @@
     command = 1,2
   12:
     index = 12
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   13:
     index = 13
@@ -1478,12 +1478,12 @@
     command = 1,1
   14:
     index = 14
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
 [Wave102]
   1:
     index = 1
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   2:
     index = 2
@@ -1491,7 +1491,7 @@
     command = 1,1
   3:
     index = 3
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   4:
     index = 4
@@ -1499,7 +1499,7 @@
     command = 1,2
   5:
     index = 5
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   6:
     index = 6
@@ -1515,7 +1515,7 @@
     command = (
   9:
     index = 9
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   10:
     index = 10
@@ -1523,7 +1523,7 @@
     command = 1,1
   11:
     index = 11
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   12:
     index = 12
@@ -1531,7 +1531,7 @@
     command = 1,2
   13:
     index = 13
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   14:
     index = 14
@@ -1543,11 +1543,11 @@
     command = 2,2
   15:
     index = 15
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   16:
     index = 16
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   17:
     index = 17
@@ -1555,7 +1555,7 @@
     command = 1,1
   18:
     index = 18
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   19:
     index = 19
@@ -1563,7 +1563,7 @@
     command = 1,2
   20:
     index = 20
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
 [Wave103]
   1:
@@ -1576,11 +1576,11 @@
     command = 2,2
   3:
     index = 3
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   4:
     index = 4
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   5:
     index = 5
@@ -1588,7 +1588,7 @@
     command = 2,2
   6:
     index = 6
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   7:
     index = 7
@@ -1596,11 +1596,11 @@
     command = 1,2
   8:
     index = 8
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   9:
     index = 9
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   10:
     index = 10
@@ -1608,7 +1608,7 @@
     command = 1,1
   11:
     index = 11
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   12:
     index = 12
@@ -1616,15 +1616,15 @@
     command = (
   13:
     index = 13
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   14:
     index = 14
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   15:
     index = 15
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   16:
     index = 16
@@ -1632,15 +1632,15 @@
     command = 1,1
   17:
     index = 17
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   18:
     index = 18
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   19:
     index = 19
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   20:
     index = 20
@@ -1648,7 +1648,7 @@
     command = )
   21:
     index = 21
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   22:
     index = 22
@@ -1656,7 +1656,7 @@
     command = 1,1
   23:
     index = 23
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   24:
     index = 24
@@ -1664,7 +1664,7 @@
     command = 2,2
   25:
     index = 25
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   26:
     index = 26
@@ -1672,7 +1672,7 @@
     command = 1,1
   27:
     index = 27
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   28:
     index = 28
@@ -1696,16 +1696,16 @@
     command = 2,3
   33:
     index = 33
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   34:
     index = 34
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
 [Wave104]
   1:
     index = 1
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   2:
     index = 2
@@ -1713,7 +1713,7 @@
     command = 3,3
   3:
     index = 3
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   4:
     index = 4
@@ -1721,7 +1721,7 @@
     command = 2,3
   5:
     index = 5
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   60:
     index = 60
@@ -1729,7 +1729,7 @@
     command = 2,3
   6:
     index = 6
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   7:
     index = 7
@@ -1737,7 +1737,7 @@
     command = 1,2
   8:
     index = 8
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   9:
     index = 9
@@ -1745,7 +1745,7 @@
     command = 1,2
   10:
     index = 10
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   11:
     index = 11
@@ -1753,7 +1753,7 @@
     command = 1,1
   12:
     index = 12
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   13:
     index = 13
@@ -1761,11 +1761,11 @@
     command = 1,2
   14:
     index = 14
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   15:
     index = 15
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   16:
     index = 16
@@ -1773,7 +1773,7 @@
     command = 1,2
   17:
     index = 17
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   18:
     index = 18
@@ -1781,7 +1781,7 @@
     command = 1,2
   19:
     index = 19
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   20:
     index = 20
@@ -1789,7 +1789,7 @@
     command = 1,2
   21:
     index = 21
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   22:
     index = 22
@@ -1797,7 +1797,7 @@
     command = (
   23:
     index = 23
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   24:
     index = 24
@@ -1805,7 +1805,7 @@
     command = 1,1
   25:
     index = 25
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   26:
     index = 26
@@ -1813,7 +1813,7 @@
     command = 1,1
   27:
     index = 27
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   28:
     index = 28
@@ -1821,7 +1821,7 @@
     command = 1,1
   29:
     index = 29
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   30:
     index = 30
@@ -1837,7 +1837,7 @@
     command = 1,1
   33:
     index = 33
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   34:
     index = 34
@@ -1845,7 +1845,7 @@
     command = 1,1
   35:
     index = 35
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   36:
     index = 36
@@ -1853,7 +1853,7 @@
     command = 1,1
   37:
     index = 37
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   38:
     index = 38
@@ -1861,7 +1861,7 @@
     command = 1,2
   39:
     index = 39
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   40:
     index = 40
@@ -1869,7 +1869,7 @@
     command = 1,2
   41:
     index = 41
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   42:
     index = 42
@@ -1881,7 +1881,7 @@
     command = 4,4
   44:
     index = 44
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   45:
     index = 45
@@ -1889,15 +1889,15 @@
     command = 1,3
   46:
     index = 46
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   47:
     index = 47
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   48:
     index = 48
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   49:
     index = 49
@@ -1905,7 +1905,7 @@
     command = 1,1
   50:
     index = 50
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   51:
     index = 51
@@ -1913,7 +1913,7 @@
     command = 1,1
   52:
     index = 52
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   53:
     index = 53
@@ -1921,11 +1921,11 @@
     command = 1,3
   54:
     index = 54
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   55:
     index = 55
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   56:
     index = 56
@@ -1933,7 +1933,7 @@
     command = 1,1
   57:
     index = 57
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   58:
     index = 58
@@ -1950,7 +1950,7 @@
     command = NULL
   2:
     index = 2
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   3:
     index = 3
@@ -1958,7 +1958,7 @@
     command = 1,2
   4:
     index = 4
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   5:
     index = 5
@@ -1966,11 +1966,11 @@
     command = 2,2
   6:
     index = 6
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   7:
     index = 7
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   8:
     index = 8
@@ -1978,7 +1978,7 @@
     command = 1,2
   9:
     index = 9
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   10:
     index = 10
@@ -1994,11 +1994,11 @@
     command = 2,2
   11:
     index = 11
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   12:
     index = 12
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   14:
     index = 14
@@ -2018,7 +2018,7 @@
     command = NULL
   18:
     index = 18
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   19:
     index = 19
@@ -2026,7 +2026,7 @@
     command = 1,2
   20:
     index = 20
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   21:
     index = 21
@@ -2034,11 +2034,11 @@
     command = 1,1
   22:
     index = 22
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   23:
     index = 23
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   24:
     index = 24
@@ -2046,7 +2046,7 @@
     command = 2,2
   25:
     index = 25
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   26:
     index = 26
@@ -2066,7 +2066,7 @@
     command = 1,1
   30:
     index = 30
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   31:
     index = 31
@@ -2074,7 +2074,7 @@
     command = 1,1
   32:
     index = 32
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   33:
     index = 33
@@ -2090,11 +2090,11 @@
     command = 2,3
   36:
     index = 36
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   37:
     index = 37
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   38:
     index = 38
@@ -2102,7 +2102,7 @@
     command = 1,1
   39:
     index = 39
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   40:
     index = 40
@@ -2138,7 +2138,7 @@
     command = 1,1
   48:
     index = 48
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   49:
     index = 49
@@ -2146,7 +2146,7 @@
     command = 1,1
   50:
     index = 50
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   51:
     index = 51
@@ -2155,19 +2155,19 @@
 [Wave106]
   1:
     index = 1
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   2:
     index = 2
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   3:
     index = 3
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   4:
     index = 4
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   6:
     index = 6
@@ -2175,19 +2175,19 @@
     command = 1,1
   7:
     index = 7
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   8:
     index = 8
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   9:
     index = 9
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   10:
     index = 10
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   22:
     index = 22
@@ -2248,7 +2248,7 @@
     command = 1,2
   24:
     index = 24
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   26:
     index = 26
@@ -2256,11 +2256,11 @@
     command = 1,1
   25:
     index = 25
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   1:
     index = 1
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   2:
     index = 2
@@ -2268,7 +2268,7 @@
     command = 1,1
   3:
     index = 3
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   4:
     index = 4
@@ -2276,7 +2276,7 @@
     command = 1.1
   5:
     index = 5
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   6:
     index = 6
@@ -2304,7 +2304,7 @@
     command = NULL
   12:
     index = 12
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   13:
     index = 13
@@ -2312,7 +2312,7 @@
     command = 1,1
   14:
     index = 14
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   15:
     index = 15
@@ -2320,7 +2320,7 @@
     command = 1,1
   16:
     index = 16
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   17:
     index = 17
@@ -2369,7 +2369,7 @@
     command = )
   1:
     index = 1
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   2:
     index = 2
@@ -2377,7 +2377,7 @@
     command = (
   3:
     index = 3
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   4:
     index = 4
@@ -2389,7 +2389,7 @@
     command = (
   6:
     index = 6
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   7:
     index = 7
@@ -2401,7 +2401,7 @@
     command = (
   9:
     index = 9
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   10:
     index = 10
@@ -2409,7 +2409,7 @@
     command = 1,1
   11:
     index = 11
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   12:
     index = 12
@@ -2442,7 +2442,7 @@
     command = 2,2
   7:
     index = 7
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   8:
     index = 8
@@ -2450,7 +2450,7 @@
     command = 1,1
   9:
     index = 9
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   10:
     index = 10
@@ -2458,7 +2458,7 @@
     command = 1,1
   11:
     index = 11
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   12:
     index = 12
@@ -2474,15 +2474,15 @@
     command = 3,3
   15:
     index = 15
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   16:
     index = 16
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   17:
     index = 17
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   18:
     index = 18
@@ -2494,7 +2494,7 @@
     command = 4,5
   20:
     index = 20
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   21:
     index = 21
@@ -2502,7 +2502,7 @@
     command = 1,1
   22:
     index = 22
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   23:
     index = 23
@@ -2510,7 +2510,7 @@
     command = 1,1
   24:
     index = 24
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   25:
     index = 25
@@ -2518,7 +2518,7 @@
     command = 1,1
   26:
     index = 26
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   27:
     index = 27
@@ -2526,7 +2526,7 @@
     command = 1,1
   28:
     index = 28
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   29:
     index = 29
@@ -2534,7 +2534,7 @@
     command = 1,1
   30:
     index = 30
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   31:
     index = 31
@@ -2547,93 +2547,93 @@
 [Wave_001]
   1:
     type = Spawn
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.CrawlingTorsoTutorial
     count = 3
     spacing = Loose
   2:
     type = Spawn
-    enemy = Enemies.l_zombie_melee_tutorial
+    enemy = Enemies.LZombieMeleeTutorial
     count = 2
     spacing = Loose
   3:
     type = Spawn
-    enemy = Enemies.l_zombie_melee_tutorial
+    enemy = Enemies.LZombieMeleeTutorial
     count = 2
     spacing = Tight
   4:
     type = Spawn
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.CrawlingTorsoTutorial
     count = 3
     spacing = Moderate
     startMode = Overlap
 [Wave_002]
   1:
     type = Spawn
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.CrawlingTorsoTutorial
     count = 2
     spacing = Loose
   2:
     type = Spawn
-    enemy = Enemies.l_zombie_melee_tutorial
+    enemy = Enemies.LZombieMeleeTutorial
     count = 2
     spacing = Loose
   3:
     type = Spawn
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     count = 2
     spacing = Moderate
   4:
     type = Spawn
-    enemy = Enemies.l_zombie_melee_tutorial
+    enemy = Enemies.LZombieMeleeTutorial
     count = 2
     spacing = Moderate
   5:
     type = Spawn
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.CrawlingTorsoTutorial
     count = 1
     spacing = Moderate
     startMode = Overlap
   6:
     type = Spawn
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     count = 2
     spacing = Tight
 [Wave_003]
   1:
     type = Spawn
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     count = 2
     spacing = Loose
   2:
     type = Spawn
-    enemy = Enemies.l_zombie_melee
+    enemy = Enemies.LZombieMelee
     count = 3
     spacing = Loose
     startMode = Overlap
   3:
     type = Spawn
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     count = 2
     spacing = Moderate
   4:
     type = Spawn
-    enemy = Enemies.l_zombie_melee
+    enemy = Enemies.LZombieMelee
     count = 3
     spacing = Tight
   5:
     type = Spawn
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     count = 3
     spacing = Tight
     startMode = Overlap
   6:
     type = Spawn
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     count = 2
     spacing = Moderate
   7:
     type = Spawn
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     count = 2
     spacing = Moderate
     advanceAt = 0.0
@@ -2643,187 +2643,187 @@
     startMode = Overlap
   9:
     type = Spawn
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     count = 3
     spacing = Loose
   10:
     type = Spawn
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     count = 3
     spacing = Tight
   11:
     type = Spawn
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     count = 3
     spacing = Tight
     startMode = Overlap
   12:
     type = Spawn
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     count = 2
     spacing = Tight
     startMode = Overlap
 [Wave_004]
   1:
     type = Spawn
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     count = 3
     spacing = Loose
   2:
     type = Spawn
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     count = 2
     spacing = Loose
   3:
     type = Spawn
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     count = 2
     spacing = Loose
     startMode = Overlap
   4:
     type = Spawn
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     count = 3
     spacing = Moderate
     startMode = Overlap
   5:
     type = Spawn
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     count = 3
     spacing = Tight
   6:
     type = Spawn
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     count = 4
     spacing = Tight
     startMode = Overlap
   7:
     type = Spawn
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     count = 3
     spacing = Moderate
     startMode = Overlap
   8:
     type = Spawn
-    enemy = Enemies.l_zombie_melee
+    enemy = Enemies.LZombieMelee
     count = 4
     spacing = Tight
   9:
     type = Spawn
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     count = 2
     spacing = Loose
   10:
     type = Spawn
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     count = 3
     spacing = Moderate
   11:
     type = Spawn
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     count = 4
     spacing = Tight
     startMode = Overlap
 [Wave_005]
   1:
     type = Spawn
-    enemy = Enemies.l_zombie_melee
+    enemy = Enemies.LZombieMelee
     count = 3
     spacing = Loose
   2:
     type = Spawn
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     count = 3
     spacing = Loose
     startMode = Overlap
   3:
     type = Spawn
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     count = 4
     spacing = Moderate
   4:
     type = Spawn
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     count = 2
     spacing = Moderate
   5:
     type = Spawn
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     count = 2
     spacing = Tight
     startMode = Overlap
   6:
     type = Spawn
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     count = 2
     spacing = Tight
   7:
     type = Spawn
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     count = 3
     spacing = Tight
     startMode = Overlap
   8:
     type = Spawn
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     count = 2
     spacing = Moderate
   9:
     type = Spawn
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     count = 3
     spacing = Tight
     startMode = Overlap
   10:
     type = Spawn
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     count = 5
     spacing = Moderate
     startMode = Overlap
   11:
     type = Spawn
-    enemy = Enemies.l_zombie_melee
+    enemy = Enemies.LZombieMelee
     count = 4
     spacing = Loose
   12:
     type = Spawn
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     count = 2
     spacing = Moderate
   13:
     type = Spawn
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     count = 3
     spacing = Tight
     startMode = Overlap
   14:
     type = Spawn
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     count = 4
     spacing = Tight
     startMode = Overlap
   15:
     type = Spawn
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     count = 3
     spacing = Tight
     startMode = Overlap
   16:
     type = Spawn
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     count = 4
     spacing = Tight
     startMode = Overlap
   17:
     type = Spawn
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     count = 3
     spacing = Tight
     startMode = Overlap
 [Wave_006]
   27:
     index = 27
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   26:
     index = 26
@@ -2831,7 +2831,7 @@
     command = 2,3
   25:
     index = 25
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   24:
     index = 24
@@ -2839,7 +2839,7 @@
     command = 2,2
   23:
     index = 23
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   28:
     index = 28
@@ -2847,7 +2847,7 @@
     command = 8,8
   1:
     index = 1
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.CrawlingTorsoTutorial
     command = NULL
   2:
     index = 2
@@ -2855,7 +2855,7 @@
     command = 2,3
   3:
     index = 3
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.CrawlingTorsoTutorial
     command = NULL
   6:
     index = 6
@@ -2887,7 +2887,7 @@
     command = (
   9:
     index = 9
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   10:
     index = 10
@@ -2895,7 +2895,7 @@
     command = 1,1
   11:
     index = 11
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   14:
     index = 14
@@ -2907,11 +2907,11 @@
     command = 2,2
   15:
     index = 15
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.CrawlingTorsoTutorial
     command = NULL
   16:
     index = 16
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   17:
     index = 17
@@ -2919,7 +2919,7 @@
     command = 1,1
   18:
     index = 18
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   19:
     index = 19
@@ -2927,7 +2927,7 @@
     command = 1,2
   20:
     index = 20
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.CrawlingTorsoTutorial
     command = NULL
   22:
     index = 22
@@ -2943,7 +2943,7 @@
     command = 5,5
   31:
     index = 31
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   32:
     index = 32
@@ -2951,7 +2951,7 @@
     command = 1,2
   33:
     index = 33
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
 [Wave_007]
   1:
@@ -2980,7 +2980,7 @@
     command = (
   7:
     index = 7
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   8:
     index = 8
@@ -2988,7 +2988,7 @@
     command = 1,1
   9:
     index = 9
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   10:
     index = 10
@@ -2996,7 +2996,7 @@
     command = 1,1
   11:
     index = 11
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   12:
     index = 12
@@ -3004,7 +3004,7 @@
     command = 1,1
   13:
     index = 13
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   14:
     index = 14
@@ -3012,7 +3012,7 @@
     command = 1,2
   15:
     index = 15
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   16:
     index = 16
@@ -3020,7 +3020,7 @@
     command = 1,1
   17:
     index = 17
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   18:
     index = 18
@@ -3028,7 +3028,7 @@
     command = 1,1
   19:
     index = 19
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   20:
     index = 20
@@ -3036,7 +3036,7 @@
     command = 1,1
   21:
     index = 21
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   22:
     index = 22
@@ -3056,7 +3056,7 @@
     command = 1,1
   26:
     index = 26
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   27:
     index = 27
@@ -3072,7 +3072,7 @@
     command = 1,1
   30:
     index = 30
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   31:
     index = 31
@@ -3088,7 +3088,7 @@
     command = 1,1
   34:
     index = 34
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   35:
     index = 35
@@ -3096,7 +3096,7 @@
     command = 1,1
   36:
     index = 36
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   37:
     index = 37
@@ -3104,16 +3104,16 @@
     command = 1,1
   38:
     index = 38
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
 [Wave_008]
   1:
     index = 1
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   2:
     index = 2
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   3:
     index = 3
@@ -3121,7 +3121,7 @@
     command = 1,1
   4:
     index = 4
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   5:
     index = 5
@@ -3129,7 +3129,7 @@
     command = 1,1
   6:
     index = 6
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   7:
     index = 7
@@ -3137,11 +3137,11 @@
     command = 1,2
   8:
     index = 8
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   9:
     index = 9
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   10:
     index = 10
@@ -3169,7 +3169,7 @@
     command = NULL
   16:
     index = 16
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   17:
     index = 17
@@ -3177,7 +3177,7 @@
     command = 1,1
   20:
     index = 20
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   21:
     index = 21
@@ -3185,7 +3185,7 @@
     command = 1,1
   22:
     index = 22
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   23:
     index = 23
@@ -3193,7 +3193,7 @@
     command = 1,2
   24:
     index = 24
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   25:
     index = 25
@@ -3209,7 +3209,7 @@
     command = 4,4
   28:
     index = 28
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   29:
     index = 29
@@ -3217,15 +3217,15 @@
     command = 1,2
   30:
     index = 30
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   31:
     index = 31
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   32:
     index = 32
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   33:
     index = 33
@@ -3233,7 +3233,7 @@
     command = 1,1
   34:
     index = 34
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   35:
     index = 35
@@ -3241,7 +3241,7 @@
     command = 1,1
   36:
     index = 36
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   37:
     index = 37
@@ -3249,7 +3249,7 @@
     command = 1,2
   38:
     index = 38
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   39:
     index = 39
@@ -3273,11 +3273,11 @@
     command = 2,2
   43:
     index = 43
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   44:
     index = 44
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   45:
     index = 45
@@ -3285,7 +3285,7 @@
     command = 1,1
   46:
     index = 46
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   47:
     index = 47
@@ -3313,7 +3313,7 @@
     command = NULL
   55:
     index = 55
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   56:
     index = 56
@@ -3321,7 +3321,7 @@
     command = .25,.25
   57:
     index = 57
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
 [Wave_009]
   1:
@@ -3330,7 +3330,7 @@
     command = NULL
   2:
     index = 2
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   3:
     index = 3
@@ -3338,7 +3338,7 @@
     command = 1,2
   4:
     index = 4
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   5:
     index = 5
@@ -3346,11 +3346,11 @@
     command = 2,2
   6:
     index = 6
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   7:
     index = 7
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   8:
     index = 8
@@ -3358,7 +3358,7 @@
     command = 1,2
   9:
     index = 9
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   10:
     index = 10
@@ -3374,11 +3374,11 @@
     command = 2,2
   11:
     index = 11
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   12:
     index = 12
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   14:
     index = 14
@@ -3398,7 +3398,7 @@
     command = NULL
   18:
     index = 18
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   19:
     index = 19
@@ -3406,7 +3406,7 @@
     command = 1,2
   20:
     index = 20
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   21:
     index = 21
@@ -3414,11 +3414,11 @@
     command = 1,1
   22:
     index = 22
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   23:
     index = 23
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   24:
     index = 24
@@ -3446,7 +3446,7 @@
     command = 1,1
   30:
     index = 30
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   31:
     index = 31
@@ -3454,7 +3454,7 @@
     command = 1,1
   32:
     index = 32
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   33:
     index = 33
@@ -3470,11 +3470,11 @@
     command = 2,3
   36:
     index = 36
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   37:
     index = 37
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   38:
     index = 38
@@ -3482,7 +3482,7 @@
     command = 1,1
   39:
     index = 39
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   40:
     index = 40
@@ -3538,7 +3538,7 @@
     command = 1,1
   48:
     index = 48
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   49:
     index = 49
@@ -3546,7 +3546,7 @@
     command = 1,1
   50:
     index = 50
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   51:
     index = 51
@@ -3555,7 +3555,7 @@
 [Wave_010]
   1:
     index = 1
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   2:
     index = 2
@@ -3563,7 +3563,7 @@
     command = 1,1
   3:
     index = 3
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   4:
     index = 4
@@ -3571,7 +3571,7 @@
     command = 1,1
   5:
     index = 5
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   6:
     index = 6
@@ -3579,7 +3579,7 @@
     command = 1,1
   7:
     index = 7
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   8:
     index = 8
@@ -3615,7 +3615,7 @@
     command = 4,4
   34:
     index = 34
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   35:
     index = 35
@@ -3623,7 +3623,7 @@
     command = 2,3
   36:
     index = 36
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   14:
     index = 14
@@ -3631,7 +3631,7 @@
     command = 6,6
   15:
     index = 15
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   16:
     index = 16
@@ -3639,7 +3639,7 @@
     command = 2,3
   17:
     index = 17
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   18:
     index = 18
@@ -3647,7 +3647,7 @@
     command = 6,6
   19:
     index = 19
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   20:
     index = 20
@@ -3655,12 +3655,12 @@
     command = 2,3
   21:
     index = 21
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
 [Wave_011]
   1:
     index = 1
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.CrawlingTorsoTutorial
     command = NULL
   2:
     index = 2
@@ -3676,7 +3676,7 @@
     command = 2,3
   5:
     index = 5
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.CrawlingTorsoTutorial
     command = NULL
   6:
     index = 6
@@ -3684,7 +3684,7 @@
     command = 2,3
   7:
     index = 7
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.CrawlingTorsoTutorial
     command = NULL
   8:
     index = 8
@@ -3692,7 +3692,7 @@
     command = 2,3
   9:
     index = 9
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.CrawlingTorsoTutorial
     command = NULL
   10:
     index = 10
@@ -3700,15 +3700,15 @@
     command = (
   11:
     index = 11
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   12:
     index = 12
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   13:
     index = 13
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   14:
     index = 14
@@ -3716,15 +3716,15 @@
     command = 3,3
   15:
     index = 15
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   16:
     index = 16
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   17:
     index = 17
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   37:
     index = 37
@@ -3764,15 +3764,15 @@
     command = 6,6
   26:
     index = 26
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.CrawlingTorsoTutorial
     command = NULL
   27:
     index = 27
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.CrawlingTorsoTutorial
     command = NULL
   28:
     index = 28
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.CrawlingTorsoTutorial
     command = NULL
   29:
     index = 29
@@ -3796,20 +3796,20 @@
     command = 3,3
   34:
     index = 34
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   35:
     index = 35
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   36:
     index = 36
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
 [Wave_012]
   1:
     index = 1
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   2:
     index = 2
@@ -3817,7 +3817,7 @@
     command = 3,3
   3:
     index = 3
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   4:
     index = 4
@@ -3825,11 +3825,11 @@
     command = 1,2
   5:
     index = 5
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   6:
     index = 6
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   7:
     index = 7
@@ -3837,7 +3837,7 @@
     command = 1,2
   8:
     index = 8
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   9:
     index = 9
@@ -3845,7 +3845,7 @@
     command = 1,2
   10:
     index = 10
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   11:
     index = 11
@@ -3853,11 +3853,11 @@
     command = 1,2
   12:
     index = 12
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   13:
     index = 13
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   14:
     index = 14
@@ -3865,7 +3865,7 @@
     command = 1,2
   15:
     index = 15
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   16:
     index = 16
@@ -3873,7 +3873,7 @@
     command = 1,2
   17:
     index = 17
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   18:
     index = 18
@@ -3881,7 +3881,7 @@
     command = 1,2
   19:
     index = 19
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   20:
     index = 20
@@ -3889,7 +3889,7 @@
     command = (
   21:
     index = 21
-    enemy = Enemies.l_zombie_melee
+    enemy = Enemies.LZombieMelee
     command = NULL
   22:
     index = 22
@@ -3897,7 +3897,7 @@
     command = 1,1
   23:
     index = 23
-    enemy = Enemies.l_zombie_melee
+    enemy = Enemies.LZombieMelee
     command = NULL
   24:
     index = 24
@@ -3905,7 +3905,7 @@
     command = 1,1
   25:
     index = 25
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   26:
     index = 26
@@ -3913,7 +3913,7 @@
     command = 1,1
   27:
     index = 27
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   28:
     index = 28
@@ -3921,7 +3921,7 @@
     command = 1,1
   29:
     index = 29
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   30:
     index = 30
@@ -3929,7 +3929,7 @@
     command = 1,1
   31:
     index = 31
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   32:
     index = 32
@@ -3937,7 +3937,7 @@
     command = 1,1
   33:
     index = 33
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   34:
     index = 34
@@ -3945,7 +3945,7 @@
     command = 1,1
   35:
     index = 35
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   36:
     index = 36
@@ -3953,7 +3953,7 @@
     command = 1,1
   37:
     index = 37
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   38:
     index = 38
@@ -3961,7 +3961,7 @@
     command = 1,2
   39:
     index = 39
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   40:
     index = 40
@@ -3969,7 +3969,7 @@
     command = 1,2
   41:
     index = 41
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   42:
     index = 42
@@ -3981,7 +3981,7 @@
     command = 4,4
   44:
     index = 44
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   45:
     index = 45
@@ -3989,11 +3989,11 @@
     command = 1,3
   46:
     index = 46
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   47:
     index = 47
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   48:
     index = 48
@@ -4001,7 +4001,7 @@
     command = 1,1
   49:
     index = 49
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   50:
     index = 50
@@ -4009,7 +4009,7 @@
     command = 1,1
   51:
     index = 51
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   52:
     index = 52
@@ -4017,11 +4017,11 @@
     command = 1,3
   53:
     index = 53
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   54:
     index = 54
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   55:
     index = 55
@@ -4029,7 +4029,7 @@
     command = 1,1
   56:
     index = 56
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   57:
     index = 57
@@ -4042,7 +4042,7 @@
 [Wave_013]
   1:
     index = 1
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   2:
     index = 2
@@ -4050,7 +4050,7 @@
     command = 3,3
   3:
     index = 3
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   4:
     index = 4
@@ -4058,7 +4058,7 @@
     command = 2,3
   5:
     index = 5
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   60:
     index = 60
@@ -4066,7 +4066,7 @@
     command = 2,3
   6:
     index = 6
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   7:
     index = 7
@@ -4074,7 +4074,7 @@
     command = 1,2
   8:
     index = 8
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   9:
     index = 9
@@ -4082,7 +4082,7 @@
     command = 1,2
   10:
     index = 10
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   11:
     index = 11
@@ -4090,7 +4090,7 @@
     command = 1,1
   12:
     index = 12
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   13:
     index = 13
@@ -4098,11 +4098,11 @@
     command = 1,2
   14:
     index = 14
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   15:
     index = 15
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   16:
     index = 16
@@ -4110,7 +4110,7 @@
     command = 1,2
   17:
     index = 17
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   18:
     index = 18
@@ -4118,7 +4118,7 @@
     command = 1,2
   19:
     index = 19
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   20:
     index = 20
@@ -4126,7 +4126,7 @@
     command = 1,2
   21:
     index = 21
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   22:
     index = 22
@@ -4134,7 +4134,7 @@
     command = (
   23:
     index = 23
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   24:
     index = 24
@@ -4142,7 +4142,7 @@
     command = 1,1
   25:
     index = 25
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   26:
     index = 26
@@ -4150,7 +4150,7 @@
     command = 1,1
   27:
     index = 27
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   28:
     index = 28
@@ -4158,7 +4158,7 @@
     command = 1,1
   29:
     index = 29
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   30:
     index = 30
@@ -4174,7 +4174,7 @@
     command = 1,1
   33:
     index = 33
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   34:
     index = 34
@@ -4182,7 +4182,7 @@
     command = 1,1
   35:
     index = 35
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   36:
     index = 36
@@ -4190,7 +4190,7 @@
     command = 1,1
   37:
     index = 37
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   38:
     index = 38
@@ -4198,7 +4198,7 @@
     command = 1,2
   39:
     index = 39
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   40:
     index = 40
@@ -4206,7 +4206,7 @@
     command = 1,2
   41:
     index = 41
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   42:
     index = 42
@@ -4218,7 +4218,7 @@
     command = 4,4
   44:
     index = 44
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   45:
     index = 45
@@ -4226,15 +4226,15 @@
     command = 1,3
   46:
     index = 46
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   47:
     index = 47
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   48:
     index = 48
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   49:
     index = 49
@@ -4242,7 +4242,7 @@
     command = 1,1
   50:
     index = 50
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   51:
     index = 51
@@ -4250,7 +4250,7 @@
     command = 1,1
   52:
     index = 52
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   53:
     index = 53
@@ -4258,11 +4258,11 @@
     command = 1,3
   54:
     index = 54
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   55:
     index = 55
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   56:
     index = 56
@@ -4270,7 +4270,7 @@
     command = 1,1
   57:
     index = 57
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   58:
     index = 58
@@ -4327,7 +4327,7 @@
     command = NULL
   11:
     index = 11
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   12:
     index = 12
@@ -4335,7 +4335,7 @@
     command = 1,1
   13:
     index = 13
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   14:
     index = 14
@@ -4343,7 +4343,7 @@
     command = 1,1
   15:
     index = 15
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   16:
     index = 16
@@ -4351,7 +4351,7 @@
     command = 7,7
   53:
     index = 53
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   52:
     index = 52
@@ -4359,7 +4359,7 @@
     command = 1,1
   17:
     index = 17
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   51:
     index = 51
@@ -4367,7 +4367,7 @@
     command = 1,1
   50:
     index = 50
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   18:
     index = 18
@@ -4415,7 +4415,7 @@
     command = 1,1
   29:
     index = 29
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   30:
     index = 30
@@ -4459,19 +4459,19 @@
     command = 1,1
   39:
     index = 39
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   40:
     index = 40
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   41:
     index = 41
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   43:
     index = 43
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   44:
     index = 44
@@ -4491,7 +4491,7 @@
     command = NULL
   45:
     index = 45
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   46:
     index = 46
@@ -4499,7 +4499,7 @@
     command = 1,1
   47:
     index = 47
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   48:
     index = 48
@@ -4507,7 +4507,7 @@
     command = 1,1
   49:
     index = 49
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
 [Wave_015]
   1:
@@ -4528,7 +4528,7 @@
     command = 8,8
   5:
     index = 5
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   6:
     index = 6
@@ -4536,7 +4536,7 @@
     command = 1,1
   7:
     index = 7
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   8:
     index = 8
@@ -4544,7 +4544,7 @@
     command = 1,1
   9:
     index = 9
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   10:
     index = 10
@@ -4552,7 +4552,7 @@
     command = (
   11:
     index = 11
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   12:
     index = 12
@@ -4560,7 +4560,7 @@
     command = 1,1
   13:
     index = 13
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   14:
     index = 14
@@ -4568,7 +4568,7 @@
     command = 1,1
   15:
     index = 15
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   16:
     index = 16
@@ -4576,7 +4576,7 @@
     command = 1,1
   17:
     index = 17
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   18:
     index = 18
@@ -4584,7 +4584,7 @@
     command = 1,1
   19:
     index = 19
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   20:
     index = 20
@@ -4592,7 +4592,7 @@
     command = 1,1
   21:
     index = 21
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   22:
     index = 22
@@ -4652,7 +4652,7 @@
     enemyGroup = 
   29:
     index = 29
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   30:
     index = 30
@@ -4660,7 +4660,7 @@
     command = 1,1
   31:
     index = 31
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   32:
     index = 32
@@ -4668,7 +4668,7 @@
     command = 1,1
   33:
     index = 33
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   34:
     index = 34
@@ -4736,7 +4736,7 @@
     command = 1,1
   47:
     index = 47
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   49:
     index = 49
@@ -4744,12 +4744,12 @@
     command = 2,2
   48:
     index = 48
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
 [Wave_016]
   1:
     index = 1
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   2:
     index = 2
@@ -4757,7 +4757,7 @@
     command = 2,3
   3:
     index = 3
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   4:
     index = 4
@@ -4765,7 +4765,7 @@
     command = 2,3
   5:
     index = 5
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   6:
     index = 6
@@ -4773,7 +4773,7 @@
     command = 2,3
   7:
     index = 7
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   8:
     index = 8
@@ -4781,7 +4781,7 @@
     command = 2,3
   9:
     index = 9
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   10:
     index = 10
@@ -4821,7 +4821,7 @@
     command = 1,1
   19:
     index = 19
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   20:
     index = 20
@@ -4829,7 +4829,7 @@
     command = 1,1
   21:
     index = 21
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   22:
     index = 22
@@ -4837,7 +4837,7 @@
     command = 1,1
   23:
     index = 23
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   24:
     index = 24
@@ -4845,7 +4845,7 @@
     command = 1,1
   25:
     index = 25
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   26:
     index = 26
@@ -4853,7 +4853,7 @@
     command = 1,1
   27:
     index = 27
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   28:
     index = 28
@@ -4861,7 +4861,7 @@
     command = 1,1
   29:
     index = 29
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   30:
     index = 30
@@ -5010,7 +5010,7 @@
 [Wave_017]
   1:
     index = 1
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   2:
     index = 2
@@ -5018,7 +5018,7 @@
     command = 1,1
   3:
     index = 3
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   4:
     index = 4
@@ -5026,7 +5026,7 @@
     command = 1,1
   5:
     index = 5
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   6:
     index = 6
@@ -5034,7 +5034,7 @@
     command = 1,1
   7:
     index = 7
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   8:
     index = 8
@@ -5042,7 +5042,7 @@
     command = 1,1
   9:
     index = 9
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   10:
     index = 10
@@ -5050,7 +5050,7 @@
     command = 1,1
   11:
     index = 11
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   12:
     index = 12
@@ -5098,7 +5098,7 @@
     command = 1,1
   23:
     index = 23
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   24:
     index = 24
@@ -5106,7 +5106,7 @@
     command = 1,1
   25:
     index = 25
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   26:
     index = 26
@@ -5114,7 +5114,7 @@
     command = 1,1
   27:
     index = 27
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   28:
     index = 28
@@ -5122,7 +5122,7 @@
     command = 1,1
   29:
     index = 29
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   30:
     index = 30
@@ -5130,7 +5130,7 @@
     command = 1,1
   31:
     index = 31
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   32:
     index = 32
@@ -5138,7 +5138,7 @@
     command = 1,1
   33:
     index = 33
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   34:
     index = 34
@@ -5146,7 +5146,7 @@
     command = .25,.25
   35:
     index = 35
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   36:
     index = 36
@@ -5154,7 +5154,7 @@
     command = .25,.25
   37:
     index = 37
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   38:
     index = 38
@@ -5162,11 +5162,11 @@
     command = (
   39:
     index = 39
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   40:
     index = 40
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   41:
     index = 41
@@ -5174,7 +5174,7 @@
     command = 1,1
   42:
     index = 42
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   43:
     index = 43
@@ -5182,7 +5182,7 @@
     command = 1,1
   44:
     index = 44
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   45:
     index = 45
@@ -5190,7 +5190,7 @@
     command = 1,1
   46:
     index = 46
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   47:
     index = 47
@@ -5198,7 +5198,7 @@
     command = 2,3
   48:
     index = 48
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   49:
     index = 49
@@ -5206,7 +5206,7 @@
     command = NULL
   50:
     index = 50
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   51:
     index = 51
@@ -5286,7 +5286,7 @@
     command = 1,1
   70:
     index = 70
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   71:
     index = 71
@@ -5294,7 +5294,7 @@
     command = .5,.5
   72:
     index = 72
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   73:
     index = 73
@@ -5302,7 +5302,7 @@
     command = .5,.5
   74:
     index = 74
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   75:
     index = 75
@@ -5358,7 +5358,7 @@
     command = 1,1
   88:
     index = 88
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   89:
     index = 89
@@ -5366,7 +5366,7 @@
     command = 1,1
   90:
     index = 90
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   91:
     index = 91
@@ -5374,7 +5374,7 @@
     command = 1,1
   92:
     index = 92
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   93:
     index = 93
@@ -5382,7 +5382,7 @@
     command = 1,1
   94:
     index = 94
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   95:
     index = 95
@@ -5390,7 +5390,7 @@
     command = .5,.5
   96:
     index = 96
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   97:
     index = 97
@@ -5398,7 +5398,7 @@
     command = .5,.5
   98:
     index = 98
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
 [Wave_018]
   1:
@@ -5427,15 +5427,15 @@
     command = 2,3
   7:
     index = 7
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   8:
     index = 8
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   9:
     index = 9
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   10:
     index = 10
@@ -5499,7 +5499,7 @@
     command = 1,1
   25:
     index = 25
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   26:
     index = 26
@@ -5507,7 +5507,7 @@
     command = 1,1
   27:
     index = 27
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   28:
     index = 28
@@ -5587,15 +5587,15 @@
     command = (
   47:
     index = 47
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   48:
     index = 48
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   49:
     index = 49
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   50:
     index = 50
@@ -5603,15 +5603,15 @@
     command = 2,3
   51:
     index = 51
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   52:
     index = 52
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   53:
     index = 53
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   54:
     index = 54
@@ -5768,7 +5768,7 @@
     command = 1,1
   31:
     index = 31
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   32:
     index = 32
@@ -5776,7 +5776,7 @@
     command = 1,1
   33:
     index = 33
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   34:
     index = 34
@@ -5784,7 +5784,7 @@
     command = 1,1
   35:
     index = 35
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   36:
     index = 36
@@ -5942,15 +5942,15 @@
     command = 1,1
   1:
     index = 1
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   2:
     index = 2
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   3:
     index = 3
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   4:
     index = 4
@@ -6042,7 +6042,7 @@
     command = 12,12
   26:
     index = 26
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   27:
     index = 27
@@ -6050,7 +6050,7 @@
     command = 1,1
   28:
     index = 28
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   29:
     index = 29
@@ -6066,7 +6066,7 @@
     command = 1,1
   32:
     index = 32
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   33:
     index = 33
@@ -6074,7 +6074,7 @@
     command = 1,1
   34:
     index = 34
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   35:
     index = 35
@@ -6082,7 +6082,7 @@
     command = 1,1
   36:
     index = 36
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   49:
     index = 49
@@ -6131,15 +6131,15 @@
 [Wave_021]
   1:
     index = 1
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   2:
     index = 2
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   3:
     index = 3
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   4:
     index = 4
@@ -6163,7 +6163,7 @@
     command = 1,1
   9:
     index = 9
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   10:
     index = 10
@@ -6171,7 +6171,7 @@
     command = 1,1
   11:
     index = 11
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   12:
     index = 12
@@ -6179,7 +6179,7 @@
     command = 1,1
   13:
     index = 13
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   14:
     index = 14
@@ -6299,15 +6299,15 @@
     command = 1,1
   43:
     index = 43
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   44:
     index = 44
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   45:
     index = 45
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   46:
     index = 46
@@ -6404,7 +6404,7 @@
     enemyGroup = 
   11:
     index = 11
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   12:
     index = 12
@@ -6412,7 +6412,7 @@
     command = 1,1
   13:
     index = 13
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   14:
     index = 14
@@ -6420,7 +6420,7 @@
     command = 1,1
   15:
     index = 15
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   16:
     index = 16
@@ -6428,7 +6428,7 @@
     command = 1,1
   17:
     index = 17
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   18:
     index = 18
@@ -6436,7 +6436,7 @@
     command = (
   19:
     index = 19
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   20:
     index = 20
@@ -6444,7 +6444,7 @@
     command = 1,1
   21:
     index = 21
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   22:
     index = 22
@@ -6452,7 +6452,7 @@
     command = 1,1
   23:
     index = 23
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   24:
     index = 24
@@ -6579,12 +6579,12 @@
     command = NULL
   51:
     index = 51
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
 [Wave_023]
   1:
     index = 1
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   2:
     index = 2
@@ -6592,7 +6592,7 @@
     command = 1,1
   3:
     index = 3
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   4:
     index = 4
@@ -6600,7 +6600,7 @@
     command = 1,1
   5:
     index = 5
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   6:
     index = 6
@@ -6608,7 +6608,7 @@
     command = 1,1
   7:
     index = 7
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   8:
     index = 8
@@ -6616,7 +6616,7 @@
     command = 2,2
   9:
     index = 9
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   10:
     index = 10
@@ -6624,7 +6624,7 @@
     command = 2,2
   11:
     index = 11
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   12:
     index = 12
@@ -6648,7 +6648,7 @@
     command = 1,1
   17:
     index = 17
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   18:
     index = 18
@@ -6684,7 +6684,7 @@
     command = NULL
   26:
     index = 26
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   27:
     index = 27
@@ -6692,7 +6692,7 @@
     command = 1,1
   28:
     index = 28
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   29:
     index = 29
@@ -6744,7 +6744,7 @@
     command = NULL
   41:
     index = 41
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   42:
     index = 42
@@ -6752,7 +6752,7 @@
     command = 1,1
   43:
     index = 43
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   44:
     index = 44
@@ -6800,7 +6800,7 @@
     command = NULL
   55:
     index = 55
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   56:
     index = 56
@@ -6808,7 +6808,7 @@
     command = 1,1
   57:
     index = 57
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   58:
     index = 58
@@ -6816,7 +6816,7 @@
     command = 1,1
   59:
     index = 59
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   60:
     index = 60
@@ -6824,7 +6824,7 @@
     command = 1,1
   61:
     index = 61
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   62:
     index = 62
@@ -6832,7 +6832,7 @@
     command = 1,1
   63:
     index = 63
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   64:
     index = 64
@@ -6877,7 +6877,7 @@
 [Wave_024]
   1:
     index = 1
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   2:
     index = 2
@@ -6885,7 +6885,7 @@
     command = 2,2
   3:
     index = 3
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   4:
     index = 4
@@ -6893,7 +6893,7 @@
     command = 2,2
   5:
     index = 5
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   6:
     index = 6
@@ -7242,15 +7242,15 @@
     command = 3,3
   23:
     index = 23
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   24:
     index = 24
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   25:
     index = 25
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   26:
     index = 26
@@ -7390,15 +7390,15 @@
     command = 4,4
   56:
     index = 56
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   57:
     index = 57
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   58:
     index = 58
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
 [Wave_026]
   1:
@@ -7443,15 +7443,15 @@
     command = 12,12
   11:
     index = 11
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   12:
     index = 12
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   13:
     index = 13
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   14:
     index = 14
@@ -7475,15 +7475,15 @@
     command = 3,3
   19:
     index = 19
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   20:
     index = 20
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   21:
     index = 21
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   22:
     index = 22
@@ -7491,7 +7491,7 @@
     command = (
   23:
     index = 23
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   24:
     index = 24
@@ -7499,7 +7499,7 @@
     command = 1,1
   25:
     index = 25
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   26:
     index = 26
@@ -7633,7 +7633,7 @@
     command = 2,2
   7:
     index = 7
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   8:
     index = 8
@@ -7641,7 +7641,7 @@
     command = 1,1
   9:
     index = 9
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   10:
     index = 10
@@ -7649,7 +7649,7 @@
     command = 1,1
   11:
     index = 11
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   12:
     index = 12
@@ -7657,7 +7657,7 @@
     command = 1,1
   13:
     index = 13
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   14:
     index = 14
@@ -7870,7 +7870,7 @@
 [Wave_028]
   1:
     index = 1
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   2:
     index = 2
@@ -7878,7 +7878,7 @@
     command = 1,1
   3:
     index = 3
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   4:
     index = 4
@@ -7886,7 +7886,7 @@
     command = 2,2
   5:
     index = 5
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   6:
     index = 6
@@ -7894,7 +7894,7 @@
     command = 2,2
   7:
     index = 7
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   8:
     index = 8
@@ -7902,7 +7902,7 @@
     command = 1,1
   9:
     index = 9
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   10:
     index = 10
@@ -7910,7 +7910,7 @@
     command = 1,1
   11:
     index = 11
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   12:
     index = 12
@@ -7918,7 +7918,7 @@
     command = 1,1
   13:
     index = 13
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   14:
     index = 14
@@ -7954,7 +7954,7 @@
     command = 1,1
   22:
     index = 22
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   23:
     index = 23
@@ -7962,7 +7962,7 @@
     command = 1,1
   24:
     index = 24
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   25:
     index = 25
@@ -7970,7 +7970,7 @@
     command = 1,1
   26:
     index = 26
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   27:
     index = 27
@@ -8034,7 +8034,7 @@
     command = (
   42:
     index = 42
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   43:
     index = 43
@@ -8042,7 +8042,7 @@
     command = 1,1
   44:
     index = 44
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   45:
     index = 45
@@ -8050,7 +8050,7 @@
     command = 1,1
   46:
     index = 46
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   47:
     index = 47
@@ -8066,7 +8066,7 @@
     command = 1,1
   50:
     index = 50
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   51:
     index = 51
@@ -8082,7 +8082,7 @@
     command = 1,1
   54:
     index = 54
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   55:
     index = 55
@@ -8098,7 +8098,7 @@
     command = 1,1
   58:
     index = 58
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   59:
     index = 59
@@ -8114,7 +8114,7 @@
     command = 1,1
   62:
     index = 62
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   63:
     index = 63
@@ -8122,7 +8122,7 @@
     command = 1,1
   64:
     index = 64
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   65:
     index = 65
@@ -8130,7 +8130,7 @@
     command = 1,1
   66:
     index = 66
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   67:
     index = 67
@@ -8146,7 +8146,7 @@
     command = 1,1
   70:
     index = 70
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   71:
     index = 71
@@ -8279,7 +8279,7 @@
 [Wave_029]
   1:
     index = 1
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   2:
     index = 2
@@ -8287,7 +8287,7 @@
     command = 1,1
   3:
     index = 3
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   4:
     index = 4
@@ -8295,7 +8295,7 @@
     command = 1,1
   5:
     index = 5
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   6:
     index = 6
@@ -8303,7 +8303,7 @@
     command = 1,1
   7:
     index = 7
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   8:
     index = 8
@@ -8335,7 +8335,7 @@
     command = 1,1
   15:
     index = 15
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   16:
     index = 16
@@ -8343,7 +8343,7 @@
     command = 1,1
   17:
     index = 17
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   18:
     index = 18
@@ -8351,7 +8351,7 @@
     command = 1,1
   19:
     index = 19
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   20:
     index = 20
@@ -8367,7 +8367,7 @@
     command = 1,1
   23:
     index = 23
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   24:
     index = 24
@@ -8383,7 +8383,7 @@
     command = 1,1
   27:
     index = 27
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   28:
     index = 28
@@ -8832,7 +8832,7 @@
     command = 2,2
   76:
     index = 76
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   75:
     index = 75
@@ -8840,7 +8840,7 @@
     command = 1,1
   74:
     index = 74
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   79:
     index = 79
@@ -8848,7 +8848,7 @@
     command = 1,1
   78:
     index = 78
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   77:
     index = 77
@@ -16804,7 +16804,7 @@
     enemyGroup = 
   48:
     index = 48
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
     enemyGroup = 
   49:
@@ -16814,7 +16814,7 @@
     enemyGroup = 
   50:
     index = 50
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
     enemyGroup = 
   51:
@@ -16824,7 +16824,7 @@
     enemyGroup = 
   52:
     index = 52
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
     enemyGroup = 
   53:
@@ -16834,7 +16834,7 @@
     enemyGroup = 
   54:
     index = 54
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
     enemyGroup = 
   55:
@@ -17090,7 +17090,7 @@
 [Wave_MP_01]
   1:
     index = 1
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   2:
     index = 2
@@ -17098,7 +17098,7 @@
     command = 1,1
   3:
     index = 3
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   4:
     index = 4
@@ -17106,7 +17106,7 @@
     command = 1,1
   5:
     index = 5
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   6:
     index = 6
@@ -17114,15 +17114,15 @@
     command = 2,2
   7:
     index = 7
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   8:
     index = 8
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   9:
     index = 9
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   10:
     index = 10
@@ -17146,7 +17146,7 @@
     command = (
   15:
     index = 15
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   16:
     index = 16
@@ -17154,7 +17154,7 @@
     command = 1,1
   17:
     index = 17
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   18:
     index = 18
@@ -17178,7 +17178,7 @@
     command = 1,1
   23:
     index = 23
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   24:
     index = 24
@@ -17186,7 +17186,7 @@
     command = 1,1
   25:
     index = 25
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   26:
     index = 26
@@ -17198,7 +17198,7 @@
     command = 3,3
   28:
     index = 28
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   29:
     index = 29
@@ -17206,7 +17206,7 @@
     command = 1,1
   30:
     index = 30
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   31:
     index = 31
@@ -17214,7 +17214,7 @@
     command = 1,1
   32:
     index = 32
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   33:
     index = 33
@@ -17235,7 +17235,7 @@
 [Wave_MP_02]
   3:
     index = 3
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   4:
     index = 4
@@ -17243,7 +17243,7 @@
     command = 1,1
   5:
     index = 5
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   6:
     index = 6
@@ -17251,7 +17251,7 @@
     command = 1,1
   7:
     index = 7
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   8:
     index = 8
@@ -17259,7 +17259,7 @@
     command = 1,1
   9:
     index = 9
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   10:
     index = 10
@@ -17267,7 +17267,7 @@
     command = 1,1
   11:
     index = 11
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   12:
     index = 12
@@ -17275,7 +17275,7 @@
     command = 2,2
   15:
     index = 15
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   16:
     index = 16
@@ -17283,7 +17283,7 @@
     command = 1,1
   17:
     index = 17
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   18:
     index = 18
@@ -17291,7 +17291,7 @@
     command = 1,1
   19:
     index = 19
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   20:
     index = 20
@@ -17299,7 +17299,7 @@
     command = 1,1
   1:
     index = 1
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   2:
     index = 2
@@ -17307,7 +17307,7 @@
     command = 1,1
   21:
     index = 21
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   22:
     index = 22
@@ -17315,7 +17315,7 @@
     command = 1,1
   23:
     index = 23
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   24:
     index = 24
@@ -17323,7 +17323,7 @@
     command = 1,1
   25:
     index = 25
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   26:
     index = 26
@@ -17331,7 +17331,7 @@
     command = 1,1
   27:
     index = 27
-    enemy = Enemies.l_zombie_warhammer
+    enemy = Enemies.LZombieWarHammer
     command = NULL
   28:
     index = 28
@@ -17379,7 +17379,7 @@
     command = 3,3
   45:
     index = 45
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   47:
     index = 47
@@ -17387,7 +17387,7 @@
     command = 3,3
   46:
     index = 46
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
 [Wave_MP_03]
   1:
@@ -17400,11 +17400,11 @@
     command = 2,2
   3:
     index = 3
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   4:
     index = 4
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   5:
     index = 5
@@ -17412,7 +17412,7 @@
     command = 2,2
   6:
     index = 6
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   7:
     index = 7
@@ -17420,11 +17420,11 @@
     command = 1,2
   8:
     index = 8
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   9:
     index = 9
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   10:
     index = 10
@@ -17432,7 +17432,7 @@
     command = 1,1
   11:
     index = 11
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   12:
     index = 12
@@ -17440,15 +17440,15 @@
     command = (
   13:
     index = 13
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   14:
     index = 14
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   15:
     index = 15
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   16:
     index = 16
@@ -17456,15 +17456,15 @@
     command = 1,1
   17:
     index = 17
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   18:
     index = 18
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   19:
     index = 19
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   20:
     index = 20
@@ -17472,7 +17472,7 @@
     command = )
   21:
     index = 21
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   22:
     index = 22
@@ -17480,7 +17480,7 @@
     command = 1,1
   23:
     index = 23
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   24:
     index = 24
@@ -17488,7 +17488,7 @@
     command = 2,2
   25:
     index = 25
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   26:
     index = 26
@@ -17496,7 +17496,7 @@
     command = 1,1
   27:
     index = 27
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   28:
     index = 28
@@ -17520,16 +17520,16 @@
     command = 2,3
   33:
     index = 33
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   34:
     index = 34
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
 [Wave_MP_04]
   1:
     index = 1
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   2:
     index = 2
@@ -17537,7 +17537,7 @@
     command = 3,3
   3:
     index = 3
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   4:
     index = 4
@@ -17545,7 +17545,7 @@
     command = 2,3
   5:
     index = 5
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   60:
     index = 60
@@ -17553,7 +17553,7 @@
     command = 2,3
   6:
     index = 6
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   7:
     index = 7
@@ -17561,7 +17561,7 @@
     command = 1,2
   8:
     index = 8
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   9:
     index = 9
@@ -17569,7 +17569,7 @@
     command = 1,2
   10:
     index = 10
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   11:
     index = 11
@@ -17577,7 +17577,7 @@
     command = 1,1
   12:
     index = 12
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   13:
     index = 13
@@ -17585,11 +17585,11 @@
     command = 1,2
   14:
     index = 14
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   15:
     index = 15
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   16:
     index = 16
@@ -17597,7 +17597,7 @@
     command = 1,2
   17:
     index = 17
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   18:
     index = 18
@@ -17605,7 +17605,7 @@
     command = 1,2
   19:
     index = 19
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   20:
     index = 20
@@ -17613,7 +17613,7 @@
     command = 1,2
   21:
     index = 21
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   22:
     index = 22
@@ -17621,7 +17621,7 @@
     command = (
   23:
     index = 23
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   24:
     index = 24
@@ -17629,7 +17629,7 @@
     command = 1,1
   25:
     index = 25
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   26:
     index = 26
@@ -17637,7 +17637,7 @@
     command = 1,1
   27:
     index = 27
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   28:
     index = 28
@@ -17645,7 +17645,7 @@
     command = 1,1
   29:
     index = 29
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   30:
     index = 30
@@ -17661,7 +17661,7 @@
     command = 1,1
   33:
     index = 33
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   34:
     index = 34
@@ -17669,7 +17669,7 @@
     command = 1,1
   35:
     index = 35
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   36:
     index = 36
@@ -17677,7 +17677,7 @@
     command = 1,1
   37:
     index = 37
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   38:
     index = 38
@@ -17685,7 +17685,7 @@
     command = 1,2
   39:
     index = 39
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   40:
     index = 40
@@ -17693,7 +17693,7 @@
     command = 1,2
   41:
     index = 41
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   42:
     index = 42
@@ -17705,7 +17705,7 @@
     command = 4,4
   44:
     index = 44
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   45:
     index = 45
@@ -17713,15 +17713,15 @@
     command = 1,3
   46:
     index = 46
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   47:
     index = 47
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   48:
     index = 48
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   49:
     index = 49
@@ -17729,7 +17729,7 @@
     command = 1,1
   50:
     index = 50
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   51:
     index = 51
@@ -17737,7 +17737,7 @@
     command = 1,1
   52:
     index = 52
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   53:
     index = 53
@@ -17745,11 +17745,11 @@
     command = 1,3
   54:
     index = 54
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   55:
     index = 55
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   56:
     index = 56
@@ -17757,7 +17757,7 @@
     command = 1,1
   57:
     index = 57
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   58:
     index = 58
@@ -17770,7 +17770,7 @@
 [Wave_MP_05]
   1:
     index = 1
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   2:
     index = 2
@@ -17778,7 +17778,7 @@
     command = 2,2
   3:
     index = 3
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   4:
     index = 4
@@ -17786,7 +17786,7 @@
     command = 2,2
   5:
     index = 5
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   6:
     index = 6
@@ -17842,7 +17842,7 @@
     command = 4,4
   19:
     index = 19
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   20:
     index = 20
@@ -17850,7 +17850,7 @@
     command = 2,2
   21:
     index = 21
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   22:
     index = 22
@@ -17858,7 +17858,7 @@
     command = 2,2
   23:
     index = 23
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   24:
     index = 24
@@ -17866,7 +17866,7 @@
     command = 2,2
   25:
     index = 25
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   26:
     index = 26
@@ -17874,7 +17874,7 @@
     command = (
   27:
     index = 27
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   28:
     index = 28
@@ -17882,7 +17882,7 @@
     command = 1,1
   29:
     index = 29
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   30:
     index = 30
@@ -17890,7 +17890,7 @@
     command = 1,1
   31:
     index = 31
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   32:
     index = 32
@@ -17930,7 +17930,7 @@
     command = 1,1
   41:
     index = 41
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   42:
     index = 42
@@ -17938,7 +17938,7 @@
     command = 2,2
   43:
     index = 43
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   44:
     index = 44
@@ -17991,7 +17991,7 @@
     command = NULL
   2:
     index = 2
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   3:
     index = 3
@@ -17999,7 +17999,7 @@
     command = 1,2
   4:
     index = 4
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   5:
     index = 5
@@ -18007,11 +18007,11 @@
     command = 2,2
   6:
     index = 6
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   7:
     index = 7
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   8:
     index = 8
@@ -18019,7 +18019,7 @@
     command = 1,2
   9:
     index = 9
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   10:
     index = 10
@@ -18035,11 +18035,11 @@
     command = 2,2
   11:
     index = 11
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   12:
     index = 12
-    enemy = Enemies.l_zombie_spear
+    enemy = Enemies.LZombieSpear
     command = NULL
   14:
     index = 14
@@ -18059,7 +18059,7 @@
     command = NULL
   18:
     index = 18
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   19:
     index = 19
@@ -18067,7 +18067,7 @@
     command = 1,2
   20:
     index = 20
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   21:
     index = 21
@@ -18075,11 +18075,11 @@
     command = 1,1
   22:
     index = 22
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   23:
     index = 23
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   24:
     index = 24
@@ -18087,7 +18087,7 @@
     command = 2,2
   25:
     index = 25
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   26:
     index = 26
@@ -18107,7 +18107,7 @@
     command = 1,1
   30:
     index = 30
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   31:
     index = 31
@@ -18115,7 +18115,7 @@
     command = 1,1
   32:
     index = 32
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   33:
     index = 33
@@ -18131,11 +18131,11 @@
     command = 2,3
   36:
     index = 36
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   37:
     index = 37
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   38:
     index = 38
@@ -18143,7 +18143,7 @@
     command = 1,1
   39:
     index = 39
-    enemy = Enemies.crawling_torso
+    enemy = Enemies.CrawlingTorso
     command = NULL
   40:
     index = 40
@@ -18179,7 +18179,7 @@
     command = 1,1
   48:
     index = 48
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   49:
     index = 49
@@ -18187,7 +18187,7 @@
     command = 1,1
   50:
     index = 50
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   51:
     index = 51
@@ -18228,7 +18228,7 @@
     command = 2,3
   9:
     index = 9
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   10:
     index = 10
@@ -18236,7 +18236,7 @@
     command = 1,1
   11:
     index = 11
-    enemy = Enemies.chochinobake
+    enemy = Enemies.Chochinobake
     command = NULL
   12:
     index = 12
@@ -18441,7 +18441,7 @@
 [Wave_MP_Easy_001]
   1:
     index = 1
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.CrawlingTorsoTutorial
     command = NULL
   2:
     index = 2
@@ -18449,7 +18449,7 @@
     command = 2,2
   3:
     index = 3
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.CrawlingTorsoTutorial
     command = NULL
   4:
     index = 4
@@ -18457,7 +18457,7 @@
     command = 2,2
   5:
     index = 5
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.CrawlingTorsoTutorial
     command = NULL
   6:
     index = 6
@@ -18465,11 +18465,11 @@
     command = 3,3
   7:
     index = 7
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   8:
     index = 8
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   10:
     index = 10
@@ -18477,11 +18477,11 @@
     command = 2,2
   11:
     index = 11
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   12:
     index = 12
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   14:
     index = 14
@@ -18489,7 +18489,7 @@
     command = (
   15:
     index = 15
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   16:
     index = 16
@@ -18497,7 +18497,7 @@
     command = 1,1
   17:
     index = 17
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   18:
     index = 18
@@ -18505,7 +18505,7 @@
     command = 1,1
   23:
     index = 23
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   24:
     index = 24
@@ -18513,7 +18513,7 @@
     command = 1,1
   25:
     index = 25
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   26:
     index = 26
@@ -18525,7 +18525,7 @@
     command = 3,3
   28:
     index = 28
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   29:
     index = 29
@@ -18533,7 +18533,7 @@
     command = 1,1
   30:
     index = 30
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   31:
     index = 31
@@ -18541,7 +18541,7 @@
     command = 1,1
   32:
     index = 32
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   33:
     index = 33
@@ -18549,7 +18549,7 @@
     command = 1,1
   34:
     index = 34
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.CrawlingTorsoTutorial
     command = NULL
   35:
     index = 35
@@ -18557,12 +18557,12 @@
     command = 2,2
   36:
     index = 36
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.CrawlingTorsoTutorial
     command = NULL
 [Wave_MP_Easy_002]
   7:
     index = 7
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   9:
     index = 9
@@ -18570,7 +18570,7 @@
     command = 1,1
   8:
     index = 8
-    enemy = Enemies.l_zombie_ax
+    enemy = Enemies.LZombieAxe
     command = NULL
   10:
     index = 10
@@ -18578,7 +18578,7 @@
     command = 2,2
   11:
     index = 11
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   13:
     index = 13
@@ -18586,7 +18586,7 @@
     command = 1,1
   12:
     index = 12
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   14:
     index = 14
@@ -18594,7 +18594,7 @@
     command = 1,1
   15:
     index = 15
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   16:
     index = 16
@@ -18602,7 +18602,7 @@
     command = 1,1
   17:
     index = 17
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   18:
     index = 18
@@ -18610,7 +18610,7 @@
     command = 1,1
   28:
     index = 28
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   29:
     index = 29
@@ -18618,7 +18618,7 @@
     command = 1,1
   1:
     index = 1
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.CrawlingTorsoTutorial
     command = NULL
   2:
     index = 2
@@ -18626,7 +18626,7 @@
     command = 2,2
   3:
     index = 3
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.CrawlingTorsoTutorial
     command = NULL
   4:
     index = 4
@@ -18634,7 +18634,7 @@
     command = 2,2
   5:
     index = 5
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.CrawlingTorsoTutorial
     command = NULL
   6:
     index = 6
@@ -18642,7 +18642,7 @@
     command = 3,3
   23:
     index = 23
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   24:
     index = 24
@@ -18650,7 +18650,7 @@
     command = 1,1
   25:
     index = 25
-    enemy = Enemies.l_zombie_bow
+    enemy = Enemies.LZombieArcher
     command = NULL
   27:
     index = 27
@@ -18658,7 +18658,7 @@
     command = 3,3
   30:
     index = 30
-    enemy = Enemies.l_zombie_sword
+    enemy = Enemies.LZombieSword
     command = NULL
   31:
     index = 31
@@ -18666,7 +18666,7 @@
     command = 1,1
   32:
     index = 32
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
   33:
     index = 33
@@ -18674,7 +18674,7 @@
     command = 1,1
   34:
     index = 34
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.CrawlingTorsoTutorial
     command = NULL
   35:
     index = 35
@@ -18682,7 +18682,7 @@
     command = 2,2
   36:
     index = 36
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.CrawlingTorsoTutorial
     command = NULL
   19:
     index = 19
@@ -18690,7 +18690,7 @@
     command = 2,2
   20:
     index = 20
-    enemy = Enemies.CrawlingTorso_Tutorial
+    enemy = Enemies.CrawlingTorsoTutorial
     command = NULL
   21:
     index = 21
@@ -18698,5 +18698,5 @@
     command = 2,2
   22:
     index = 22
-    enemy = Enemies.nobusuma
+    enemy = Enemies.Nobusuma
     command = NULL
