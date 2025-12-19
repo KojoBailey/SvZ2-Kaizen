@@ -1,4 +1,5 @@
 # Samurai vs Zombies Defense 2: Kaizen
+> Kaizen (改善) → Japanese for "betterment​" and pertains to the philosophy of continuous improvement.
 
 ![Splash Screen](SplashScreen.png)
 
