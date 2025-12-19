@@ -34,6 +34,8 @@ There are also many changes that are planned to be added, but have not yet been 
 - A trophy/achievement system will be added, integrated with the game itself as opposed to depending on some external cloud service.
 - Many Allies will be reworked, breathing into them new life and generally making them more useful.
 - Heroes may be reworked in some ways. In particular, the Onmyoji (formerly Sorceress) will focus more on healing Allies than just spamming abilities.
+- Stages and music from the first SvZ will be ported and used.
+- Pachinko may be added, although less as a means of progression and rather for some other fun purpose if I can figure one out.
 
 ## Feedback
 You can help this project reach its full potential by sending feedback via the [SvZ Discord server](https://discord.gg/9nNeTYrpaj)! It is here that you will also be able to keep up with news regarding the mod, as well as see the progress on it behind the scenes, completely for free (and that's a great price)!
