@@ -184,7 +184,7 @@
     championIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_PanzerSamurai_Gold.png
     platinumIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_PanzerSamurai_Platinum.png
     meleeWeaponPrefab = Assets/Game/Resources/Props/Weapons/heavysamuraisword.fbx
-    waveToUnlock = 14
+    waveToUnlock = 19
     resourcesCost = 30
     cooldownTimer = 5
     attackFrequency = 2.5
@@ -209,11 +209,9 @@
     resources = Character.SamuraiArcherIce
     HUDIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_FrostieTheBowman.png
     championIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_FrostieTheBowman_Gold.png
-    lockedIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_FrostieTheBowman_Locked.png
     platinumIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_FrostieTheBowman_Platinum.png
     rangedWeaponPrefab = Assets/Game/Resources/Props/Weapons/bow.fbx
-    waveToUnlock = 999
-    availableAtWave = 11
+    waveToUnlock = 26
     resourcesCost = 20
     cooldownTimer = 3
     attackFrequency = 4
@@ -221,7 +219,6 @@
     canBeEaten = True
     award = 50
     resourceDropMax = 3
-    valueInCoins = 3000
     levels = IceArcher
     goldenHelperProbability = 3
     goldenHelperHealthMultiplier = 2
@@ -239,12 +236,10 @@
     resources = Character.FemaleWarrior
     HUDIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_Assassin.png
     championIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_Assassin_Gold.png
-    lockedIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_Assassin_Locked.png
     platinumIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_Assassin_Platinum.png
     meleeWeaponPrefab = Assets/Game/Resources/Props/Weapons/farmerknifeupgrade.fbx
     rangedWeaponPrefab = 
-    waveToUnlock = 999
-    availableAtWave = 15
+    waveToUnlock = 13
     resourcesCost = 5
     cooldownTimer = 1.5
     attackFrequency = 1.5
@@ -272,7 +267,7 @@
     platinumIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_Nobunga_Platinum.png
     meleeWeaponPrefab = 
     lane = Lane.front
-    waveToUnlock = 17
+    waveToUnlock = 54
     resourcesCost = 55
     cooldownTimer = 1
     attackFrequency = 3
@@ -301,7 +296,7 @@
     platinumIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_Priest_Platinum.png
     meleeWeaponPrefab = 
     lane = Lane.front
-    waveToUnlock = 16
+    waveToUnlock = 29
     resourcesCost = 40
     cooldownTimer = 1
     attackFrequency = 3.5
@@ -326,11 +321,9 @@
     resources = Character.Riflesmith
     HUDIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_Riflesmith.png
     championIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_Riflesmith_Gold.png
-    lockedIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_Riflesmith_Locked.png
     meleeWeaponPrefab = Assets/Game/Resources/Props/Weapons/swordsmithrifle.fbx
     lane = Lane.front
-    waveToUnlock = 999
-    availableAtWave = 21
+    waveToUnlock = 46
     resourcesCost = 10
     cooldownTimer = 1
     attackFrequency = 2
@@ -433,7 +426,7 @@
     championIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_SpearHorseman_Gold.png
     platinumIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_SpearHorseman_Platinum.png
     meleeWeaponPrefab = Assets/Game/Resources/Props/Weapons/Spear.fbx
-    waveToUnlock = 23
+    waveToUnlock = 35
     resourcesCost = 45
     cooldownTimer = 5
     attackFrequency = 2.5
@@ -461,7 +454,7 @@
     championIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_SpearWarrior_Gold.png
     platinumIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_SpearWarrior_Platinum.png
     meleeWeaponPrefab = Assets/Game/Resources/Props/Weapons/Spear.fbx
-    waveToUnlock = 7
+    waveToUnlock = 9
     resourcesCost = 15
     cooldownTimer = 3
     attackFrequency = 2
@@ -508,11 +501,9 @@
     resources = Character.Swordsmith
     HUDIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_Swordsmith.png
     championIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_Swordsmith_Gold.png
-    lockedIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_Swordsmith_Locked.png
     meleeWeaponPrefab = Assets/Game/Resources/Props/Weapons/swordsmithhammer.fbx
     lane = Lane.front
-    waveToUnlock = 999
-    availableAtWave = 21
+    waveToUnlock = 60
     resourcesCost = 10
     cooldownTimer = 1
     attackFrequency = 2
@@ -539,12 +530,10 @@
     resources = Character.Takeda
     HUDIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_TakedaShingen.png
     championIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_TakedaShingen_Gold.png
-    lockedIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_TakedaShingen_Locked.png
     platinumIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_TakedaShingen_Platinum.png
     meleeWeaponPrefab = Assets/Game/Resources/Props/Weapons/Takedasword.fbx
     lane = Lane.front
-    waveToUnlock = 999
-    availableAtWave = 4
+    waveToUnlock = 31
     resourcesCost = 65
     cooldownTimer = 1
     attackFrequency = 3
@@ -638,6 +627,7 @@
     unlockPlayhavenRequest = NULL
     summonIndex = 0
   FarmerOnStilts:
+    id = FarmerOnStilts
     displayName = LocalizedStrings.New_Helper_FarmerOnStilts_name
     desc = LocalizedStrings.New_Helper_FarmerOnStilts_description
     resources = Character.FarmerOnStilts
@@ -647,7 +637,6 @@
     meleeWeaponPrefab = Assets/Game/Resources/Props/Weapons/farmerfork.fbx
     lane = Lane.back
     waveToUnlock = 15
-    availableAtWave = 0
     resourcesCost = 10
     cooldownTimer = 3
     attackFrequency = 1.5
@@ -680,8 +669,7 @@
     platinumIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_ShieldSamurai_Platinum.png
     meleeWeaponPrefab = Assets/Game/Resources/Props/Weapons/samuraishield.fbx
     lane = Lane.center
-    waveToUnlock = 8
-    availableAtWave = 0
+    waveToUnlock = 22
     resourcesCost = 45
     cooldownTimer = 15
     attackFrequency = 4
@@ -715,8 +703,7 @@
     platinumIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_Handmaiden_Platinum.png
     rangedWeaponPrefab = 
     lane = 
-    waveToUnlock = 12
-    availableAtWave = 0
+    waveToUnlock = 44
     resourcesCost = 25
     cooldownTimer = 2
     attackFrequency = 3
@@ -749,8 +736,7 @@
     meleeWeaponPrefab = 
     rangedWeaponPrefab = Assets/Game/Resources/Props/Weapons/rocketlauncher.fbx
     lane = 
-    waveToUnlock = 9
-    availableAtWave = 0
+    waveToUnlock = 17
     resourcesCost = 15
     cooldownTimer = 15
     attackFrequency = 3.5
@@ -780,13 +766,11 @@
     resources = Character.RockyTMan
     HUDIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_RockyTMan.png
     championIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_RockyTMan_Gold.png
-    lockedIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_RockyTMan_Locked.png
     platinumIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_RockyTMan_Platinum.png
     meleeWeaponPrefab = 
     rangedWeaponPrefab = 
     lane = Lane.front
-    waveToUnlock = 999
-    availableAtWave = 16
+    waveToUnlock = 58
     resourcesCost = 30
     cooldownTimer = 25
     attackFrequency = 1
@@ -823,8 +807,7 @@
     meleeWeaponPrefab = Assets/Game/Resources/Props/Weapons/blindsword.fbx
     rangedWeaponPrefab = 
     lane = 
-    waveToUnlock = 24
-    availableAtWave = 0
+    waveToUnlock = 49
     resourcesCost = 40
     cooldownTimer = 15
     attackFrequency = 1
@@ -859,8 +842,7 @@
     meleeWeaponPrefab = 
     rangedWeaponPrefab = 
     lane = Lane.center
-    waveToUnlock = 15
-    availableAtWave = 0
+    waveToUnlock = 37
     resourcesCost = 30
     cooldownTimer = 25
     attackFrequency = 0
@@ -899,8 +881,7 @@
     meleeWeaponPrefab = 
     rangedWeaponPrefab = Assets/Game/Resources/Props/Weapons/bow.fbx
     lane = 
-    waveToUnlock = 21
-    availableAtWave = 0
+    waveToUnlock = 33
     resourcesCost = 25
     cooldownTimer = 5
     attackFrequency = 1.5
@@ -937,13 +918,11 @@
     resources = Character.HorseMaster
     HUDIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_HorseMaster.png
     championIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_HorseMaster_Gold.png
-    lockedIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_HorseMaster_Locked.png
     platinumIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_HorseArcher_Platinum.png
     meleeWeaponPrefab = 
     rangedWeaponPrefab = 
     lane = 
-    waveToUnlock = 999
-    availableAtWave = 21
+    waveToUnlock = 39
     resourcesCost = 15
     cooldownTimer = 1
     attackFrequency = 0.5

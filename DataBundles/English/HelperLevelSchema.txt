@@ -669,7 +669,6 @@
     projectile = 
     upgradeAlliesFrom = 
     upgradeAlliesTo = 
-    specialUnlockText = 
     buffRecordKey = 
 [Horse_Archer]
   001:
@@ -687,7 +686,6 @@
     projectile = Projectile.Arrow
     upgradeAlliesFrom = 
     upgradeAlliesTo = 
-    specialUnlockText = 
   002:
     id = 002
     cost = 1250,0
@@ -703,7 +701,6 @@
     projectile = Projectile.Arrow
     upgradeAlliesFrom = 
     upgradeAlliesTo = 
-    specialUnlockText = 
   003:
     id = 003
     cost = 2200,0
@@ -719,7 +716,6 @@
     projectile = Projectile.Arrow
     upgradeAlliesFrom = 
     upgradeAlliesTo = 
-    specialUnlockText = 
   004:
     id = 004
     cost = 5500,0
@@ -735,7 +731,6 @@
     projectile = Projectile.Arrow
     upgradeAlliesFrom = 
     upgradeAlliesTo = 
-    specialUnlockText = 
   005:
     id = 005
     cost = 10000,0
@@ -751,7 +746,6 @@
     projectile = Projectile.Arrow
     upgradeAlliesFrom = 
     upgradeAlliesTo = 
-    specialUnlockText = 
   006:
     id = 006
     cost = 0,12
@@ -767,7 +761,6 @@
     projectile = Projectile.Arrow
     upgradeAlliesFrom = 
     upgradeAlliesTo = 
-    specialUnlockText = 
   007:
     id = 007
     cost = 0,18
@@ -783,7 +776,6 @@
     projectile = Projectile.Arrow
     upgradeAlliesFrom = 
     upgradeAlliesTo = 
-    specialUnlockText = 
   008:
     id = 008
     cost = 0,22
@@ -799,7 +791,6 @@
     projectile = Projectile.Arrow
     upgradeAlliesFrom = 
     upgradeAlliesTo = 
-    specialUnlockText = 
   009:
     id = 009
     cost = 0,26
@@ -815,7 +806,6 @@
     projectile = Projectile.Arrow
     upgradeAlliesFrom = 
     upgradeAlliesTo = 
-    specialUnlockText = 
   010:
     id = 010
     cost = 0,30
@@ -831,7 +821,6 @@
     projectile = Projectile.Arrow
     upgradeAlliesFrom = 
     upgradeAlliesTo = 
-    specialUnlockText = 
   011:
     id = 011
     cost = 0,60
@@ -847,7 +836,6 @@
     projectile = Projectile.Arrow
     upgradeAlliesFrom = 
     upgradeAlliesTo = 
-    specialUnlockText = 
     buffRecordKey = 
 [Horse_Master]
   001:
@@ -865,7 +853,6 @@
     projectile = 
     upgradeAlliesFrom = 
     upgradeAlliesTo = 
-    specialUnlockText = LocalizedStrings.store_find_HorseMaster
     buffRecordKey = BuffDefinitions.HorseMasterBuff
   002:
     id = 002
@@ -882,7 +869,6 @@
     projectile = 
     upgradeAlliesFrom = 
     upgradeAlliesTo = 
-    specialUnlockText = LocalizedStrings.store_find_HorseMaster
     buffRecordKey = BuffDefinitions.HorseMasterBuff
   003:
     id = 003
@@ -899,7 +885,6 @@
     projectile = 
     upgradeAlliesFrom = 
     upgradeAlliesTo = 
-    specialUnlockText = LocalizedStrings.store_find_HorseMaster
     buffRecordKey = BuffDefinitions.HorseMasterBuff
   004:
     id = 004
@@ -916,7 +901,6 @@
     projectile = 
     upgradeAlliesFrom = 
     upgradeAlliesTo = 
-    specialUnlockText = LocalizedStrings.store_find_HorseMaster
     buffRecordKey = BuffDefinitions.HorseMasterBuff
   005:
     id = 005
@@ -933,7 +917,6 @@
     projectile = 
     upgradeAlliesFrom = 
     upgradeAlliesTo = 
-    specialUnlockText = LocalizedStrings.store_find_HorseMaster
     buffRecordKey = BuffDefinitions.HorseMasterBuff
 [IceArcher]
   001:
@@ -945,7 +928,6 @@
     bowRange = 4.5
     bowDamage = 12
     projectile = Projectile.IceArrow
-    specialUnlockText = LocalizedStrings.store_find_frostie
   002:
     id = 002
     cost = 2000,0
@@ -1219,7 +1201,6 @@
     knockbackPower = 5
     knockbackResistance = 5
     projectile = Projectile.Shuriken
-    specialUnlockText = LocalizedStrings.store_find_ninja_girl
   002:
     id = 002
     cost = 2000,0
@@ -1611,7 +1592,6 @@
     bowRange = 4.5
     upgradeAlliesFrom = Helpers.SamuraiArcher
     upgradeAlliesTo = Helpers.SamuraiRifleman
-    specialUnlockText = LocalizedStrings.store_find_rifleman
   002:
     id = 002
     cost = 2000,0
@@ -1627,7 +1607,6 @@
     projectile = 
     upgradeAlliesFrom = Helpers.SamuraiArcher
     upgradeAlliesTo = Helpers.SamuraiRifleman
-    specialUnlockText = LocalizedStrings.store_find_rifleman
   003:
     id = 003
     cost = 6000,0
@@ -1643,7 +1622,6 @@
     projectile = 
     upgradeAlliesFrom = Helpers.SamuraiArcher
     upgradeAlliesTo = Helpers.SamuraiRifleman
-    specialUnlockText = LocalizedStrings.store_find_rifleman
   004:
     id = 004
     cost = 0,12
@@ -1659,7 +1637,6 @@
     projectile = 
     upgradeAlliesFrom = Helpers.SamuraiArcher
     upgradeAlliesTo = Helpers.SamuraiRifleman
-    specialUnlockText = LocalizedStrings.store_find_rifleman
   005:
     id = 005
     cost = 0,24
@@ -1675,7 +1652,6 @@
     projectile = 
     upgradeAlliesFrom = Helpers.SamuraiArcher
     upgradeAlliesTo = Helpers.SamuraiRifleman
-    specialUnlockText = LocalizedStrings.store_find_rifleman
 [RocketFarmer]
   001:
     id = 001
@@ -1870,7 +1846,6 @@
     projectile = 
     upgradeAlliesFrom = 
     upgradeAlliesTo = 
-    specialUnlockText = LocalizedStrings.store_find_rocky_tman
   002:
     id = 002
     cost = 500,0
@@ -2889,7 +2864,6 @@
     bowRange = 4.5
     upgradeAlliesFrom = Helpers.Farmer
     upgradeAlliesTo = Helpers.SuperFarmer
-    specialUnlockText = LocalizedStrings.store_find_swordsmith
   002:
     id = 002
     cost = 1500,0
@@ -2905,7 +2879,6 @@
     projectile = 
     upgradeAlliesFrom = Helpers.Farmer
     upgradeAlliesTo = Helpers.SuperFarmer
-    specialUnlockText = LocalizedStrings.store_find_swordsmith
   003:
     id = 003
     cost = 5500,0
@@ -2921,7 +2894,6 @@
     projectile = 
     upgradeAlliesFrom = Helpers.Farmer
     upgradeAlliesTo = Helpers.SuperFarmer
-    specialUnlockText = LocalizedStrings.store_find_swordsmith
   004:
     id = 004
     cost = 0,12
@@ -2937,7 +2909,6 @@
     projectile = 
     upgradeAlliesFrom = Helpers.Farmer
     upgradeAlliesTo = Helpers.SuperFarmer
-    specialUnlockText = LocalizedStrings.store_find_swordsmith
   005:
     id = 005
     cost = 0,24
@@ -2953,7 +2924,6 @@
     projectile = 
     upgradeAlliesFrom = Helpers.Farmer
     upgradeAlliesTo = Helpers.SuperFarmer
-    specialUnlockText = LocalizedStrings.store_find_swordsmith
 [Takeda]
   001:
     id = 001
@@ -2965,7 +2935,6 @@
     meleeDamage = 405
     knockbackPower = 50
     knockbackResistance = 75
-    specialUnlockText = LocalizedStrings.store_find_takeda
   002:
     id = 002
     cost = 0,34
