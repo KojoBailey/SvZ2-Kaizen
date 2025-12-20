@@ -572,7 +572,7 @@
   5:
     title = Quiver
     scene = ZenGarden_day
-    music = MusicEvents.BGM_MountainOutlook_Day
+    music = MusicEvents.BGM_ZenGarden_Day
     rewards = Reward_Table.Reward_Wave_05
     commands = Wave_005
     recommendedHero = Heroes.HeroBalanced
@@ -580,64 +580,48 @@
     VsModeAIOpponent = CollectionEnemies.EasyBalanced
   6:
     title = Gate Rushers
-    scene = ZenGarden_day
-    music = MusicEvents.BGM_MountainOutlook_Day
+    scene = ZenGarden_night
+    music = MusicEvents.BGM_ZenGarden_Night
     rewards = Reward_Table.Reward_Wave_06
     commands = Wave_006
     recommendedHero = Heroes.HeroBalanced
     recommendedHeroIsRequired = True
     VsModeAIOpponent = CollectionEnemies.EasyBalanced
   7:
-    index = 7
-    title = 
-    scene = MountainLookout
+    title = 40,000
+    scene = ZenGarden_day
     tutorial = NULL
-    bell = 0
-    villageArchers = 0
-    music = MusicEvents.BGM_MountainOutlook_Day
+    music = MusicEvents.BGM_ZenGarden_Day
     rewards = 
     commands = Wave_007
-    recommendedHero = Heroes.HeroAttack
+    recommendedHero = Heroes.HeroBalanced
     recommendedHeroIsRequired = False
     VsModeAIOpponent = CollectionEnemies.EasyBalanced
   8:
-    index = 8
-    title = 
-    scene = MountainLookout
-    tutorial = NULL
-    bell = 0
-    villageArchers = 0
-    music = MusicEvents.BGM_MountainOutlook_Day
+    title = Bismillah Kebabish
+    scene = ZenGarden_day
+    music = MusicEvents.BGM_ZenGarden_Day
     rewards = 
     commands = Wave_008
-    recommendedHero = Heroes.HeroAttack
+    recommendedHero = Heroes.HeroBalanced
     recommendedHeroIsRequired = False
     VsModeAIOpponent = CollectionEnemies.EasyBalanced
   9:
-    index = 9
     title = 
-    scene = MountainLookout
-    tutorial = NULL
-    bell = 0
-    villageArchers = 0
-    music = MusicEvents.BGM_MountainOutlook_Day
+    scene = ZenGarden_day
+    music = MusicEvents.BGM_ZenGarden_Day
     rewards = 
     commands = Wave_009
     recommendedHero = Heroes.HeroBalanced
-    recommendedHeroIsRequired = True
-    VsModeAIOpponent = CollectionEnemies.EasyBalanced
-  10:
-    index = 10
-    title = Demon King
-    scene = MountainLookout_Night
-    tutorial = NULL
-    bell = 0
-    villageArchers = 0
-    music = MusicEvents.BGM_MountainOutlook_Night
-    rewards = Reward_Table.Reward_Wave_10
-    commands = Wave_010
-    recommendedHero = Heroes.HeroAttack
     recommendedHeroIsRequired = False
     VsModeAIOpponent = CollectionEnemies.EasyBalanced
-    showRateMe = True
-    BossEnemy = Enemies.Nio_Guardian_Boss
+  10:
+    title = Demon King
+    BossEnemy = Enemies.oni_boss
+    scene = ZenGarden_night
+    music = MusicEvents.BGM_ZenGarden_Night
+    rewards = Reward_Table.Reward_Wave_10
+    commands = Wave_010
+    recommendedHero = Heroes.HeroBalanced
+    recommendedHeroIsRequired = True
+    VsModeAIOpponent = CollectionEnemies.EasyBalanced
