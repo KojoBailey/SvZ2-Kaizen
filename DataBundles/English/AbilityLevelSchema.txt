@@ -903,9 +903,9 @@
     level = 1
     costCoins = 0
     costGems = 0
-    damage = 35
+    damage = 25
     damageMultEachTarget = 0.8
-    radius = 3
+    radius = 2.5
     effectModifier = 100
   2:
     level = 2
@@ -1855,7 +1855,7 @@
     level = 1
     costCoins = 100
     damage = 10
-    DOTDamage = 3
+    DOTDamage = 2
     DOTFrequency = 1
     DOTDuration = 3
     radius = 325

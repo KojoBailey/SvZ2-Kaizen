@@ -9,13 +9,13 @@
     storePortrait = Assets/Game/Resources/UI/Textures/DynamicIcons/Misc/Store_PortraitSamurai.png
     meleeWeapon = Weapons.Katana
     rangedWeapon = Weapons.Bow
+    levels = HeroBalanced
     infiniteUpgradeCost = 0,5
     infiniteUpgradeHealth = 0.05
     infiniteUpgradeHealthRecovery = 0.05
-    levels = HeroBalanced
-    PotentialAbilties = AbilitiesHeroBalanced
     allySlots = 5
     abilitySlots = 2
+    PotentialAbilties = AbilitiesHeroBalanced
     unlockAchievement = 
     upgradeAchievement = Achievements.SamuraiUpgrade
     meleeAchievement = Achievements.Samurai_Melee

@@ -2547,34 +2547,34 @@
 [Wave_001]
   1:
     type = Spawn
-    enemy = Enemies.CrawlingTorsoTutorial
+    enemy = Enemies.CrawlingTorso
     count = 3
     spacing = Loose
   2:
     type = Spawn
-    enemy = Enemies.LZombieMeleeTutorial
+    enemy = Enemies.LZombieMelee
     count = 2
     spacing = Loose
   3:
     type = Spawn
-    enemy = Enemies.LZombieMeleeTutorial
+    enemy = Enemies.LZombieMelee
     count = 2
     spacing = Tight
   4:
     type = Spawn
-    enemy = Enemies.CrawlingTorsoTutorial
+    enemy = Enemies.CrawlingTorso
     count = 3
     spacing = Moderate
     spawnAt = NoDelay
 [Wave_002]
   1:
     type = Spawn
-    enemy = Enemies.CrawlingTorsoTutorial
+    enemy = Enemies.CrawlingTorso
     count = 2
     spacing = Loose
   2:
     type = Spawn
-    enemy = Enemies.LZombieMeleeTutorial
+    enemy = Enemies.LZombieMelee
     count = 2
     spacing = Loose
   3:
@@ -2584,12 +2584,12 @@
     spacing = Moderate
   4:
     type = Spawn
-    enemy = Enemies.LZombieMeleeTutorial
+    enemy = Enemies.LZombieMelee
     count = 2
     spacing = Moderate
   5:
     type = Spawn
-    enemy = Enemies.CrawlingTorsoTutorial
+    enemy = Enemies.CrawlingTorso
     count = 1
     spacing = Moderate
     spawnAt = NoDelay
@@ -2702,6 +2702,10 @@
     count = 3
     spacing = Moderate
     spawnAt = NoDelay
+  12:
+    type = Banner
+    banner = Legion
+    spawnAt = Death
   8:
     type = Spawn
     enemy = Enemies.LZombieMelee
@@ -2779,6 +2783,10 @@
     count = 5
     spacing = Moderate
     spawnAt = NoDelay
+  18:
+    type = Banner
+    banner = Legion
+    spawnAt = Death
   11:
     type = Spawn
     enemy = Enemies.LZombieMelee
@@ -2820,138 +2828,111 @@
     spacing = Tight
     spawnAt = NoDelay
 [Wave_006]
-  27:
-    index = 27
-    enemy = Enemies.Chochinobake
-    command = NULL
-  26:
-    index = 26
-    enemy = 
-    command = 2,3
-  25:
-    index = 25
-    enemy = Enemies.Chochinobake
-    command = NULL
-  24:
-    index = 24
-    enemy = 
-    command = 2,2
-  23:
-    index = 23
-    enemy = Enemies.Chochinobake
-    command = NULL
-  28:
-    index = 28
-    enemy = 
-    command = 8,8
   1:
-    index = 1
-    enemy = Enemies.CrawlingTorsoTutorial
-    command = NULL
+    type = Spawn
+    enemy = Enemies.Chochinobake
+    count = 3
+    spacing = Loose
   2:
-    index = 2
-    enemy = 
-    command = 2,3
+    type = Spawn
+    enemy = Enemies.CrawlingTorso
+    count = 2
+    spacing = Loose
+    spawnAt = NoDelay
   3:
-    index = 3
-    enemy = Enemies.CrawlingTorsoTutorial
-    command = NULL
+    type = Spawn
+    enemy = Enemies.LZombieSword
+    count = 2
+    spacing = Moderate
+  4:
+    type = Spawn
+    enemy = Enemies.LZombieArcher
+    count = 3
+    spacing = Moderate
+    spawnAt = NoDelay
+  5:
+    type = Spawn
+    enemy = Enemies.Chochinobake
+    count = 2
+    spacing = Loose
   6:
-    index = 6
-    enemy = 
-    command = 1,1
-  37:
-    index = 37
-    enemy = Enemies.h_zombie_ax
-    command = NULL
-  36:
-    index = 36
-    enemy = 
-    command = 1,1
-  35:
-    index = 35
-    enemy = Enemies.h_zombie_ax
-    command = NULL
-  34:
-    index = 34
-    enemy = 
-    command = 1,1
+    type = Spawn
+    enemy = Enemies.LZombieSword
+    count = 3
+    spacing = Tight
+    spawnAt = NoDelay
   7:
-    index = 7
-    enemy = Enemies.komusou
-    command = NULL
+    type = Spawn
+    enemy = Enemies.LZombieSpear
+    count = 3
+    spacing = Tight
+    spawnAt = NoDelay
   8:
-    index = 8
-    enemy = 
-    command = (
-  9:
-    index = 9
-    enemy = Enemies.Chochinobake
-    command = NULL
+    type = Spawn
+    enemy = Enemies.LZombieArcher
+    count = 3
+    spacing = Tight
+    spawnAt = NoDelay
   10:
-    index = 10
-    enemy = 
-    command = 1,1
+    type = Spawn
+    enemy = Enemies.Chochinobake
+    count = 4
+    spacing = Loose
   11:
-    index = 11
-    enemy = Enemies.Chochinobake
-    command = NULL
+    type = Spawn
+    enemy = Enemies.LZombieAxe
+    count = 3
+    spacing = Moderate
+    spawnAt = NoDelay
+  12:
+    type = Spawn
+    enemy = Enemies.Nobusuma
+    count = 3
+    spacing = Moderate
+    spawnAt = NoDelay
+  13:
+    type = Spawn
+    enemy = Enemies.LZombieSword
+    count = 3
+    spacing = Moderate
+  9:
+    type = Banner
+    banner = Legion
   14:
-    index = 14
-    enemy = 
-    command = )
-  21:
-    index = 21
-    enemy = 
-    command = 2,2
+    type = Spawn
+    enemy = Enemies.Chochinobake
+    count = 5
+    spacing = Moderate
   15:
-    index = 15
-    enemy = Enemies.CrawlingTorsoTutorial
-    command = NULL
+    type = Spawn
+    enemy = Enemies.LZombieAxe
+    count = 3
+    spacing = Tight
+    spawnAt = NoDelay
   16:
-    index = 16
-    enemy = Enemies.LZombieSword
-    command = NULL
+    type = Spawn
+    enemy = Enemies.LZombieArcher
+    count = 4
+    spacing = Tight
+    spawnAt = NoDelay
   17:
-    index = 17
-    enemy = 
-    command = 1,1
+    type = Spawn
+    enemy = Enemies.Nobusuma
+    count = 3
+    spacing = Moderate
+    spawnAt = NoDelay
   18:
-    index = 18
-    enemy = Enemies.LZombieSword
-    command = NULL
+    type = Spawn
+    enemy = Enemies.LZombieSpear
+    count = 3
+    spacing = Tight
+    spawnAt = NoDelay
   19:
-    index = 19
-    enemy = 
-    command = 1,2
-  20:
-    index = 20
-    enemy = Enemies.CrawlingTorsoTutorial
-    command = NULL
-  22:
-    index = 22
-    enemy = 
-    command = 2,3
-  29:
-    index = 29
-    enemy = Enemies.ghost_ronin
-    command = NULL
-  30:
-    index = 30
-    enemy = 
-    command = 5,5
-  31:
-    index = 31
+    type = Spawn
     enemy = Enemies.Chochinobake
-    command = NULL
-  32:
-    index = 32
-    enemy = 
-    command = 1,2
-  33:
-    index = 33
-    enemy = Enemies.Chochinobake
-    command = NULL
+    count = 6
+    spacing = Tight
+    spawnAt = HighHealth
 [Wave_007]
   1:
     index = 1

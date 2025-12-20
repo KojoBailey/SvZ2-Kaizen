@@ -16,23 +16,23 @@ public class KatanaSlashHandler : AbilityHandler
 
 	public override void Execute(Character executor)
 	{
+		var hero = executor as Hero;
+		if (hero == null) return;
+
 		float num = Extrapolate((AbilityLevelSchema als) => als.damage);
 		float num2 = Extrapolate((AbilityLevelSchema als) => als.damageMultEachTarget);
 		float num3 = num * Extrapolate((AbilityLevelSchema als) => als.lifeSteal);
-		Hero hero = executor as Hero;
-		if (hero == null)
-		{
-			return;
-		}
+
 		List<Character> enemiesAhead = hero.GetEnemiesAhead(Extrapolate((AbilityLevelSchema als) => als.radius));
-		bool flag = false;
 		foreach (Character item in enemiesAhead)
 		{
 			item.RecievedAttack(EAttackType.Slice, num, executor);
 			item.TryKnockback((int)Extrapolate((AbilityLevelSchema als) => als.effectModifier));
 			num *= num2;
 		}
-		if (flag)
+
+		bool lifesteal = false;
+		if (lifesteal)
 		{
 			hero.health += num3;
 		}

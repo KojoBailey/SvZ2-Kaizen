@@ -123,11 +123,11 @@
   001:
     id = 001
     cost = 50,0
-    health = 37
+    health = 42
     speedMin = 1
     speedMax = 1
     meleeRange = 1
-    meleeDamage = 11
+    meleeDamage = 12
     knockbackPower = 5
     knockbackResistance = 10
   002:
