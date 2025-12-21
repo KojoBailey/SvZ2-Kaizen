@@ -577,9 +577,9 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		if (enemy == string.Empty) return;
 
 		int count = (command.count > 1) ? command.count : 1;
-		float delay = command.spacingSeconds;
 		for (int i = 0; i < count; i++)
 		{
+			float delay = (i < count - 1) ? command.spacingSeconds : 2.0f;
 			mSpawnQueue.Enqueue(new QueueItem(enemy, delay));
 		}
 
