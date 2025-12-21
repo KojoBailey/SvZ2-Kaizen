@@ -378,7 +378,7 @@
     championIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_Bowman_Gold.png
     platinumIcon = Assets/Game/Resources/UI/Textures/DynamicIcons/Allies/Ally_Bowman_Platinum.png
     rangedWeaponPrefab = Assets/Game/Resources/Props/Weapons/bow.fbx
-    waveToUnlock = 6
+    waveToUnlock = 5
     resourcesCost = 10
     cooldownTimer = 3
     attackFrequency = 2
