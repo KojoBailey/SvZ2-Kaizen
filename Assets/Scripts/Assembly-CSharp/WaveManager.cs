@@ -243,7 +243,13 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 	[method: MethodImpl(32)]
 	public event OnLegionCallback onLegionStart;
 
-	public WaveManager(WaveType waveType, int waveIndex, BoxCollider enemiesSpawnArea, float zTarget)
+	public WaveManager(
+		WaveType waveType,
+		int waveIndex,
+		List<float> enemyGateZPositions,
+		BoxCollider enemiesSpawnArea,
+		float zTarget
+	)
 	{
 		SetUniqueInstance(this);
 		mWaveType = waveType;

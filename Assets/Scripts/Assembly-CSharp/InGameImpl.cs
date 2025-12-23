@@ -1,40 +1,36 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 {
-	public static readonly int kMaxPlayers = 2;
+	public const int MaxPlayers = 2;
 
 	public Transform heroSpawnPointLeft;
-
 	public Transform heroSpawnPointRight;
 
 	public GameObject enemiesTargetLeft;
+	public GameObject enemiesTargetRight;
+
+	public GameObject enemyGatePositions;
 
 	public GameObject vortexLeft;
-
 	public GameObject vortexRight;
 
 	public GameObject gateSparklesLeft;
 
-	public GameObject enemiesTargetRight;
-
 	public Camera gameCamera;
 
 	public Transform heroWalkLeftEdge;
-
 	public Transform heroWalkRightEdge;
 
 	public BoxCollider enemiesSpawnAreaRight;
-
 	public BoxCollider helpersSpawnAreaLeft;
 
 	public GameObject bellRingerLocationObject;
-
 	public GameObject bellLocationObject;
-
 	public GameObject bellObject;
 
 	public Transform[] villageArcher = new Transform[3];
@@ -53,9 +49,9 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	private BuffIconManager mBuffIconManager = new BuffIconManager();
 
-	private Hero[] mHero = new Hero[kMaxPlayers];
+	private Hero[] mHero = new Hero[MaxPlayers];
 
-	private Gate[] mGate = new Gate[kMaxPlayers];
+	private Gate[] mGate = new Gate[MaxPlayers];
 
 	private Bell mBell;
 
@@ -71,7 +67,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	private ProceduralShaderManager mShaderManager;
 
-	private Leadership[] mLeadership = new Leadership[kMaxPlayers];
+	private Leadership[] mLeadership = new Leadership[MaxPlayers];
 
 	private VillageArchers mVillageArchers;
 
@@ -211,10 +207,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	public float timeScalar
 	{
-		get
-		{
-			return (!useSlowMoFinisher) ? 1f : 0.8f;
-		}
+		get { return (!useSlowMoFinisher) ? 1f : 0.8f; }
 		set
 		{
 		}
@@ -227,24 +220,15 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	public float allAlliesInvincibleTimer
 	{
-		get
-		{
-			return mAllAlliesInvincibleTimer;
-		}
-		set
-		{
-			mAllAlliesInvincibleTimer = value;
-		}
+		get { return mAllAlliesInvincibleTimer; }
+		set { mAllAlliesInvincibleTimer = value; }
 	}
 
 	private GameObject fireworksResource { get; set; }
 
 	public bool gamePaused
 	{
-		get
-		{
-			return Time.timeScale == 0f;
-		}
+		get { return Time.timeScale == 0f; }
 		set
 		{
 			if (value == (Time.timeScale == 0f)) return;
@@ -296,10 +280,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	public Pit Pit
 	{
-		get
-		{
-			return mPit;
-		}
+		get { return mPit; }
 		set
 		{
 		}
@@ -496,7 +477,21 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		List<string> allEnemyKeys = new List<string>();
 		if (!Singleton<Profile>.Instance.inVSMultiplayerWave)
 		{
-			mWaveManager = new WaveManager(Singleton<Profile>.Instance.waveTypeToPlay, Singleton<Profile>.Instance.waveToPlay, enemiesSpawnArea, enemiesTarget.transform.position.z);
+			var EnemyGateZPositions = new List<float>(3);
+			for (int i = 0; i < EnemyGateZPositions.Count; i++)
+			{
+				string childName = string.Format("RGatePosition{1}", i);
+				EnemyGateZPositions[i] = enemyGatePositions.FindChild(childName).transform.position.z;
+			}
+
+			mWaveManager = new WaveManager(
+				Singleton<Profile>.Instance.waveTypeToPlay,
+				Singleton<Profile>.Instance.waveToPlay,
+				EnemyGateZPositions,
+				enemiesSpawnArea,
+				enemiesTarget.transform.position.z
+			);
+
 			allEnemyKeys = new List<string>(mWaveManager.allDifferentEnemies);
 			if (mWaveManager.HasCorruptionEnemy())
 			{
@@ -980,7 +975,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	public Hero GetHero(int playerId)
 	{
-		if (playerId >= 0 && playerId < kMaxPlayers)
+		if (playerId >= 0 && playerId < MaxPlayers)
 		{
 			return mHero[playerId];
 		}
@@ -989,7 +984,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	public Gate GetGate(int playerId)
 	{
-		if (playerId >= 0 && playerId < kMaxPlayers)
+		if (playerId >= 0 && playerId < MaxPlayers)
 		{
 			return mGate[playerId];
 		}
@@ -998,7 +993,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	public Leadership GetLeadership(int playerIndex)
 	{
-		if (playerIndex >= 0 && playerIndex < kMaxPlayers)
+		if (playerIndex >= 0 && playerIndex < MaxPlayers)
 		{
 			return mLeadership[playerIndex];
 		}

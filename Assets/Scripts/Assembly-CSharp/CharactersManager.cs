@@ -12,7 +12,7 @@ public class CharactersManager : WeakGlobalInstance<CharactersManager>
 		center = 3
 	}
 
-	protected Character[] mMount = new Character[InGameImpl.kMaxPlayers];
+	protected Character[] mMount = new Character[InGameImpl.MaxPlayers];
 
 	private List<Character> mCharacters = new List<Character>();
 
@@ -131,8 +131,8 @@ public class CharactersManager : WeakGlobalInstance<CharactersManager>
 	public CharactersManager()
 	{
 		SetUniqueInstance(this);
-		mPlayerCharacters = new List<Character>[InGameImpl.kMaxPlayers];
-		for (int i = 0; i < InGameImpl.kMaxPlayers; i++)
+		mPlayerCharacters = new List<Character>[InGameImpl.MaxPlayers];
+		for (int i = 0; i < InGameImpl.MaxPlayers; i++)
 		{
 			mPlayerCharacters[i] = new List<Character>();
 		}

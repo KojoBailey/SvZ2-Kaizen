@@ -114,7 +114,7 @@ public class EnemiesShowCase : WeakGlobalInstance<EnemiesShowCase>
 		{
 			return;
 		}
-		mWaveManager = new WaveManager(waveType, waveNum, null, 0f);
+		mWaveManager = new WaveManager(waveType, waveNum, null, null, 0f);
 		List<string> list;
 		if (Singleton<Profile>.Instance.inVSMultiplayerWave)
 		{
