@@ -26,6 +26,8 @@ public class Helper : Character
 
 	public bool IsGolden { get; set; }
 
+	private float mRange;
+
 	public Helper(CharacterData data, float zTarget, Vector3 pos, int playerId)
 	{
 		base.ownerId = playerId;
@@ -35,6 +37,7 @@ public class Helper : Character
 			mIsLeftToRightGameplay = !mIsLeftToRightGameplay;
 		}
 		base.id = data.id;
+		mRange = data.swordAttackRange;
 		InitializeModel(data);
 		base.controller.position = pos;
 		if (mIsLeftToRightGameplay)
@@ -170,7 +173,11 @@ public class Helper : Character
 			return;
 		}
 		float z = base.controller.position.z;
-		bool flag = ((base.controller.facing != FacingType.Right) ? (z <= base.controller.constraintLeft) : (z >= base.controller.constraintRight));
+
+		base.controller.constraintRight = WeakGlobalMonoBehavior<InGameImpl>.Instance.heroTarget.transform.position.z
+			+ mRange * ((!mIsLeftToRightGameplay) ? 1 : -1);
+
+		bool flag = (base.controller.facing != FacingType.Right) ? (z <= base.controller.constraintLeft) : (z >= base.controller.constraintRight);
 		if (base.controller.isCharging)
 		{
 			if (flag)

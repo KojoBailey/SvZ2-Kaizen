@@ -35,6 +35,8 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 	private GameObject mEnemyGateGroup;
 	private BoxCollider mEnemiesSpawnArea;
 
+	public float rightConstraint;
+
 	private float mZTarget;
 
 	private WaveSchema waveRootData;
@@ -264,7 +266,10 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 		AnalyseWaveCommandsForStats();
 
-		MoveGate(0);
+		if (mEnemyGateGroup != null)
+		{
+			MoveGate(0);
+		}
 		mNextCommandIndex = 0;
 		mEnemiesKilledSoFar = 0;
 
@@ -292,6 +297,8 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 			mEnemyGateGroup.transform.position.y,
 			mEnemyGateZPositions[index]
 		);
+
+		rightConstraint = mEnemyGateZPositions[index];
 	}
 
 	public static string SpecialBossName(int level)
@@ -566,6 +573,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 				break;
 			case WaveCommandSchema.Type.MoveGate:
 				MoveGate(mNextCommand.gatePosIndex);
+				FlashBanner("Legion");
 				break;
 			default: break;
 			}

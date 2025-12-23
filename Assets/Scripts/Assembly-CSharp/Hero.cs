@@ -33,9 +33,23 @@ public class Hero : Character
 
 	private ArmorLevelSchema mCollectionArmorSchema;
 
-	private float mLeftConstraint;
+	private float mLeftConstraint
+	{
+		get
+		{
+			if (!WeakGlobalMonoBehavior<InGameImpl>.Exists) return 0f;
+			return WeakGlobalMonoBehavior<InGameImpl>.Instance.heroLeftConstraint;
+		}
+	}
 
-	private float mRightConstraint;
+	private float mRightConstraint
+	{
+		get
+		{
+			if (!WeakGlobalMonoBehavior<InGameImpl>.Exists) return 0f;
+			return WeakGlobalMonoBehavior<InGameImpl>.Instance.heroRightConstraint;
+		}
+	}
 
 	private DataBundleRecordHandle<CostumeSchema> matLookupHandle { get; set; }
 
@@ -324,30 +338,25 @@ public class Hero : Character
 			ActivateHealthBar();
 		}
 		base.BlocksHeroMovement = mainData.blocksHeroMovement || SingletonSpawningMonoBehaviour<DesignerVariables>.Instance.GetVariable("HeroBlockMovement", true);
-		if (!WeakGlobalMonoBehavior<InGameImpl>.Exists)
-		{
-			return;
-		}
-		mLeftConstraint = WeakGlobalMonoBehavior<InGameImpl>.Instance.heroWalkLeftEdge.position.z;
-		mRightConstraint = WeakGlobalMonoBehavior<InGameImpl>.Instance.heroWalkRightEdge.position.z;
-		if (Singleton<Profile>.Instance.inVSMultiplayerWave)
-		{
-			if (base.LeftToRight)
-			{
-				mLeftConstraint -= 1f;
-				mRightConstraint = WeakGlobalMonoBehavior<InGameImpl>.Instance.enemiesSpawnAreaRight.transform.position.z - 0.288f;
-			}
-			else
-			{
-				mRightConstraint += 1f;
-				mLeftConstraint = WeakGlobalMonoBehavior<InGameImpl>.Instance.helpersSpawnAreaLeft.transform.position.z + 0.288f;
-			}
-			if (WeakGlobalInstance<CollectableManager>.Instance != null && base.ownerId == 0)
-			{
-				WeakGlobalInstance<CollectableManager>.Instance.LeftEdge = mLeftConstraint + 0.16f;
-				WeakGlobalInstance<CollectableManager>.Instance.RightEdge = mRightConstraint - 0.16f;
-			}
-		}
+		if (!WeakGlobalMonoBehavior<InGameImpl>.Exists) return;
+		// if (Singleton<Profile>.Instance.inVSMultiplayerWave)
+		// {
+		// 	if (base.LeftToRight)
+		// 	{
+		// 		mLeftConstraint -= 1f;
+		// 		mRightConstraint = WeakGlobalMonoBehavior<InGameImpl>.Instance.enemiesSpawnAreaRight.transform.position.z - 0.288f;
+		// 	}
+		// 	else
+		// 	{
+		// 		mRightConstraint += 1f;
+		// 		mLeftConstraint = WeakGlobalMonoBehavior<InGameImpl>.Instance.helpersSpawnAreaLeft.transform.position.z + 0.288f;
+		// 	}
+		// 	if (WeakGlobalInstance<CollectableManager>.Instance != null && base.ownerId == 0)
+		// 	{
+		// 		WeakGlobalInstance<CollectableManager>.Instance.LeftEdge = mLeftConstraint + 0.16f;
+		// 		WeakGlobalInstance<CollectableManager>.Instance.RightEdge = mRightConstraint - 0.16f;
+		// 	}
+		// }
 	}
 
 	private void CheckForUpgradeFXSword()
@@ -485,27 +494,34 @@ public class Hero : Character
 	public override void Update()
 	{
 		base.Update();
+
 		if (base.health > 0f)
 		{
 			UpdateConstraints();
+
 			if (mPlayerControls != null)
 			{
 				mPlayerControls.Update();
 			}
 		}
+
 		UpdateAttacks();
+
 		UpdateMount();
+
 		UpdateFSBloodEffect();
 	}
 
 	private void UpdateConstraints()
 	{
 		Character[] array = WeakGlobalMonoBehavior<InGameImpl>.Instance.CharacterMgr.GetPlayerCharacters(1 - base.ownerId).ToArray();
+		
 		float num = -10000f;
 		if (base.LeftToRight)
 		{
 			num = 10000f;
 		}
+
 		Character character = null;
 		Character[] array2 = array;
 		foreach (Character character2 in array2)
@@ -516,6 +532,7 @@ public class Hero : Character
 				num = character2.transform.position.z;
 			}
 		}
+
 		if (character != null)
 		{
 			if (mIsLeftToRightGameplay)

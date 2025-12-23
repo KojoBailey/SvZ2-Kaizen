@@ -90,12 +90,9 @@
     count = 2
     spacing = Moderate
   7:
-    type = Banner
-    banner = Legion
-    spawnAt = Death
-  14:
     type = MoveGate
     gatePos = Far
+    spawnAt = Death
   8:
     type = Spawn
     enemy = Enemies.LZombieAxe

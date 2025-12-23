@@ -14,10 +14,6 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 
 	private float mTotalDropWeight;
 
-	private float mLeftEdge;
-
-	private float mRightEdge;
-
 	private float mCenterX;
 
 	public float magnetMaxDist { get; private set; }
@@ -30,11 +26,8 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 	{
 		get
 		{
-			return mLeftEdge;
-		}
-		set
-		{
-			mLeftEdge = value;
+			if (!WeakGlobalMonoBehavior<InGameImpl>.Exists) return 0f;
+			return WeakGlobalMonoBehavior<InGameImpl>.Instance.heroLeftConstraint;
 		}
 	}
 
@@ -42,11 +35,8 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 	{
 		get
 		{
-			return mRightEdge;
-		}
-		set
-		{
-			mRightEdge = value;
+			if (!WeakGlobalMonoBehavior<InGameImpl>.Exists) return 0f;
+			return WeakGlobalMonoBehavior<InGameImpl>.Instance.heroRightConstraint;
 		}
 	}
 
@@ -54,8 +44,6 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 	{
 		SetUniqueInstance(this);
 		mCollectables = new List<Collectable>();
-		mLeftEdge = leftEdge;
-		mRightEdge = rightEdge;
 		mCenterX = centerX;
 		mTotalDropWeight = 0f;
 		currentWaveSpoils = new WaveSpoils();
@@ -415,7 +403,7 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 		Vector3 zero = Vector3.zero;
 		zero.x = mCenterX + 1.15f + UnityEngine.Random.Range(-0.02f, 0.02f);
 		zero.z = spawnPosition.z + UnityEngine.Random.Range(-0.55f, 0.55f);
-		zero.z = Mathf.Clamp(zero.z, mLeftEdge, mRightEdge);
+		zero.z = Mathf.Clamp(zero.z, LeftEdge, RightEdge);
 		zero.y = WeakGlobalInstance<RailManager>.Instance.GetY(zero.z) + 0.26f;
 		return zero;
 	}

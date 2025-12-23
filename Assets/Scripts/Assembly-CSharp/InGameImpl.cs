@@ -27,6 +27,15 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 	public Transform heroWalkLeftEdge;
 	public Transform heroWalkRightEdge;
 
+	public float heroLeftConstraint
+	{
+		get { return heroWalkLeftEdge.position.z; }
+	}
+	public float heroRightConstraint
+	{
+		get { return heroWalkRightEdge.position.z; }
+	}
+
 	public BoxCollider enemiesSpawnAreaRight;
 	public BoxCollider helpersSpawnAreaLeft;
 
@@ -1451,37 +1460,34 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	private void HideUnusedGate()
 	{
-		if (Singleton<Profile>.Instance.inVSMultiplayerWave)
-		{
-			return;
-		}
-		switch (mGameDirection)
-		{
-		case PlayModesManager.GameDirection.LeftToRight:
-			if (enemiesTargetRight != null)
-			{
-				UnityEngine.Object.DestroyImmediate(enemiesTargetRight, true);
-				enemiesTargetRight = null;
-			}
-			break;
-		case PlayModesManager.GameDirection.RightToLeft:
-			if (enemiesTargetLeft != null)
-			{
-				UnityEngine.Object.DestroyImmediate(enemiesTargetLeft, true);
-				enemiesTargetLeft = null;
-				if (vortexLeft != null)
-				{
-					UnityEngine.Object.DestroyImmediate(vortexLeft, true);
-					vortexLeft = null;
-				}
-				if (gateSparklesLeft != null)
-				{
-					UnityEngine.Object.DestroyImmediate(gateSparklesLeft, true);
-					gateSparklesLeft = null;
-				}
-			}
-			break;
-		}
+		if (Singleton<Profile>.Instance.inVSMultiplayerWave) return;
+		// switch (mGameDirection)
+		// {
+		// case PlayModesManager.GameDirection.LeftToRight:
+		// 	if (enemiesTargetRight != null)
+		// 	{
+		// 		UnityEngine.Object.DestroyImmediate(enemiesTargetRight, true);
+		// 		enemiesTargetRight = null;
+		// 	}
+		// 	break;
+		// case PlayModesManager.GameDirection.RightToLeft:
+		// 	if (enemiesTargetLeft != null)
+		// 	{
+		// 		UnityEngine.Object.DestroyImmediate(enemiesTargetLeft, true);
+		// 		enemiesTargetLeft = null;
+		// 		if (vortexLeft != null)
+		// 		{
+		// 			UnityEngine.Object.DestroyImmediate(vortexLeft, true);
+		// 			vortexLeft = null;
+		// 		}
+		// 		if (gateSparklesLeft != null)
+		// 		{
+		// 			UnityEngine.Object.DestroyImmediate(gateSparklesLeft, true);
+		// 			gateSparklesLeft = null;
+		// 		}
+		// 	}
+		// 	break;
+		// }
 	}
 
 	public bool SetCheatAbility(string ability)
