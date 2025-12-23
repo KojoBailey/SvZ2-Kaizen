@@ -34174,6 +34174,7 @@ MonoBehaviour:
   heroSpawnPointRight: {fileID: 183}
   enemiesTargetLeft: {fileID: 19}
   enemiesTargetRight: {fileID: 33}
+  enemyGateGroup: {fileID: 1155985541}
   enemyGatePositions: {fileID: 1145749898}
   vortexLeft: {fileID: 1786420764793537, guid: 7bfac34ef983ba84bbc2e5cacf60ab13, type: 2}
   vortexRight: {fileID: 125}

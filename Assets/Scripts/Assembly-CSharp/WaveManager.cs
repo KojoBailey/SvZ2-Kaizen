@@ -1,10 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Xml.XPath;
-using UnityEngine;
+using System; 							// used
+using System.Collections; 				// used
+using System.Collections.Generic;       // used
+using System.Runtime.CompilerServices; 	// used
+using UnityEngine; 						// used
 
 public class WaveManager : WeakGlobalInstance<WaveManager>
 {
@@ -33,6 +31,8 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	private WaveType mWaveType;
 
+	private List<float> mEnemyGateZPositions;
+	private GameObject mEnemyGateGroup;
 	private BoxCollider mEnemiesSpawnArea;
 
 	private float mZTarget;
@@ -247,6 +247,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		WaveType waveType,
 		int waveIndex,
 		List<float> enemyGateZPositions,
+		GameObject enemyGateGroup,
 		BoxCollider enemiesSpawnArea,
 		float zTarget
 	)
@@ -254,6 +255,8 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		SetUniqueInstance(this);
 		mWaveType = waveType;
 		mWaveIndex = waveIndex;
+		mEnemyGateZPositions = enemyGateZPositions;
+		mEnemyGateGroup = enemyGateGroup;
 		mEnemiesSpawnArea = enemiesSpawnArea;
 		mZTarget = zTarget;
 
@@ -261,6 +264,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 		AnalyseWaveCommandsForStats();
 
+		MoveGate(0);
 		mNextCommandIndex = 0;
 		mEnemiesKilledSoFar = 0;
 
@@ -279,6 +283,15 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		{
 			corruptionSpawnEffect = ResourceCache.GetCachedResource("FX/Corrupt", 1).Resource as GameObject;
 		}
+	}
+
+	public void MoveGate(int index)
+	{
+		mEnemyGateGroup.transform.position = new Vector3(
+			mEnemyGateGroup.transform.position.x,
+			mEnemyGateGroup.transform.position.y,
+			mEnemyGateZPositions[index]
+		);
 	}
 
 	public static string SpecialBossName(int level)

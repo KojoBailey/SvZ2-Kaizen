@@ -14,6 +14,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 	public GameObject enemiesTargetLeft;
 	public GameObject enemiesTargetRight;
 
+	public GameObject enemyGateGroup;
 	public GameObject enemyGatePositions;
 
 	public GameObject vortexLeft;
@@ -477,17 +478,20 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		List<string> allEnemyKeys = new List<string>();
 		if (!Singleton<Profile>.Instance.inVSMultiplayerWave)
 		{
-			var EnemyGateZPositions = new List<float>(3);
-			for (int i = 0; i < EnemyGateZPositions.Count; i++)
+			var enemyGateZPositions = new List<float>();
+			for (int i = 1; true; i++)
 			{
-				string childName = string.Format("RGatePosition{1}", i);
-				EnemyGateZPositions[i] = enemyGatePositions.FindChild(childName).transform.position.z;
+				string childName = string.Format("RGatePosition{0}", i);
+				GameObject child = enemyGatePositions.FindChild(childName);
+				if (child == null) break;
+				enemyGateZPositions.Add(child.transform.position.z);
 			}
 
 			mWaveManager = new WaveManager(
 				Singleton<Profile>.Instance.waveTypeToPlay,
 				Singleton<Profile>.Instance.waveToPlay,
-				EnemyGateZPositions,
+				enemyGateZPositions,
+				enemyGateGroup,
 				enemiesSpawnArea,
 				enemiesTarget.transform.position.z
 			);
