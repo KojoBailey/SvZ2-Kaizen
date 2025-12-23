@@ -5,8 +5,9 @@ public class WaveCommandSchema
 	{
 		Default, // Default
 		Spawn,
-		Delay,
+		Delay, // not yet implemented
 		Banner,
+		MoveGate,
 	}
 
 	public enum Spacing
@@ -32,6 +33,13 @@ public class WaveCommandSchema
 		Low,
 		High,
 		Infinite,
+	}
+
+	public enum GatePos
+	{
+		Close, // Default
+		Middle,
+		Far,
 	}
 
 	[DataBundleKey]
@@ -77,6 +85,14 @@ public class WaveCommandSchema
 
 	[DataBundleField(ColumnWidth = 200)]
 	public string banner;
+
+	[DataBundleField(ColumnWidth = 200)]
+	public GatePos gatePos;
+
+	public int gatePosIndex
+	{
+		get { return GatePosToIndex(gatePos); }
+	}
 	
 	[DataBundleField(ColumnWidth = 200)]
 	public string command;
@@ -118,6 +134,17 @@ public class WaveCommandSchema
 		case MaxDelay.Normal	: return 25.0f;
 		case MaxDelay.High		: return 35.0f;
 		case MaxDelay.Infinite	: return float.MaxValue;
+		default: return 0;
+		}
+	}
+
+	public static int GatePosToIndex(GatePos _gatePos)
+	{
+		switch (_gatePos)
+		{
+		case GatePos.Close	: return 0;
+		case GatePos.Middle	: return 1;
+		case GatePos.Far	: return 2;
 		default: return 0;
 		}
 	}

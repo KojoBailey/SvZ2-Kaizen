@@ -564,6 +564,9 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 			case WaveCommandSchema.Type.Banner:
 				FlashBanner(mNextCommand.banner);
 				break;
+			case WaveCommandSchema.Type.MoveGate:
+				MoveGate(mNextCommand.gatePosIndex);
+				break;
 			default: break;
 			}
 

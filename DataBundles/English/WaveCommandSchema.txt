@@ -65,6 +65,9 @@
     count = 3
     spacing = Loose
     spawnAt = NoDelay
+  13:
+    type = MoveGate
+    gatePos = Middle
   3:
     type = Spawn
     enemy = Enemies.LZombieAxe
@@ -90,6 +93,9 @@
     type = Banner
     banner = Legion
     spawnAt = Death
+  14:
+    type = MoveGate
+    gatePos = Far
   8:
     type = Spawn
     enemy = Enemies.LZombieAxe
