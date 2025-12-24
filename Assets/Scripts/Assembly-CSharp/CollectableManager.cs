@@ -63,7 +63,11 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 		}
 		TextDBSchema[] array = (!Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive()) ? DataBundleUtils.InitializeRecords<TextDBSchema>("resources") : DataBundleUtils.InitializeRecords<TextDBSchema>("resources_MP");
 		if (array == null) return;
-		string text = (!string.IsNullOrEmpty(Singleton<Profile>.Instance.playModeSubSection)) ? Singleton<Profile>.Instance.playModeSubSection : "classic";
+		
+		string text = !string.IsNullOrEmpty(Singleton<Profile>.Instance.playModeSubSection)
+			? Singleton<Profile>.Instance.playModeSubSection
+			: "classic";
+
 		string[] names = Enum.GetNames(typeof(ECollectableType));
 		Array values = Enum.GetValues(typeof(ECollectableType));
 		mResourceTemplates = new ResourceTemplate[names.Length];
