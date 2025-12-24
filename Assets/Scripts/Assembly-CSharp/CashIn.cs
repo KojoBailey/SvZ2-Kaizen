@@ -273,14 +273,10 @@ public class CashIn
 		{
 			switch (cost.Value.currency)
 			{
-			case Cost.Currency.Soft:
-				return cost.Value.price * keyValuePair.Value;
-			case Cost.Currency.Hard:
-				return ConvertGemsValueToCoins(cost.Value.price) * keyValuePair.Value;
 			case Cost.Currency.Soul:
 				return ConvertSoulsValueToCoins(cost.Value.price) * keyValuePair.Value;
 			default:
-				return 0;
+				return cost.Value.price * keyValuePair.Value;;
 			}
 		}
 		return 0;
@@ -292,8 +288,8 @@ public class CashIn
 		{
 			IAPSchema iAPSchema = SingletonSpawningMonoBehaviour<GluIap>.Instance.Products.Find((IAPSchema s) => string.Equals(s.productId, "com.glu.samuzombie2.PACK_GEMS_199"));
 			IAPSchema iAPSchema2 = SingletonSpawningMonoBehaviour<GluIap>.Instance.Products.Find((IAPSchema s) => string.Equals(s.productId, "com.glu.samuzombie2.PACK_COINS_199"));
-			int num = ((iAPSchema == null) ? 40 : iAPSchema.hardCurrencyAmount);
-			int num2 = ((iAPSchema2 == null) ? 2000 : iAPSchema2.softCurrencyAmount);
+			int num = (iAPSchema == null) ? 40 : iAPSchema.hardCurrencyAmount;
+			int num2 = (iAPSchema2 == null) ? 2000 : iAPSchema2.softCurrencyAmount;
 			gemsToCoins = (float)num2 / (float)num;
 		}
 		return (int)((float)amount * gemsToCoins);
@@ -305,15 +301,7 @@ public class CashIn
 		{
 			PotionSchema potionSchema = Singleton<PotionsDatabase>.Instance["souls"];
 			Cost cost = new Cost(potionSchema.cost, 0f);
-			switch (cost.currency)
-			{
-			case Cost.Currency.Soft:
-				soulsToCoins = (float)cost.price / (float)potionSchema.amount;
-				break;
-			case Cost.Currency.Hard:
-				soulsToCoins = (float)ConvertGemsValueToCoins(cost.price) / (float)potionSchema.amount;
-				break;
-			}
+			soulsToCoins = (float)cost.price / (float)potionSchema.amount;
 		}
 		return (int)((float)amount * soulsToCoins);
 	}
@@ -324,15 +312,7 @@ public class CashIn
 		{
 			PotionSchema potionSchema = Singleton<PotionsDatabase>.Instance["leadershipPotion"];
 			Cost cost = new Cost(potionSchema.cost, 0f);
-			switch (cost.currency)
-			{
-			case Cost.Currency.Soft:
-				leadershipToCoins = (float)cost.price / (float)potionSchema.amount;
-				break;
-			case Cost.Currency.Hard:
-				leadershipToCoins = (float)ConvertGemsValueToCoins(cost.price) / (float)potionSchema.amount;
-				break;
-			}
+			leadershipToCoins = (float)cost.price / (float)potionSchema.amount;
 		}
 		return (int)((float)amount * leadershipToCoins);
 	}

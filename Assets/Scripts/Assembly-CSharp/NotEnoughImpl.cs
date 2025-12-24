@@ -49,8 +49,7 @@ public class NotEnoughImpl : MonoBehaviour, IGluiActionHandler
 			root_main.SetActive(true);
 			text_disconnected.gameObject.SetActive(false);
 			Cost cost = (Cost)SingletonSpawningMonoBehaviour<GluiPersistentDataCache>.Instance.GetData("NOT_ENOUGH_COST");
-			bool flag = cost.currency == Cost.Currency.Hard;
-			int num = ((!flag) ? Singleton<Profile>.Instance.coins : Singleton<Profile>.Instance.gems);
+			int num = Singleton<Profile>.Instance.coins;
 			int num2 = cost.price - num;
 			int num3 = 100000;
 			int num4 = 0;
@@ -60,7 +59,7 @@ public class NotEnoughImpl : MonoBehaviour, IGluiActionHandler
 			for (int i = 0; i < SingletonSpawningMonoBehaviour<GluIap>.Instance.Products.Count; i++)
 			{
 				iAPSchema = SingletonSpawningMonoBehaviour<GluIap>.Instance.Products[i];
-				int num5 = ((!flag) ? iAPSchema.softCurrencyAmount : iAPSchema.hardCurrencyAmount);
+				int num5 = iAPSchema.softCurrencyAmount;
 				if (!iAPSchema.hidden && num5 >= num2 && num5 - num2 < num3)
 				{
 					num3 = num5 - num2;
@@ -71,7 +70,7 @@ public class NotEnoughImpl : MonoBehaviour, IGluiActionHandler
 			for (int j = 0; j < SingletonSpawningMonoBehaviour<GluIap>.Instance.Products.Count; j++)
 			{
 				iAPSchema = SingletonSpawningMonoBehaviour<GluIap>.Instance.Products[j];
-				int num6 = ((!flag) ? iAPSchema.softCurrencyAmount : iAPSchema.hardCurrencyAmount);
+				int num6 = iAPSchema.softCurrencyAmount;
 				if (!iAPSchema.hidden && num6 >= num2 && num6 - num2 < num3 && j != num4)
 				{
 					num3 = num6 - num2;

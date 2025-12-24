@@ -78,7 +78,7 @@ public class MysteryBoxImpl : MonoBehaviour, IGluiActionHandler
 	private void Awake()
 	{
 		cost = MysteryBoxCost;
-		MysteryBoxCost = new Cost(0, Cost.Currency.Soft, 0f);
+		MysteryBoxCost = new Cost(0, Cost.Currency.Coin, 0f);
 	}
 
 	private void Start()

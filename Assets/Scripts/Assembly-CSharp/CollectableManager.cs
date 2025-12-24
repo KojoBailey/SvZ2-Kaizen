@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class CollectableManager : WeakGlobalInstance<CollectableManager>
@@ -60,43 +61,41 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 			magnetMinSpeed = 0f;
 			magnetMaxSpeed = 0f;
 		}
-		TextDBSchema[] array = ((!Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive()) ? DataBundleUtils.InitializeRecords<TextDBSchema>("resources") : DataBundleUtils.InitializeRecords<TextDBSchema>("resources_MP"));
-		if (array == null)
-		{
-			return;
-		}
-		string text = ((!string.IsNullOrEmpty(Singleton<Profile>.Instance.playModeSubSection)) ? Singleton<Profile>.Instance.playModeSubSection : "classic");
-		mResourceTemplates = new ResourceTemplate[9];
+		TextDBSchema[] array = (!Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive()) ? DataBundleUtils.InitializeRecords<TextDBSchema>("resources") : DataBundleUtils.InitializeRecords<TextDBSchema>("resources_MP");
+		if (array == null) return;
+		string text = (!string.IsNullOrEmpty(Singleton<Profile>.Instance.playModeSubSection)) ? Singleton<Profile>.Instance.playModeSubSection : "classic";
 		string[] names = Enum.GetNames(typeof(ECollectableType));
 		Array values = Enum.GetValues(typeof(ECollectableType));
+		mResourceTemplates = new ResourceTemplate[names.Length];
 		for (int i = 0; i < names.Length; i++)
 		{
-			string text2 = names[i];
-			int @int = array.GetInt(TextDBSchema.ChildKey(text2, "amount"));
-			if (@int < 1)
-			{
-				continue;
-			}
-			ECollectableType eCollectableType = (ECollectableType)(int)values.GetValue(i);
+			string field = names[i];
+			int @int = array.GetInt(TextDBSchema.ChildKey(field, "amount"));
+			if (@int < 1) continue;
+
+			var collectableType = (ECollectableType)(int)values.GetValue(i);
+
 			ResourceTemplate resourceTemplate = new ResourceTemplate
 			{
 				amount = @int
 			};
-			SharedResourceLoader.SharedResource cachedResource = ResourceCache.GetCachedResource(string.Format("Assets/Game/Resources/{0}.prefab", array.GetString(TextDBSchema.ChildKey(text2, "prefab", text))), 1);
+
+			SharedResourceLoader.SharedResource cachedResource = ResourceCache.GetCachedResource(string.Format("Assets/Game/Resources/{0}.prefab", array.GetString(TextDBSchema.ChildKey(field, "prefab", text))), 1);
 			if (cachedResource != null)
 			{
 				resourceTemplate.prefab = cachedResource.Resource as GameObject;
 			}
-			resourceTemplate.lifetime = array.GetFloat(TextDBSchema.ChildKey(text2, "lifetime"));
-			resourceTemplate.weight = array.GetFloat(TextDBSchema.ChildKey(text2, "weight"));
+			resourceTemplate.lifetime = array.GetFloat(TextDBSchema.ChildKey(field, "lifetime"));
+			resourceTemplate.weight = array.GetFloat(TextDBSchema.ChildKey(field, "weight"));
 			resourceTemplate.contentsTotalWeight = 0f;
 			resourceTemplate.contents = null;
 			resourceTemplate.postDeathContentsTotalWeight = 0f;
 			resourceTemplate.postDeathContents = null;
-			if (eCollectableType >= ECollectableType.presentA && eCollectableType <= ECollectableType.presentD)
+
+			if (collectableType >= ECollectableType.presentA && collectableType <= ECollectableType.presentD)
 			{
-				string text3 = TextDBSchema.ChildKey(text2, "normal", text);
-				string text4 = TextDBSchema.ChildKey(text2, "death", text);
+				string text3 = TextDBSchema.ChildKey(field, "normal", text);
+				string text4 = TextDBSchema.ChildKey(field, "death", text);
 				TextDBSchema[] array2 = array;
 				foreach (TextDBSchema textDBSchema in array2)
 				{
@@ -116,10 +115,8 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 					}
 					else
 					{
-						if (!textDBSchema.key.StartsWith(text4))
-						{
-							continue;
-						}
+						if (!textDBSchema.key.StartsWith(text4)) continue;
+
 						string text6 = textDBSchema.key.Substring(text4.Length + 1);
 						if (IsValidPresentContent(text6) && !AlreadyHasPermenantItem(text6) && !ItemRestrictedByLevel(text6))
 						{
@@ -134,15 +131,15 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 					}
 				}
 			}
-			mResourceTemplates[(int)eCollectableType] = resourceTemplate;
+
+			mResourceTemplates[(int)collectableType] = resourceTemplate;
 			mTotalDropWeight += resourceTemplate.weight;
 		}
 	}
 
 	public void Update()
 	{
-		int num = 0;
-		while (num < mCollectables.Count)
+		for (int num = 0; num < mCollectables.Count; num++)
 		{
 			if (mCollectables[num].isReadyToBeCollected && IsInRange(WeakGlobalMonoBehavior<InGameImpl>.Instance.hero, mCollectables[num]))
 			{
@@ -156,13 +153,11 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 			{
 				mCollectables[num].Update();
 			}
+
 			if (mCollectables[num].isDestroyed)
 			{
 				mCollectables.RemoveAt(num);
-			}
-			else
-			{
-				num++;
+				num--;
 			}
 		}
 	}
@@ -178,18 +173,18 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 		for (int i = 0; i < num; i++)
 		{
 			float num2 = UnityEngine.Random.Range(0f, mTotalDropWeight - float.Epsilon);
-			for (int j = 0; j < 9; j++)
+			for (int j = 0; j < (int)ECollectableType.Count; j++)
 			{
-				ECollectableType eCollectableType = (ECollectableType)j;
+				var collectableType = (ECollectableType)j;
 				num2 -= mResourceTemplates[j].weight;
 				if (mResourceTemplates[j].prefab != null && num2 < 0f && mResourceTemplates[j].weight > 0f)
 				{
-					if (eCollectableType >= ECollectableType.presentA && eCollectableType <= ECollectableType.presentD)
+					if (collectableType >= ECollectableType.presentA && collectableType <= ECollectableType.presentD)
 					{
-						mCollectables.Add(new Collectable(eCollectableType, mResourceTemplates[(int)eCollectableType], position, FindNewCollectableFinalPosition(position)));
+						mCollectables.Add(new Collectable(collectableType, mResourceTemplates[(int)collectableType], position, FindNewCollectableFinalPosition(position)));
 						return;
 					}
-					list.Add(eCollectableType);
+					list.Add(collectableType);
 					break;
 				}
 			}
@@ -284,7 +279,9 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 	{
 		switch (type)
 		{
-		case ECollectableType.coin:
+		case ECollectableType.copperCoin:
+		case ECollectableType.silverCoin:
+		case ECollectableType.goldCoin:
 			if (Singleton<Profile>.Instance.GetUpgradeLevel("CoinDouble") > 0)
 			{
 				currentWaveSpoils.coins += amount * 2;
@@ -333,7 +330,9 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 	{
 		switch (type)
 		{
-		case ECollectableType.coin:
+		case ECollectableType.copperCoin:
+		case ECollectableType.silverCoin:
+		case ECollectableType.goldCoin:
 			if (Singleton<Profile>.Instance.GetUpgradeLevel("CoinDouble") > 0)
 			{
 				amount *= 2;

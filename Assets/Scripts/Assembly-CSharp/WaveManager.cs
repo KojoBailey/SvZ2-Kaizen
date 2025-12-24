@@ -329,7 +329,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 	{
 		if (waveRootData.Rewards != null && Singleton<Profile>.Instance.GetWaveLevel(mWaveIndex) == 1)
 		{
-			WeakGlobalInstance<CollectableManager>.Instance.GiveResource(ECollectableType.coin, waveRootData.Rewards.coins);
+			WeakGlobalInstance<CollectableManager>.Instance.GiveResource(ECollectableType.copperCoin, waveRootData.Rewards.coins); // [TODO] support all coin types
 			WeakGlobalInstance<CollectableManager>.Instance.GiveResource(ECollectableType.gem, waveRootData.Rewards.gems);
 			WeakGlobalInstance<CollectableManager>.Instance.GiveResource(ECollectableType.pachinkoball, waveRootData.Rewards.pachinkoBalls);
 			WeakGlobalInstance<CollectableManager>.Instance.GiveResource(ECollectableType.soul, waveRootData.Rewards.souls);

@@ -937,7 +937,11 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 			}
 		}
 
-		mLeadership[0].Update();
+		if (mLeadership[0] != null)
+		{
+			mLeadership[0].Update();
+		}
+
 		if (mLeadership[1] != null)
 		{
 			mLeadership[1].Update();
@@ -948,13 +952,40 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 			mWaveManager.Update();
 		}
 
-		mCharactersManager.Update();
-		mCollectableManager.Update();
-		mProjectileManager.Update();
-		mShaderManager.update();
-		mBell.Update();
-		mPit.Update();
-		mVillageArchers.Update();
+		if (mCharactersManager != null)
+		{
+			mCharactersManager.Update();
+		}
+
+		if (mCollectableManager != null)
+		{
+			mCollectableManager.Update();
+		}
+
+		if (mProjectileManager != null)
+		{
+			mProjectileManager.Update();
+		}
+
+		if (mShaderManager != null)
+		{
+			mShaderManager.update();
+		}
+
+		if (mBell != null)
+		{
+			mBell.Update();
+		}
+
+		if (mPit != null)
+		{
+			mPit.Update();
+		}
+
+		if (mVillageArchers != null)
+		{
+			mVillageArchers.Update();
+		}
 
 		CheckWinLoseConditions();
 
@@ -1200,15 +1231,14 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	private void UpdateCamera()
 	{
+		if (mHero[0] == null) return;
 		gameCamera.transform.position = new Vector3(gameCamera.transform.position.x, mHero[0].position.y + mCameraYOffset, mHero[0].position.z);
 	}
 
 	private void CheckWinLoseConditions()
 	{
-		if (mGameOver)
-		{
-			return;
-		}
+		if (mGameOver) return;
+
 		bool flag = false;
 		if (mHero[0].isOver)
 		{
@@ -1231,6 +1261,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 				mHero[1].ForceDeath();
 			}
 		}
+
 		if (flag)
 		{
 			Lose();

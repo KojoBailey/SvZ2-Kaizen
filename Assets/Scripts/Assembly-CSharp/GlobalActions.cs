@@ -192,14 +192,7 @@ public class GlobalActions : GluiGlobalActionHandler
 			GluiActionSender.SendGluiAction("POPUP_CONFIRMPURCHASE", sender, StoreAvailability.GetUpgrade("SoulJar"));
 			return true;
 		case "GET_MORE":
-			if (GetCurrencyWarnType((string)SingletonSpawningMonoBehaviour<GluiPersistentDataCache>.Instance.GetData("NOT_ENOUGH")) == Cost.Currency.Hard)
-			{
-				SingletonSpawningMonoBehaviour<GluiPersistentDataCache>.Instance.Save("IAP_TAB", "LocalizedStrings.hard_currency_tab");
-			}
-			else
-			{
-				SingletonSpawningMonoBehaviour<GluiPersistentDataCache>.Instance.Save("IAP_TAB", "LocalizedStrings.soft_currency_tab");
-			}
+			SingletonSpawningMonoBehaviour<GluiPersistentDataCache>.Instance.Save("IAP_TAB", "LocalizedStrings.soft_currency_tab");
 			GluiActionSender.SendGluiAction("POPUP_IAP", sender, data);
 			return true;
 		case "IAP_PURCHASE":
@@ -349,7 +342,7 @@ public class GlobalActions : GluiGlobalActionHandler
 				if (item.id == "mysterybox")
 				{
 					MultipleMysteryBoxImpl.MysteryBoxPackCost = item.packCost;
-					MysteryBoxImpl.MysteryBoxCost = new Cost(0, Cost.Currency.Soft, 0f);
+					MysteryBoxImpl.MysteryBoxCost = new Cost(0, Cost.Currency.Coin, 0f);
 				}
 				else
 				{
@@ -425,10 +418,8 @@ public class GlobalActions : GluiGlobalActionHandler
 	{
 		switch (cur)
 		{
-		case Cost.Currency.Soft:
+		case Cost.Currency.Coin:
 			return "MenuFixedStrings.Warn_CurrencySoft";
-		case Cost.Currency.Hard:
-			return "MenuFixedStrings.Warn_CurrencyHard";
 		default:
 			throw new Exception("Missing Warn_Currency string hookup: " + cur);
 		}
@@ -439,9 +430,7 @@ public class GlobalActions : GluiGlobalActionHandler
 		switch (stringID)
 		{
 		case "MenuFixedStrings.Warn_CurrencySoft":
-			return Cost.Currency.Soft;
-		case "MenuFixedStrings.Warn_CurrencyHard":
-			return Cost.Currency.Hard;
+			return Cost.Currency.Coin;
 		default:
 			throw new Exception("Missing Warn_Currency string hookup: " + stringID);
 		}

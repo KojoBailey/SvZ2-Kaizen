@@ -146,10 +146,7 @@ public class WidgetPriceHandler : MonoBehaviour
 			currencyIcon.gameObject.SetActive(true);
 			switch (mCost.currency)
 			{
-			case Cost.Currency.Hard:
-				currencyIcon.ApplyGluiAtlasedTexture("Global_A.T_Currency_Hard.1");
-				break;
-			case Cost.Currency.Soft:
+			case Cost.Currency.Coin:
 				currencyIcon.ApplyGluiAtlasedTexture("Global_A.T_Currency_Soft.1");
 				break;
 			case Cost.Currency.Soul:

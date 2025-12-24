@@ -11,18 +11,6 @@ public class Collectable
 		Destroy = 4
 	}
 
-	private const float kSpawnTimeFactor = 2f;
-
-	private const float kSpawnArcHeight = 0.96f;
-
-	private const float kMagnetHeight = 0.64f;
-
-	private const float kMagnetVerticalVel = 1.3f;
-
-	private const float kFadeOutTime = 4f;
-
-	private const string kShaderColorName = "_TintColor";
-
 	private GameObject mObject;
 
 	private float mFriction;
@@ -65,30 +53,18 @@ public class Collectable
 
 	public bool isReadyToBeCollected
 	{
-		get
-		{
-			return mState == CollectableState.WaitForPickup || mState == CollectableState.TimeOutFade;
-		}
+		get { return mState == CollectableState.WaitForPickup || mState == CollectableState.TimeOutFade; }
 	}
 
 	public ECollectableType type
 	{
-		get
-		{
-			return mType;
-		}
+		get { return mType; }
 	}
 
 	public Vector3 position
 	{
-		get
-		{
-			return mTransform.position;
-		}
-		set
-		{
-			mTransform.position = value;
-		}
+		get { return mTransform.position; }
+		set { mTransform.position = value; }
 	}
 
 	public Collectable(ECollectableType type, ResourceTemplate template, Vector3 startPos, Vector3 targetPos)
@@ -155,23 +131,22 @@ public class Collectable
 
 	public void OnCollected()
 	{
-		if (!mWasCollected)
+		if (mWasCollected) return;
+		
+		mWasCollected = true;
+		if (mMaterial != null && mMaterial.HasProperty("_TintColor"))
 		{
-			mWasCollected = true;
-			if (mMaterial != null && mMaterial.HasProperty("_TintColor"))
-			{
-				mMaterial.SetColor("_TintColor", new Color(mOriginalColor.r, mOriginalColor.g, mOriginalColor.b, 1f));
-			}
-			if (mAnimPlayer == null || mAnimPlayer["Pickup"] == null)
-			{
-				mState = CollectableState.Destroy;
-				return;
-			}
-			mState = CollectableState.Collected;
-			AnimationState animationState = mAnimPlayer["Pickup"];
-			mAnimPlayer.Play("Pickup");
-			mTimeLeftAlive = animationState.length;
+			mMaterial.SetColor("_TintColor", new Color(mOriginalColor.r, mOriginalColor.g, mOriginalColor.b, 1f));
 		}
+		if (mAnimPlayer == null || mAnimPlayer["Pickup"] == null)
+		{
+			mState = CollectableState.Destroy;
+			return;
+		}
+		mState = CollectableState.Collected;
+		AnimationState animationState = mAnimPlayer["Pickup"];
+		mAnimPlayer.Play("Pickup");
+		mTimeLeftAlive = animationState.length;
 	}
 
 	private void UpdateFadeOut()

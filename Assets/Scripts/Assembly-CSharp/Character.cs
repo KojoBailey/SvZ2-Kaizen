@@ -1191,12 +1191,14 @@ public class Character : Weakable
 	public virtual void Update()
 	{
 		mBuffIconClient.Update();
+
 		float? num = mLeniencyTimer;
 		if (num.HasValue)
 		{
 			float? num2 = mLeniencyTimer;
-			mLeniencyTimer = ((!num2.HasValue) ? null : new float?(num2.Value - Time.deltaTime));
+			mLeniencyTimer = num2.HasValue ? new float?(num2.Value - Time.deltaTime) : null;
 		}
+
 		if (health > 0f)
 		{
 			UpdateBuffsAndAfflictions();
@@ -1207,12 +1209,16 @@ public class Character : Weakable
 		{
 			Die();
 		}
+
 		UpdateAiming();
+
 		if (healthBarMini != null)
 		{
 			healthBarMini.Update();
 		}
+
 		timeSinceDamaged += Time.deltaTime;
+
 		UpdateHealthTexts();
 	}
 
@@ -1228,20 +1234,24 @@ public class Character : Weakable
 		rangedWeaponPrefab = null;
 		mPaperDollMeleeWeapon.Clear();
 		mPaperDollRangedWeapon = null;
+
 		if (controller != null)
 		{
 			controller.Destroy();
 			controller = null;
 		}
+
 		if (healthBarMini != null)
 		{
 			healthBarMini.Destroy();
 			healthBarMini = null;
 		}
+
 		foreach (HealthTextInfo healthTextObject in healthTextObjects)
 		{
 			sObjectPool.Release(healthTextObject.obj);
 		}
+
 		EffectKiller[] componentsInChildren = go.GetComponentsInChildren<EffectKiller>(true);
 		if (componentsInChildren != null)
 		{
@@ -1252,7 +1262,9 @@ public class Character : Weakable
 				effectKiller.Cleanup();
 			}
 		}
+
 		ClearBuffs();
+
 		BreakWeakLinks();
 	}
 
@@ -1721,11 +1733,13 @@ public class Character : Weakable
 			dieAnim = "dieashes";
 			break;
 		}
+
 		if (isEnemy && controller != null && !controller.startedDieAnim && WeakGlobalInstance<WaveManager>.Instance != null && WeakGlobalInstance<WaveManager>.Instance.isDone && WeakGlobalInstance<CharactersManager>.Instance.enemiesCount == 1)
 		{
 			dieAnim = "dieexplode";
 			controller.impactPauseTime = 0f;
 		}
+
 		Die(dieAnim);
 	}
 
@@ -1735,20 +1749,24 @@ public class Character : Weakable
 		if (dieAnim.Length < 3 || !(controller != null) || controller.currentAnimation == null || controller.currentAnimation.Length < 3 || !(dieAnim.Substring(0, 3) == "die") || !(controller.currentAnimation.Substring(0, 3) == "die"))
 		{
 			singleAttackTarget = null;
+			
 			if (onDeathEvent != null)
 			{
 				CharactersManager instance = WeakGlobalInstance<CharactersManager>.Instance;
 				instance.postUpdateFunc = (Action)Delegate.Combine(instance.postUpdateFunc, onDeathEvent);
 				onDeathEvent = null;
 			}
+
 			if (meleeWeaponPrefab != null)
 			{
 				SetRangeAttackMode(false);
 			}
+
 			if (controller != null)
 			{
 				controller.Die(dieAnim, postDeathAction);
 			}
+
 			OnDied();
 		}
 	}

@@ -821,21 +821,51 @@
     key = 008~projectile
     value = Arrow
 [resources]
-  coin~amount:
-    key = coin~amount
-    value = 3
-  coin~weight:
-    key = coin~weight
+  copperCoin~amount:
+    key = copperCoin~amount
+    value = 1
+  copperCoin~weight:
+    key = copperCoin~weight
     value = 500
-  coin~lifetime:
-    key = coin~lifetime
+  copperCoin~lifetime:
+    key = copperCoin~lifetime
     value = 5.0
-  coin~prefab~classic:
-    key = coin~prefab~classic
-    value = FX/CoinPickup
-  coin~prefab~zombies:
-    key = coin~prefab~zombies
-    value = FX/CoinPickup
+  copperCoin~prefab~classic:
+    key = copperCoin~prefab~classic
+    value = FX/CoinCopperPickup
+  copperCoin~prefab~zombies:
+    key = copperCoin~prefab~zombies
+    value = FX/CoinCopperPickup
+  silverCoin~amount:
+    key = silverCoin~amount
+    value = 100
+  silverCoin~weight:
+    key = silverCoin~weight
+    value = 500
+  silverCoin~lifetime:
+    key = silverCoin~lifetime
+    value = 5.0
+  silverCoin~prefab~classic:
+    key = silverCoin~prefab~classic
+    value = FX/CoinSilverPickup
+  silverCoin~prefab~zombies:
+    key = silverCoin~prefab~zombies
+    value = FX/CoinSilverPickup
+  goldCoin~amount:
+    key = goldCoin~amount
+    value = 5000
+  goldCoin~weight:
+    key = goldCoin~weight
+    value = 500
+  goldCoin~lifetime:
+    key = goldCoin~lifetime
+    value = 5.0
+  goldCoin~prefab~classic:
+    key = goldCoin~prefab~classic
+    value = FX/CoinGoldPickup
+  goldCoin~prefab~zombies:
+    key = goldCoin~prefab~zombies
+    value = FX/CoinGoldPickup
   leadership~amount:
     key = leadership~amount
     value = 3
@@ -1482,20 +1512,20 @@
     key = presentD~death~zombies~Necromancer
     value = 0
 [resources_MP]
-  coin~amount:
-    key = coin~amount
+  copperCoin~amount:
+    key = copperCoin~amount
     value = 3
-  coin~weight:
-    key = coin~weight
+  copperCoin~weight:
+    key = copperCoin~weight
     value = 500
-  coin~lifetime:
-    key = coin~lifetime
+  copperCoin~lifetime:
+    key = copperCoin~lifetime
     value = 5.0
-  coin~prefab~classic:
-    key = coin~prefab~classic
+  copperCoin~prefab~classic:
+    key = copperCoin~prefab~classic
     value = FX/CoinPickup
-  coin~prefab~zombies:
-    key = coin~prefab~zombies
+  copperCoin~prefab~zombies:
+    key = copperCoin~prefab~zombies
     value = FX/CoinPickup
   leadership~amount:
     key = leadership~amount

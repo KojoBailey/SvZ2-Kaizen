@@ -5,9 +5,8 @@ public struct Cost
 	public enum Currency
 	{
 		Unknown = 0,
-		Soft = 1,
-		Hard = 2,
-		Soul = 3
+		Coin,
+		Soul,
 	}
 
 	public Currency currency;
@@ -31,11 +30,8 @@ public struct Cost
 			int num = 0;
 			switch (currency)
 			{
-			case Currency.Soft:
+			case Currency.Coin:
 				num = Singleton<Profile>.Instance.coins;
-				break;
-			case Currency.Hard:
-				num = Singleton<Profile>.Instance.gems;
 				break;
 			case Currency.Soul:
 				num = Singleton<Profile>.Instance.souls;
@@ -64,10 +60,8 @@ public struct Cost
 		{
 			switch (currency)
 			{
-			case Currency.Soft:
+			case Currency.Coin:
 				return "SC";
-			case Currency.Hard:
-				return "HC";
 			case Currency.Soul:
 				return "SO";
 			default:
@@ -105,12 +99,9 @@ public struct Cost
 				switch (num)
 				{
 				case 0:
-					currency = Currency.Soft;
+					currency = Currency.Coin;
 					break;
 				case 1:
-					currency = Currency.Hard;
-					break;
-				case 2:
 					currency = Currency.Soul;
 					break;
 				}
@@ -131,11 +122,8 @@ public struct Cost
 		empty = price.ToString();
 		switch (currency)
 		{
-		case Currency.Soft:
+		case Currency.Coin:
 			empty += " Coins";
-			break;
-		case Currency.Hard:
-			empty += " Gems";
 			break;
 		case Currency.Soul:
 			empty += " Souls";
@@ -164,11 +152,8 @@ public struct Cost
 	{
 		switch (currency)
 		{
-		case Currency.Soft:
+		case Currency.Coin:
 			Singleton<Profile>.Instance.SpendCoins(price);
-			break;
-		case Currency.Hard:
-			Singleton<Profile>.Instance.SpendGems(price);
 			break;
 		case Currency.Soul:
 			Singleton<Profile>.Instance.souls -= price;

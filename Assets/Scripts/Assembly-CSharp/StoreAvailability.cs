@@ -536,14 +536,7 @@ public class StoreAvailability
 		}
 		float salePercentage = SaleItemSchema.FindActiveSaleForItem("VillageArchers");
 		int costCoins = data2.costCoins;
-		if (costCoins > 0)
-		{
-			item.cost = new Cost(data2.costCoins, Cost.Currency.Soft, salePercentage);
-		}
-		else
-		{
-			item.cost = new Cost(data2.costGems, Cost.Currency.Hard, salePercentage);
-		}
+		item.cost = new Cost(data2.costCoins, Cost.Currency.Coin, salePercentage);
 		string stringFromStringRef = StringUtils.GetStringFromStringRef("LocalizedStrings", "village_archers_name");
 		if (Singleton<Profile>.Instance.archerLevel == 0)
 		{
