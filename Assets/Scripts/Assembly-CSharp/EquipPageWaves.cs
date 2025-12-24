@@ -58,8 +58,7 @@ public class EquipPageWaves : EquipPage, UIHandlerComponent
 			{
 				num = minChange;
 			}
-			int amount = (int)num;
-			IncWave(amount);
+			IncWave((int)num);
 			mTimeSinceChange = 0.001f;
 		}
 		else if (num <= -1f)
@@ -220,26 +219,25 @@ public class EquipPageWaves : EquipPage, UIHandlerComponent
 
 	private void RefreshButtonStates()
 	{
-		if (!Singleton<Profile>.Instance.inDailyChallenge)
+		if (Singleton<Profile>.Instance.inDailyChallenge) return;
+
+		if (/*Singleton<Profile>.Instance.allNormalWavesBeaten*/ true)
 		{
-			if (Singleton<Profile>.Instance.allNormalWavesBeaten)
-			{
-				mButtonDec.Locked = false;
-				mButtonInc.Locked = false;
-				mButtonDec_10.Locked = false;
-				mButtonInc_10.Locked = false;
-				mTimesCompleted.Enabled = true;
-				mTimesCompleted.Visible = true;
-			}
-			else
-			{
-				mButtonDec.gameObject.SetActive(false);
-				mButtonInc.gameObject.SetActive(false);
-				mButtonDec_10.gameObject.SetActive(false);
-				mButtonInc_10.gameObject.SetActive(false);
-				mTimesCompleted.Enabled = false;
-				mTimesCompleted.Visible = false;
-			}
+			mButtonDec.Locked = false;
+			mButtonInc.Locked = false;
+			mButtonDec_10.Locked = false;
+			mButtonInc_10.Locked = false;
+			mTimesCompleted.Enabled = true;
+			mTimesCompleted.Visible = true;
+		}
+		else
+		{
+			mButtonDec.gameObject.SetActive(false);
+			mButtonInc.gameObject.SetActive(false);
+			mButtonDec_10.gameObject.SetActive(false);
+			mButtonInc_10.gameObject.SetActive(false);
+			mTimesCompleted.Enabled = false;
+			mTimesCompleted.Visible = false;
 		}
 	}
 }

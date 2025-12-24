@@ -61,9 +61,14 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 			magnetMinSpeed = 0f;
 			magnetMaxSpeed = 0f;
 		}
-		TextDBSchema[] array = (!Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive()) ? DataBundleUtils.InitializeRecords<TextDBSchema>("resources") : DataBundleUtils.InitializeRecords<TextDBSchema>("resources_MP");
-		if (array == null) return;
 		
+		TextDBSchema[] array = (!Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive()) ? DataBundleUtils.InitializeRecords<TextDBSchema>("resources") : DataBundleUtils.InitializeRecords<TextDBSchema>("resources_MP");
+
+		// [TODO] Use this instead of TextDBSchema.
+		ResourceSchema[] resourceSchemas = DataBundleUtils.InitializeRecords<ResourceSchema>("Resources");
+
+		if (array == null) return;
+
 		string text = !string.IsNullOrEmpty(Singleton<Profile>.Instance.playModeSubSection)
 			? Singleton<Profile>.Instance.playModeSubSection
 			: "classic";
