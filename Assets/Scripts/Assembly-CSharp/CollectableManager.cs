@@ -47,9 +47,9 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 		mCenterX = centerX;
 		mTotalDropWeight = 0f;
 		currentWaveSpoils = new WaveSpoils();
-		if (WeakGlobalMonoBehavior<InGameImpl>.Instance.HasWealthCharm())
+		if (/*WeakGlobalMonoBehavior<InGameImpl>.Instance.HasWealthCharm()*/ true)
 		{
-			CharmSchema charmSchema = Singleton<CharmsDatabase>.Instance[WeakGlobalMonoBehavior<InGameImpl>.Instance.activeCharm];
+			CharmSchema charmSchema = Singleton<CharmsDatabase>.Instance["wealth"];
 			magnetMaxDist = charmSchema.magnetRange;
 			magnetMinSpeed = charmSchema.magnetMinPullSpeed;
 			magnetMaxSpeed = charmSchema.magnetMaxPullSpeed;
