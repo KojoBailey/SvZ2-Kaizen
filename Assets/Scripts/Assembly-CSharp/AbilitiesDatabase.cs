@@ -99,7 +99,7 @@ public class AbilitiesDatabase : Singleton<AbilitiesDatabase>
 			{
 				gameObject = abSchema.rightToLeftPrefab;
 			}
-			GameObject gameObject2 = ((!(gameObject != null)) ? new GameObject(abSchema.id + "_handler") : GameObjectPool.DefaultObjectPool.Acquire(gameObject));
+			GameObject gameObject2 = (gameObject == null) ? new GameObject(abSchema.id + "_handler") : GameObjectPool.DefaultObjectPool.Acquire(gameObject);
 			T val = gameObject2.GetComponent<T>();
 			if ((Object)val == (Object)null)
 			{

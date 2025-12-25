@@ -25,6 +25,7 @@ public class DataBundleUtils
 			}
 			return true;
 		}
+		UnityEngine.Debug.LogError(string.Format("Path \"{0}\" is not relative to resources folder.", assetPath));
 		return false;
 	}
 

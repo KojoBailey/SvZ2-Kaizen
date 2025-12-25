@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using UnityEngine;
 
 public class Collectable
@@ -67,19 +68,27 @@ public class Collectable
 		set { mTransform.position = value; }
 	}
 
-	public Collectable(ECollectableType type, ResourceTemplate template, Vector3 startPos, Vector3 targetPos)
+	public Collectable(ResourceSchema resourceSchema, int value, Vector3 startPos, Vector3 targetPos)
 	{
+		if (resourceSchema.prefab == null)
+		{
+			UnityEngine.Debug.LogError("No ResourceSchema prefab la de");
+		}
 		mStartPos = startPos;
 		mTargetPos = targetPos;
-		mObject = GameObjectPool.DefaultObjectPool.Acquire(template.prefab);
+		mObject = GameObjectPool.DefaultObjectPool.Acquire(resourceSchema.prefab);
+		if (mObject == null)
+		{
+			UnityEngine.Debug.LogError("No object la de");
+		}
 		mAnimPlayer = mObject.GetComponent<Animation>();
 		mTransform = mObject.transform;
 		mMaterial = mObject.GetComponentInChildren<Renderer>().material;
 		mState = CollectableState.MoveToGround;
 		mTime = 0f;
-		mType = type;
-		mValue = template.amount;
-		mTimeLeftAlive = template.lifetime;
+		mType = resourceSchema.type;
+		mValue = value;
+		mTimeLeftAlive = 5.0f;
 		mShouldStartFadeOut = false;
 		wasAtLeftOfHero = targetPos.z < WeakGlobalMonoBehavior<InGameImpl>.Instance.hero.position.z;
 		isReadyToDie = false;

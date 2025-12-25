@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
+using System.Runtime;
 using UnityEngine;
 
 public class CollectableManager : WeakGlobalInstance<CollectableManager>
@@ -12,6 +15,9 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 	private List<Collectable> mCollectables;
 
 	private ResourceTemplate[] mResourceTemplates;
+
+	private ResourceSchema[] mResourceSchemas;
+	private Dictionary<ECollectableType, ResourceSchema> mResourceSchemaById;
 
 	private float mTotalDropWeight;
 
@@ -46,8 +52,8 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 		SetUniqueInstance(this);
 		mCollectables = new List<Collectable>();
 		mCenterX = centerX;
-		mTotalDropWeight = 0f;
 		currentWaveSpoils = new WaveSpoils();
+
 		if (/*WeakGlobalMonoBehavior<InGameImpl>.Instance.HasWealthCharm()*/ true)
 		{
 			CharmSchema charmSchema = Singleton<CharmsDatabase>.Instance["wealth"];
@@ -62,87 +68,103 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 			magnetMaxSpeed = 0f;
 		}
 		
-		TextDBSchema[] array = (!Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive()) ? DataBundleUtils.InitializeRecords<TextDBSchema>("resources") : DataBundleUtils.InitializeRecords<TextDBSchema>("resources_MP");
+		// TextDBSchema[] array = (!Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive()) ? DataBundleUtils.InitializeRecords<TextDBSchema>("resources") : DataBundleUtils.InitializeRecords<TextDBSchema>("resources_MP");
 
-		// [TODO] Use this instead of TextDBSchema.
-		ResourceSchema[] resourceSchemas = DataBundleUtils.InitializeRecords<ResourceSchema>("Resources");
+		// if (array == null) return;
 
-		if (array == null) return;
-
-		string text = !string.IsNullOrEmpty(Singleton<Profile>.Instance.playModeSubSection)
-			? Singleton<Profile>.Instance.playModeSubSection
-			: "classic";
-
-		string[] names = Enum.GetNames(typeof(ECollectableType));
-		Array values = Enum.GetValues(typeof(ECollectableType));
-		mResourceTemplates = new ResourceTemplate[names.Length];
-		for (int i = 0; i < names.Length; i++)
+		mResourceSchemas = DataBundleUtils.InitializeRecords<ResourceSchema>("Resources");
+		if (mResourceSchemas == null)
 		{
-			string field = names[i];
-			int @int = array.GetInt(TextDBSchema.ChildKey(field, "amount"));
-			if (@int < 1) continue;
+			Debug.LogError("Failed to load Resources from ResourceSchema.");
+		}
 
-			var collectableType = (ECollectableType)(int)values.GetValue(i);
+		mResourceSchemaById = mResourceSchemas.ToDictionary(resourceSchema => resourceSchema.type);
 
-			ResourceTemplate resourceTemplate = new ResourceTemplate
+		mResourceTemplates = new ResourceTemplate[11];
+		mTotalDropWeight = 0f;
+
+		int i = 0;
+		foreach (var resourceSchema in mResourceSchemas)
+		{
+			// [TODO] Need to figure out why this doesn't work in the first place... Band-aid solution for now.
+			if (resourceSchema.prefab == null)
 			{
-				amount = @int
-			};
+				UnityEngine.Debug.LogError(string.Format("Unable to load prefab for {0}.", resourceSchema.type));
+				
+				string buffer;
 
-			SharedResourceLoader.SharedResource cachedResource = ResourceCache.GetCachedResource(string.Format("Assets/Game/Resources/{0}.prefab", array.GetString(TextDBSchema.ChildKey(field, "prefab", text))), 1);
-			if (cachedResource != null)
-			{
-				resourceTemplate.prefab = cachedResource.Resource as GameObject;
-			}
-			resourceTemplate.lifetime = array.GetFloat(TextDBSchema.ChildKey(field, "lifetime"));
-			resourceTemplate.weight = array.GetFloat(TextDBSchema.ChildKey(field, "weight"));
-			resourceTemplate.contentsTotalWeight = 0f;
-			resourceTemplate.contents = null;
-			resourceTemplate.postDeathContentsTotalWeight = 0f;
-			resourceTemplate.postDeathContents = null;
-
-			if (collectableType >= ECollectableType.presentA && collectableType <= ECollectableType.presentD)
-			{
-				string text3 = TextDBSchema.ChildKey(field, "normal", text);
-				string text4 = TextDBSchema.ChildKey(field, "death", text);
-				TextDBSchema[] array2 = array;
-				foreach (TextDBSchema textDBSchema in array2)
+				switch (resourceSchema.type)
 				{
-					if (textDBSchema.key.StartsWith(text3))
-					{
-						string text5 = textDBSchema.key.Substring(text3.Length + 1);
-						if (IsValidPresentContent(text5) && !AlreadyHasPermenantItem(text5) && !ItemRestrictedByLevel(text5))
-						{
-							if (resourceTemplate.contents == null)
-							{
-								resourceTemplate.contents = new Dictionary<string, float>();
-							}
-							float num = float.Parse(textDBSchema.value);
-							resourceTemplate.contents.Add(text5, num);
-							resourceTemplate.contentsTotalWeight += num;
-						}
-					}
-					else
-					{
-						if (!textDBSchema.key.StartsWith(text4)) continue;
+				case ECollectableType.copperCoin:
+					buffer = "Copper";
+					break;
+				case ECollectableType.silverCoin:
+					buffer = "Silver";
+					break;
+				case ECollectableType.goldCoin:
+					buffer = "Gold";
+					break;
+				default:
+					UnityEngine.Debug.LogError("Getting unsupported collectable type.");
+					continue;
+				}
 
-						string text6 = textDBSchema.key.Substring(text4.Length + 1);
-						if (IsValidPresentContent(text6) && !AlreadyHasPermenantItem(text6) && !ItemRestrictedByLevel(text6))
-						{
-							if (resourceTemplate.postDeathContents == null)
-							{
-								resourceTemplate.postDeathContents = new Dictionary<string, float>();
-							}
-							float num2 = float.Parse(textDBSchema.value);
-							resourceTemplate.postDeathContents.Add(text6, num2);
-							resourceTemplate.postDeathContentsTotalWeight += num2;
-						}
-					}
+    			resourceSchema.prefab = Resources.Load<GameObject>(string.Format("FX/Coin{0}Pickup", buffer));
+
+				if (resourceSchema.prefab == null)
+				{
+					UnityEngine.Debug.LogError("Couldn't load resource manually either.");
 				}
 			}
 
-			mResourceTemplates[(int)collectableType] = resourceTemplate;
-			mTotalDropWeight += resourceTemplate.weight;
+			mResourceTemplates[i] = new ResourceTemplate
+			{
+				amount = resourceSchema.RandomValue,
+				prefab = resourceSchema.prefab,
+				dropRate = resourceSchema.dropRate,
+			};
+
+			// if (resourceSchema.type >= ECollectableType.presentA && resourceSchema.type <= ECollectableType.presentD)
+			// {
+			// 	string text3 = TextDBSchema.ChildKey(field, "normal", text);
+			// 	string text4 = TextDBSchema.ChildKey(field, "death", text);
+			// 	TextDBSchema[] array2 = array;
+			// 	foreach (TextDBSchema textDBSchema in array2)
+			// 	{
+			// 		if (textDBSchema.key.StartsWith(text3))
+			// 		{
+			// 			string text5 = textDBSchema.key.Substring(text3.Length + 1);
+			// 			if (IsValidPresentContent(text5) && !AlreadyHasPermenantItem(text5) && !ItemRestrictedByLevel(text5))
+			// 			{
+			// 				if (resourceTemplate.contents == null)
+			// 				{
+			// 					resourceTemplate.contents = new Dictionary<string, float>();
+			// 				}
+			// 				float num = float.Parse(textDBSchema.value);
+			// 				resourceTemplate.contents.Add(text5, num);
+			// 				resourceTemplate.contentsTotalWeight += num;
+			// 			}
+			// 		}
+			// 		else
+			// 		{
+			// 			if (!textDBSchema.key.StartsWith(text4)) continue;
+
+			// 			string text6 = textDBSchema.key.Substring(text4.Length + 1);
+			// 			if (IsValidPresentContent(text6) && !AlreadyHasPermenantItem(text6) && !ItemRestrictedByLevel(text6))
+			// 			{
+			// 				if (resourceTemplate.postDeathContents == null)
+			// 				{
+			// 					resourceTemplate.postDeathContents = new Dictionary<string, float>();
+			// 				}
+			// 				float num2 = float.Parse(textDBSchema.value);
+			// 				resourceTemplate.postDeathContents.Add(text6, num2);
+			// 				resourceTemplate.postDeathContentsTotalWeight += num2;
+			// 			}
+			// 		}
+			// 	}
+			// }
+
+			// mTotalDropWeight += resourceTemplate.weight;
 		}
 	}
 
@@ -173,50 +195,30 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 
 	public void SpawnResources(ResourceDrops drops, Vector3 position)
 	{
-		int num = drops.amountDropped.randInRange();
-		if (num <= 0)
+		foreach (var resourceSchema in mResourceSchemas)
 		{
-			return;
-		}
-		List<ECollectableType> list = new List<ECollectableType>();
-		for (int i = 0; i < num; i++)
-		{
-			float num2 = UnityEngine.Random.Range(0f, mTotalDropWeight - float.Epsilon);
-			for (int j = 0; j < (int)ECollectableType.Count; j++)
-			{
-				var collectableType = (ECollectableType)j;
-				num2 -= mResourceTemplates[j].weight;
-				if (mResourceTemplates[j].prefab != null && num2 < 0f && mResourceTemplates[j].weight > 0f)
-				{
-					if (collectableType >= ECollectableType.presentA && collectableType <= ECollectableType.presentD)
-					{
-						mCollectables.Add(new Collectable(collectableType, mResourceTemplates[(int)collectableType], position, FindNewCollectableFinalPosition(position)));
-						return;
-					}
-					list.Add(collectableType);
-					break;
-				}
-			}
-		}
-		foreach (ECollectableType item in list)
-		{
-			if (mResourceTemplates[(int)item].prefab != null)
-			{
-				mCollectables.Add(new Collectable(item, mResourceTemplates[(int)item], position, FindNewCollectableFinalPosition(position)));
-			}
+			if (UnityEngine.Random.value > resourceSchema.dropRate) return;
+			
+			mCollectables.Add(new Collectable(
+				resourceSchema,
+				resourceSchema.RandomValue,
+				position,
+				FindNewCollectableFinalPosition(position)
+			));
 		}
 	}
 
-	public void ForceSpawnResourceType(string dropType, Vector3 position)
+	public void ForceSpawnResourceType(string dropTypeStr, Vector3 position)
 	{
-		foreach (int value in Enum.GetValues(typeof(ECollectableType)))
-		{
-			if (((ECollectableType)value).ToString().Equals(dropType, StringComparison.OrdinalIgnoreCase))
-			{
-				mCollectables.Add(new Collectable((ECollectableType)value, mResourceTemplates[value], position, FindNewCollectableFinalPosition(position)));
-				break;
-			}
-		}
+		var type = (ECollectableType)Enum.Parse(typeof(ECollectableType), dropTypeStr);
+		var resourceSchema = mResourceSchemaById[type];
+
+		mCollectables.Add(new Collectable(
+			resourceSchema,
+			resourceSchema.RandomValue,
+			position,
+			FindNewCollectableFinalPosition(position)
+		));
 	}
 
 	public void OpenPresents(bool fromPlayerDeath)

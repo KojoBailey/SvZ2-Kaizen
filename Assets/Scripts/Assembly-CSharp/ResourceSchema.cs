@@ -3,11 +3,14 @@ using UnityEngine;
 [DataBundleClass(Category = "Design")]
 public class ResourceSchema
 {
-    [DataBundleKey]
-    public string id;
+    // [DataBundleKey]
+    // public string id;
 
-    [DataBundleField]
+    [DataBundleKey]
     public ECollectableType type;
+
+    [DataBundleField(StaticResource = true)]
+	public GameObject prefab;
 
     [DataBundleField]
     public int minValue;
@@ -15,9 +18,11 @@ public class ResourceSchema
     [DataBundleField]
     public int maxValue;
 
+    public int RandomValue
+    {
+        get { return UnityEngine.Random.Range(minValue, maxValue + 1); }
+    }
+
     [DataBundleField]
     public float dropRate;
-
-    [DataBundleField(StaticResource = true)]
-	public GameObject prefab;
 }

@@ -9,6 +9,8 @@ public class ResourceTemplate
 
 	public float weight;
 
+	public float dropRate;
+
 	public float lifetime = 5f;
 
 	public float contentsTotalWeight;
