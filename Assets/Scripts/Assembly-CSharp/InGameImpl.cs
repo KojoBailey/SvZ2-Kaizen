@@ -490,6 +490,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 			var enemyGateZPositions = new List<float>();
 			for (int i = 1; true; i++)
 			{
+				// [TODO] Implement in every stage
 				string childName = string.Format("RGatePosition{0}", i);
 				GameObject child = enemyGatePositions.FindChild(childName);
 				if (child == null) break;

@@ -70,17 +70,9 @@ public class Collectable
 
 	public Collectable(ResourceSchema resourceSchema, int value, Vector3 startPos, Vector3 targetPos)
 	{
-		if (resourceSchema.prefab == null)
-		{
-			UnityEngine.Debug.LogError("No ResourceSchema prefab la de");
-		}
 		mStartPos = startPos;
 		mTargetPos = targetPos;
 		mObject = GameObjectPool.DefaultObjectPool.Acquire(resourceSchema.prefab);
-		if (mObject == null)
-		{
-			UnityEngine.Debug.LogError("No object la de");
-		}
 		mAnimPlayer = mObject.GetComponent<Animation>();
 		mTransform = mObject.transform;
 		mMaterial = mObject.GetComponentInChildren<Renderer>().material;
