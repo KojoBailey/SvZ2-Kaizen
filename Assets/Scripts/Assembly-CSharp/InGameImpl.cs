@@ -937,55 +937,28 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 			}
 		}
 
-		if (mLeadership[0] != null)
-		{
-			mLeadership[0].Update();
-		}
+		mLeadership[0].Update();
 
 		if (mLeadership[1] != null)
 		{
 			mLeadership[1].Update();
 		}
 
-		if (mWaveManager != null)
-		{
-			mWaveManager.Update();
-		}
+		mWaveManager.Update();
 
-		if (mCharactersManager != null)
-		{
-			mCharactersManager.Update();
-		}
+		mCharactersManager.Update();
 
-		if (mCollectableManager != null)
-		{
-			mCollectableManager.Update();
-		}
+		mCollectableManager.Update();
 
-		if (mProjectileManager != null)
-		{
-			mProjectileManager.Update();
-		}
+		mProjectileManager.Update();
 
-		if (mShaderManager != null)
-		{
-			mShaderManager.update();
-		}
+		mShaderManager.update();
 
-		if (mBell != null)
-		{
-			mBell.Update();
-		}
+		mBell.Update();
 
-		if (mPit != null)
-		{
-			mPit.Update();
-		}
+		mPit.Update();
 
-		if (mVillageArchers != null)
-		{
-			mVillageArchers.Update();
-		}
+		mVillageArchers.Update();
 
 		CheckWinLoseConditions();
 
@@ -1261,7 +1234,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 				mHero[1].ForceDeath();
 			}
 		}
-
+		
 		if (flag)
 		{
 			Lose();
@@ -1523,14 +1496,12 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	public bool SetCheatAbility(string ability)
 	{
-		if (Singleton<AbilitiesDatabase>.Instance.GetSchema(ability) != null)
-		{
-			List<string> list = new List<string>(1);
-			list.Add(ability);
-			Singleton<Profile>.Instance.SetSelectedAbilities(list);
-			return true;
-		}
-		return false;
+		if (Singleton<AbilitiesDatabase>.Instance.GetSchema(ability) != null) return false;
+
+		List<string> list = new List<string>(1);
+		list.Add(ability);
+		Singleton<Profile>.Instance.SetSelectedAbilities(list);
+		return true;
 	}
 
 	public void SetHeroInvulnByDefault(bool toSet)
