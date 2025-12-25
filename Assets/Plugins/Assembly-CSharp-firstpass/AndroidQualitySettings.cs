@@ -52,13 +52,13 @@ public class AndroidQualitySettings : MonoBehaviour
 	{
 		string graphicsDeviceName = SystemInfo.graphicsDeviceName;
 		int processorCount = SystemInfo.processorCount;
-		Debug.Log("******* AndroidQualitySettings **********");
-		Debug.Log("*** gpu name: " + graphicsDeviceName);
-		Debug.Log("*** gpu memory: " + SystemInfo.graphicsMemorySize);
-		Debug.Log("*** shader level: " + SystemInfo.graphicsShaderLevel);
-		Debug.Log("*** cpu cores: " + processorCount);
-		Debug.Log("*** sys memory: " + SystemInfo.systemMemorySize);
-		Debug.Log("*****************************************");
+		// Debug.Log("******* AndroidQualitySettings **********");
+		// Debug.Log("*** gpu name: " + graphicsDeviceName);
+		// Debug.Log("*** gpu memory: " + SystemInfo.graphicsMemorySize);
+		// Debug.Log("*** shader level: " + SystemInfo.graphicsShaderLevel);
+		// Debug.Log("*** cpu cores: " + processorCount);
+		// Debug.Log("*** sys memory: " + SystemInfo.systemMemorySize);
+		// Debug.Log("*****************************************");
 		AndroidQuality androidQuality = ReadOverrideQuality();
 		if (androidQuality != AndroidQuality.Unknown)
 		{
