@@ -4,32 +4,23 @@ using UnityEngine;
 
 public class TutorialMain : SingletonMonoBehaviour<TutorialMain>, IGluiActionHandler
 {
-	private const string passiveTutorial_GroupName = "Passive";
-
-	private const string tutorialTableName = "TutorialData";
-
-	private const string tutorialActionWhenChainDone = "TUTORIAL_CLEAR";
-
 	private DataBundleTableHandle<TutorialSchema> tutorialDataHandle;
 
 	private List<TutorialSchema> tutorialData;
 
 	public IEnumerator Start()
 	{
-		while (!DataBundleRuntime.Instance)
-		{
-			yield return null;
-		}
+		while (!DataBundleRuntime.Instance) yield return null;
+
 		Init();
 	}
 
 	public void Init()
 	{
-		if (tutorialData == null)
-		{
-			tutorialDataHandle = new DataBundleTableHandle<TutorialSchema>("TutorialData");
-			tutorialData = new List<TutorialSchema>(tutorialDataHandle.Data);
-		}
+		if (tutorialData != null) return;
+
+		tutorialDataHandle = new DataBundleTableHandle<TutorialSchema>("TutorialData");
+		tutorialData = new List<TutorialSchema>(tutorialDataHandle.Data);
 	}
 
 	public bool IsTutorialNeeded(string tutorialName)

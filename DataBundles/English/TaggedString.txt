@@ -995,7 +995,7 @@
     stringValue = This feature requires an internet connection.
   tutorial_store_intro:
     tag = tutorial_store_intro
-    stringValue = Welcome to the Samurai Store! Here you can upgrade your hero, recruit villagers, and improve village defenses.
+    stringValue = Welcome to the Samurai Store! Here you can upgrade your Hero, recruit Allies, and improve your defences.
   tutorial_dealpacks:
     tag = tutorial_dealpacks
     stringValue = Your Samurai thirsts for power. Feed him with these valuable items from the Welcome Pack today!
@@ -4235,8 +4235,9 @@
     tag = Tutorial_Gate
     stringValue = SACRED GATE!
   Tutorial_TouchMove:
-    tag = Tutorial_TouchMove
-    stringValue = Touch the screen to move forward or back.  Stand still to attack.
+    stringValue = Touch the screen to move forward or back. Stand still to attack.
+  Tutorial_MovementKeyboard:
+    stringValue = Press 'A' and 'D' to move left and right, and stand still to attack!
   Tutorial_Ally:
     tag = Tutorial_Ally
     stringValue = Tap the Ally icon to spend Leadership, summoning a Farmer to the battle.
