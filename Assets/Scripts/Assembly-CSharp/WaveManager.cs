@@ -568,6 +568,9 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 			case WaveCommandSchema.Type.Spawn:
 				QueueSpawns(mNextCommand);
 				break;
+			case WaveCommandSchema.Type.Delay:
+				mSpawnTimer.IncreaseBy(mNextCommand.duration);
+				break;
 			case WaveCommandSchema.Type.Banner:
 				FlashBanner(mNextCommand.banner);
 				break;

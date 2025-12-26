@@ -8,7 +8,7 @@
   *:
     # Give some time for player to test movement controls.
     type = Delay
-    duration = 5
+    duration = 10
   *:
     type = Spawn
     enemy = Enemies.CrawlingTorso
@@ -34,7 +34,8 @@
     tutorial = Tutorial_Game04_Ability
   *:
     type = MoveGate
-    banner = Middle
+    gatePos = Middle
+    spawnAt = Death
   *:
     type = Spawn
     enemy = Enemies.LZombieMelee
