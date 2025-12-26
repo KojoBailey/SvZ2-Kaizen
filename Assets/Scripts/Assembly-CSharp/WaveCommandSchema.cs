@@ -8,6 +8,7 @@ public class WaveCommandSchema
 		Delay, // not yet implemented
 		Banner,
 		MoveGate,
+		Tutorial, // not yet implemented
 	}
 
 	public enum Spacing
@@ -45,7 +46,7 @@ public class WaveCommandSchema
 	[DataBundleKey]
 	public int index;
 
-	[DataBundleField(ColumnWidth = 200)]
+	[DataBundleField]
 	public Type type;
 
 	[DataBundleSchemaFilter(typeof(EnemySchema), false)]
@@ -53,10 +54,10 @@ public class WaveCommandSchema
 	[DataBundleRecordTableFilter("Enemies")]
 	public DataBundleRecordKey enemy;
 
-	[DataBundleField(ColumnWidth = 200)]
+	[DataBundleField]
 	public int count;
 
-	[DataBundleField(ColumnWidth = 200)]
+	[DataBundleField]
 	public Spacing spacing;
 
 	public float spacingSeconds
@@ -64,10 +65,10 @@ public class WaveCommandSchema
 		get { return SpacingToSeconds(spacing); }
 	}
 
-	[DataBundleField(ColumnWidth = 200)]
+	[DataBundleField]
 	public float duration;
 
-	[DataBundleField(ColumnWidth = 200)]
+	[DataBundleField]
 	public SpawnAt spawnAt;
 
 	public float spawnAtPercent
@@ -75,7 +76,7 @@ public class WaveCommandSchema
 		get { return SpawnAtToPercent(spawnAt); }
 	}
 
-	[DataBundleField(ColumnWidth = 200)]
+	[DataBundleField]
 	public MaxDelay maxDelay;
 
 	public float maxDelaySeconds
@@ -86,13 +87,16 @@ public class WaveCommandSchema
 	[DataBundleField(ColumnWidth = 200)]
 	public string banner;
 
-	[DataBundleField(ColumnWidth = 200)]
+	[DataBundleField]
 	public GatePos gatePos;
 
 	public int gatePosIndex
 	{
 		get { return GatePosToIndex(gatePos); }
 	}
+
+	[DataBundleField(ColumnWidth = 200)]
+	public string tutorial;
 	
 	[DataBundleField(ColumnWidth = 200)]
 	public string command;

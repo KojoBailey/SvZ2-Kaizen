@@ -1,21 +1,36 @@
 [Wave_001]
   1:
+    type = Tutorial
+    tutorial = Tutorial_Game01_ProtectGate
+  2:
+    type = Tutorial
+    tutorial = Tutorial_Game02_Movement
+  3:
+    type = Delay
+    duration = 5
+  4:
     type = Spawn
     enemy = Enemies.CrawlingTorso
     count = 3
     spacing = Loose
-  2:
+  5:
+    type = Tutorial
+    tutorial = Tutorial_Attack
+  6:
     type = Spawn
     enemy = Enemies.LZombieMelee
     count = 2
     spacing = Loose
     spawnAt = Death
-  3:
+  7:
+    type = Tutorial
+    tutorial = Tutorial_Game04_Ability
+  8:
     type = Spawn
     enemy = Enemies.LZombieMelee
     count = 2
     spacing = Tight
-  4:
+  9:
     type = Spawn
     enemy = Enemies.CrawlingTorso
     count = 3
