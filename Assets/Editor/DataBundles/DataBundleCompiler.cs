@@ -50,16 +50,8 @@ public class DataBundleCompiler : MonoBehaviour
 
         List<BundleClass> parsedClasses = new List<BundleClass>();
 
-        string currentTable = "", currentKey = "";
-
-        Type objectType = typeof(UnityEngine.Object),
-        tableType = typeof(DataBundleRecordTable),
-        keyType = typeof(DataBundleRecordKey),
-        integerType = typeof(int),
-		floatingType = typeof(float),
-		stringType = typeof(string),
-		booleanType = typeof(bool),
-		enumType = typeof(Enum);
+        string currentTable = "";
+        string currentKey = "";
 
         int classIndex = 0;
         string[] classes = Directory.GetFiles(path);
@@ -90,10 +82,7 @@ public class DataBundleCompiler : MonoBehaviour
 
                 string skippedLine = line.Substring(startingIndex);
 
-                if (string.IsNullOrEmpty(skippedLine))
-                {
-                    continue;
-                }
+                if (string.IsNullOrEmpty(skippedLine) || skippedLine.StartsWith("#")) continue;
 
                 if (skippedLine.Contains(" = "))
                 {
@@ -134,7 +123,7 @@ public class DataBundleCompiler : MonoBehaviour
 
                     if (fieldValue != "NULL")
                     {
-                        if (fieldInfo.FieldType.IsSubclassOf(objectType))
+                        if (fieldInfo.FieldType.IsSubclassOf(typeof(UnityEngine.Object)))
                         {
                             AddString(cachedAssets, fieldValue);
                             value = fieldValue;
@@ -150,23 +139,23 @@ public class DataBundleCompiler : MonoBehaviour
 
                             value = recordHash;
                         }
-                        else if (fieldInfo.FieldType == integerType)
+                        else if (fieldInfo.FieldType == typeof(int))
                         {
                             value = int.Parse(fieldValue);
                         }
-                        else if (fieldInfo.FieldType == floatingType)
+                        else if (fieldInfo.FieldType == typeof(float))
                         {
                             value = float.Parse(fieldValue);
                         }
-                        else if (fieldInfo.FieldType == stringType)
+                        else if (fieldInfo.FieldType == typeof(string))
                         {
                             value = fieldValue.Replace("_NEWLINE_", "\n");
                         }
-                        else if (fieldInfo.FieldType == booleanType)
+                        else if (fieldInfo.FieldType == typeof(bool))
                         {
                             value = bool.Parse(fieldValue);
                         }
-                        else if (fieldInfo.FieldType.IsSubclassOf(enumType))
+                        else if (fieldInfo.FieldType.IsSubclassOf(typeof(Enum)))
                         {
                             value = Enum.Parse(fieldInfo.FieldType, fieldValue);
                         }
@@ -188,6 +177,23 @@ public class DataBundleCompiler : MonoBehaviour
                 else if (skippedLine.EndsWith(":"))
                 {
                     currentKey = skippedLine.Replace(":", "");
+
+                    if (currentKey == "*")
+                    {
+                        int highestIntegerKey = 1;
+                        foreach (string key in currentClass.tables[currentTable].Keys)
+                        {
+                            int keyInt;
+                            bool isInteger = int.TryParse(key, out keyInt);
+                            if (isInteger && keyInt > highestIntegerKey)
+                            {
+                                highestIntegerKey = keyInt;
+                            }
+                        }
+
+                        currentKey = (highestIntegerKey + 1).ToString();
+                    }
+
                     currentClass.tables[currentTable].Add(currentKey, new List<DataBundle.BundleField>());
 
                     AddString(cachedStrings, currentKey);
@@ -247,7 +253,7 @@ public class DataBundleCompiler : MonoBehaviour
 
                         if (field.value != null)
                         {
-                            if (field.info.FieldType.IsSubclassOf(objectType))
+                            if (field.info.FieldType.IsSubclassOf(typeof(UnityEngine.Object)))
                             {
                                 string asset = (string)field.value;
 
@@ -260,7 +266,9 @@ public class DataBundleCompiler : MonoBehaviour
                                     value = assetToIndex[asset];
                                 }
                             }
-                            else if (field.info.FieldType == tableType || field.info.FieldType == keyType)
+                            else if (
+                                field.info.FieldType == typeof(DataBundleRecordTable) ||
+                                field.info.FieldType == typeof(DataBundleRecordKey))
                             {
                                 ushort[] hash = new ushort[4];
                                 string[] recordHash = (string[])field.value;
