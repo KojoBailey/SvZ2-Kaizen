@@ -1,41 +1,56 @@
 [Wave_001]
-  1:
+  *:
     type = Tutorial
     tutorial = Tutorial_Game01_ProtectGate
-  2:
+  *:
     type = Tutorial
     tutorial = Tutorial_Game02_Movement
-  3:
+  *:
+    # Give some time for player to test movement controls.
     type = Delay
     duration = 5
-  4:
+  *:
+    type = Spawn
+    enemy = Enemies.CrawlingTorso
+    count = 1
+    spacing = Loose
+  *:
+    type = Tutorial
+    tutorial = Tutorial_Attack
+  *:
     type = Spawn
     enemy = Enemies.CrawlingTorso
     count = 3
     spacing = Loose
-  5:
-    type = Tutorial
-    tutorial = Tutorial_Attack
-  6:
+    spawnAt = Death
+  *:
     type = Spawn
     enemy = Enemies.LZombieMelee
     count = 2
     spacing = Loose
-    spawnAt = Death
-  7:
+  *:
+    # Should be shown as soon as has enough Souls.
     type = Tutorial
     tutorial = Tutorial_Game04_Ability
-  8:
+  *:
+    type = MoveGate
+    banner = Middle
+  *:
     type = Spawn
     enemy = Enemies.LZombieMelee
     count = 2
     spacing = Tight
-  9:
+  *:
     type = Spawn
     enemy = Enemies.CrawlingTorso
     count = 3
     spacing = Moderate
     spawnAt = NoDelay
+  *:
+    type = Spawn
+    enemy = Enemies.LZombieMelee
+    count = 3
+    spacing = Tight
 [Wave_002]
   1:
     type = Spawn
