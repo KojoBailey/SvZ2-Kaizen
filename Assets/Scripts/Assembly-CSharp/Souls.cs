@@ -7,7 +7,7 @@ public class Souls : WeakGlobalInstance<Souls>
 {
 	private SoulSchema mSchema;
 
-	public float maxSouls
+	public int maxSouls
 	{
 		get { return mSchema.maxSouls; }
 	}

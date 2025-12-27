@@ -79,7 +79,7 @@ public class HUDSouls : UIHandlerComponent
 			mPreviousSoulsCount = souls;
 			mSoulsCount.Text = souls.ToString();
 		}
-		mActiveMeter.Value = souls / WeakGlobalInstance<Souls>.Instance.maxSouls;
+		mActiveMeter.Value = (float)souls / WeakGlobalInstance<Souls>.Instance.maxSouls;
 	}
 
 	public bool OnUIEvent(string eventID) { return true; }
