@@ -111,7 +111,7 @@ public class HUDAbilities : UIHandlerComponent
 		{
 			mCooldownCurrent = 0f;
             WeakGlobalInstance<Souls>.Instance.souls -= mSoulsCost;
-			if (mCooldownMax < 0f || WeakGlobalInstance<Souls>.Instance.souls < mSoulsCost)
+			if (mCooldownMax < 0f)
 			{
 				mEnabled = false;
 			}
