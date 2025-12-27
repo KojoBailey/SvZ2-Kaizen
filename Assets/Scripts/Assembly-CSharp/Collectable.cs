@@ -133,8 +133,10 @@ public class Collectable
 	public void OnCollected()
 	{
 		if (mWasCollected) return;
-		
 		mWasCollected = true;
+
+		WeakGlobalInstance<CollectableManager>.Instance.GiveResource(mType, mValue);
+
 		if (mMaterial != null && mMaterial.HasProperty("_TintColor"))
 		{
 			mMaterial.SetColor("_TintColor", new Color(mOriginalColor.r, mOriginalColor.g, mOriginalColor.b, 1f));
@@ -182,10 +184,6 @@ public class Collectable
 	{
 		if (!isDestroyed)
 		{
-			if (mWasCollected)
-			{
-				WeakGlobalInstance<CollectableManager>.Instance.GiveResource(mType, mValue);
-			}
 			GameObjectPool.DefaultObjectPool.Release(mObject);
 			mObject = null;
 			isDestroyed = true;
