@@ -119,7 +119,7 @@
     description = LocalizedStrings.ab_slash_desc
     icon = Assets/Game/Resources/UI/Textures/DynamicIcons/Abilities/Ability_KatanaSlash.png
     cost = 3
-    cooldown = 8
+    cooldown = 4
     AIMaxRange = 2
     levelToUnlock = 0
     animName = katanaslash
