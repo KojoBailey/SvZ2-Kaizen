@@ -16,6 +16,10 @@ public class HUDAbilities : UIHandlerComponent
 
 		private ProgressMeterRadial mMeterRef;
 
+        private GluiText mSoulsCostText;
+
+        private int mSoulsCost;
+
 		private float mCooldownCurrent;
 
 		private float mCooldownMax;
@@ -28,6 +32,7 @@ public class HUDAbilities : UIHandlerComponent
 				return
 					mEnabled &&
 					mCooldownCurrent >= mCooldownMax &&
+                    WeakGlobalInstance<Souls>.Instance.souls >= mSoulsCost &&
 					WeakGlobalMonoBehavior<InGameImpl>.Instance.hero.CanUseAbility(); 
 			}
 			set
@@ -72,6 +77,11 @@ public class HUDAbilities : UIHandlerComponent
 			mButtonRef = mGameObject.FindChildComponent<GluiStandardButtonContainer>("Button_AbilityHUD");
 			mIconRef = mGameObject.FindChildComponent<GluiSprite>("SwapIcon_Ability");
 			mMeterRef = mGameObject.FindChildComponent<ProgressMeterRadial>("Meter_CooldownOL");
+
+            mSoulsCostText = mGameObject.FindChildComponent<GluiText>("SwapText_Souls");
+            mSoulsCost = abData.cost;
+            mSoulsCostText.Text = mSoulsCost.ToString();
+
 			Texture2D texture = (!BundleUtils.GetSystemLanguage().StartsWith("English") && !(abData.iconNoText == null))
 				? abData.iconNoText
 				: abData.icon;
@@ -100,7 +110,8 @@ public class HUDAbilities : UIHandlerComponent
 		public void Spend()
 		{
 			mCooldownCurrent = 0f;
-			if (mCooldownMax < 0f)
+            WeakGlobalInstance<Souls>.Instance.souls -= mSoulsCost;
+			if (mCooldownMax < 0f || WeakGlobalInstance<Souls>.Instance.souls < mSoulsCost)
 			{
 				mEnabled = false;
 			}

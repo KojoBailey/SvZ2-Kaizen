@@ -118,6 +118,7 @@
     displayName = LocalizedStrings.ab_slash_name
     description = LocalizedStrings.ab_slash_desc
     icon = Assets/Game/Resources/UI/Textures/DynamicIcons/Abilities/Ability_KatanaSlash.png
+    cost = 3
     cooldown = 8
     AIMaxRange = 2
     levelToUnlock = 0
@@ -189,6 +190,7 @@
     description = LocalizedStrings.ab_lightning_desc
     icon = Assets/Game/Resources/UI/Textures/DynamicIcons/Abilities/Ability_Lightning.png
     cooldown = 15
+    cost = 5
     AIMinRange = 2
     AIMaxRange = 3
     levelToUnlock = 3

@@ -6,6 +6,10 @@ using UnityEngine;
 public class Souls : WeakGlobalInstance<Souls>
 {
 	private SoulSchema mSchema;
+	public SoulSchema schema
+	{
+		get  { return mSchema; }
+	}
 
 	public int maxSouls
 	{

@@ -5006,7 +5006,7 @@ MonoBehaviour:
       height: 0.0625
     AtlasRecordKey: Hud.LeadershipMeter_Fill_2
     sourceAssetPath: Assets/Content/UI/Textures/HUD/LeadershipMeter_Fill_2.png
-  color: {r: 0, g: 0.78431374, b: 0, a: 1}
+  color: {r: 0.12156863, g: 0.654902, b: 0.972549, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   material: {fileID: 0}
   renderQueue: -1
@@ -5815,7 +5815,7 @@ MonoBehaviour:
       height: 0.0625
     AtlasRecordKey: Hud.LeadershipMeter_Fill_0
     sourceAssetPath: Assets/Content/UI/Textures/HUD/LeadershipMeter_Fill_0.png
-  color: {r: 0, g: 0.78431374, b: 0, a: 1}
+  color: {r: 0.12156863, g: 0.654902, b: 0.972549, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   material: {fileID: 0}
   renderQueue: -1
@@ -6283,7 +6283,7 @@ MonoBehaviour:
       height: 0.0625
     AtlasRecordKey: Hud.LeadershipMeter_Fill_3
     sourceAssetPath: Assets/Content/UI/Textures/HUD/LeadershipMeter_Fill_3.png
-  color: {r: 0, g: 0.78431374, b: 0, a: 1}
+  color: {r: 0.12156863, g: 0.654902, b: 0.972549, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   material: {fileID: 0}
   renderQueue: -1
@@ -6522,7 +6522,7 @@ MonoBehaviour:
       height: 0.0625
     AtlasRecordKey: Hud.LeadershipMeter_Fill_1
     sourceAssetPath: Assets/Content/UI/Textures/HUD/LeadershipMeter_Fill_1.png
-  color: {r: 0, g: 0.78431374, b: 0, a: 1}
+  color: {r: 0.12156863, g: 0.654902, b: 0.972549, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   material: {fileID: 0}
   renderQueue: -1

@@ -36,6 +36,9 @@ public class AbilitySchema
 	public Texture2D iconNoText;
 
 	[DataBundleField]
+	public int cost;
+
+	[DataBundleField]
 	public float cooldown;
 
 	[DataBundleField]
