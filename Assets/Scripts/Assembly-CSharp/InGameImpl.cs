@@ -426,7 +426,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 		RunAfterDelay(delegate {
 			WeakGlobalMonoBehavior<BannerManager>.Instance.OpenBanner(new BannerStartWave(5f, ProfileData.WaveToPlay));
-		}, 2f);
+		}, SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game02_Movement") ? 4.5f : 2f);
 
 		IncrementWaveAttempts();
 
@@ -855,9 +855,10 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		{
 			if (CurrentWave <= 1)
 			{
-				if (SingletonMonoBehaviour<TutorialMain>.Instance.TutorialStartIfNeeded("Tutorial_Game02_Movement"))
+				if (SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game02_Movement"))
 				{
-					yield return new WaitForSeconds(20f);
+					SingletonMonoBehaviour<TutorialMain>.Instance.StartTutorial("Tutorial_Game02_Movement");
+					yield return new WaitForSeconds(10f);
 					mTimeToNextTutorial = 0f;
 				}
 				else if (SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game04_Ability"))
@@ -888,7 +889,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 			{
 				if (CurrentWave != 4 || !SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game05_Flying"))
 				{
-					break;
+					yield return null;
 				}
 				List<Character> enemiesPlayerCanSee = WeakGlobalInstance<CharactersManager>.Instance.GetCharactersInRange(hero.controller.position.z, hero.controller.position.z + 4f, 1);
 				int foundIndex = enemiesPlayerCanSee.FindIndex((Character c) => c.isFlying);
