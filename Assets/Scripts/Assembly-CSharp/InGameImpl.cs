@@ -178,7 +178,6 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 	{
 		get { return mGameOver && hero.health > 0f; }
 	}
-
 	public bool enemiesWon
 	{
 		get { return mGameOver && hero.health <= 0f; }
@@ -199,7 +198,6 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 	{
 		get { return mHero[0]; }
 	}
-
 	public Hero enemyHero
 	{
 		get { return mHero[1]; }
@@ -209,7 +207,6 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 	{
 		get { return (mGate[0] == null) ? mGate[1] : mGate[0]; }
 	}
-
 	public Gate enemyGate
 	{
 		get { return mGate[1]; }
@@ -220,9 +217,6 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 	public float timeScalar
 	{
 		get { return (!useSlowMoFinisher) ? 1f : 0.8f; }
-		set
-		{
-		}
 	}
 
 	public float TimeSinceStart
@@ -285,17 +279,11 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 			}
 			return mFriendshipHelperID;
 		}
-		set
-		{
-		}
 	}
 
 	public Pit Pit
 	{
 		get { return mPit; }
-		set
-		{
-		}
 	}
 
 	public CharactersManager CharacterMgr
@@ -339,33 +327,44 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	private IEnumerator Start()
 	{
-		while (!Singleton<Profile>.Instance.Initialized)
-		{
-			yield return null;
-		}
+		while (!Singleton<Profile>.Instance.Initialized) yield return null;
 
 		ApplicationUtilities._allowAutoSave = true;
 		ResourceCache.DefaultCacheLevel = 1;
 		Singleton<Achievements>.Instance.SuppressPartialReporting(true);
+
 		fireworksResource = ResourceCache.GetCachedResource("FX/Fireworks", 1).Resource as GameObject;
 
-		int currentWave = Singleton<Profile>.Instance.wave_SinglePlayerGame;
-		if (!Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive() && !Singleton<Profile>.Instance.inDailyChallenge)
+		int currentWave = Singleton<Profile>.Instance.CurrentStoryWave;
+
+		if (!Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive() && !Singleton<Profile>.Instance.IsInDailyChallenge)
 		{
-			if (currentWave == 2 && Singleton<Profile>.Instance.GetWaveLevel(2) == 1)
+			if (currentWave == 2 && Singleton<Profile>.Instance.GetWaveCompletionCount(2) == 1)
 			{
 				Singleton<Profile>.Instance.SetSelectedHelpers(new List<string>(new string[1] { "Farmer" }));
 				Singleton<Profile>.Instance.ForceOnboardingStage("OnboardingStep17_StartWave2");
 			}
-			else if (currentWave == 1 && Singleton<Profile>.Instance.GetWaveLevel(1) == 1)
+			else if (currentWave == 1 && Singleton<Profile>.Instance.GetWaveCompletionCount(1) == 1)
 			{
 				Singleton<Profile>.Instance.ForceOnboardingStage("OnboardingStep3_StartWave1");
 				ApplicationUtilities.MakePlayHavenContentRequest("tutorial_start");
 			}
 		}
 
-		LoadingScreen.LogStep("InGame Start BEGIN");
+		// LoadingScreen.LogStep("InGame Start BEGIN");
 		List<string> helpersToLoad = new List<string>();
+
+		if (currentWave == 1 && Singleton<Profile>.Instance.GetWaveCompletionCount(1) == 1)
+		{
+			WeakGlobalMonoBehavior<HUD>.Instance.alliesEnabled = false;
+			StartCoroutine(CheckForHeroMovement());
+			StartCoroutine(CheckForHeroAttack());
+
+			Singleton<Profile>.Instance.SetSelectedAbilities(new List<string>(new string[1] { "KatanaSlash" }));
+			WeakGlobalMonoBehavior<HUD>.Instance.ResetAbilities();
+			WeakGlobalMonoBehavior<HUD>.Instance.abilitiesEnabled = true;
+			StartCoroutine(CheckForKatanaSlashUse());
+		}
 
 		List<string> abilitiesToLoad = new List<string>();
 		foreach (string ability in Singleton<Profile>.Instance.GetSelectedAbilities())
@@ -414,7 +413,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 			}
 		}
 
-		if (Singleton<Profile>.Instance.inVSMultiplayerWave)
+		if (Singleton<Profile>.Instance.IsInVSMultiplayerWave)
 		{
 			foreach (string ability2 in Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.abilityIdList)
 			{
@@ -442,7 +441,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 			string[] array2 = tagHeroes;
 			foreach (string hero in array2)
 			{
-				if (Singleton<Profile>.Instance.heroId != hero && (!Singleton<Profile>.Instance.inMultiplayerWave || Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.heroId != hero))
+				if (Singleton<Profile>.Instance.CurrentHeroId != hero && (!Singleton<Profile>.Instance.IsInMultiplayerWave || Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.CurrentHeroId != hero))
 				{
 					possibleTag.Add(hero);
 				}
@@ -478,8 +477,8 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		Singleton<PotionsDatabase>.Instance.LoadInGameData();
 		LoadingScreen.LogStep("PotionsDatabase.Instance.LoadInGameData");
 		Singleton<PlayStatistics>.Instance.Reset();
-		Singleton<PlayStatistics>.Instance.data.wavePlayed = Singleton<Profile>.Instance.waveToPlay;
-		Singleton<PlayStatistics>.Instance.data.wavePlayedLevel = Singleton<Profile>.Instance.GetWaveLevel(Singleton<Profile>.Instance.waveToPlay);
+		Singleton<PlayStatistics>.Instance.data.wavePlayed = Singleton<Profile>.Instance.WaveToPlay;
+		Singleton<PlayStatistics>.Instance.data.wavePlayedLevel = Singleton<Profile>.Instance.GetWaveCompletionCount(Singleton<Profile>.Instance.WaveToPlay);
 		Singleton<PlayStatistics>.Instance.data.waveTypePlayed = Singleton<Profile>.Instance.waveTypeToPlay;
 		Profile.UpdatePlayMode();
 		mGameDirection = Singleton<PlayModesManager>.Instance.gameDirection;
@@ -487,7 +486,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		mRailManager = new RailManager();
 		mProjectileManager = new ProjectileManager();
 		List<string> allEnemyKeys = new List<string>();
-		if (!Singleton<Profile>.Instance.inVSMultiplayerWave)
+		if (!Singleton<Profile>.Instance.IsInVSMultiplayerWave)
 		{
 			var enemyGateZPositions = new List<float>();
 			for (int i = 1; true; i++)
@@ -501,7 +500,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 			mWaveManager = new WaveManager(
 				Singleton<Profile>.Instance.waveTypeToPlay,
-				Singleton<Profile>.Instance.waveToPlay,
+				Singleton<Profile>.Instance.WaveToPlay,
 				enemyGateZPositions,
 				enemyGateGroup,
 				enemiesSpawnArea,
@@ -525,11 +524,11 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 				}
 			}
 		}
-		if (Singleton<Profile>.Instance.inDailyChallenge)
+		if (Singleton<Profile>.Instance.IsInDailyChallenge)
 		{
 			mGameTimer = Singleton<Profile>.Instance.dailyChallengeProceduralWaveSchema.maxTime;
 		}
-		if (Singleton<Profile>.Instance.inMultiplayerWave)
+		if (Singleton<Profile>.Instance.IsInMultiplayerWave)
 		{
 			mLegendaryStrikeEnemies = DataBundleRuntime.Instance.GetRecordKeys(typeof(EnemyListSchema), "LegendaryStrikeEnemies", false);
 			foreach (string enemy in mLegendaryStrikeEnemies)
@@ -544,7 +543,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 				mGameTimer = SingletonSpawningMonoBehaviour<DesignerVariables>.Instance.GetVariable("AttackTime", 300f);
 			}
 		}
-		if (!Singleton<Profile>.Instance.inVSMultiplayerWave)
+		if (!Singleton<Profile>.Instance.IsInVSMultiplayerWave)
 		{
 			List<string> enemiesSoFar = new List<string>(allEnemyKeys);
 			foreach (string enemyID in enemiesSoFar)
@@ -579,19 +578,19 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		mSouls[0] = new Souls(0);
 
 		int defenderId = 0;
-		if (Singleton<Profile>.Instance.inVSMultiplayerWave && Singleton<PlayModesManager>.Instance.Attacking)
+		if (Singleton<Profile>.Instance.IsInVSMultiplayerWave && Singleton<PlayModesManager>.Instance.Attacking)
 		{
 			defenderId = 1;
 		}
 		mGate[defenderId] = new Gate(enemiesTargetLeft, defenderId);
-		if (Singleton<Profile>.Instance.inVSMultiplayerWave)
+		if (Singleton<Profile>.Instance.IsInVSMultiplayerWave)
 		{
 			mLeadership[1] = new EnemyLeadership(1);
 		}
 		mBell = new Bell(bellRingerLocationObject, bellLocationObject, defenderId);
 		mPit = new Pit(pitArea, defenderId);
 		int bannerLevel = Singleton<Profile>.Instance.MultiplayerData.CollectionLevel("Banner");
-		if (Singleton<Profile>.Instance.inVSMultiplayerWave && Singleton<PlayModesManager>.Instance.Attacking)
+		if (Singleton<Profile>.Instance.IsInVSMultiplayerWave && Singleton<PlayModesManager>.Instance.Attacking)
 		{
 			bannerLevel = Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.bannersCollected;
 		}
@@ -605,7 +604,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 			}
 		}
 		int flowerCount = Singleton<Profile>.Instance.MultiplayerData.CollectionLevel("Flower");
-		if (Singleton<Profile>.Instance.inVSMultiplayerWave && Singleton<PlayModesManager>.Instance.Attacking)
+		if (Singleton<Profile>.Instance.IsInVSMultiplayerWave && Singleton<PlayModesManager>.Instance.Attacking)
 		{
 			flowerCount = Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.flowersCollected;
 		}
@@ -631,7 +630,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		}
 		LoadingScreen.LogStep("InGame load misc");
 		CreateHero(0, heroSpawnPoint);
-		if (Singleton<Profile>.Instance.inVSMultiplayerWave)
+		if (Singleton<Profile>.Instance.IsInVSMultiplayerWave)
 		{
 			CreateHero(1, enemySpawnPoint);
 		}
@@ -665,9 +664,10 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		SingletonMonoBehaviour<TutorialMain>.Instance.Init();
 		mTimeStarted = Time.time;
 		if (!Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive() && 
-			!Singleton<Profile>.Instance.inDailyChallenge && 
-			SingletonMonoBehaviour<TutorialMain>.Instance.TutorialStartIfNeeded("Tutorial_Game01_ProtectGate"))
+			!Singleton<Profile>.Instance.IsInDailyChallenge && 
+			SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game01_ProtectGate"))
 		{
+			SingletonMonoBehaviour<TutorialMain>.Instance.StartTutorial("Tutorial_Game01_ProtectGate");
 			WeakGlobalMonoBehavior<HUD>.Instance.abilitiesEnabled = false;
 			WeakGlobalMonoBehavior<HUD>.Instance.alliesEnabled = false;
 			mTimeToNextTutorial = 7f;
@@ -677,17 +677,22 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 			mTimeToNextTutorial = 5f;
 			RunAfterDelay(delegate
 			{
-				WeakGlobalMonoBehavior<BannerManager>.Instance.OpenBanner(new BannerStartWave(5f, Singleton<Profile>.Instance.waveToPlay));
+				WeakGlobalMonoBehavior<BannerManager>.Instance.OpenBanner(new BannerStartWave(5f, Singleton<Profile>.Instance.WaveToPlay));
 			}, 2f);
 		}
-		if (currentWave == 1 && Singleton<Profile>.Instance.GetWaveLevel(1) == 1)
+		if (currentWave == 1 && Singleton<Profile>.Instance.GetWaveCompletionCount(1) == 1)
 		{
 			WeakGlobalMonoBehavior<HUD>.Instance.alliesEnabled = false;
 			StartCoroutine(CheckForHeroMovement());
 			StartCoroutine(CheckForHeroAttack());
+
+			Singleton<Profile>.Instance.SetSelectedAbilities(new List<string>(new string[1] { "KatanaSlash" }));
+			WeakGlobalMonoBehavior<HUD>.Instance.ResetAbilities();
+			WeakGlobalMonoBehavior<HUD>.Instance.abilitiesEnabled = true;
+			StartCoroutine(CheckForKatanaSlashUse());
 		}
-		StartCoroutine(CheckTutorials());
-		if (!Singleton<Profile>.Instance.inDailyChallenge)
+		// StartCoroutine(CheckTutorials());
+		if (!Singleton<Profile>.Instance.IsInDailyChallenge)
 		{
 			if (!Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive())
 			{
@@ -757,9 +762,9 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	private IEnumerator CheckTutorials()
 	{
-		while (!Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive() && !Singleton<Profile>.Instance.inDailyChallenge)
+		while (!Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive() && !Singleton<Profile>.Instance.IsInDailyChallenge)
 		{
-			int currentWave = Singleton<Profile>.Instance.wave_SinglePlayerGame;
+			int currentWave = Singleton<Profile>.Instance.CurrentStoryWave;
 			if (mTimeToNextTutorial <= 0f)
 			{
 				if (currentWave <= 1)
@@ -1100,7 +1105,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		}
 		CreateWinDialog();
 		StartCoroutine(PostWinDelay());
-		if (!Singleton<Profile>.Instance.inMultiplayerWave && Singleton<Profile>.Instance.waveToPlay > 2)
+		if (!Singleton<Profile>.Instance.IsInMultiplayerWave && Singleton<Profile>.Instance.WaveToPlay > 2)
 		{
 			if (mGate[0] != null && mGate[0].NoDamage)
 			{
@@ -1136,18 +1141,13 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 	{
 		Singleton<Profile>.Instance.FlurrySession.ReportWaveLost();
 		mGameOver = true;
-		if (Singleton<Profile>.Instance.inBonusWave)
-		{
-			Singleton<Profile>.Instance.bonusWaveToBeat++;
-			Singleton<Profile>.Instance.wavesSinceLastBonusWave = 0;
-		}
 		if (Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive())
 		{
 			Singleton<Profile>.Instance.MultiplayerData.FinishMultiplayerGameSession(false);
 		}
 		CreateLoseDialog();
 		Singleton<Profile>.Instance.Save();
-		if (Singleton<Profile>.Instance.wave_SinglePlayerGame == 1 && Singleton<Profile>.Instance.GetWaveLevel(1) == 1 && !Singleton<Profile>.Instance.inMultiplayerWave)
+		if (Singleton<Profile>.Instance.CurrentStoryWave == 1 && Singleton<Profile>.Instance.GetWaveCompletionCount(1) == 1 && !Singleton<Profile>.Instance.IsInMultiplayerWave)
 		{
 			Restart();
 		}
@@ -1186,11 +1186,11 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		mReviveOfferDismissed = false;
 		Singleton<Profile>.Instance.globalPlayerRating += 20;
 		Singleton<Achievements>.Instance.IncrementAchievement("UseRevive", 1);
-		if (Singleton<Profile>.Instance.inVSMultiplayerWave && Singleton<PlayModesManager>.Instance.Attacking)
+		if (Singleton<Profile>.Instance.IsInVSMultiplayerWave && Singleton<PlayModesManager>.Instance.Attacking)
 		{
 			mGameTimer = SingletonSpawningMonoBehaviour<DesignerVariables>.Instance.GetVariable("AttackTime", 300f);
 		}
-		else if (Singleton<Profile>.Instance.inDailyChallenge)
+		else if (Singleton<Profile>.Instance.IsInDailyChallenge)
 		{
 			mGameTimer = Singleton<Profile>.Instance.dailyChallengeProceduralWaveSchema.maxTime;
 		}
@@ -1234,7 +1234,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		bool flag = false;
 		if (mHero[0].isOver)
 		{
-			if ((Singleton<Profile>.Instance.wave_SinglePlayerGame > 1 || Singleton<Profile>.Instance.GetWaveLevel(1) > 1) && !mReviveOfferDismissed)
+			if ((Singleton<Profile>.Instance.CurrentStoryWave > 1 || Singleton<Profile>.Instance.GetWaveCompletionCount(1) > 1) && !mReviveOfferDismissed)
 			{
 				// WeakGlobalInstance<CollectableManager>.Instance.OpenPresents(true);
 				GluiActionSender.SendGluiAction("POPUP_REVIVE", base.gameObject, null);
@@ -1258,7 +1258,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		{
 			Lose();
 		}
-		else if (Singleton<Profile>.Instance.inVSMultiplayerWave)
+		else if (Singleton<Profile>.Instance.IsInVSMultiplayerWave)
 		{
 			if (Singleton<PlayModesManager>.Instance.Attacking)
 			{
@@ -1321,37 +1321,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 			WeakGlobalInstance<WaveManager>.Instance.AddSpecialRewardsToCollectables();
 		}
 		WeakGlobalInstance<CollectableManager>.Instance.BankAllResources();
-		NextWave();
-		Singleton<Profile>.Instance.Save();
-	}
-
-	private void NextWave()
-	{
-		if (Singleton<Profile>.Instance.inBonusWave)
-		{
-			Singleton<Profile>.Instance.bonusWaveToBeat++;
-			Singleton<Profile>.Instance.wavesSinceLastBonusWave = 0;
-		}
-		else if (!Singleton<Profile>.Instance.inMultiplayerWave && !Singleton<Profile>.Instance.inDailyChallenge)
-		{
-			Singleton<Profile>.Instance.SetWaveLevel(Singleton<Profile>.Instance.wave_SinglePlayerGame, Singleton<Profile>.Instance.GetWaveLevel(Singleton<Profile>.Instance.wave_SinglePlayerGame) + 1);
-			Singleton<Profile>.Instance.wave_SinglePlayerGame++;
-			if (Singleton<Profile>.Instance.GetWaveLevel(Singleton<Profile>.Instance.wave_SinglePlayerGame) == 0)
-			{
-				Singleton<Profile>.Instance.SetWaveLevel(Singleton<Profile>.Instance.wave_SinglePlayerGame, 1);
-			}
-			if (Singleton<PlayModesManager>.Instance.selectedMode == "classic")
-			{
-				Singleton<Profile>.Instance.wavesSinceLastBonusWave++;
-			}
-			WaveSchema waveData = WaveManager.GetWaveData(Singleton<Profile>.Instance.wave_SinglePlayerGame, Singleton<Profile>.Instance.waveTypeToPlay);
-			Singleton<Profile>.Instance.heroId = waveData.recommendedHero.Key;
-			if (Singleton<Profile>.Instance.GetWaveLevel(Singleton<PlayStatistics>.Instance.data.wavePlayed) == 2)
-			{
-				ResultsMenuImpl.UnlockedFeature unlockedHero = ResultsMenuImpl.GetUnlockedHero();
-				Singleton<Profile>.Instance.AutoEquipNewAbilities(Singleton<PlayStatistics>.Instance.data.wavePlayed + 1, (unlockedHero == null) ? null : unlockedHero.id);
-			}
-		}
+		Singleton<Profile>.Instance.GoToNextWave();
 	}
 
 	private IEnumerator RunAfterDelayInternal(Action fn, float delay)
@@ -1374,15 +1344,12 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	private void SpendCharm()
 	{
-		if (!Singleton<Profile>.Instance.inBonusWave)
+		string selectedCharm = Singleton<Profile>.Instance.selectedCharm;
+		if (selectedCharm != string.Empty)
 		{
-			string selectedCharm = Singleton<Profile>.Instance.selectedCharm;
-			if (selectedCharm != string.Empty)
-			{
-				Singleton<Profile>.Instance.SetNumCharms(selectedCharm, Mathf.Max(0, Singleton<Profile>.Instance.GetNumCharms(selectedCharm) - 1));
-				Singleton<Profile>.Instance.selectedCharm = string.Empty;
-				Singleton<Profile>.Instance.globalPlayerRating += 20;
-			}
+			Singleton<Profile>.Instance.SetNumCharms(selectedCharm, Mathf.Max(0, Singleton<Profile>.Instance.GetNumCharms(selectedCharm) - 1));
+			Singleton<Profile>.Instance.selectedCharm = string.Empty;
+			Singleton<Profile>.Instance.globalPlayerRating += 20;
 		}
 	}
 
@@ -1409,7 +1376,6 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 			HelperListSchema[] array = dataBundleRecordTable.InitializeRecords<HelperListSchema>();
 			int num = UnityEngine.Random.Range(0, array.Length);
 			DataBundleRecordKey dataBundleRecordKey = new DataBundleRecordKey(array[num].ability);
-			FriendshipHelperID = DataBundleRuntime.RecordKey(dataBundleRecordKey);
 		}
 		if (!string.IsNullOrEmpty(charmSchema.abilityToActivate.Key))
 		{
@@ -1483,7 +1449,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	private void HideUnusedGate()
 	{
-		if (Singleton<Profile>.Instance.inVSMultiplayerWave) return;
+		if (Singleton<Profile>.Instance.IsInVSMultiplayerWave) return;
 		// switch (mGameDirection)
 		// {
 		// case PlayModesManager.GameDirection.LeftToRight:

@@ -47,11 +47,11 @@ public class StoreMenuImpl : SingletonMonoBehaviour<StoreMenuImpl>, IGluiActionH
 		{
 			FrontEnd_HUD.SetDefenseRatingMode(false);
 		}
-		if (Singleton<Profile>.Instance.wave_SinglePlayerGame == 2 && Singleton<Profile>.Instance.GetWaveLevel(2) == 1)
+		if (Singleton<Profile>.Instance.CurrentStoryWave == 2 && Singleton<Profile>.Instance.GetWaveCompletionCount(2) == 1)
 		{
 			Singleton<Profile>.Instance.ForceOnboardingStage("OnboardingStep8_StoreTutorial");
 		}
-		else if (Singleton<Profile>.Instance.wave_SinglePlayerGame == 3 && Singleton<Profile>.Instance.GetWaveLevel(3) == 1 && !Singleton<Profile>.Instance.IsOnboardingStageComplete("OnboardingStep20_StoreMain2"))
+		else if (Singleton<Profile>.Instance.CurrentStoryWave == 3 && Singleton<Profile>.Instance.GetWaveCompletionCount(3) == 1 && !Singleton<Profile>.Instance.IsOnboardingStageComplete("OnboardingStep20_StoreMain2"))
 		{
 			Singleton<Profile>.Instance.ForceOnboardingStage("OnboardingStep20_StoreMain2");
 			if (PortableQualitySettings.GetQuality() != EPortableQualitySetting.Low)

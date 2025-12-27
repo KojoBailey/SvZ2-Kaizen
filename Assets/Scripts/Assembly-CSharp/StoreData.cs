@@ -142,22 +142,22 @@ public class StoreData
 				analyticsParams["Cost"] = cost.price;
 				analyticsParams["Currency"] = cost.currencyAnalyticCode;
 				analyticsParams["PlayerLevel"] = Singleton<Profile>.Instance.playerLevel;
-				analyticsParams["WaveNumber"] = Singleton<Profile>.Instance.wave_SinglePlayerGame;
+				analyticsParams["WaveNumber"] = Singleton<Profile>.Instance.CurrentStoryWave;
 				analyticsParams["MPWavesWon"] = Singleton<Profile>.Instance.mpWavesWon;
 				Singleton<Analytics>.Instance.LogEvent(analyticsEvent, analyticsParams);
-				Singleton<Analytics>.Instance.KontagentEvent(text, st2, analyticsEvent, Singleton<Profile>.Instance.wave_SinglePlayerGame, cost.price, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()), Analytics.KParam("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon.ToString()));
+				Singleton<Analytics>.Instance.KontagentEvent(text, st2, analyticsEvent, Singleton<Profile>.Instance.CurrentStoryWave, cost.price, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()), Analytics.KParam("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon.ToString()));
 			}
 			if (dealPack != null)
 			{
-				Singleton<Analytics>.Instance.KontagentEvent(text, "DealPackPurchased", st, Singleton<Profile>.Instance.wave_SinglePlayerGame, cost.price, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()), Analytics.KParam("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon.ToString()), Analytics.KParam("PackContents", dealPack.items));
+				Singleton<Analytics>.Instance.KontagentEvent(text, "DealPackPurchased", st, Singleton<Profile>.Instance.CurrentStoryWave, cost.price, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()), Analytics.KParam("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon.ToString()), Analytics.KParam("PackContents", dealPack.items));
 			}
 			
 			Singleton<Profile>.Instance.JustMadeSC_IAP = false;
-			Singleton<Analytics>.Instance.KontagentEvent(text, "FirstPurchaseFollowingSC_IAP", "SC", Singleton<Profile>.Instance.wave_SinglePlayerGame, cost.price, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()), Analytics.KParam("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon.ToString()));
+			Singleton<Analytics>.Instance.KontagentEvent(text, "FirstPurchaseFollowingSC_IAP", "SC", Singleton<Profile>.Instance.CurrentStoryWave, cost.price, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()), Analytics.KParam("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon.ToString()));
 			
 			if (analyticsParams != null && analyticsParams.ContainsKey("ItemName"))
 			{
-				Singleton<Analytics>.Instance.KontagentEvent("Sink", "SINK_SOURCE", st, Singleton<Profile>.Instance.wave_SinglePlayerGame, -amount, Analytics.KParam("SinkName", text));
+				Singleton<Analytics>.Instance.KontagentEvent("Sink", "SINK_SOURCE", st, Singleton<Profile>.Instance.CurrentStoryWave, -amount, Analytics.KParam("SinkName", text));
 			}
 		}
 

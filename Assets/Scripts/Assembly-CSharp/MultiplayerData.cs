@@ -961,7 +961,7 @@ public class MultiplayerData : SaveProvider
 					mLocalPlayerLoadout.isDirty = true;
 					UpdateLoadout();
 				}
-				int valueInt = Singleton<Profile>.Instance.saveData.GetValueInt("CollectionItemToAdd");
+				int valueInt = Singleton<Profile>.Instance.SaveData.GetValueInt("CollectionItemToAdd");
 				if (valueInt > 0)
 				{
 					valueInt--;
@@ -974,7 +974,7 @@ public class MultiplayerData : SaveProvider
 					}
 					else
 					{
-						Singleton<Profile>.Instance.saveData.SetValueInt("CollectionItemToAdd", 0);
+						Singleton<Profile>.Instance.SaveData.SetValueInt("CollectionItemToAdd", 0);
 					}
 				}
 				arg = AwardAnyCompletedSets();
@@ -1042,7 +1042,7 @@ public class MultiplayerData : SaveProvider
 
 	public int TotalTimesCompletedSet(string setName)
 	{
-		return Singleton<Profile>.Instance.saveData.GetValueInt("CollectionSetCount_" + setName);
+		return Singleton<Profile>.Instance.SaveData.GetValueInt("CollectionSetCount_" + setName);
 	}
 
 	public int TotalCollectionItemsOwned()
@@ -1094,9 +1094,9 @@ public class MultiplayerData : SaveProvider
 			{
 				Singleton<Achievements>.Instance.IncrementAchievement("CompleteCollection3x", 1);
 			}
-			Singleton<Profile>.Instance.saveData.SetValue("CollectionSetDummyReward_" + setName, CollectionDummyRewardsSchema.GetRandomRecord(recordTable).id);
+			Singleton<Profile>.Instance.SaveData.SetValue("CollectionSetDummyReward_" + setName, CollectionDummyRewardsSchema.GetRandomRecord(recordTable).id);
 		}
-		Singleton<Profile>.Instance.saveData.SetValueInt("CollectionSetCount_" + setName, num);
+		Singleton<Profile>.Instance.SaveData.SetValueInt("CollectionSetCount_" + setName, num);
 		UpdateUserDefensiveBuffs();
 		Singleton<Achievements>.Instance.IncrementAchievement("CompleteCollection", 1);
 		if (num == 1)
@@ -1107,7 +1107,7 @@ public class MultiplayerData : SaveProvider
 
 	public CollectionDummyRewardsSchema GetDummyReward(string rewardTable, string setName)
 	{
-		string value = Singleton<Profile>.Instance.saveData.GetValue("CollectionSetDummyReward_" + setName);
+		string value = Singleton<Profile>.Instance.SaveData.GetValue("CollectionSetDummyReward_" + setName);
 		return CollectionDummyRewardsSchema.GetRecord(rewardTable, value);
 	}
 

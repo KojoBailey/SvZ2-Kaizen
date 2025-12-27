@@ -40,9 +40,9 @@ public class EquipPageWaves : EquipPage, UIHandlerComponent
 		mButtonInc = uiParent.FindChildComponent<GluiStandardButtonContainer>("Button_WaveUp");
 		mButtonDec_10 = uiParent.FindChildComponent<GluiStandardButtonContainer>("Button_WaveDown_10");
 		mButtonInc_10 = uiParent.FindChildComponent<GluiStandardButtonContainer>("Button_WaveUp_10");
-		mLabel = ((!Singleton<Profile>.Instance.inDailyChallenge) ? uiParent.FindChildComponent<GluiText>("SwapText_Digit") : uiParent.FindChildComponent<GluiText>("SwapText_Title"));
+		mLabel = ((!Singleton<Profile>.Instance.IsInDailyChallenge) ? uiParent.FindChildComponent<GluiText>("SwapText_Digit") : uiParent.FindChildComponent<GluiText>("SwapText_Title"));
 		mTimesCompleted = uiParent.FindChildComponent<GluiText>("Text_TimesCompleted");
-		SelectWave(Singleton<Profile>.Instance.waveToPlay);
+		SelectWave(Singleton<Profile>.Instance.WaveToPlay);
 		SetDefaultHero(true);
 		RefreshButtonStates();
 		Singleton<Profile>.Instance.ForceOnboardingStage("OnboardingStep11_Wave2Select");
@@ -53,7 +53,7 @@ public class EquipPageWaves : EquipPage, UIHandlerComponent
 		float num = mTimeSinceChange * mWaveTicksPerSecond;
 		if (num >= 1f)
 		{
-			int num2 = mSelectedWave - Singleton<Profile>.Instance.wave_SinglePlayerGame;
+			int num2 = mSelectedWave - Singleton<Profile>.Instance.CurrentStoryWave;
 			if (num2 > 0 && num2 < minChange)
 			{
 				num = minChange;
@@ -63,7 +63,7 @@ public class EquipPageWaves : EquipPage, UIHandlerComponent
 		}
 		else if (num <= -1f)
 		{
-			int num3 = mSelectedWave - Singleton<Profile>.Instance.wave_SinglePlayerGame;
+			int num3 = mSelectedWave - Singleton<Profile>.Instance.CurrentStoryWave;
 			if (num3 < 0 && num3 > -minChange)
 			{
 				num = minChange;
@@ -101,10 +101,10 @@ public class EquipPageWaves : EquipPage, UIHandlerComponent
 		else
 		{
 			mTimePushed = Mathf.Max(mTimePushed - Time.deltaTime, -10f);
-			if (mTimePushed < -0.75f && Singleton<Profile>.Instance.waveTypeToPlay == WaveManager.WaveType.Wave_SinglePlayer && Singleton<Profile>.Instance.wave_SinglePlayerGame != mSelectedWave)
+			if (mTimePushed < -0.75f && Singleton<Profile>.Instance.waveTypeToPlay == WaveManager.WaveType.Wave_SinglePlayer && Singleton<Profile>.Instance.CurrentStoryWave != mSelectedWave)
 			{
-				Singleton<Profile>.Instance.wave_SinglePlayerGame = mSelectedWave;
-				WeakGlobalInstance<EnemiesShowCase>.Instance.Reload(WaveManager.WaveType.Wave_SinglePlayer, Singleton<Profile>.Instance.wave_SinglePlayerGame);
+				Singleton<Profile>.Instance.CurrentStoryWave = mSelectedWave;
+				WeakGlobalInstance<EnemiesShowCase>.Instance.Reload(WaveManager.WaveType.Wave_SinglePlayer, Singleton<Profile>.Instance.CurrentStoryWave);
 			}
 		}
 	}
@@ -177,7 +177,7 @@ public class EquipPageWaves : EquipPage, UIHandlerComponent
 				newWave = 1;
 			}
 			mSelectedWave = newWave;
-			if (Singleton<Profile>.Instance.inDailyChallenge)
+			if (Singleton<Profile>.Instance.IsInDailyChallenge)
 			{
 				mLabel.Text = StringUtils.GetStringFromStringRef(Singleton<Profile>.Instance.dailyChallengeProceduralWaveSchema.waveDisplayName);
 			}
@@ -187,17 +187,17 @@ public class EquipPageWaves : EquipPage, UIHandlerComponent
 			}
 			if (mTimesCompleted != null)
 			{
-				mTimesCompleted.Text = string.Format(StringUtils.GetStringFromStringRef("MenuFixedStrings.Menu_MPCollectionTally"), Singleton<Profile>.Instance.GetWaveLevel(mSelectedWave) - 1);
+				mTimesCompleted.Text = string.Format(StringUtils.GetStringFromStringRef("MenuFixedStrings.Menu_MPCollectionTally"), Singleton<Profile>.Instance.GetWaveCompletionCount(mSelectedWave) - 1);
 			}
 		}
 	}
 
 	private void SetDefaultHero(bool onlyIfForced)
 	{
-		WaveSchema waveData = WaveManager.GetWaveData(Singleton<Profile>.Instance.waveToPlay, Singleton<Profile>.Instance.waveTypeToPlay);
+		WaveSchema waveData = WaveManager.GetWaveData(Singleton<Profile>.Instance.WaveToPlay, Singleton<Profile>.Instance.waveTypeToPlay);
 		if (!onlyIfForced || (onlyIfForced && waveData.recommendedHeroIsRequired))
 		{
-			Singleton<Profile>.Instance.heroId = waveData.recommendedHero.InitializeRecord<HeroSchema>().id;
+			Singleton<Profile>.Instance.CurrentHeroId = waveData.recommendedHero.InitializeRecord<HeroSchema>().id;
 		}
 	}
 
@@ -219,9 +219,9 @@ public class EquipPageWaves : EquipPage, UIHandlerComponent
 
 	private void RefreshButtonStates()
 	{
-		if (Singleton<Profile>.Instance.inDailyChallenge) return;
+		if (Singleton<Profile>.Instance.IsInDailyChallenge) return;
 
-		if (/*Singleton<Profile>.Instance.allNormalWavesBeaten*/ true)
+		if (/*Singleton<Profile>.Instance.AreAllNormalWavesBeaten*/ true)
 		{
 			mButtonDec.Locked = false;
 			mButtonInc.Locked = false;

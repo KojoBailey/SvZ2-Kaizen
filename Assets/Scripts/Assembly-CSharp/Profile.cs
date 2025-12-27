@@ -12,36 +12,29 @@ public class Profile : Singleton<Profile>
 
 	public static bool FastLoseItem = false;
 
-	public static readonly string kCloudSaveDisabledKey = "cloudSaveDisabled";
+	public const string kCloudSaveDisabledKey = "cloudSaveDisabled";
 
-	public static readonly string kPlayerRatingLeaderboard = "SAMUZOMBIE2_PLAYER_POWER";
+	public const string kPlayerRatingLeaderboard = "SAMUZOMBIE2_PLAYER_POWER";
+	public const string kDailyChallengeLeaderboard = "SAMUZOMBIE2_DAILY_CHALLENGE";
+	public const string kMultiplayerLeaderboard = "SAMUZOMBIE2_MP_WINS";
 
-	public static readonly string kDailyChallengeLeaderboard = "SAMUZOMBIE2_DAILY_CHALLENGE";
-
-	public static readonly string kMultiplayerLeaderboard = "SAMUZOMBIE2_MP_WINS";
+	public const string kWavePrefix = "Wave_";
 
 	protected int mPlayerAttackRating;
-
 	protected int[] mAttackRatingCategory = new int[14];
 
 	private static bool mRefreshingDailyChallenge = false;
-
 	private ProceduralWaveSchema mDailyChallengProceduralWaveSchema;
-
 	private HeroSchema mDailyChallengeHeroSchema;
-
 	private List<string> mDailyChallengeHelpers;
-
 	private List<string> mDailyChallengeAbilities;
 
 	private static DateTime? lastUpdateCheck;
-
 	private static TimeSpan? timeBetweenUpdateChecks;
 
 	private static object _lock = new object();
 
 	private SDFTreeSaveProvider mSavedData;
-
 	private SDFTreeSaveProvider mCloudSavedData;
 
 	private MultiplayerData multiplayerData;
@@ -67,87 +60,45 @@ public class Profile : Singleton<Profile>
 	private int mHighestUnlockedWave;
 
 	private bool mJustMadeSC_IAP;
-
 	private bool mJustMadeHC_IAP;
 
 	public int[] AttackRatingCategory
 	{
-		get
-		{
-			return mAttackRatingCategory;
-		}
+		get { return mAttackRatingCategory; }
 	}
 
 	public SeededRandomizer dailyRandomizer { get; private set; }
 
 	private static DateTime CurrentTime
 	{
-		get
-		{
-			return SntpTime.UniversalTime.AddHours(-8.0);
-		}
+		get { return SntpTime.UniversalTime.AddHours(-8.0); }
 	}
-
 	public ProceduralWaveSchema dailyChallengeProceduralWaveSchema
 	{
-		get
-		{
-			return mDailyChallengProceduralWaveSchema;
-		}
-		private set
-		{
-			mDailyChallengProceduralWaveSchema = value;
-		}
+		get { return mDailyChallengProceduralWaveSchema; }
+		private set { mDailyChallengProceduralWaveSchema = value; }
 	}
-
 	public HeroSchema dailyChallengeHeroSchema
 	{
-		get
-		{
-			return mDailyChallengeHeroSchema;
-		}
-		private set
-		{
-			mDailyChallengeHeroSchema = value;
-		}
+		get { return mDailyChallengeHeroSchema; }
+		private set { mDailyChallengeHeroSchema = value; }
 	}
-
 	public List<string> dailyChallengeHelpers
 	{
-		get
-		{
-			return mDailyChallengeHelpers;
-		}
-		private set
-		{
-			mDailyChallengeHelpers = value;
-		}
+		get { return mDailyChallengeHelpers; }
+		private set { mDailyChallengeHelpers = value; }
 	}
-
 	public List<string> dailyChallengeAbilities
 	{
-		get
-		{
-			return mDailyChallengeAbilities;
-		}
-		private set
-		{
-			mDailyChallengeAbilities = value;
-		}
+		get { return mDailyChallengeAbilities; }
+		private set { mDailyChallengeAbilities = value; }
 	}
 
 	public static bool iCloudEnabled
 	{
-		get
-		{
-			return GeneralConfig.iCloudEnabled && PlayerPrefs.GetInt(kCloudSaveDisabledKey, 1) == 0;
-		}
-		set
-		{
-			PlayerPrefs.SetInt(kCloudSaveDisabledKey, (!value) ? 1 : 0);
-		}
+		get { return GeneralConfig.iCloudEnabled && PlayerPrefs.GetInt(kCloudSaveDisabledKey, 1) == 0; }
+		set { PlayerPrefs.SetInt(kCloudSaveDisabledKey, (!value) ? 1 : 0); }
 	}
-
 	public SDFTreeSaveProvider CloudSave
 	{
 		get
@@ -156,35 +107,22 @@ public class Profile : Singleton<Profile>
 			return mCloudSavedData;
 		}
 	}
-
 	public SaveProvider.Result CloudSaveResult { get; private set; }
 
 	public string this[string key]
 	{
-		get
-		{
-			return mSavedData.Data[key];
-		}
-		set
-		{
-			mSavedData.Data[key] = value;
-		}
+		get { return mSavedData.Data[key]; }
+		set { mSavedData.Data[key] = value; }
 	}
 
 	public MultiplayerData MultiplayerData
 	{
-		get
-		{
-			return multiplayerData;
-		}
+		get { return multiplayerData; }
 	}
 
 	public Flurry_Session FlurrySession
 	{
-		get
-		{
-			return flurrySession;
-		}
+		get { return flurrySession; }
 	}
 
 	public bool Initialized { get; private set; }
@@ -195,48 +133,25 @@ public class Profile : Singleton<Profile>
 
 	public string GameSpyUserID
 	{
-		get
-		{
-			return mSavedData.GetValue("GameSpyUserID");
-		}
-		set
-		{
-			mSavedData.SetValue("GameSpyUserID", value);
-		}
+		get { return mSavedData.GetValue("GameSpyUserID"); }
+		set { mSavedData.SetValue("GameSpyUserID", value); }
 	}
-
 	public float GameSpyUserAccountVersion
 	{
-		get
-		{
-			return mSavedData.GetValueFloat("GameSpyUserAccountVersion");
-		}
-		set
-		{
-			mSavedData.SetValueFloat("GameSpyUserAccountVersion", value);
-		}
+		get { return mSavedData.GetValueFloat("GameSpyUserAccountVersion"); }
+		set { mSavedData.SetValueFloat("GameSpyUserAccountVersion", value); }
 	}
 
 	public int lastDailyRewardIndex
 	{
-		get
-		{
-			return mSavedData.GetValueInt("lastDailyRewardIndex");
-		}
-		set
-		{
-			mSavedData.SetValueInt("lastDailyRewardIndex", value);
-		}
+		get { return mSavedData.GetValueInt("lastDailyRewardIndex"); }
+		set { mSavedData.SetValueInt("lastDailyRewardIndex", value); }
 	}
-
 	public DateTime? lastDailyRewardDate
 	{
 		get
 		{
 			string value = mSavedData.GetValue("lastDailyReward");
-			if (value != null)
-			{
-			}
 			DateTime result;
 			if (DateTime.TryParseExact(value, "O", null, DateTimeStyles.None, out result))
 			{
@@ -259,46 +174,19 @@ public class Profile : Singleton<Profile>
 
 	public int playerLevel
 	{
-		get
-		{
-			return mSavedData.GetValueInt("playerLevel");
-		}
-		set
-		{
-			mSavedData.SetValueInt("playerLevel", value);
-		}
+		get { return mSavedData.GetValueInt("playerLevel"); }
+		set { mSavedData.SetValueInt("playerLevel", value); }
 	}
 
 	public int mpWavesWon
 	{
-		get
-		{
-			return mSavedData.GetValueInt("mpWavesWon");
-		}
-		set
-		{
-			mSavedData.SetValueInt("mpWavesWon", value);
-		}
-	}
-
-	public bool neverShowRateMeAlertAgain
-	{
-		get
-		{
-			return mSavedData.GetValueBool("neverShowRateMeAlertAgain");
-		}
-		set
-		{
-			mSavedData.SetValueBool("neverShowRateMeAlertAgain", value);
-		}
+		get { return mSavedData.GetValueInt("mpWavesWon"); }
+		set { mSavedData.SetValueInt("mpWavesWon", value); }
 	}
 
 	public bool wasBasicGameBeaten
 	{
-		get
-		{
-			return GetWaveLevel(maxBaseWave) > 1;
-		}
+		get { return GetWaveCompletionCount(maxBaseWave) > 1; }
 	}
 
 	public DateTime timeStamp
@@ -312,12 +200,8 @@ public class Profile : Singleton<Profile>
 			}
 			return ApplicationUtilities.Now;
 		}
-		set
-		{
-			mSavedData.SetValue("timeStamp", value.ToString("O"));
-		}
+		set { mSavedData.SetValue("timeStamp", value.ToString("O")); }
 	}
-
 	public DateTime sntpTimeStamp
 	{
 		get
@@ -329,259 +213,120 @@ public class Profile : Singleton<Profile>
 			}
 			return SntpTime.UniversalTime;
 		}
-		set
-		{
-			mSavedData.SetValue("sntpTimeStamp", value.ToString("O"));
-		}
+		set { mSavedData.SetValue("sntpTimeStamp", value.ToString("O")); }
 	}
 
 	public int timeRemainingUntilNotification
 	{
-		get
-		{
-			return mSavedData.GetValueInt("timeRemainingUntilNotification");
-		}
-		set
-		{
-			mSavedData.SetValueInt("timeRemainingUntilNotification", value);
-		}
+		get { return mSavedData.GetValueInt("timeRemainingUntilNotification"); }
+		set { mSavedData.SetValueInt("timeRemainingUntilNotification", value); }
 	}
 
 	public int lastYearPlayed
 	{
-		get
-		{
-			return mSavedData.GetValueInt("lastYearPlayed");
-		}
-		set
-		{
-			mSavedData.SetValueInt("lastYearPlayed", value);
-		}
+		get { return mSavedData.GetValueInt("lastYearPlayed"); }
+		set { mSavedData.SetValueInt("lastYearPlayed", value); }
 	}
-
 	public int lastMonthPlayed
 	{
-		get
-		{
-			return mSavedData.GetValueInt("lastMonthPlayed");
-		}
-		set
-		{
-			mSavedData.SetValueInt("lastMonthPlayed", value);
-		}
+		get { return mSavedData.GetValueInt("lastMonthPlayed"); }
+		set { mSavedData.SetValueInt("lastMonthPlayed", value); }
 	}
-
 	public int lastDayPlayed
 	{
-		get
-		{
-			return mSavedData.GetValueInt("lastDayPlayed");
-		}
-		set
-		{
-			mSavedData.SetValueInt("lastDayPlayed", value);
-		}
+		get { return mSavedData.GetValueInt("lastDayPlayed"); }
+		set { mSavedData.SetValueInt("lastDayPlayed", value); }
 	}
 
 	public string profileName
 	{
-		get
-		{
-			return mSavedData.GetValue("profileName");
-		}
-		set
-		{
-			mSavedData.SetValue("profileName", value);
-		}
+		get { return mSavedData.GetValue("profileName"); }
+		set { mSavedData.SetValue("profileName", value); }
 	}
 
 	public string latestDetectedOnlineVersion
 	{
-		get
-		{
-			return mSavedData.GetValue("latestDetectedOnlineVersion");
-		}
-		set
-		{
-			mSavedData.SetValue("latestDetectedOnlineVersion", value);
-		}
+		get { return mSavedData.GetValue("latestDetectedOnlineVersion"); }
+		set { mSavedData.SetValue("latestDetectedOnlineVersion", value); }
 	}
-
 	public bool newVersionDetected
 	{
-		get
-		{
-			return activeSavedData.GetValueBool("newVersionDetected");
-		}
-		set
-		{
-			mSavedData.SetValueBool("newVersionDetected", value);
-		}
+		get { return ActiveSavedData.GetValueBool("newVersionDetected"); }
+		set { mSavedData.SetValueBool("newVersionDetected", value); }
 	}
 
 	public bool tutorialIsComplete
 	{
-		get { return GetWaveLevel(3) > 0; }
+		get { return GetWaveCompletionCount(3) > 0; }
 	}
 
 	public bool hasReportedUser
 	{
-		get
-		{
-			return mSavedData.GetValueBool("hasReportedUser");
-		}
-		set
-		{
-			mSavedData.SetValueBool("hasReportedUser", value);
-		}
+		get { return mSavedData.GetValueBool("hasReportedUser"); }
+		set { mSavedData.SetValueBool("hasReportedUser", value); }
 	}
-
 	public bool hasReportedGemPurchase
 	{
-		get
-		{
-			return mSavedData.GetValueBool("hasReportedGemPurchase");
-		}
-		set
-		{
-			mSavedData.SetValueBool("hasReportedGemPurchase", value);
-		}
+		get { return mSavedData.GetValueBool("hasReportedGemPurchase"); }
+		set { mSavedData.SetValueBool("hasReportedGemPurchase", value); }
 	}
 
 	public int latestOnlineBundleVersion
 	{
-		get
-		{
-			return mSavedData.GetValueInt("onlineBundleVersion");
-		}
-		set
-		{
-			mSavedData.SetValueInt("onlineBundleVersion", value);
-		}
+		get { return mSavedData.GetValueInt("onlineBundleVersion"); }
+		set { mSavedData.SetValueInt("onlineBundleVersion", value); }
 	}
 
 	public bool hasWonPachinkoBefore
 	{
-		get
-		{
-			return mSavedData.GetValueBool("hasWonPachinkoBefore");
-		}
-		set
-		{
-			mSavedData.SetValueBool("hasWonPachinkoBefore", value);
-		}
+		get { return mSavedData.GetValueBool("hasWonPachinkoBefore"); }
+		set { mSavedData.SetValueBool("hasWonPachinkoBefore", value); }
 	}
 
 	public int lifetimeSCSpent
 	{
-		get
-		{
-			return mSavedData.GetValueInt("lifetimeSCSpent");
-		}
-		set
-		{
-			mSavedData.SetValueInt("lifetimeSCSpent", value);
-		}
-	}
-
-	public int lifetimeHCSpent
-	{
-		get
-		{
-			return mSavedData.GetValueInt("lifetimeHCSpent");
-		}
-		set
-		{
-			mSavedData.SetValueInt("lifetimeHCSpent", value);
-		}
+		get { return mSavedData.GetValueInt("lifetimeSCSpent"); }
+		set { mSavedData.SetValueInt("lifetimeSCSpent", value); }
 	}
 
 	public int globalPlayerRating
 	{
-		get
-		{
-			return mSavedData.GetValueInt("playerRating");
-		}
-		set
-		{
-			mSavedData.SetValueInt("playerRating", Mathf.Max(0, value));
-		}
+		get { return mSavedData.GetValueInt("playerRating"); }
+		set { mSavedData.SetValueInt("playerRating", Mathf.Max(0, value)); }
 	}
-
 	public int dailyRewardRating
 	{
-		get
-		{
-			return mSavedData.GetValueInt("dailyRewardRating");
-		}
-		set
-		{
-			mSavedData.SetValueInt("dailyRewardRating", Mathf.Max(0, value));
-		}
+		get { return mSavedData.GetValueInt("dailyRewardRating"); }
+		set { mSavedData.SetValueInt("dailyRewardRating", Mathf.Max(0, value)); }
 	}
-
 	public int multiplayerWinRating
 	{
-		get
-		{
-			return mSavedData.GetValueInt("multiplayerWinRating");
-		}
-		set
-		{
-			mSavedData.SetValueInt("multiplayerWinRating", Mathf.Max(0, value));
-		}
+		get { return mSavedData.GetValueInt("multiplayerWinRating"); }
+		set { mSavedData.SetValueInt("multiplayerWinRating", Mathf.Max(0, value)); }
 	}
-
 	public int multiplayerLossRating
 	{
-		get
-		{
-			return mSavedData.GetValueInt("multiplayerLossRating");
-		}
-		set
-		{
-			mSavedData.SetValueInt("multiplayerLossRating", Mathf.Max(0, value));
-		}
+		get { return mSavedData.GetValueInt("multiplayerLossRating"); }
+		set { mSavedData.SetValueInt("multiplayerLossRating", Mathf.Max(0, value)); }
 	}
-
 	public int collectionItemLossRating
 	{
-		get
-		{
-			return mSavedData.GetValueInt("collectionItemLossRating");
-		}
-		set
-		{
-			mSavedData.SetValueInt("collectionItemLossRating", Mathf.Max(0, value));
-		}
+		get { return mSavedData.GetValueInt("collectionItemLossRating"); }
+		set { mSavedData.SetValueInt("collectionItemLossRating", Mathf.Max(0, value)); }
 	}
-
 	public int achievementRating
 	{
-		get
-		{
-			return mSavedData.GetValueInt("achievementRating");
-		}
-		set
-		{
-			mSavedData.SetValueInt("achievementRating", Mathf.Max(0, value));
-		}
+		get { return mSavedData.GetValueInt("achievementRating"); }
+		set { mSavedData.SetValueInt("achievementRating", Mathf.Max(0, value)); }
 	}
-
 	public int playerAttackRating
 	{
-		get
-		{
-			return mPlayerAttackRating;
-		}
+		get { return mPlayerAttackRating; }
 	}
 
 	public int coins
 	{
-		get
-		{
-			return mSavedData.GetValueInt("coins");
-		}
+		get { return mSavedData.GetValueInt("coins"); }
 		set
 		{
 			Singleton<Achievements>.Instance.CheckThresholdAchievement("CollectCoins", value);
@@ -595,7 +340,7 @@ public class Profile : Singleton<Profile>
 				}
 			}
 
-			int num2 = Mathf.Clamp(value, 0, 999999999);
+			int num2 = value;
 			mSavedData.SetValueInt("coins", num2);
 			if (SingletonSpawningMonoBehaviour<GluiPersistentDataCache>.Exists)
 			{
@@ -604,56 +349,12 @@ public class Profile : Singleton<Profile>
 		}
 	}
 
-	public int purchasedCoins
-	{
-		get
-		{
-			return mSavedData.GetValueInt("purchasedCoins");
-		}
-		set
-		{
-			mSavedData.SetValueInt("purchasedCoins", Mathf.Clamp(value, 0, 999999999));
-		}
-	}
-
-	public int gems
-	{
-		get
-		{
-			return mSavedData.GetValueInt("gems");
-		}
-		set
-		{
-			int num = Mathf.Clamp(value, 0, 999999999);
-			mSavedData.SetValueInt("gems", num);
-			if (SingletonSpawningMonoBehaviour<GluiPersistentDataCache>.Exists)
-			{
-				SingletonSpawningMonoBehaviour<GluiPersistentDataCache>.Instance.Save("gems", StringUtils.FormatAmountString(num));
-			}
-		}
-	}
-
-	public int purchasedGems
-	{
-		get
-		{
-			return mSavedData.GetValueInt("purchasedGems");
-		}
-		set
-		{
-			mSavedData.SetValueInt("purchasedGems", Mathf.Clamp(value, 0, 999999999));
-		}
-	}
-
 	public int pachinkoBalls
 	{
-		get
-		{
-			return mSavedData.GetValueInt("pachinkoBalls");
-		}
+		get { return mSavedData.GetValueInt("pachinkoBalls"); }
 		set
 		{
-			int num = Mathf.Clamp(value, 0, 999999999);
+			int num = value;
 			mSavedData.SetValueInt("pachinkoBalls", num);
 			if (SingletonSpawningMonoBehaviour<GluiPersistentDataCache>.Exists)
 			{
@@ -661,37 +362,21 @@ public class Profile : Singleton<Profile>
 			}
 		}
 	}
-
 	public int pachinkoBallsLaunched
 	{
-		get
-		{
-			return mSavedData.GetValueInt("pachinkoBallsLaunched");
-		}
-		set
-		{
-			mSavedData.SetValueInt("pachinkoBallsLaunched", Mathf.Clamp(value, 0, 999999999));
-		}
+		get { return mSavedData.GetValueInt("pachinkoBallsLaunched"); }
+		set { mSavedData.SetValueInt("pachinkoBallsLaunched", value); }
 	}
 
 	public int freeBoosterPacks
 	{
-		get
-		{
-			return mSavedData.GetValueInt("fbp");
-		}
-		set
-		{
-			mSavedData.SetValueInt("fbp", value);
-		}
+		get { return mSavedData.GetValueInt("fbp"); }
+		set { mSavedData.SetValueInt("fbp", value); }
 	}
 
 	public int souls
 	{
-		get
-		{
-			return mSavedData.GetValueInt("souls");
-		}
+		get { return mSavedData.GetValueInt("souls"); }
 		set
 		{
 			if (WeakGlobalMonoBehavior<InGameImpl>.Instance != null)
@@ -729,62 +414,19 @@ public class Profile : Singleton<Profile>
 
 	public int storeVisitCount
 	{
-		get
-		{
-			return mSavedData.GetValueInt("storeVisitsCount");
-		}
-		set
-		{
-			mSavedData.SetValueInt("storeVisitsCount", value);
-		}
-	}
-
-	public int wavesSinceLastBonusWave
-	{
-		get
-		{
-			return mSavedData.GetValueInt("wavesSinceLastBonusWave");
-		}
-		set
-		{
-			mSavedData.SetValueInt("wavesSinceLastBonusWave", value);
-		}
-	}
-
-	public bool readyToStartBonusWave
-	{
-		get
-		{
-			return Singleton<PlayModesManager>.Instance.selectedMode == "classic" && wavesSinceLastBonusWave >= Singleton<Config>.Instance.data.GetInt(TextDBSchema.ChildKey("waveLevelMultipliers", "wavesPerBonusWave"));
-		}
-	}
-
-	public int bonusWaveToBeat
-	{
-		get
-		{
-			return Mathf.Max(1, mSavedData.GetValueInt("bonusWaveToBeat"));
-		}
-		set
-		{
-			int val = ValidateBonusWaveIndex(value);
-			mSavedData.SetValueInt("bonusWaveToBeat", val);
-		}
+		get { return mSavedData.GetValueInt("storeVisitsCount"); }
+		set { mSavedData.SetValueInt("storeVisitsCount", value); }
 	}
 
 	public WaveManager.WaveType waveTypeToPlay
 	{
 		get
 		{
-			if (inBonusWave)
-			{
-				return WaveManager.WaveType.Wave_Bonus;
-			}
-			if (inMultiplayerWave)
+			if (IsInMultiplayerWave)
 			{
 				return WaveManager.WaveType.Wave_Multiplayer;
 			}
-			if (inDailyChallenge)
+			if (IsInDailyChallenge)
 			{
 				return WaveManager.WaveType.Wave_DailyChallenge;
 			}
@@ -792,117 +434,75 @@ public class Profile : Singleton<Profile>
 		}
 	}
 
-	public bool allNormalWavesBeaten
+	public bool AreAllNormalWavesBeaten
 	{
 		get
 		{
 			PlayModeSchema selectedModeData = Singleton<PlayModesManager>.Instance.selectedModeData;
-			return Singleton<Profile>.Instance.highestUnlockedWave > selectedModeData.maxBaseWave || GetWaveLevel(selectedModeData.maxBaseWave) > 1;
+			return Singleton<Profile>.Instance.highestUnlockedWave > selectedModeData.maxBaseWave || GetWaveCompletionCount(selectedModeData.maxBaseWave) > 1;
 		}
 	}
 
-	public int waveToPlay
+	public int CurrentStoryWave
 	{
-		get
-		{
-			if (inBonusWave)
-			{
-				return bonusWaveToBeat;
-			}
-			if (inMultiplayerWave)
-			{
-				return MultiplayerData.MultiplayerGameSessionData.waveToPlay;
-			}
-			return wave_SinglePlayerGame;
-		}
-	}
-
-	public int wave_SinglePlayerGame
-	{
-		get
-		{
-			return Mathf.Max(1, mSavedData.GetValueInt("waveToBeat", playModeSubSection));
-		}
+		get { return Mathf.Max(1, mSavedData.GetValueInt("waveToBeat", playModeSubSection)); }
 		set
 		{
 			int num = ValidateWaveIndex(value);
 			mSavedData.SetValueInt("waveToBeat", num, playModeSubSection);
-			if (GetWaveLevel(num) == 0)
+			if (!GetIsWaveUnlocked(num))
 			{
-				SetWaveLevel(num, 1);
+				SetIsWaveUnlocked(num, true);
 			}
 		}
 	}
 
-	public bool waveAllowBow
+	public int WaveToPlay
 	{
 		get
 		{
-			return Singleton<Profile>.Instance.waveToPlay > 1 || Singleton<Profile>.Instance.GetWaveLevel(1) > 1;
+			if (IsInMultiplayerWave)
+			{
+				return MultiplayerData.MultiplayerGameSessionData.WaveToPlay;
+			}
+			return CurrentStoryWave;
 		}
 	}
 
-	public bool inBonusWave
+	public bool DoesWaveAllowBow
 	{
-		get
-		{
-			return false;
-		}
+		get { return Singleton<Profile>.Instance.WaveToPlay > 1 || Singleton<Profile>.Instance.GetWaveCompletionCount(1) > 1; }
 	}
 
-	public bool inMultiplayerWave
+	public bool IsInMultiplayerWave
 	{
-		get
-		{
-			return MultiplayerData != null && MultiplayerData.IsMultiplayerGameSessionActive();
-		}
+		get { return MultiplayerData != null && MultiplayerData.IsMultiplayerGameSessionActive(); }
 	}
-
-	public bool inVSMultiplayerWave
+	public bool IsInVSMultiplayerWave
 	{
-		get
-		{
-			return MultiplayerData != null && MultiplayerData.IsMultiplayerGameSessionActive() && UseVsMode;
-		}
+		get { return MultiplayerData != null && MultiplayerData.IsMultiplayerGameSessionActive() && UseVsMode; }
 	}
-
-	public bool inDailyChallenge
+	public bool IsInDailyChallenge
 	{
-		get
-		{
-			return (string)SingletonSpawningMonoBehaviour<GluiPersistentDataCache>.Instance.GetData("GAME_MODE") == "Button_DailyChallenge";
-		}
+		get { return (string)SingletonSpawningMonoBehaviour<GluiPersistentDataCache>.Instance.GetData("GAME_MODE") == "Button_DailyChallenge"; }
 	}
 
-	public SDFTreeSaveProvider activeSavedData
+	public SDFTreeSaveProvider ActiveSavedData
 	{
-		get
-		{
-			return mSavedData;
-		}
+		get { return mSavedData; }
 	}
-
-	public SDFTreeSaveProvider saveData
+	public SDFTreeSaveProvider SaveData
 	{
-		get
-		{
-			return mSavedData;
-		}
+		get { return mSavedData; }
 	}
 
-	public int heroLevel
+	public int CurrentHeroLevel
 	{
-		get
-		{
-			return GetHeroLevel(heroId);
-		}
-		set
-		{
-			SetHeroLevel(heroId, value);
-		}
+		get { return GetHeroLevel(CurrentHeroId); }
+		set { SetHeroLevel(CurrentHeroId, value); }
 	}
 
-	public string heroId
+	public string CurrentHeroId
 	{
 		get
 		{
@@ -910,8 +510,8 @@ public class Profile : Singleton<Profile>
 			{
 				return SelectedDefendHero;
 			}
-			string text = (!inDailyChallenge)
-				? mSavedData.GetValue("heroId", playModeSubSection)
+			string text = (!IsInDailyChallenge)
+				? mSavedData.GetValue("CurrentHeroId", playModeSubSection)
 				: mSavedData.GetValue("dailychallenge_heroID", playModeSubSection);
 			if (text == string.Empty && Singleton<PlayModesManager>.Exists && Singleton<PlayModesManager>.Instance.selectedModeData != null)
 			{
@@ -926,138 +526,99 @@ public class Profile : Singleton<Profile>
 				SelectedDefendHero = value;
 				multiplayerData.LocalPlayerLoadout.UpdateLocalProfile();
 			}
-			else if (inDailyChallenge)
+			else if (IsInDailyChallenge)
 			{
 				mSavedData.SetValue("dailychallenge_heroID", value, playModeSubSection);
 			}
 			else
 			{
-				mSavedData.SetValue("heroId", value, playModeSubSection);
+				mSavedData.SetValue("CurrentHeroId", value, playModeSubSection);
 			}
 		}
 	}
 
-	public int initialLeadershipLevel
+	public int InitialLeadershipLevel
 	{
-		get { return GetLeadershipLevel(heroId); }
-		set { SetLeadershipLevel(heroId, value); }
+		get { return GetLeadershipLevel(CurrentHeroId); }
+		set { SetLeadershipLevel(CurrentHeroId, value); }
+	}
+	public int SoulsLevel
+	{
+		get { return GetSoulsLevel(CurrentHeroId); }
+		set { SetSoulsLevel(CurrentHeroId, value); }
 	}
 
-	public int soulsLevel
+	public int SwordLevel
 	{
-		get { return GetSoulsLevel(heroId); }
-		set { SetSoulsLevel(heroId, value); }
+		get { return GetMeleeWeaponLevel(CurrentHeroId); }
+		set { SetMeleeWeaponLevel(CurrentHeroId, value); }
 	}
-
-	public int swordLevel
-	{
-		get { return GetMeleeWeaponLevel(heroId); }
-		set { SetMeleeWeaponLevel(heroId, value); }
-	}
-
-	public string swordID
+	public string SwordId
 	{
 		get
 		{
-			string value = mSavedData.GetValue("swordID", playModeSubSection);
+			string value = mSavedData.GetValue("SwordId", playModeSubSection);
 			if (value == string.Empty)
 			{
 				return Singleton<PlayModesManager>.Instance.selectedModeData.defaultMeleeWeaponID;
 			}
 			return value;
 		}
-		set
-		{
-			mSavedData.SetValue("swordID", value, playModeSubSection);
-		}
+		set { mSavedData.SetValue("SwordId", value, playModeSubSection); }
 	}
-
-	public int bowLevel
+	public int BowLevel
+	{
+		get { return GetRangedWeaponLevel(CurrentHeroId); }
+		set { SetRangedWeaponLevel(CurrentHeroId, value); }
+	}
+	public string BowId
 	{
 		get
 		{
-			return GetRangedWeaponLevel(heroId);
-		}
-		set
-		{
-			SetRangedWeaponLevel(heroId, value);
-		}
-	}
-
-	public string bowID
-	{
-		get
-		{
-			string value = mSavedData.GetValue("bowID", playModeSubSection);
+			string value = mSavedData.GetValue("BowId", playModeSubSection);
 			if (value == string.Empty)
 			{
 				return Singleton<PlayModesManager>.Instance.selectedModeData.defaultRangeWeaponID;
 			}
 			return value;
 		}
-		set
-		{
-			mSavedData.SetValue("bowID", value, playModeSubSection);
-		}
+		set { mSavedData.SetValue("BowId", value, playModeSubSection); }
 	}
-
 	public int armorLevel
 	{
-		get
-		{
-			return GetArmorLevel(heroId);
-		}
-		set
-		{
-			SetArmorLevel(heroId, value);
-		}
+		get { return GetArmorLevel(CurrentHeroId); }
+		set { SetArmorLevel(CurrentHeroId, value); }
 	}
-
 	public int archerLevel
 	{
-		get
-		{
-			return activeSavedData.GetValueInt("archerLevel", playModeSubSection);
-		}
+		get { return ActiveSavedData.GetValueInt("archerLevel", playModeSubSection); }
 		set
 		{
 			mSavedData.SetValueInt("archerLevel", value, playModeSubSection);
 			CalculateAttackRating();
 		}
 	}
-
 	public int baseLevel
 	{
-		get
-		{
-			return Mathf.Max(1, activeSavedData.GetValueInt("baseLevel", playModeSubSection));
-		}
+		get { return Mathf.Max(1, ActiveSavedData.GetValueInt("baseLevel", playModeSubSection)); }
 		set
 		{
 			mSavedData.SetValueInt("baseLevel", Mathf.Max(0, value), playModeSubSection);
 			CalculateAttackRating();
 		}
 	}
-
 	public int bellLevel
 	{
-		get
-		{
-			return activeSavedData.GetValueInt("bellLevel", playModeSubSection);
-		}
+		get { return ActiveSavedData.GetValueInt("bellLevel", playModeSubSection); }
 		set
 		{
 			mSavedData.SetValueInt("bellLevel", value, playModeSubSection);
 			CalculateAttackRating();
 		}
 	}
-
 	public int pitLevel
 	{
-		get
-		{
-			return activeSavedData.GetValueInt("pitLevel", playModeSubSection);
-		}
+		get { return ActiveSavedData.GetValueInt("pitLevel", playModeSubSection); }
 		set
 		{
 			mSavedData.SetValueInt("pitLevel", value, playModeSubSection);
@@ -1065,139 +626,52 @@ public class Profile : Singleton<Profile>
 		}
 	}
 
-	public int undeathLevel
-	{
-		get
-		{
-			return activeSavedData.GetValueInt("undeathLevel", playModeSubSection);
-		}
-		set
-		{
-			mSavedData.SetValueInt("undeathLevel", value, playModeSubSection);
-		}
-	}
-
-	public int legionOnTheLooseLevel
-	{
-		get
-		{
-			return activeSavedData.GetValueInt("legionOnTheLoose", playModeSubSection);
-		}
-		set
-		{
-			mSavedData.SetValueInt("legionOnTheLoose", value, playModeSubSection);
-		}
-	}
-
-	public int deathFromAboveLevel
-	{
-		get
-		{
-			return activeSavedData.GetValueInt("deathFromAbove", playModeSubSection);
-		}
-		set
-		{
-			mSavedData.SetValueInt("deathFromAbove", value, playModeSubSection);
-		}
-	}
-
-	public bool fromTheShadows
-	{
-		get
-		{
-			return activeSavedData.GetValueBool("fromTheShadows", playModeSubSection);
-		}
-		set
-		{
-			mSavedData.SetValueBool("fromTheShadows", value, playModeSubSection);
-		}
-	}
-
 	public List<string> novelties
 	{
-		get
-		{
-			return mSavedData.GetSimpleList("novelties", playModeSubSection);
-		}
-		set
-		{
-			mSavedData.SetSimpleList("novelties", value, playModeSubSection);
-		}
+		get { return mSavedData.GetSimpleList("novelties", playModeSubSection); }
+		set { mSavedData.SetSimpleList("novelties", value, playModeSubSection); }
 	}
 
 	public List<string> alreadyEarnedAchievements
 	{
-		get
-		{
-			return mSavedData.GetSimpleList("alreadyEarnedAchievements");
-		}
-		set
-		{
-			mSavedData.SetSimpleList("alreadyEarnedAchievements", value);
-		}
+		get { return mSavedData.GetSimpleList("alreadyEarnedAchievements"); }
+		set { mSavedData.SetSimpleList("alreadyEarnedAchievements", value); }
 	}
 
 	public List<string> giveOnceCompleted
 	{
-		get
-		{
-			return mSavedData.GetSimpleList("giveOnce");
-		}
-		set
-		{
-			mSavedData.SetSimpleList("giveOnce", value);
-		}
+		get { return mSavedData.GetSimpleList("giveOnce"); }
+		set { mSavedData.SetSimpleList("giveOnce", value); }
 	}
 
 	public List<string> alreadySeenEnemies
 	{
-		get
-		{
-			return mSavedData.GetSimpleList("seenEnemies");
-		}
+		get { return mSavedData.GetSimpleList("seenEnemies"); }
 	}
 
 	public string SelectedDefendHero
 	{
-		get
-		{
-			return activeSavedData.GetDictionaryValue<string>("defend", "hero");
-		}
-		set
-		{
-			activeSavedData.SetDictionaryValue("defend", "hero", value);
-		}
+		get { return ActiveSavedData.GetDictionaryValue<string>("defend", "hero"); }
+		set { ActiveSavedData.SetDictionaryValue("defend", "hero", value); }
 	}
 
 	public bool HasSetupDefenses
 	{
-		get
-		{
-			return activeSavedData.GetDictionaryValue<bool>("defend", "setup");
-		}
-		set
-		{
-			activeSavedData.SetDictionaryValue("defend", "setup", value);
-		}
+		get { return ActiveSavedData.GetDictionaryValue<bool>("defend", "setup"); }
+		set { ActiveSavedData.SetDictionaryValue("defend", "setup", value); }
 	}
 
 	public int MaxDefensiveRating
 	{
-		get
-		{
-			return activeSavedData.GetDictionaryValue<int>("defend", "maxRating");
-		}
-		set
-		{
-			activeSavedData.SetDictionaryValue("defend", "maxRating", value);
-		}
+		get { return ActiveSavedData.GetDictionaryValue<int>("defend", "maxRating"); }
+		set { ActiveSavedData.SetDictionaryValue("defend", "maxRating", value); }
 	}
 
 	public int maxSelectedHelpers
 	{
 		get
 		{
-			int num = Singleton<HeroesDatabase>.Instance[heroId].allySlots;
+			int num = Singleton<HeroesDatabase>.Instance[CurrentHeroId].allySlots;
 			if (GetUpgradeLevel("AllySlot") > 0)
 			{
 				num++;
@@ -1205,12 +679,11 @@ public class Profile : Singleton<Profile>
 			return num;
 		}
 	}
-
 	public int maxSelectedAbilities
 	{
 		get
 		{
-			int num = Singleton<HeroesDatabase>.Instance[heroId].abilitySlots;
+			int num = Singleton<HeroesDatabase>.Instance[CurrentHeroId].abilitySlots;
 			if (GetUpgradeLevel("AbilitySlot") > 0)
 			{
 				num++;
@@ -1219,44 +692,21 @@ public class Profile : Singleton<Profile>
 		}
 	}
 
-	public int maxSelectedCharms
-	{
-		get
-		{
-			return 1;
-		}
-	}
-
 	public string selectedCharm
 	{
-		get
-		{
-			return activeSavedData.GetValue("selectedCharm", playModeSubSection);
-		}
-		set
-		{
-			mSavedData.SetValue("selectedCharm", value, playModeSubSection);
-		}
+		get { return ActiveSavedData.GetValue("selectedCharm", playModeSubSection); }
+		set { mSavedData.SetValue("selectedCharm", value, playModeSubSection); }
 	}
 
 	public int highestUnlockedWave
 	{
-		get
-		{
-			return mHighestUnlockedWave;
-		}
+		get { return mHighestUnlockedWave; }
 	}
 
 	public bool hasSummonedFarmer
 	{
-		get
-		{
-			return mSavedData.GetValueBool("hasSummonedFarmer");
-		}
-		set
-		{
-			mSavedData.SetValueBool("hasSummonedFarmer", value);
-		}
+		get { return mSavedData.GetValueBool("hasSummonedFarmer"); }
+		set { mSavedData.SetValueBool("hasSummonedFarmer", value); }
 	}
 
 	public UpgradesSchema[] AllUpgrades
@@ -1273,18 +723,11 @@ public class Profile : Singleton<Profile>
 
 	public int maxBaseWave
 	{
-		get
-		{
-			return Singleton<PlayModesManager>.Instance.selectedModeData.maxBaseWave;
-		}
+		get { return Singleton<PlayModesManager>.Instance.selectedModeData.maxBaseWave; }
 	}
-
 	public int maxStoryModeWave
 	{
-		get
-		{
-			return Singleton<PlayModesManager>.Instance.allModes[0].maxBaseWave;
-		}
+		get { return Singleton<PlayModesManager>.Instance.allModes[0].maxBaseWave; }
 	}
 
 	public string playModeSubSection
@@ -1305,119 +748,56 @@ public class Profile : Singleton<Profile>
 
 	public int lastCompletedDailyChallenge
 	{
-		get
-		{
-			return mSavedData.GetValueInt("lastCompletedDailyChallenge");
-		}
-		set
-		{
-			mSavedData.SetValueInt("lastCompletedDailyChallenge", value);
-		}
+		get { return mSavedData.GetValueInt("lastCompletedDailyChallenge"); }
+		set { mSavedData.SetValueInt("lastCompletedDailyChallenge", value); }
 	}
 
 	public int dailyChallengesCompleted
 	{
-		get
-		{
-			return mSavedData.GetValueInt("dailyChallengesCompleted");
-		}
-		set
-		{
-			mSavedData.SetValueInt("dailyChallengesCompleted", value);
-		}
+		get { return mSavedData.GetValueInt("dailyChallengesCompleted"); }
+		set { mSavedData.SetValueInt("dailyChallengesCompleted", value); }
 	}
 
 	public bool CompletedTodaysDailyChallenge
 	{
-		get
-		{
-			return lastCompletedDailyChallenge == GetDailyChallengeDaysSinceStart();
-		}
-		private set
-		{
-		}
+		get { return lastCompletedDailyChallenge == GetDailyChallengeDaysSinceStart(); }
 	}
 
 	public DateTime MultiplayerShieldExpireTime
 	{
-		get
-		{
-			return mMultiplayerShieldExpireTime;
-		}
+		get { return mMultiplayerShieldExpireTime; }
 	}
 
 	private int onboardingStage
 	{
-		get
-		{
-			return saveData.GetValueInt("OnboardingStage");
-		}
-		set
-		{
-			saveData.SetValueInt("OnboardingStage", value);
-		}
+		get { return SaveData.GetValueInt("OnboardingStage"); }
+		set { SaveData.SetValueInt("OnboardingStage", value); }
 	}
 
 	public bool showHealthText
 	{
-		get
-		{
-			return saveData.GetValueBool("ShowHealthText");
-		}
-		set
-		{
-			saveData.SetValueBool("ShowHealthText", value);
-		}
+		get { return SaveData.GetValueBool("ShowHealthText"); }
+		set { SaveData.SetValueBool("ShowHealthText", value); }
 	}
 
 	public bool debugHeroInvuln
 	{
-		get
-		{
-			return saveData.GetValueBool("DebugHeroInvuln");
-		}
-		set
-		{
-			saveData.SetValueBool("DebugHeroInvuln", value);
-		}
+		get { return SaveData.GetValueBool("DebugHeroInvuln"); }
+		set { SaveData.SetValueBool("DebugHeroInvuln", value); }
 	}
 
 	public bool DisplayedDailyChallengeUnlock
 	{
-		get
-		{
-			return saveData.GetValueBool("DisplayedDailyChallengeUnlock");
-		}
-		set
-		{
-			saveData.SetValueBool("DisplayedDailyChallengeUnlock", value);
-		}
+		get { return SaveData.GetValueBool("DisplayedDailyChallengeUnlock"); }
+		set { SaveData.SetValueBool("DisplayedDailyChallengeUnlock", value); }
 	}
 
 	public bool ChangingDefenseLoadout { get; set; }
 
 	public bool JustMadeSC_IAP
 	{
-		get
-		{
-			return mJustMadeSC_IAP;
-		}
-		set
-		{
-			mJustMadeSC_IAP = value;
-		}
-	}
-
-	public bool JustMadeHC_IAP
-	{
-		get
-		{
-			return mJustMadeHC_IAP;
-		}
-		set
-		{
-			mJustMadeHC_IAP = value;
-		}
+		get { return mJustMadeSC_IAP; }
+		set { mJustMadeSC_IAP = value; }
 	}
 
 	public Profile()
@@ -1528,7 +908,7 @@ public class Profile : Singleton<Profile>
 		int index = dailyRandomizer.NextRange(0, count - 1, this);
 		string id = list[index];
 		dailyChallengeHeroSchema = Singleton<HeroesDatabase>.Instance[id];
-		heroId = dailyChallengeHeroSchema.id;
+		CurrentHeroId = dailyChallengeHeroSchema.id;
 	}
 
 	private void RefreshDailyChallengeHelpers()
@@ -1965,8 +1345,6 @@ public class Profile : Singleton<Profile>
 
 	public void ResetData()
 	{
-		int num = purchasedCoins;
-		int num2 = purchasedGems;
 		int num3 = latestOnlineBundleVersion;
 		List<string> achievementsDisplayed = GetAchievementsDisplayed();
 		mSavedData.Clear();
@@ -1975,14 +1353,10 @@ public class Profile : Singleton<Profile>
 		{
 			sntpTimeStamp = SntpTime.UniversalTime;
 		}
-		coins = num;
-		gems = num2;
-		purchasedCoins = num;
-		purchasedGems = num2;
+		coins = 0;
 		latestOnlineBundleVersion = num3;
 		SetAchievementsDisplayed(achievementsDisplayed);
 		coins = SingletonSpawningMonoBehaviour<DesignerVariables>.Instance.GetVariable("StartingCoins", 0);
-		gems = SingletonSpawningMonoBehaviour<DesignerVariables>.Instance.GetVariable("StartingGems", 0);
 		souls = SingletonSpawningMonoBehaviour<DesignerVariables>.Instance.GetVariable("StartingSouls", 0);
 		PostLoadSyncing();
 		Save();
@@ -2009,9 +1383,9 @@ public class Profile : Singleton<Profile>
 		return mAttackRatingCategory[(int)category];
 	}
 
-	private EAttackRatingCategory GetHeroCategory(string heroId)
+	private EAttackRatingCategory GetHeroCategory(string CurrentHeroId)
 	{
-		switch (heroId)
+		switch (CurrentHeroId)
 		{
 		case "HeroBalanced":
 			return EAttackRatingCategory.kSamurai;
@@ -2111,13 +1485,13 @@ public class Profile : Singleton<Profile>
 		int num9 = baseLevel * 50;
 		int num10 = bellLevel * 50;
 		int num11 = pitLevel * 50;
-		int num12 = initialLeadershipLevel * 50;
+		int num12 = InitialLeadershipLevel * 50;
 		array[6] += num9 + num10 + num12 + num11;
 		num += num9 + num10 + num12 + num11;
 		int num13 = maxStoryModeWave;
 		for (int m = 1; m <= num13; m++)
 		{
-			int num14 = Mathf.Max(0, GetWaveLevel(m, null) - 1);
+			int num14 = Mathf.Max(0, GetWaveCompletionCount(m, null) - 1);
 			int num15 = Mathf.Max(0, GetWaveAttemptCount(m, null) - num14);
 			int num16 = num14 * m;
 			int num17 = num15 * 5;
@@ -2157,7 +1531,7 @@ public class Profile : Singleton<Profile>
 			{
 				mJustMadeSC_IAP = true;
 			}
-			Singleton<Analytics>.Instance.KontagentEvent("Source", "SINK_SOURCE", "SC", Singleton<Profile>.Instance.wave_SinglePlayerGame, amount, Analytics.KParam("Source", source));
+			Singleton<Analytics>.Instance.KontagentEvent("Source", "SINK_SOURCE", "SC", Singleton<Profile>.Instance.CurrentStoryWave, amount, Analytics.KParam("Source", source));
 		}
 	}
 
@@ -2165,36 +1539,6 @@ public class Profile : Singleton<Profile>
 	{
 		coins -= amount;
 		lifetimeSCSpent += amount;
-	}
-
-	public void AddGems(int amount, string source)
-	{
-		if (amount > 0)
-		{
-			gems += amount;
-		}
-		int num = gems;
-		if (num > 0)
-		{
-			Singleton<Analytics>.Instance.LogEvent("HC_Received", Analytics.Param("Source", source), Analytics.Param("HC_Amount", num), Analytics.Param("PlayerLevel", Singleton<Profile>.Instance.playerLevel), Analytics.Param("WaveNumber", Singleton<Profile>.Instance.wave_SinglePlayerGame), Analytics.Param("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon));
-			string st = "HC_GAME";
-			if (source == "IAP")
-			{
-				st = "HC_IAP";
-				mJustMadeHC_IAP = true;
-			}
-			else if (source == "TAPJOY")
-			{
-				st = "HC_TAPJOY";
-			}
-			Singleton<Analytics>.Instance.KontagentEvent("Source", "SINK_SOURCE", st, Singleton<Profile>.Instance.wave_SinglePlayerGame, amount, Analytics.KParam("Source", source));
-		}
-	}
-
-	public void SpendGems(int amount)
-	{
-		gems -= amount;
-		lifetimeHCSpent += amount;
 	}
 
 	public int GetMaxSouls()
@@ -2221,13 +1565,13 @@ public class Profile : Singleton<Profile>
 
 	public int GetHeroLevel(string id)
 	{
-		return Mathf.Max(1, mSavedData.GetValueInt(heroStat(id, "heroLevel"), playModeSubSection));
+		return Mathf.Max(1, mSavedData.GetValueInt(heroStat(id, "CurrentHeroLevel"), playModeSubSection));
 	}
 
 	public int SetHeroLevel(string id, int value)
 	{
 		int num = Mathf.Max(0, value);
-		mSavedData.SetValueInt(heroStat(id, "heroLevel"), num, playModeSubSection);
+		mSavedData.SetValueInt(heroStat(id, "CurrentHeroLevel"), num, playModeSubSection);
 		CalculateAttackRating();
 		return num;
 	}
@@ -2254,71 +1598,71 @@ public class Profile : Singleton<Profile>
 		CalculateAttackRating();
 	}
 
-	public int GetLeadershipLevel(string heroId)
+	public int GetLeadershipLevel(string CurrentHeroId)
 	{
-		return Mathf.Max(0, mSavedData.GetValueInt(heroStat(heroId, "initialLeadershipLevel"), playModeSubSection));
+		return Mathf.Max(0, mSavedData.GetValueInt(heroStat(CurrentHeroId, "InitialLeadershipLevel"), playModeSubSection));
 	}
 
-	public int SetLeadershipLevel(string heroId, int value)
+	public int SetLeadershipLevel(string CurrentHeroId, int value)
 	{
 		int num = Mathf.Max(0, value);
-		mSavedData.SetValueInt(heroStat(heroId, "initialLeadershipLevel"), num, playModeSubSection);
+		mSavedData.SetValueInt(heroStat(CurrentHeroId, "InitialLeadershipLevel"), num, playModeSubSection);
 		CalculateAttackRating();
 		return num;
 	}
 
-	public int GetSoulsLevel(string heroId)
+	public int GetSoulsLevel(string CurrentHeroId)
 	{
-		return Mathf.Max(1, mSavedData.GetValueInt(heroStat(heroId, "soulsLevel"), playModeSubSection));
+		return Mathf.Max(1, mSavedData.GetValueInt(heroStat(CurrentHeroId, "SoulsLevel"), playModeSubSection));
 	}
 
-	public int SetSoulsLevel(string heroId, int value)
+	public int SetSoulsLevel(string CurrentHeroId, int value)
 	{
 		int num = Mathf.Max(1, value);
-		mSavedData.SetValueInt(heroStat(heroId, "soulsLevel"), num, playModeSubSection);
+		mSavedData.SetValueInt(heroStat(CurrentHeroId, "SoulsLevel"), num, playModeSubSection);
 		return num;
 	}
 
-	public int GetMeleeWeaponLevel(string heroId)
+	public int GetMeleeWeaponLevel(string CurrentHeroId)
 	{
-		return Mathf.Max(1, mSavedData.GetValueInt(heroStat(heroId, "swordLevel"), playModeSubSection));
+		return Mathf.Max(1, mSavedData.GetValueInt(heroStat(CurrentHeroId, "SwordLevel"), playModeSubSection));
 	}
 
-	public int SetMeleeWeaponLevel(string heroId, int value)
+	public int SetMeleeWeaponLevel(string CurrentHeroId, int value)
 	{
 		int num = Mathf.Max(0, value);
-		mSavedData.SetValueInt(heroStat(heroId, "swordLevel"), num, playModeSubSection);
+		mSavedData.SetValueInt(heroStat(CurrentHeroId, "SwordLevel"), num, playModeSubSection);
 		CalculateAttackRating();
 		return num;
 	}
 
-	public int GetRangedWeaponLevel(string heroId)
+	public int GetRangedWeaponLevel(string CurrentHeroId)
 	{
-		return Mathf.Max(1, mSavedData.GetValueInt(heroStat(heroId, "bowLevel"), playModeSubSection));
+		return Mathf.Max(1, mSavedData.GetValueInt(heroStat(CurrentHeroId, "BowLevel"), playModeSubSection));
 	}
 
-	public int SetRangedWeaponLevel(string heroId, int value)
+	public int SetRangedWeaponLevel(string CurrentHeroId, int value)
 	{
 		int num = Mathf.Max(0, value);
-		mSavedData.SetValueInt(heroStat(heroId, "bowLevel"), num, playModeSubSection);
+		mSavedData.SetValueInt(heroStat(CurrentHeroId, "BowLevel"), num, playModeSubSection);
 		CalculateAttackRating();
 		return num;
 	}
 
-	public int GetArmorLevel(string heroId)
+	public int GetArmorLevel(string CurrentHeroId)
 	{
-		return Mathf.Max(1, mSavedData.GetValueInt(heroStat(heroId, "armorLevel"), playModeSubSection));
+		return Mathf.Max(1, mSavedData.GetValueInt(heroStat(CurrentHeroId, "armorLevel"), playModeSubSection));
 	}
 
-	public int SetArmorLevel(string heroId, int value)
+	public int SetArmorLevel(string CurrentHeroId, int value)
 	{
 		int num = Mathf.Max(0, value);
-		HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[heroId];
+		HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[CurrentHeroId];
 		if (heroSchema != null && heroSchema.ArmorLevels != null)
 		{
 			num = Mathf.Min(heroSchema.ArmorLevels.Length, num);
 		}
-		mSavedData.SetValueInt(heroStat(heroId, "armorLevel"), num, playModeSubSection);
+		mSavedData.SetValueInt(heroStat(CurrentHeroId, "armorLevel"), num, playModeSubSection);
 		CalculateAttackRating();
 		return num;
 	}
@@ -2343,22 +1687,22 @@ public class Profile : Singleton<Profile>
 
 	public bool IsEventRewardsGiven(string eventRewardID)
 	{
-		return activeSavedData.GetDictionaryValue<bool>("eventRewards", eventRewardID);
+		return ActiveSavedData.GetDictionaryValue<bool>("eventRewards", eventRewardID);
 	}
 
 	public void SetEventRewardsGiven(string eventRewardID)
 	{
-		activeSavedData.SetDictionaryValue("eventRewards", eventRewardID, true);
+		ActiveSavedData.SetDictionaryValue("eventRewards", eventRewardID, true);
 	}
 
 	public int GetHelperLevel(string helperID)
 	{
-		return Mathf.Clamp(activeSavedData.GetDictionaryValue<int>("helperLevels", helperID, playModeSubSection), 0, Singleton<HelpersDatabase>.Instance.GetMaxLevel(helperID));
+		return Mathf.Clamp(ActiveSavedData.GetDictionaryValue<int>("helperLevels", helperID, playModeSubSection), 0, Singleton<HelpersDatabase>.Instance.GetMaxLevel(helperID));
 	}
 
 	public int GetRawHelperLevel(string helperID)
 	{
-		return activeSavedData.GetDictionaryValue<int>("helperLevels", helperID, playModeSubSection);
+		return ActiveSavedData.GetDictionaryValue<int>("helperLevels", helperID, playModeSubSection);
 	}
 
 	public void SetHelperLevel(string helperID, int val, bool autoFillSelectedHelpers = true)
@@ -2373,7 +1717,7 @@ public class Profile : Singleton<Profile>
 				SetSelectedHelpers(selectedHelpers);
 			}
 		}
-		activeSavedData.SetDictionaryValue("helperLevels", helperID, val, playModeSubSection);
+		ActiveSavedData.SetDictionaryValue("helperLevels", helperID, val, playModeSubSection);
 		CalculateAttackRating();
 	}
 
@@ -2383,11 +1727,11 @@ public class Profile : Singleton<Profile>
 		{
 			return GetSelectedDefendHelpers();
 		}
-		if (inDailyChallenge)
+		if (IsInDailyChallenge)
 		{
-			return FilterOutDuplicateIDs(activeSavedData.GetSubNodeValueList("dailychallenge_selectedHelpers", playModeSubSection));
+			return FilterOutDuplicateIDs(ActiveSavedData.GetSubNodeValueList("dailychallenge_selectedHelpers", playModeSubSection));
 		}
-		return FilterOutDuplicateIDs(activeSavedData.GetSubNodeValueList(heroStat(heroId, "selectedHelpers"), playModeSubSection));
+		return FilterOutDuplicateIDs(ActiveSavedData.GetSubNodeValueList(heroStat(CurrentHeroId, "selectedHelpers"), playModeSubSection));
 	}
 
 	public void SetSelectedHelpers(List<string> helpers)
@@ -2398,46 +1742,46 @@ public class Profile : Singleton<Profile>
 			SetSelectedDefendHelpers(helpers);
 			multiplayerData.LocalPlayerLoadout.UpdateLocalProfile();
 		}
-		else if (inDailyChallenge)
+		else if (IsInDailyChallenge)
 		{
-			activeSavedData.SetSubNodeValueList("dailychallenge_selectedHelpers", helpers, playModeSubSection);
+			ActiveSavedData.SetSubNodeValueList("dailychallenge_selectedHelpers", helpers, playModeSubSection);
 		}
 		else
 		{
-			activeSavedData.SetSubNodeValueList(heroStat(heroId, "selectedHelpers"), helpers, playModeSubSection);
+			ActiveSavedData.SetSubNodeValueList(heroStat(CurrentHeroId, "selectedHelpers"), helpers, playModeSubSection);
 		}
 	}
 
 	public List<string> GetSelectedDefendHelpers()
 	{
-		return FilterOutDuplicateIDs(activeSavedData.GetSubNodeValueList("defendHelpers"));
+		return FilterOutDuplicateIDs(ActiveSavedData.GetSubNodeValueList("defendHelpers"));
 	}
 
 	public void SetSelectedDefendHelpers(List<string> helpers)
 	{
 		FilterOutDuplicateIDs(helpers);
-		activeSavedData.SetSubNodeValueList("defendHelpers", helpers);
+		ActiveSavedData.SetSubNodeValueList("defendHelpers", helpers);
 	}
 
 	public bool GetGoldenHelperUnlocked(string helperID)
 	{
-		return activeSavedData.GetDictionaryValue<bool>("goldenHelperUnlocked", helperID, playModeSubSection);
+		return ActiveSavedData.GetDictionaryValue<bool>("goldenHelperUnlocked", helperID, playModeSubSection);
 	}
 
 	public void SetGoldenHelperUnlocked(string helperID, bool unlocked)
 	{
-		activeSavedData.SetDictionaryValue("goldenHelperUnlocked", helperID, unlocked, playModeSubSection);
+		ActiveSavedData.SetDictionaryValue("goldenHelperUnlocked", helperID, unlocked, playModeSubSection);
 		CalculateAttackRating();
 	}
 
 	public int GetAbilityLevel(string abilityID)
 	{
-		return activeSavedData.GetDictionaryValue<int>("abilityLevels", abilityID, playModeSubSection);
+		return ActiveSavedData.GetDictionaryValue<int>("abilityLevels", abilityID, playModeSubSection);
 	}
 
 	public void SetAbilityLevel(string abilityID, int val)
 	{
-		activeSavedData.SetDictionaryValue("abilityLevels", abilityID, val, playModeSubSection);
+		ActiveSavedData.SetDictionaryValue("abilityLevels", abilityID, val, playModeSubSection);
 		CalculateAttackRating();
 	}
 
@@ -2447,11 +1791,11 @@ public class Profile : Singleton<Profile>
 		{
 			return GetSelectedDefendAbilities();
 		}
-		if (inDailyChallenge)
+		if (IsInDailyChallenge)
 		{
-			return FilterOutDuplicateIDs(activeSavedData.GetSubNodeValueList("dailychallenge_selectedAbilities", playModeSubSection));
+			return FilterOutDuplicateIDs(ActiveSavedData.GetSubNodeValueList("dailychallenge_selectedAbilities", playModeSubSection));
 		}
-		return FilterOutDuplicateIDs(activeSavedData.GetSubNodeValueList(heroStat(heroId, "selectedAbilities"), playModeSubSection));
+		return FilterOutDuplicateIDs(ActiveSavedData.GetSubNodeValueList(heroStat(CurrentHeroId, "selectedAbilities"), playModeSubSection));
 	}
 
 	public void SetSelectedAbilities(List<string> abilities)
@@ -2461,24 +1805,24 @@ public class Profile : Singleton<Profile>
 			SetSelectedDefendAbilities(abilities);
 			multiplayerData.LocalPlayerLoadout.UpdateLocalProfile();
 		}
-		else if (inDailyChallenge)
+		else if (IsInDailyChallenge)
 		{
-			activeSavedData.SetSubNodeValueList("dailychallenge_selectedAbilities", FilterOutDuplicateIDs(abilities), playModeSubSection);
+			ActiveSavedData.SetSubNodeValueList("dailychallenge_selectedAbilities", FilterOutDuplicateIDs(abilities), playModeSubSection);
 		}
 		else
 		{
-			activeSavedData.SetSubNodeValueList(heroStat(heroId, "selectedAbilities"), FilterOutDuplicateIDs(abilities), playModeSubSection);
+			ActiveSavedData.SetSubNodeValueList(heroStat(CurrentHeroId, "selectedAbilities"), FilterOutDuplicateIDs(abilities), playModeSubSection);
 		}
 	}
 
 	public List<string> GetSelectedDefendAbilities()
 	{
-		return FilterOutDuplicateIDs(activeSavedData.GetSubNodeValueList("defendAbilities"));
+		return FilterOutDuplicateIDs(ActiveSavedData.GetSubNodeValueList("defendAbilities"));
 	}
 
 	public void SetSelectedDefendAbilities(List<string> abilities)
 	{
-		activeSavedData.SetSubNodeValueList("defendAbilities", FilterOutDuplicateIDs(abilities));
+		ActiveSavedData.SetSubNodeValueList("defendAbilities", FilterOutDuplicateIDs(abilities));
 	}
 
 	public void AutoEquipNewAbilities(int waveIndex, string heroJustUnlocked = null)
@@ -2496,18 +1840,18 @@ public class Profile : Singleton<Profile>
 			{
 				continue;
 			}
-			string text2 = heroId;
+			string text2 = CurrentHeroId;
 			foreach (HeroSchema item in list)
 			{
-				heroId = item.id;
+				CurrentHeroId = item.id;
 				List<string> selectedAbilities = GetSelectedAbilities();
-				if ((abilitySchema.levelToUnlock != 0f || !(heroId != heroJustUnlocked)) && selectedAbilities.Count < maxSelectedAbilities)
+				if ((abilitySchema.levelToUnlock != 0f || !(CurrentHeroId != heroJustUnlocked)) && selectedAbilities.Count < maxSelectedAbilities)
 				{
 					selectedAbilities.Add(text);
 					SetSelectedAbilities(selectedAbilities);
 				}
 			}
-			heroId = text2;
+			CurrentHeroId = text2;
 		}
 	}
 
@@ -2554,31 +1898,70 @@ public class Profile : Singleton<Profile>
 		mSavedData.SetDictionaryValue("chapterUnlock", chapterID, val, playModeSubSection);
 	}
 
-	public int GetWaveLevel(int waveIndex)
+	public bool GetIsWaveUnlocked(int waveIndex)
 	{
-		return (!inBonusWave) ? mSavedData.GetDictionaryValue<int>("waves", "w" + waveIndex, playModeSubSection) : 0;
+		return mSavedData.GetDictionaryValue<bool>("wavesUnlocked", kWavePrefix + waveIndex, playModeSubSection);
 	}
-
-	public int GetWaveLevel(int waveIndex, string playMode)
+	public bool GetIsWaveUnlocked(int waveIndex, string playMode)
 	{
-		return (!inBonusWave) ? mSavedData.GetDictionaryValue<int>("waves", "w" + waveIndex, playMode) : 0;
+		return mSavedData.GetDictionaryValue<bool>("wavesUnlocked", kWavePrefix + waveIndex, playMode);
 	}
-
-	public void SetWaveLevel(int waveIndex, int level)
+	public void SetIsWaveUnlocked(int waveIndex, bool isWaveUnlocked)
 	{
-		if (GetWaveLevel(waveIndex) < level)
+		mSavedData.SetDictionaryValue("waveCompletionCounts", kWavePrefix + waveIndex, isWaveUnlocked, playModeSubSection);
+
+		if (waveIndex > mHighestUnlockedWave)
 		{
-			level = Mathf.Clamp(level, 0, 99);
-			mSavedData.SetDictionaryValue("waves", "w" + waveIndex, level, playModeSubSection);
-			if (waveIndex == maxBaseWave && level == 2)
-			{
-				ApplicationUtilities.MakePlayHavenContentRequest("wave_won_50");
-			}
-			if (waveIndex > mHighestUnlockedWave && level > 0)
-			{
-				mHighestUnlockedWave = waveIndex;
-			}
+			mHighestUnlockedWave = waveIndex;
 		}
+	}
+
+	public int GetWaveCompletionCount(int waveIndex)
+	{
+		return mSavedData.GetDictionaryValue<int>("waveCompletionCounts", kWavePrefix + waveIndex, playModeSubSection);
+	}
+	public int GetWaveCompletionCount(int waveIndex, string playMode)
+	{
+		return mSavedData.GetDictionaryValue<int>("waveCompletionCounts", kWavePrefix + waveIndex, playMode);
+	}
+	public void SetWaveCompletionCount(int waveIndex, int completionCount)
+	{
+		if (GetWaveCompletionCount(waveIndex) >= completionCount) return;
+
+		mSavedData.SetDictionaryValue("waveCompletionCounts", kWavePrefix + waveIndex, completionCount, playModeSubSection);
+
+		if (waveIndex == maxBaseWave && completionCount == 1)
+		{
+			ApplicationUtilities.MakePlayHavenContentRequest("wave_won_50");
+		}
+	}
+	public void IncrementWaveCompletionCount(int waveIndex)
+	{
+		SetWaveCompletionCount(waveIndex, GetWaveCompletionCount(waveIndex) + 1);
+	}
+
+	public bool HasWaveBeenCompleted(int waveIndex)
+	{
+		return GetWaveCompletionCount(waveIndex) >= 1;
+	}
+
+	public void GoToNextWave()
+	{
+		if (IsInMultiplayerWave || IsInDailyChallenge) return;
+
+		IncrementWaveCompletionCount(CurrentStoryWave);
+		CurrentStoryWave++;
+		SetIsWaveUnlocked(CurrentStoryWave, true);
+		CurrentHeroId = WaveManager.GetWaveData(CurrentStoryWave, waveTypeToPlay).recommendedHero.Key;
+
+		var wavePlayed = Singleton<PlayStatistics>.Instance.data.wavePlayed;
+		if (HasWaveBeenCompleted(wavePlayed))
+		{
+			ResultsMenuImpl.UnlockedFeature unlockedHero = ResultsMenuImpl.GetUnlockedHero();
+			AutoEquipNewAbilities(wavePlayed + 1, (unlockedHero != null) ? unlockedHero.id : null);
+		}
+
+		Save();
 	}
 
 	private void CalcHighestWave()
@@ -2586,7 +1969,7 @@ public class Profile : Singleton<Profile>
 		mHighestUnlockedWave = 1;
 		for (int i = 1; i <= 999; i++)
 		{
-			if (GetWaveLevel(i) == 0)
+			if (GetWaveCompletionCount(i) == 0)
 			{
 				mHighestUnlockedWave = Mathf.Max(1, i - 1);
 				return;
@@ -2597,17 +1980,17 @@ public class Profile : Singleton<Profile>
 
 	public int GetWaveAttemptCount(int waveIndex)
 	{
-		return mSavedData.GetDictionaryValue<int>("waves", "count" + waveIndex, playModeSubSection);
+		return mSavedData.GetDictionaryValue<int>("waveAttemptCounts", kWavePrefix + waveIndex, playModeSubSection);
 	}
 
 	public int GetWaveAttemptCount(int waveIndex, string playMode)
 	{
-		return mSavedData.GetDictionaryValue<int>("waves", "count" + waveIndex, playMode);
+		return mSavedData.GetDictionaryValue<int>("waveAttemptCounts", kWavePrefix + waveIndex, playMode);
 	}
 
 	public void IncrementWaveAttemptCount(int waveIndex)
 	{
-		mSavedData.SetDictionaryValue("waves", "count" + waveIndex, GetWaveAttemptCount(waveIndex) + 1, playModeSubSection);
+		mSavedData.SetDictionaryValue("waveAttemptCounts", kWavePrefix + waveIndex, GetWaveAttemptCount(waveIndex) + 1, playModeSubSection);
 	}
 
 	public int GetMPWaveAttemptCount(string mpMission)
@@ -2723,9 +2106,9 @@ public class Profile : Singleton<Profile>
 	{
 		if (s.unique)
 		{
-			List<string> subNodeValueList = activeSavedData.GetSubNodeValueList("specialIAPPurchased");
+			List<string> subNodeValueList = ActiveSavedData.GetSubNodeValueList("specialIAPPurchased");
 			subNodeValueList.Add(s.productId);
-			activeSavedData.SetSubNodeValueList("specialIAPPurchased", FilterOutDuplicateIDs(subNodeValueList));
+			ActiveSavedData.SetSubNodeValueList("specialIAPPurchased", FilterOutDuplicateIDs(subNodeValueList));
 			Save();
 		}
 	}
@@ -2734,7 +2117,7 @@ public class Profile : Singleton<Profile>
 	{
 		if (s.unique)
 		{
-			if (activeSavedData.GetSubNodeValueList("specialIAPPurchased").Contains(s.productId))
+			if (ActiveSavedData.GetSubNodeValueList("specialIAPPurchased").Contains(s.productId))
 			{
 				return true;
 			}
@@ -2759,7 +2142,7 @@ public class Profile : Singleton<Profile>
 		if (s.hoursToExpire > 0)
 		{
 			string attrib = "specialIAPExpireTime~" + s.productId;
-			string value = activeSavedData.GetValue(attrib);
+			string value = ActiveSavedData.GetValue(attrib);
 			DateTime result;
 			if (!string.IsNullOrEmpty(value) && DateTime.TryParse(value, out result))
 			{
@@ -2774,11 +2157,11 @@ public class Profile : Singleton<Profile>
 		if (s.hoursToExpire > 0)
 		{
 			string attrib = "specialIAPExpireTime~" + s.productId;
-			string value = activeSavedData.GetValue(attrib);
+			string value = ActiveSavedData.GetValue(attrib);
 			if (string.IsNullOrEmpty(value))
 			{
 				value = SntpTime.UniversalTime.AddHours(s.hoursToExpire).ToString();
-				activeSavedData.SetValue(attrib, value);
+				ActiveSavedData.SetValue(attrib, value);
 				Save();
 			}
 		}
@@ -2805,19 +2188,18 @@ public class Profile : Singleton<Profile>
 	{
 		if (waveTypeToPlay == WaveManager.WaveType.Wave_SinglePlayer)
 		{
-			wave_SinglePlayerGame = ValidateWaveIndex(wave_SinglePlayerGame);
-			if (GetWaveLevel(1) == 0)
+			CurrentStoryWave = ValidateWaveIndex(CurrentStoryWave);
+			if (!GetIsWaveUnlocked(1))
 			{
-				SetWaveLevel(1, 1);
+				SetIsWaveUnlocked(1, true);
 			}
 		}
 		CalcHighestWave();
-		if (highestUnlockedWave == 50 && GetWaveLevel(50) > 1)
+		if (highestUnlockedWave == 50 && GetWaveCompletionCount(50) > 1)
 		{
-			wave_SinglePlayerGame = 51;
+			CurrentStoryWave = 51;
 		}
 		SingletonSpawningMonoBehaviour<GluiPersistentDataCache>.Instance.Save("coins", StringUtils.FormatAmountString(Singleton<Profile>.Instance.coins));
-		SingletonSpawningMonoBehaviour<GluiPersistentDataCache>.Instance.Save("gems", StringUtils.FormatAmountString(Singleton<Profile>.Instance.gems));
 		SingletonSpawningMonoBehaviour<GluiPersistentDataCache>.Instance.Save("revivePotion", StringUtils.FormatAmountString(Singleton<Profile>.Instance.GetNumPotions("revivePotion")));
 		Singleton<Profile>.Instance.souls = Singleton<Profile>.Instance.souls;
 		SingletonSpawningMonoBehaviour<GluiPersistentDataCache>.Instance.Save("pachinkoBalls", StringUtils.FormatAmountString(Singleton<Profile>.Instance.pachinkoBalls));
@@ -2897,9 +2279,9 @@ public class Profile : Singleton<Profile>
 
 	private void UpgradeWaveRecycling()
 	{
-		int num = wave_SinglePlayerGame;
+		int num = CurrentStoryWave;
 		int valueInt = mSavedData.GetValueInt("waveRecycle");
-		if (GetWaveLevel(num) != 0)
+		if (GetWaveCompletionCount(num) != 0)
 		{
 			return;
 		}
@@ -2907,34 +2289,34 @@ public class Profile : Singleton<Profile>
 		{
 			if (i < num)
 			{
-				SetWaveLevel(i, valueInt + 2);
+				SetWaveCompletionCount(i, valueInt + 2);
 			}
 			else if (i == num)
 			{
-				SetWaveLevel(i, valueInt + 1);
+				SetWaveCompletionCount(i, valueInt + 1);
 			}
 			else if (valueInt > 0)
 			{
-				SetWaveLevel(i, valueInt + 1);
+				SetWaveCompletionCount(i, valueInt + 1);
 			}
 		}
 		if (valueInt > 0)
 		{
 			mSavedData.SetValueInt("waveRecycle", 0);
-			wave_SinglePlayerGame = 21;
+			CurrentStoryWave = 21;
 		}
 	}
 
 	public void UpgradeToExtraWaves()
 	{
 		int num = highestUnlockedWave;
-		if (GetWaveLevel(num) > 1)
+		if (GetWaveCompletionCount(num) > 1)
 		{
 			int recordTableLength = DataBundleRuntime.Instance.GetRecordTableLength(typeof(WaveSchema), "Waves");
 			if (num + 1 < recordTableLength)
 			{
-				SetWaveLevel(num + 1, 1);
-				wave_SinglePlayerGame = num + 1;
+				CurrentStoryWave = num + 1;
+				SetIsWaveUnlocked(CurrentStoryWave, true);
 			}
 		}
 	}
@@ -2995,9 +2377,9 @@ public class Profile : Singleton<Profile>
 		}
 	}
 
-	private static string heroStat(string heroId, string statID)
+	private static string heroStat(string CurrentHeroId, string statID)
 	{
-		return string.Format("{0}.{1}", heroId, statID);
+		return string.Format("{0}.{1}", CurrentHeroId, statID);
 	}
 
 	private static List<string> FilterOutDuplicateIDs(List<string> lst)
@@ -3029,14 +2411,14 @@ public class Profile : Singleton<Profile>
 
 	public void CheckOnboardingStage(string stageName)
 	{
-		if (onboardingStage < onboardingEvents.Length && !saveData.GetValueBool(stageName))
+		if (onboardingStage < onboardingEvents.Length && !SaveData.GetValueBool(stageName))
 		{
 			string text = onboardingEvents[onboardingStage];
 			if (text == stageName)
 			{
 				Singleton<Analytics>.Instance.LogEvent(stageName);
 				onboardingStage++;
-				saveData.SetValueBool(stageName, true);
+				SaveData.SetValueBool(stageName, true);
 				Singleton<Profile>.Instance.Save();
 			}
 		}
@@ -3044,10 +2426,8 @@ public class Profile : Singleton<Profile>
 
 	public void ForceOnboardingStage(string stageName)
 	{
-		if (onboardingStage >= onboardingEvents.Length || saveData.GetValueBool(stageName))
-		{
-			return;
-		}
+		if (onboardingStage >= onboardingEvents.Length || SaveData.GetValueBool(stageName)) return;
+
 		for (int i = 0; i < onboardingEvents.Length; i++)
 		{
 			if (onboardingEvents[i] == stageName)
@@ -3058,7 +2438,7 @@ public class Profile : Singleton<Profile>
 				{
 					onboardingStage = i + 1;
 				}
-				saveData.SetValueBool(stageName, true);
+				SaveData.SetValueBool(stageName, true);
 				Singleton<Profile>.Instance.Save();
 				break;
 			}
@@ -3067,7 +2447,7 @@ public class Profile : Singleton<Profile>
 
 	public bool IsOnboardingStageComplete(string stageName)
 	{
-		return saveData.GetValueBool(stageName);
+		return SaveData.GetValueBool(stageName);
 	}
 
 	public bool UnlockedDailyChallenge()

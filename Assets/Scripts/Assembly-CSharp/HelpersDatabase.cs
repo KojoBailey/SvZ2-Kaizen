@@ -290,7 +290,7 @@ public class HelpersDatabase : Singleton<HelpersDatabase>
 
 	private void AddExtraAnims(string id, GameObject character)
 	{
-		if (!Singleton<Profile>.Instance.inMultiplayerWave)
+		if (!Singleton<Profile>.Instance.IsInMultiplayerWave)
 		{
 			return;
 		}
@@ -323,11 +323,11 @@ public class HelpersDatabase : Singleton<HelpersDatabase>
 
 	public void LoadInGameData(List<string> ids, List<string> adhocHelpers)
 	{
-		if (Singleton<Profile>.Instance.GetSelectedAbilities().Contains("ExplosiveCart") || (Singleton<Profile>.Instance.inVSMultiplayerWave && Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.HasAbilitiy("ExplosiveCart")))
+		if (Singleton<Profile>.Instance.GetSelectedAbilities().Contains("ExplosiveCart") || (Singleton<Profile>.Instance.IsInVSMultiplayerWave && Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.HasAbilitiy("ExplosiveCart")))
 		{
 			ids.Add("CartOfDoom");
 		}
-		if (Singleton<Profile>.Instance.GetSelectedAbilities().Contains("DragonDamage") || (Singleton<Profile>.Instance.inVSMultiplayerWave && Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.HasAbilitiy("DragonDamage")))
+		if (Singleton<Profile>.Instance.GetSelectedAbilities().Contains("DragonDamage") || (Singleton<Profile>.Instance.IsInVSMultiplayerWave && Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.HasAbilitiy("DragonDamage")))
 		{
 			ids.Add("DragonDamageHelper");
 		}

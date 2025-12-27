@@ -66,9 +66,9 @@ public class HeroesDatabase : Singleton<HeroesDatabase>
 		return Array.Find(mAllIDs, (string s) => string.Compare(s, id, true) == 0) != null;
 	}
 
-	public int GetMaxLevel(string heroId)
+	public int GetMaxLevel(string CurrentHeroId)
 	{
-		HeroSchema heroSchema = this[heroId];
+		HeroSchema heroSchema = this[CurrentHeroId];
 		if (heroSchema != null)
 		{
 			return heroSchema.Levels.Length;
@@ -97,12 +97,12 @@ public class HeroesDatabase : Singleton<HeroesDatabase>
 		{
 			if (string.Equals(id, mDatum.Data.id))
 			{
-				int swordLevel = ((ownerId != 0) ? Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.meleeLevel : Singleton<Profile>.Instance.GetMeleeWeaponLevel(mDatum.Data.id));
-				int bowLevel = ((ownerId != 0) ? Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.bowLevel : Singleton<Profile>.Instance.GetRangedWeaponLevel(mDatum.Data.id));
+				int SwordLevel = ((ownerId != 0) ? Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.meleeLevel : Singleton<Profile>.Instance.GetMeleeWeaponLevel(mDatum.Data.id));
+				int BowLevel = ((ownerId != 0) ? Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.BowLevel : Singleton<Profile>.Instance.GetRangedWeaponLevel(mDatum.Data.id));
 				int armorLevel = ((ownerId != 0) ? Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.armorLevel : Singleton<Profile>.Instance.GetArmorLevel(mDatum.Data.id));
 				mDatum.Load(groupToLoad, true, delegate(HeroSchema s)
 				{
-					s.LoadCachedResources(swordLevel, bowLevel, armorLevel, false);
+					s.LoadCachedResources(SwordLevel, BowLevel, armorLevel, false);
 				});
 			}
 		}

@@ -84,7 +84,7 @@ public class EquipPageHeroes : EquipPage, UIHandlerComponent
 			num++;
 		}
 		mHeroModelLocator = uiParent.FindChild("Locator_ModelHero").transform;
-		if (Singleton<Profile>.Instance.inVSMultiplayerWave && Singleton<PlayModesManager>.Instance.Attacking)
+		if (Singleton<Profile>.Instance.IsInVSMultiplayerWave && Singleton<PlayModesManager>.Instance.Attacking)
 		{
 			GameObject gameObject2 = uiParent.FindChild("Locator_ModelHero_Right");
 			if ((bool)gameObject2)
@@ -108,21 +108,21 @@ public class EquipPageHeroes : EquipPage, UIHandlerComponent
 			num3++;
 		}
 		SetupHeroesList();
-		WaveSchema waveData = WaveManager.GetWaveData(Singleton<Profile>.Instance.waveToPlay, Singleton<Profile>.Instance.waveTypeToPlay);
-		if (Singleton<Profile>.Instance.inDailyChallenge)
+		WaveSchema waveData = WaveManager.GetWaveData(Singleton<Profile>.Instance.WaveToPlay, Singleton<Profile>.Instance.waveTypeToPlay);
+		if (Singleton<Profile>.Instance.IsInDailyChallenge)
 		{
 			mRequiredSelection = FindIndexFromID(Singleton<Profile>.Instance.dailyChallengeHeroSchema.id);
 			SelectHero(mRequiredSelection, false);
 		}
-		else if (waveData.recommendedHeroIsRequired && !Singleton<Profile>.Instance.inMultiplayerWave && !Singleton<Profile>.Instance.ChangingDefenseLoadout)
+		else if (waveData.recommendedHeroIsRequired && !Singleton<Profile>.Instance.IsInMultiplayerWave && !Singleton<Profile>.Instance.ChangingDefenseLoadout)
 		{
 			mRequiredSelection = FindIndexFromID(waveData.recommendedHero.Key);
 			SelectHero(mRequiredSelection, false);
-			Singleton<Profile>.Instance.heroId = waveData.recommendedHero.Key;
+			Singleton<Profile>.Instance.CurrentHeroId = waveData.recommendedHero.Key;
 		}
 		else
 		{
-			SelectHero(FindIndexFromID(Singleton<Profile>.Instance.heroId), false);
+			SelectHero(FindIndexFromID(Singleton<Profile>.Instance.CurrentHeroId), false);
 		}
 		Singleton<Profile>.Instance.ForceOnboardingStage("OnboardingStep12_HeroSelect");
 	}
@@ -140,7 +140,7 @@ public class EquipPageHeroes : EquipPage, UIHandlerComponent
 		}
 		else if (eventID == "CHANGE_COSTUME")
 		{
-			string selectedHero = Singleton<Profile>.Instance.heroId;
+			string selectedHero = Singleton<Profile>.Instance.CurrentHeroId;
 			if (Singleton<Profile>.Instance.GetCostume(selectedHero) == "Normal")
 			{
 				Singleton<Profile>.Instance.SetCostume(selectedHero, "Gold");
@@ -194,12 +194,12 @@ public class EquipPageHeroes : EquipPage, UIHandlerComponent
 
 	private void SelectHero(int index, bool updateLoadout)
 	{
-		if ((mRequiredSelection == -1 || index == mRequiredSelection || (mCards[index].data.overrideRequirements && !Singleton<Profile>.Instance.inDailyChallenge)) && (!mCards[index].data.Locked || Singleton<Profile>.Instance.inDailyChallenge) && index != mSelectedHero)
+		if ((mRequiredSelection == -1 || index == mRequiredSelection || (mCards[index].data.overrideRequirements && !Singleton<Profile>.Instance.IsInDailyChallenge)) && (!mCards[index].data.Locked || Singleton<Profile>.Instance.IsInDailyChallenge) && index != mSelectedHero)
 		{
 			mSelectedHero = index;
 			Card card = mCards[index];
 			WeakGlobalMonoBehavior<EquipMenuImpl>.Instance.commonInfoDisplay = card.data;
-			Singleton<Profile>.Instance.heroId = card.id;
+			Singleton<Profile>.Instance.CurrentHeroId = card.id;
 			if (mHeroModel != null)
 			{
 				Object.Destroy(mHeroModel.controlledObject);
@@ -210,7 +210,7 @@ public class EquipPageHeroes : EquipPage, UIHandlerComponent
 			ObjectUtils.SetLayerRecursively(mHeroModel.rootObject, LayerMask.NameToLayer("GLUI"));
 			mHeroModel.rootObject.transform.localScale = new Vector3(1f, 1f, 1f);
 			mHeroModel.rootObject.transform.localRotation = Quaternion.identity;
-			if (Singleton<Profile>.Instance.inVSMultiplayerWave && Singleton<PlayModesManager>.Instance.Attacking)
+			if (Singleton<Profile>.Instance.IsInVSMultiplayerWave && Singleton<PlayModesManager>.Instance.Attacking)
 			{
 				mHeroModel.rootObject.transform.localRotation = Quaternion.AngleAxis(180f, Vector3.up);
 			}

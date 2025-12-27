@@ -40,7 +40,7 @@ public class MultiplayerCollectionStatus
 		}
 		if (Singleton<Profile>.Instance.MultiplayerData.Account == null || Singleton<Profile>.Instance.MultiplayerData.Account.Status != GripAccount.LoginStatus.Complete)
 		{
-			Singleton<Profile>.Instance.saveData.SetValueInt("CollectionItemToAdd", itemData.CollectionID + 1);
+			Singleton<Profile>.Instance.SaveData.SetValueInt("CollectionItemToAdd", itemData.CollectionID + 1);
 			return;
 		}
 		List<CollectionStatusRecord> list = collection.FindAll((CollectionStatusRecord r) => r.CollectionID == itemData.CollectionID);
@@ -73,11 +73,11 @@ public class MultiplayerCollectionStatus
 			if (result == GripNetwork.Result.Success)
 			{
 				newRecord.RecordID = recordID;
-				Singleton<Profile>.Instance.saveData.SetValueInt("CollectionItemToAdd", 0);
+				Singleton<Profile>.Instance.SaveData.SetValueInt("CollectionItemToAdd", 0);
 			}
 			else
 			{
-				Singleton<Profile>.Instance.saveData.SetValueInt("CollectionItemToAdd", itemData.CollectionID + 1);
+				Singleton<Profile>.Instance.SaveData.SetValueInt("CollectionItemToAdd", itemData.CollectionID + 1);
 				Singleton<Profile>.Instance.MultiplayerData.Logout();
 			}
 		});

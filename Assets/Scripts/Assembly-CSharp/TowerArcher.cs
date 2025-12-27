@@ -23,7 +23,7 @@ public class TowerArcher : Character
 		base.controller.snapToGround = false;
 		base.stats = characterStats;
 		base.ownerId = 0;
-		if (Singleton<Profile>.Instance.inVSMultiplayerWave && Singleton<PlayModesManager>.Instance.Attacking)
+		if (Singleton<Profile>.Instance.IsInVSMultiplayerWave && Singleton<PlayModesManager>.Instance.Attacking)
 		{
 			base.ownerId = 1;
 		}
@@ -61,7 +61,7 @@ public class TowerArcher : Character
 			{
 				base.controller.PlayVictoryAnim();
 			}
-			else if (Singleton<Profile>.Instance.inVSMultiplayerWave)
+			else if (Singleton<Profile>.Instance.IsInVSMultiplayerWave)
 			{
 				base.controller.Die();
 			}

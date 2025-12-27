@@ -98,7 +98,7 @@ public class HUDConsumables : UIHandlerComponent
 					}
 				}
 			}
-			else if (Singleton<Profile>.Instance.wave_SinglePlayerGame != 1 || Singleton<Profile>.Instance.GetWaveLevel(1) > 1 || Singleton<Profile>.Instance.inMultiplayerWave)
+			else if (Singleton<Profile>.Instance.CurrentStoryWave != 1 || Singleton<Profile>.Instance.GetWaveCompletionCount(1) > 1 || Singleton<Profile>.Instance.IsInMultiplayerWave)
 			{
 				WeakGlobalMonoBehavior<InGameImpl>.Instance.gamePaused = true;
 				GluiActionSender.SendGluiAction("POPUP_CONFIRMPURCHASE", WeakGlobalMonoBehavior<HUD>.Instance.gameObject, StoreAvailability.GetPotion(consumeID));
@@ -115,7 +115,7 @@ public class HUDConsumables : UIHandlerComponent
 		mCards.Add(new Card(uiParent, "Sushi", "healthPotion", 0f));
 		mCards.Add(new Card(uiParent, "Tea", "leadershipPotion", 0f));
 		int wavePlayed = Singleton<PlayStatistics>.Instance.data.wavePlayed;
-		if (Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive() || wavePlayed != 1 || Singleton<Profile>.Instance.GetWaveLevel(wavePlayed) > 1)
+		if (Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive() || wavePlayed != 1 || Singleton<Profile>.Instance.GetWaveCompletionCount(wavePlayed) > 1)
 		{
 			return;
 		}

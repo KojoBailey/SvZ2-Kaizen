@@ -134,10 +134,10 @@ public class StartScreenImpl : MonoBehaviour, IGluiActionHandler
 		switch (action)
 		{
 		case "START_GAME":
-			if (Singleton<Profile>.Instance.GetWaveLevel(1) == 1)
+			if (Singleton<Profile>.Instance.GetWaveCompletionCount(1) == 1)
 			{
-				Singleton<Profile>.Instance.wave_SinglePlayerGame = 1;
-				string value = DataBundleRuntime.Instance.GetValue<string>(typeof(WaveSchema), Singleton<PlayModesManager>.Instance.selectedModeData.waves.RecordTable, Singleton<Profile>.Instance.wave_SinglePlayerGame.ToString(), "scene", false);
+				Singleton<Profile>.Instance.CurrentStoryWave = 1;
+				string value = DataBundleRuntime.Instance.GetValue<string>(typeof(WaveSchema), Singleton<PlayModesManager>.Instance.selectedModeData.waves.RecordTable, Singleton<Profile>.Instance.CurrentStoryWave.ToString(), "scene", false);
 				LoadingScreen.LoadLevel(value);
 			}
 			else

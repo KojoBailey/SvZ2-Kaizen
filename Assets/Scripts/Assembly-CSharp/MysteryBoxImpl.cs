@@ -90,14 +90,14 @@ public class MysteryBoxImpl : MonoBehaviour, IGluiActionHandler
 		Dictionary<string, object> dictionary = new Dictionary<string, object>();
 		dictionary["Reward"] = mPrize.id;
 		dictionary["PlayerLevel"] = Singleton<Profile>.Instance.playerLevel;
-		dictionary["WaveNumber"] = Singleton<Profile>.Instance.wave_SinglePlayerGame;
+		dictionary["WaveNumber"] = Singleton<Profile>.Instance.CurrentStoryWave;
 		dictionary["MPWavesWon"] = Singleton<Profile>.Instance.mpWavesWon;
 		Singleton<Analytics>.Instance.LogEvent("MysteryBox", dictionary);
 		if (string.IsNullOrEmpty(BoxID))
 		{
 			BoxID = "MysteryBox";
 		}
-		Singleton<Analytics>.Instance.KontagentEvent(mPrize.id, "MysteryBox", BoxID, Singleton<Profile>.Instance.wave_SinglePlayerGame, mPrize.num, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()), Analytics.KParam("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon.ToString()));
+		Singleton<Analytics>.Instance.KontagentEvent(mPrize.id, "MysteryBox", BoxID, Singleton<Profile>.Instance.CurrentStoryWave, mPrize.num, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()), Analytics.KParam("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon.ToString()));
 		if (closeButton != null)
 		{
 			closeButton.Locked = true;

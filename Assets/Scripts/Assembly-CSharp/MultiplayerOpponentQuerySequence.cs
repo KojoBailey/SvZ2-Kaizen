@@ -17,7 +17,7 @@ public class MultiplayerOpponentQuerySequence
 		Profile.UpdatePlayMode();
 		string recordTable = Singleton<PlayModesManager>.Instance.selectedModeData.waves.RecordTable;
 		string text = WaveSchema.FromIndex(recordTable, WaveSchema.PickRandomRecord(recordTable));
-		multiplayerWaveData.waveToPlay = int.Parse(text);
+		multiplayerWaveData.WaveToPlay = int.Parse(text);
 		multiplayerWaveData.missionName = selectedCard.displayName.Key;
 		multiplayerWaveData.waveName = recordTable + "." + text;
 		MultiplayerOpponentQuerySequence.sender = sender;

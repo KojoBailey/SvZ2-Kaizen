@@ -44,7 +44,7 @@ public class ConsoleFunctions_Game
 			hotkey2.SetChildHotkey(num3++, "Clear Souls", "clearcurrency souls", false);
 			console.add("profile", ModifyProfile);
 			GrConsole.Hotkey hotkeyA = hotkey.SetChildHotkey(num2++, "Hero", string.Empty, true);
-			AddUdamanButtonGroup(hotkeyA, 7, "profile set heroId", ModifyProfile, "Heroes", (HeroSchema s) => s.id);
+			AddUdamanButtonGroup(hotkeyA, 7, "profile set CurrentHeroId", ModifyProfile, "Heroes", (HeroSchema s) => s.id);
 			hotkey.SetChildHotkey(num2++, "Unlock All Waves", "profile unlockallwaves", false);
 			hotkey.SetChildHotkey(num2++, "Reset Achievements", "profile resetachievements", false);
 			console.add("timers", Timers);
@@ -250,10 +250,6 @@ public class ConsoleFunctions_Game
 					Singleton<Profile>.Instance.AddCoins(result, "Cheat");
 					instance.addMessage(GrConsole.eType.Message, "Coins = " + Singleton<Profile>.Instance.coins);
 					break;
-				case "hard":
-					Singleton<Profile>.Instance.AddGems(result, "Cheat");
-					instance.addMessage(GrConsole.eType.Message, "Gems = " + Singleton<Profile>.Instance.gems);
-					break;
 				case "souls":
 					Singleton<Profile>.Instance.souls += result;
 					instance.addMessage(GrConsole.eType.Message, "Souls = " + Singleton<Profile>.Instance.souls);
@@ -277,11 +273,6 @@ public class ConsoleFunctions_Game
 				case "soft":
 					Singleton<Profile>.Instance.coins = 0;
 					instance.addMessage(GrConsole.eType.Message, "Coins = 0");
-					break;
-				case "hard":
-					Singleton<Profile>.Instance.SpendGems(Singleton<Profile>.Instance.gems);
-					instance.addMessage(GrConsole.eType.Message, "Gems = 0");
-					Singleton<Profile>.Instance.gems = 0;
 					break;
 				case "souls":
 					Singleton<Profile>.Instance.souls = 0;
@@ -559,7 +550,7 @@ public class ConsoleFunctions_Game
 			int result;
 			if (int.TryParse(args[1], out result))
 			{
-				Singleton<Profile>.Instance.wave_SinglePlayerGame = result;
+				Singleton<Profile>.Instance.CurrentStoryWave = result;
 				WaveManager.LoadSceneForWave();
 			}
 			return string.Empty;
@@ -577,16 +568,16 @@ public class ConsoleFunctions_Game
 			switch (text)
 			{
 			case "set":
-				if (text2 == "heroId" && WeakGlobalMonoBehavior<InGameImpl>.Instance != null)
+				if (text2 == "CurrentHeroId" && WeakGlobalMonoBehavior<InGameImpl>.Instance != null)
 				{
-					Singleton<Profile>.Instance.heroId = text3;
+					Singleton<Profile>.Instance.CurrentHeroId = text3;
 					WeakGlobalMonoBehavior<InGameImpl>.Instance.CreateHero(0, WeakGlobalMonoBehavior<InGameImpl>.Instance.hero.controlledObject.transform);
 				}
 				else if (text2 == "wave")
 				{
 					for (int i = 0; i <= int.Parse(text3); i++)
 					{
-						Singleton<Profile>.Instance.SetWaveLevel(i, 2);
+						Singleton<Profile>.Instance.SetIsWaveUnlocked(i, true);
 					}
 				}
 				else
@@ -596,9 +587,9 @@ public class ConsoleFunctions_Game
 				break;
 			case "unlockallwaves":
 			{
-				for (int i = 0; i <= 999; i++)
+				for (int i = 1; i <= Singleton<Profile>.Instance.maxBaseWave; i++)
 				{
-					Singleton<Profile>.Instance.SetWaveLevel(i, 2);
+					Singleton<Profile>.Instance.SetIsWaveUnlocked(i, true);
 				}
 				break;
 			}

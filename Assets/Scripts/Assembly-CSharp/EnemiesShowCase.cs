@@ -86,7 +86,7 @@ public class EnemiesShowCase : WeakGlobalInstance<EnemiesShowCase>
 		mOrigin = centerPos;
 		mRotationOffset = new Quaternion(mOrigin.localRotation.x, mOrigin.localRotation.y - 1f, mOrigin.localRotation.z, mOrigin.localRotation.w);
 		mOrigin.localRotation = new Quaternion(0f, 1f, 0f, 0f);
-		if (!Singleton<Profile>.Instance.inVSMultiplayerWave || Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent != null)
+		if (!Singleton<Profile>.Instance.IsInVSMultiplayerWave || Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent != null)
 		{
 			Reload(waveType, waveNum);
 		}
@@ -116,14 +116,14 @@ public class EnemiesShowCase : WeakGlobalInstance<EnemiesShowCase>
 		}
 		mWaveManager = new WaveManager(waveType, waveNum, null, null, null, 0f);
 		List<string> list;
-		if (Singleton<Profile>.Instance.inVSMultiplayerWave)
+		if (Singleton<Profile>.Instance.IsInVSMultiplayerWave)
 		{
 			if (Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent == null || Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout == null)
 			{
 				return;
 			}
 			list = new List<string>();
-			list.Add(Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.heroId);
+			list.Add(Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.CurrentHeroId);
 			string text = WaveManager.SpecialBossName(Singleton<Profile>.Instance.MultiplayerData.MultiplayerGameSessionData.defensiveBuffs[0]);
 			if (text != string.Empty)
 			{

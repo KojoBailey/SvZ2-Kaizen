@@ -80,7 +80,7 @@ public class SaveTest : MonoBehaviour
 
 	public bool doTextLoad;
 
-	public MySaveData saveData = new MySaveData();
+	public MySaveData SaveData = new MySaveData();
 
 	public GripAccount CurrentAccount;
 
@@ -107,15 +107,15 @@ public class SaveTest : MonoBehaviour
 		binarySave.SaveOnExit = false;
 		binarySave.Header.UseEncoding = true;
 		binarySave.Header.UseDeviceData = true;
-		binarySave.AddHandler(saveData);
+		binarySave.AddHandler(SaveData);
 		textSave = SaveProvider.Create<SimpleTextProvider>("textSave");
 		textSave.Header.UseEncoding = false;
 		textSave.Header.UseDeviceData = true;
 		FileSaveTarget fileSaveTarget = textSave.AddTarget<FileSaveTarget>("localText");
 		fileSaveTarget.UseBackup = true;
-		textSave.Strings["aInt"] = saveData.aInt.ToString();
-		textSave.Strings["aString"] = saveData.aString.ToString();
-		textSave.Strings["aFloat"] = saveData.aFloat.ToString();
+		textSave.Strings["aInt"] = SaveData.aInt.ToString();
+		textSave.Strings["aString"] = SaveData.aString.ToString();
+		textSave.Strings["aFloat"] = SaveData.aFloat.ToString();
 	}
 
 	private void Update()

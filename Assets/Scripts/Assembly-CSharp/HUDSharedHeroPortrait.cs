@@ -13,7 +13,7 @@ public class HUDSharedHeroPortrait : WeakGlobalMonoBehavior<HUDSharedHeroPortrai
 
 	private void Start()
 	{
-		HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[Singleton<Profile>.Instance.heroId];
+		HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[Singleton<Profile>.Instance.CurrentHeroId];
 		if (heroSchema != null)
 		{
 			SharedResourceLoader.SharedResource cachedResource = ResourceCache.GetCachedResource(heroSchema.IconPath, 1);

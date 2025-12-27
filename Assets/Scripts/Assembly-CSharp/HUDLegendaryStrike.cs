@@ -53,7 +53,7 @@ public class HUDLegendaryStrike : MonoBehaviour
 	public static HUDLegendaryStrike Create(GameObject parent)
 	{
 		HUDLegendaryStrike result = null;
-		if (Singleton<Profile>.Exists && Singleton<Profile>.Instance.inMultiplayerWave)
+		if (Singleton<Profile>.Exists && Singleton<Profile>.Instance.IsInMultiplayerWave)
 		{
 			GameObject gameObject = Object.Instantiate(Resources.Load("UI/Prefabs/HUD/HUD_MultiplayerAddition")) as GameObject;
 			result = ((!(gameObject != null)) ? null : gameObject.GetComponent<HUDLegendaryStrike>());

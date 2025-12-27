@@ -101,7 +101,7 @@ public class Bell
 				mBellRingerController.PlayVictoryAnim();
 				return;
 			}
-			if (Singleton<Profile>.Instance.inVSMultiplayerWave)
+			if (Singleton<Profile>.Instance.IsInVSMultiplayerWave)
 			{
 				mBellRingerController.Die();
 				return;

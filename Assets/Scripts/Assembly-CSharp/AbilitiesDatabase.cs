@@ -145,7 +145,7 @@ public class AbilitiesDatabase : Singleton<AbilitiesDatabase>
 	{
 		get
 		{
-			HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[Singleton<Profile>.Instance.heroId];
+			HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[Singleton<Profile>.Instance.CurrentHeroId];
 			return heroSchema.Abilities;
 		}
 	}
@@ -418,7 +418,7 @@ public class AbilitiesDatabase : Singleton<AbilitiesDatabase>
 	public void LoadInGameData(List<string> ids, bool unloadNotFound)
 	{
 		List<string> list = ids;
-		if (Singleton<Profile>.Instance.inMultiplayerWave)
+		if (Singleton<Profile>.Instance.IsInMultiplayerWave)
 		{
 			list = new List<string>();
 			foreach (string id in ids)

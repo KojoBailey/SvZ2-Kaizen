@@ -44,14 +44,14 @@ public class DataAdaptor_StoreHeroPanel : DataAdaptorBase
 				text2 = text2.Replace(text, " ");
 			}
 			while (text2.Contains(text));
-			for (int i = Singleton<Profile>.Instance.wave_SinglePlayerGame; i < Mathf.Min(999, Singleton<Profile>.Instance.wave_SinglePlayerGame + 10); i++)
+			for (int i = Singleton<Profile>.Instance.CurrentStoryWave; i < Mathf.Min(999, Singleton<Profile>.Instance.CurrentStoryWave + 10); i++)
 			{
 				WaveSchema waveData = WaveManager.GetWaveData(i, WaveManager.WaveType.Wave_SinglePlayer);
 				if (!waveData.recommendedHeroIsRequired || !(DataBundleRuntime.RecordKey(waveData.recommendedHero) == id))
 				{
 					continue;
 				}
-				if (i != Singleton<Profile>.Instance.wave_SinglePlayerGame)
+				if (i != Singleton<Profile>.Instance.CurrentStoryWave)
 				{
 					if (requiredFutureObject != null)
 					{

@@ -73,7 +73,7 @@ public class MultiplayerGlobalHelpers : MonoBehaviour
 		{
 			string recordTable = Singleton<PlayModesManager>.Instance.selectedModeData.waves.RecordTable;
 			string text = WaveSchema.FromIndex(recordTable, WaveSchema.PickRandomRecord(recordTable));
-			waveData.waveToPlay = int.Parse(text);
+			waveData.WaveToPlay = int.Parse(text);
 			waveData.missionName = itemSchema.displayName.Key + "." + collectionSet.displayName.Key;
 			waveData.waveName = recordTable + "." + text;
 		}
@@ -110,9 +110,9 @@ public class MultiplayerGlobalHelpers : MonoBehaviour
 			{
 				waveData.defensiveBuffs[0] = (byte)response.defensiveBuff1;
 				waveData.defensiveBuffs[1] = (byte)response.defensiveBuff2;
-				if (WeakGlobalInstance<EnemiesShowCase>.Instance != null && Singleton<Profile>.Instance.inVSMultiplayerWave)
+				if (WeakGlobalInstance<EnemiesShowCase>.Instance != null && Singleton<Profile>.Instance.IsInVSMultiplayerWave)
 				{
-					WeakGlobalInstance<EnemiesShowCase>.Instance.Reload(WaveManager.WaveType.Wave_Multiplayer, Singleton<Profile>.Instance.waveToPlay);
+					WeakGlobalInstance<EnemiesShowCase>.Instance.Reload(WaveManager.WaveType.Wave_Multiplayer, Singleton<Profile>.Instance.WaveToPlay);
 				}
 				if (mode == EMultiplayerMode.kRecovering)
 				{

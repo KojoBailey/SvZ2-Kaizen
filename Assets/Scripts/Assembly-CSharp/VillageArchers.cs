@@ -30,7 +30,7 @@ public class VillageArchers
 	public VillageArchers()
 	{
 		mArcherLevel = Singleton<Profile>.Instance.archerLevel;
-		if (Singleton<Profile>.Instance.inVSMultiplayerWave && Singleton<PlayModesManager>.Instance.Attacking)
+		if (Singleton<Profile>.Instance.IsInVSMultiplayerWave && Singleton<PlayModesManager>.Instance.Attacking)
 		{
 			mArcherLevel = Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.archerLevel;
 		}

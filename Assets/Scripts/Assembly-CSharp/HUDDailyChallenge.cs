@@ -9,7 +9,7 @@ public class HUDDailyChallenge : MonoBehaviour
 	public static HUDDailyChallenge Create(GameObject parent)
 	{
 		HUDDailyChallenge result = null;
-		if (Singleton<Profile>.Exists && Singleton<Profile>.Instance.inDailyChallenge)
+		if (Singleton<Profile>.Exists && Singleton<Profile>.Instance.IsInDailyChallenge)
 		{
 			GameObject gameObject = Object.Instantiate(Resources.Load("UI/Prefabs/HUD/HUD_DailyChallengeAddition")) as GameObject;
 			result = ((!(gameObject != null)) ? null : gameObject.GetComponent<HUDDailyChallenge>());

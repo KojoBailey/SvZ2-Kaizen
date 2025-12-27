@@ -4,7 +4,7 @@ public class MultiplayerWaveData
 
 	public string waveName;
 
-	public int waveToPlay;
+	public int WaveToPlay;
 
 	public int soulCostToAttack;
 

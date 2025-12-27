@@ -81,7 +81,7 @@ public class EnemyLeadership : Leadership
 	{
 		mOwnerId = playerIndex;
 		mIsLeftToRightGameplay = Singleton<PlayModesManager>.Instance.gameDirection == PlayModesManager.GameDirection.RightToLeft;
-		mLeadershipData = DataBundleUtils.InitializeRecord<LeadershipSchema>(new DataBundleRecordKey(Leadership.UdamanTable, Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.heroId));
+		mLeadershipData = DataBundleUtils.InitializeRecord<LeadershipSchema>(new DataBundleRecordKey(Leadership.UdamanTable, Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.CurrentHeroId));
 		mMaxLevel = mLeadershipData.maxLevel;
 		SetLeadershipLevel(Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.leadershipLevel);
 		string[] selectedHelperIDs = Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.GetSelectedHelperIDs();

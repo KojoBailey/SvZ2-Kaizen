@@ -12,7 +12,7 @@ public class HUDWaveInfo : UIHandlerComponent
 	{
 		mPercentCompletedLabel = uiParent.FindChildComponent<GluiText>("Swap_Text_Enemies");
 		mMeter = uiParent.FindChildComponent<GluiMeter>("Sprite_EnemyOverlayMeter");
-		if (Singleton<Profile>.Instance.inVSMultiplayerWave)
+		if (Singleton<Profile>.Instance.IsInVSMultiplayerWave)
 		{
 			GluiSprite gluiSprite = uiParent.FindChildComponent<GluiSprite>("Sprite_SoulSkull");
 			if (gluiSprite != null)

@@ -59,7 +59,7 @@ public class EquipPageAbilities : EquipPage, UIHandlerComponent
 	public void Load()
 	{
 		List<string> original;
-		if (Singleton<Profile>.Instance.inDailyChallenge)
+		if (Singleton<Profile>.Instance.IsInDailyChallenge)
 		{
 			original = Singleton<Profile>.Instance.dailyChallengeAbilities;
 			mListSlotManager.selectionRequired = true;
@@ -77,7 +77,7 @@ public class EquipPageAbilities : EquipPage, UIHandlerComponent
 				AbilitySchema abilitySchema = (AbilitySchema)mDataSet[i];
 				if (string.Compare(abilitySchema.id, item, true) == 0)
 				{
-					if (Singleton<Profile>.Instance.inDailyChallenge || (float)Singleton<Profile>.Instance.highestUnlockedWave >= abilitySchema.levelToUnlock)
+					if (Singleton<Profile>.Instance.IsInDailyChallenge || (float)Singleton<Profile>.Instance.highestUnlockedWave >= abilitySchema.levelToUnlock)
 					{
 						list.Add(i);
 					}

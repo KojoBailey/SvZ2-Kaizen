@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class GluIap : SingletonSpawningMonoBehaviour<GluIap>
 {
-	public const string IAP_TABLE_NAME = "IAPTable";
-
 	public bool _storeNeedsRefresh;
 
 	public ICInAppPurchase.RESTORE_STATE restoreTransactionStatus;
@@ -303,33 +301,33 @@ public class GluIap : SingletonSpawningMonoBehaviour<GluIap>
 
 	private bool TransactionComplete(IAPSchema transaction)
 	{
-		if (!Singleton<Profile>.Instance.IsUniqueIAPItemAlreadyPurchased(transaction))
-		{
-			Singleton<Profile>.Instance.NotifyUniqueIAPPurchase(transaction);
-			if (transaction.hardCurrencyAmount > 0)
-			{
-				Singleton<Profile>.Instance.purchasedGems += transaction.hardCurrencyAmount;
-				Singleton<Profile>.Instance.AddGems(transaction.hardCurrencyAmount, "IAP");
-			}
-			if (transaction.softCurrencyAmount > 0)
-			{
-				Singleton<Profile>.Instance.purchasedCoins += transaction.softCurrencyAmount;
-				Singleton<Profile>.Instance.AddCoins(transaction.softCurrencyAmount, "IAP");
-			}
-			if (!string.IsNullOrEmpty(transaction.items))
-			{
-				string[] array = transaction.items.Split(',');
-				string[] array2 = array;
-				foreach (string id in array2)
-				{
-					CashIn.From(id, 1, "IAP");
-				}
-			}
-			Singleton<Analytics>.Instance.LogEvent("IAP_Completed", Analytics.Param("IAP_Name", transaction.productId), Analytics.Param("Price", transaction.PriceInCents), Analytics.Param("PlayerLevel", Singleton<Profile>.Instance.playerLevel), Analytics.Param("WaveNumber", Singleton<Profile>.Instance.wave_SinglePlayerGame), Analytics.Param("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon));
-			Singleton<Analytics>.Instance.KontagentEvent(transaction.productId, "IAP_Completed", GeneralConfig.FlurryAppVersion, Singleton<Profile>.Instance.wave_SinglePlayerGame, transaction.PriceInCents, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()), Analytics.KParam("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon.ToString()));
-			Kontagent.RevenueTracking(transaction.PriceInCents);
-			return false;
-		}
+		// if (!Singleton<Profile>.Instance.IsUniqueIAPItemAlreadyPurchased(transaction))
+		// {
+		// 	Singleton<Profile>.Instance.NotifyUniqueIAPPurchase(transaction);
+		// 	if (transaction.hardCurrencyAmount > 0)
+		// 	{
+		// 		Singleton<Profile>.Instance.purchasedGems += transaction.hardCurrencyAmount;
+		// 		Singleton<Profile>.Instance.AddGems(transaction.hardCurrencyAmount, "IAP");
+		// 	}
+		// 	if (transaction.softCurrencyAmount > 0)
+		// 	{
+		// 		Singleton<Profile>.Instance.purchasedCoins += transaction.softCurrencyAmount;
+		// 		Singleton<Profile>.Instance.AddCoins(transaction.softCurrencyAmount, "IAP");
+		// 	}
+		// 	if (!string.IsNullOrEmpty(transaction.items))
+		// 	{
+		// 		string[] array = transaction.items.Split(',');
+		// 		string[] array2 = array;
+		// 		foreach (string id in array2)
+		// 		{
+		// 			CashIn.From(id, 1, "IAP");
+		// 		}
+		// 	}
+		// 	Singleton<Analytics>.Instance.LogEvent("IAP_Completed", Analytics.Param("IAP_Name", transaction.productId), Analytics.Param("Price", transaction.PriceInCents), Analytics.Param("PlayerLevel", Singleton<Profile>.Instance.playerLevel), Analytics.Param("WaveNumber", Singleton<Profile>.Instance.CurrentStoryWave), Analytics.Param("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon));
+		// 	Singleton<Analytics>.Instance.KontagentEvent(transaction.productId, "IAP_Completed", GeneralConfig.FlurryAppVersion, Singleton<Profile>.Instance.CurrentStoryWave, transaction.PriceInCents, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()), Analytics.KParam("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon.ToString()));
+		// 	Kontagent.RevenueTracking(transaction.PriceInCents);
+		// 	return false;
+		// }
 		return true;
 	}
 

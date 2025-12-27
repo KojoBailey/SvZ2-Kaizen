@@ -10,15 +10,15 @@ public class MultiplayerProfileLoadout
 
 	private int mVersion;
 
-	public string heroId = string.Empty;
+	public string CurrentHeroId = string.Empty;
 
-	public int heroLevel;
+	public int CurrentHeroLevel;
 
 	public int leadershipLevel;
 
 	public int meleeLevel;
 
-	public int bowLevel;
+	public int BowLevel;
 
 	public int armorLevel;
 
@@ -86,18 +86,18 @@ public class MultiplayerProfileLoadout
 	{
 		if (!Singleton<Profile>.Instance.HasSetupDefenses)
 		{
-			Singleton<Profile>.Instance.SelectedDefendHero = Singleton<Profile>.Instance.heroId;
+			Singleton<Profile>.Instance.SelectedDefendHero = Singleton<Profile>.Instance.CurrentHeroId;
 			Singleton<Profile>.Instance.SetSelectedDefendHelpers(Singleton<Profile>.Instance.GetSelectedHelpers());
 			Singleton<Profile>.Instance.SetSelectedDefendAbilities(Singleton<Profile>.Instance.GetSelectedAbilities());
 		}
 		playerName = string.Empty;
 		mVersion = CollectionStatusRecord.kCollectionVersion;
-		UpdateString(ref heroId, Singleton<Profile>.Instance.SelectedDefendHero);
-		UpdateInt(ref heroLevel, Singleton<Profile>.Instance.heroLevel);
-		UpdateInt(ref leadershipLevel, Singleton<Profile>.Instance.initialLeadershipLevel);
-		UpdateInt(ref meleeLevel, Singleton<Profile>.Instance.GetMeleeWeaponLevel(heroId));
-		UpdateInt(ref bowLevel, Singleton<Profile>.Instance.GetRangedWeaponLevel(heroId));
-		UpdateInt(ref armorLevel, Singleton<Profile>.Instance.GetArmorLevel(heroId));
+		UpdateString(ref CurrentHeroId, Singleton<Profile>.Instance.SelectedDefendHero);
+		UpdateInt(ref CurrentHeroLevel, Singleton<Profile>.Instance.CurrentHeroLevel);
+		UpdateInt(ref leadershipLevel, Singleton<Profile>.Instance.InitialLeadershipLevel);
+		UpdateInt(ref meleeLevel, Singleton<Profile>.Instance.GetMeleeWeaponLevel(CurrentHeroId));
+		UpdateInt(ref BowLevel, Singleton<Profile>.Instance.GetRangedWeaponLevel(CurrentHeroId));
+		UpdateInt(ref armorLevel, Singleton<Profile>.Instance.GetArmorLevel(CurrentHeroId));
 		UpdateInt(ref baseLevel, Singleton<Profile>.Instance.baseLevel);
 		UpdateInt(ref archerLevel, Singleton<Profile>.Instance.archerLevel);
 		UpdateInt(ref bellLevel, Singleton<Profile>.Instance.bellLevel);
@@ -209,10 +209,10 @@ public class MultiplayerProfileLoadout
 	{
 		defenseRating = 0;
 		heroRating = 0;
-		HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[heroId];
+		HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[CurrentHeroId];
 		if (heroSchema != null)
 		{
-			heroRating += heroSchema.defenseRating * heroLevel;
+			heroRating += heroSchema.defenseRating * CurrentHeroLevel;
 			WeaponSchema meleeWeapon = heroSchema.MeleeWeapon;
 			if (meleeWeapon != null)
 			{
@@ -221,7 +221,7 @@ public class MultiplayerProfileLoadout
 			meleeWeapon = heroSchema.RangedWeapon;
 			if (meleeWeapon != null)
 			{
-				heroRating += meleeWeapon.defenseRating * bowLevel;
+				heroRating += meleeWeapon.defenseRating * BowLevel;
 			}
 			if (armorLevel > 0 && heroSchema.ArmorLevels != null)
 			{
@@ -264,11 +264,11 @@ public class MultiplayerProfileLoadout
 	public void UpdateFromAISchema(AIEnemySchema aiSchema)
 	{
 		mVersion = CollectionStatusRecord.kCollectionVersion;
-		heroId = aiSchema.heroId.Key;
-		heroLevel = aiSchema.heroLevel;
-		bowLevel = aiSchema.bowLevel;
+		CurrentHeroId = aiSchema.CurrentHeroId.Key;
+		CurrentHeroLevel = aiSchema.CurrentHeroLevel;
+		BowLevel = aiSchema.BowLevel;
 		armorLevel = aiSchema.armorLevel;
-		meleeLevel = aiSchema.swordLevel;
+		meleeLevel = aiSchema.SwordLevel;
 		baseLevel = aiSchema.gateLevel;
 		archerLevel = aiSchema.archerLevel;
 		bellLevel = aiSchema.bellLevel;
@@ -352,7 +352,7 @@ public class MultiplayerProfileLoadout
 		abilityIdList.Clear();
 		if (bytes == null || bytes.Length < 8)
 		{
-			WaveSchema waveData = WaveManager.GetWaveData(Singleton<Profile>.Instance.waveToPlay, WaveManager.WaveType.Wave_Multiplayer);
+			WaveSchema waveData = WaveManager.GetWaveData(Singleton<Profile>.Instance.WaveToPlay, WaveManager.WaveType.Wave_Multiplayer);
 			AIEnemySchema aIEnemySchema = null;
 			if (waveData != null)
 			{
@@ -374,11 +374,11 @@ public class MultiplayerProfileLoadout
 			mVersion = (int)binaryReader.ReadUInt64();
 			if (mVersion == CollectionStatusRecord.kCollectionVersion)
 			{
-				heroId = binaryReader.ReadString();
-				heroLevel = binaryReader.ReadByte();
+				CurrentHeroId = binaryReader.ReadString();
+				CurrentHeroLevel = binaryReader.ReadByte();
 				leadershipLevel = binaryReader.ReadByte();
 				meleeLevel = binaryReader.ReadByte();
-				bowLevel = binaryReader.ReadByte();
+				BowLevel = binaryReader.ReadByte();
 				armorLevel = binaryReader.ReadByte();
 				baseLevel = binaryReader.ReadByte();
 				archerLevel = binaryReader.ReadByte();
@@ -434,7 +434,7 @@ public class MultiplayerProfileLoadout
 			}
 			else
 			{
-				WaveSchema waveData2 = WaveManager.GetWaveData(Singleton<Profile>.Instance.waveToPlay, WaveManager.WaveType.Wave_Multiplayer);
+				WaveSchema waveData2 = WaveManager.GetWaveData(Singleton<Profile>.Instance.WaveToPlay, WaveManager.WaveType.Wave_Multiplayer);
 				AIEnemySchema aIEnemySchema2 = null;
 				if (waveData2 != null)
 				{
@@ -458,11 +458,11 @@ public class MultiplayerProfileLoadout
 		MemoryStream memoryStream = new MemoryStream();
 		BinaryWriter binaryWriter = new BinaryWriter(memoryStream);
 		binaryWriter.Write((ulong)mVersion);
-		binaryWriter.Write(heroId);
-		binaryWriter.Write((byte)heroLevel);
+		binaryWriter.Write(CurrentHeroId);
+		binaryWriter.Write((byte)CurrentHeroLevel);
 		binaryWriter.Write((byte)leadershipLevel);
 		binaryWriter.Write((byte)meleeLevel);
-		binaryWriter.Write((byte)bowLevel);
+		binaryWriter.Write((byte)BowLevel);
 		binaryWriter.Write((byte)armorLevel);
 		binaryWriter.Write((byte)baseLevel);
 		binaryWriter.Write((byte)archerLevel);

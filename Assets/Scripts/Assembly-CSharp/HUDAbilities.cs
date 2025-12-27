@@ -224,11 +224,11 @@ public class HUDAbilities : UIHandlerComponent
 		catch (Exception)
 		{
 		}
-		if (Singleton<Profile>.Instance.inMultiplayerWave)
+		if (Singleton<Profile>.Instance.IsInMultiplayerWave)
 		{
 			mLegendaryStrike = HUDLegendaryStrike.Create(mAbilitiesLocations[0].gameObject);
 		}
-		else if (Singleton<Profile>.Instance.inDailyChallenge && Singleton<Profile>.Instance.dailyChallengeProceduralWaveSchema.maxTime > 0f)
+		else if (Singleton<Profile>.Instance.IsInDailyChallenge && Singleton<Profile>.Instance.dailyChallengeProceduralWaveSchema.maxTime > 0f)
 		{
 			HUDDailyChallenge.Create(mAbilitiesLocations[0].gameObject);
 		}

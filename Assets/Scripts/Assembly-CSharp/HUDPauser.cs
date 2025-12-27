@@ -19,13 +19,13 @@ public class HUDPauser : MonoBehaviour, IGluiActionHandler
 		}
 		mBackupMusicVolume = AudioUtils.MusicVolumePlayer;
 		AudioUtils.MusicVolumePlayer = 0f;
-		if (Singleton<Profile>.Instance.wave_SinglePlayerGame == 1 && Singleton<Profile>.Instance.GetWaveLevel(1) == 1 && !Singleton<Profile>.Instance.inMultiplayerWave)
+		if (Singleton<Profile>.Instance.CurrentStoryWave == 1 && Singleton<Profile>.Instance.GetWaveCompletionCount(1) == 1 && !Singleton<Profile>.Instance.IsInMultiplayerWave)
 		{
 			mQuitAllowed = false;
 			base.gameObject.FindChildComponent<GluiStandardButtonContainer>("Button_Quit").Locked = true;
 			base.gameObject.FindChild("Button_Quit").SetActive(false);
 		}
-		if (Singleton<Profile>.Instance.inMultiplayerWave && RestartButton != null)
+		if (Singleton<Profile>.Instance.IsInMultiplayerWave && RestartButton != null)
 		{
 			RestartButton.SetActive(false);
 		}

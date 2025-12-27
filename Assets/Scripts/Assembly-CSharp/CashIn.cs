@@ -42,9 +42,6 @@ public class CashIn
 			case ItemType.Coins:
 				Singleton<Profile>.Instance.AddCoins(keyValuePair.Value, source);
 				break;
-			case ItemType.Gems:
-				Singleton<Profile>.Instance.AddGems(keyValuePair.Value, source);
-				break;
 			case ItemType.Balls:
 				Singleton<Profile>.Instance.pachinkoBalls += keyValuePair.Value;
 				break;

@@ -27,7 +27,7 @@ public class Souls : WeakGlobalInstance<Souls>
 
 	public int level
 	{
-		get { return Singleton<Profile>.Instance.soulsLevel; }
+		get { return Singleton<Profile>.Instance.SoulsLevel; }
 	}
 
 	public Souls() {}
@@ -39,7 +39,7 @@ public class Souls : WeakGlobalInstance<Souls>
 			SetUniqueInstance(this);
 
 			var dataBundleRecordKey = new DataBundleRecordKey(
-				Singleton<Profile>.Instance.heroId, Singleton<Profile>.Instance.soulsLevel.ToString());
+				Singleton<Profile>.Instance.CurrentHeroId, Singleton<Profile>.Instance.SoulsLevel.ToString());
 			mSchema = DataBundleUtils.InitializeRecord<SoulSchema>(dataBundleRecordKey);
 		}
 	}

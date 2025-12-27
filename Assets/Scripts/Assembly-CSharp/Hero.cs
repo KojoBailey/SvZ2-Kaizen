@@ -102,41 +102,41 @@ public class Hero : Character
 
 	public Hero(Transform spawnPoint, int playerId)
 	{
-		string heroId = Singleton<Profile>.Instance.heroId;
+		string CurrentHeroId = Singleton<Profile>.Instance.CurrentHeroId;
 		if (playerId != 0)
 		{
-			heroId = Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.heroId;
+			CurrentHeroId = Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.CurrentHeroId;
 		}
-		Init(spawnPoint.position, playerId, heroId, playerId == 0);
+		Init(spawnPoint.position, playerId, CurrentHeroId, playerId == 0);
 	}
 
-	public Hero(Vector3 spawnPoint, int playerId, string heroId, bool isLocalPlayer)
+	public Hero(Vector3 spawnPoint, int playerId, string CurrentHeroId, bool isLocalPlayer)
 	{
-		Init(spawnPoint, playerId, heroId, isLocalPlayer);
+		Init(spawnPoint, playerId, CurrentHeroId, isLocalPlayer);
 	}
 
 	public static CharacterStats GetHeroStats(HeroSchema mainData, int ownerId)
 	{
 		if (mainData == null)
 		{
-			mainData = Singleton<HeroesDatabase>.Instance[Singleton<Profile>.Instance.heroId];
+			mainData = Singleton<HeroesDatabase>.Instance[Singleton<Profile>.Instance.CurrentHeroId];
 		}
-		int heroLevel = Singleton<Profile>.Instance.heroLevel;
-		int level = Singleton<Profile>.Instance.swordLevel;
-		int bowLevel = Singleton<Profile>.Instance.bowLevel;
+		int CurrentHeroLevel = Singleton<Profile>.Instance.CurrentHeroLevel;
+		int level = Singleton<Profile>.Instance.SwordLevel;
+		int BowLevel = Singleton<Profile>.Instance.BowLevel;
 		if (ownerId != 0)
 		{
-			heroLevel = Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.heroLevel;
+			CurrentHeroLevel = Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.CurrentHeroLevel;
 			level = Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.meleeLevel;
-			bowLevel = Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.bowLevel;
+			BowLevel = Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.BowLevel;
 		}
 		CharacterStats result = default(CharacterStats);
 		result.isPlayer = true;
 		result.knockbackResistance = 100;
-		result.maxHealth = mainData.MaxHealth(heroLevel);
+		result.maxHealth = mainData.MaxHealth(CurrentHeroLevel);
 		result.health = result.maxHealth;
-		result.autoHealthRecovery = mainData.HealthRecovery(heroLevel);
-		result.speed = mainData.GetLevel(heroLevel).speed;
+		result.autoHealthRecovery = mainData.HealthRecovery(CurrentHeroLevel);
+		result.speed = mainData.GetLevel(CurrentHeroLevel).speed;
 		WeaponSchema meleeWeapon = mainData.MeleeWeapon;
 		result.meleeWeaponIsABlade = meleeWeapon.isBladeWeapon;
 		result.meleeAttackRange = meleeWeapon.GetLevel(level).attackRange;
@@ -158,20 +158,20 @@ public class Hero : Character
 		bool flag = Singleton<PlayModesManager>.Instance.selectedModeData.allowBowOnFirstWave1;
 		if (!flag)
 		{
-			flag = Singleton<Profile>.Instance.waveAllowBow;
+			flag = Singleton<Profile>.Instance.DoesWaveAllowBow;
 		}
 		if (flag)
 		{
 			WeaponSchema rangedWeapon = mainData.RangedWeapon;
-			result.bowAttackRange = rangedWeapon.GetLevel(bowLevel).attackRange;
-			result.bowAttackDamage = rangedWeapon.Damage(bowLevel);
-			result.bowAttackFrequency = rangedWeapon.GetLevel(bowLevel).attackFrequency;
-			result.projectile = rangedWeapon.GetLevel(bowLevel).projectile.Key;
-			result.knockbackPowerRanged = rangedWeapon.GetLevel(bowLevel).knockbackPower;
+			result.bowAttackRange = rangedWeapon.GetLevel(BowLevel).attackRange;
+			result.bowAttackDamage = rangedWeapon.Damage(BowLevel);
+			result.bowAttackFrequency = rangedWeapon.GetLevel(BowLevel).attackFrequency;
+			result.projectile = rangedWeapon.GetLevel(BowLevel).projectile.Key;
+			result.knockbackPowerRanged = rangedWeapon.GetLevel(BowLevel).knockbackPower;
 			DOTInfo dOTInfo = default(DOTInfo);
-			dOTInfo.ratio = rangedWeapon.GetLevel(bowLevel).DOTDamageRatio;
-			dOTInfo.duration = rangedWeapon.GetLevel(bowLevel).DOTDuration;
-			dOTInfo.interval = rangedWeapon.GetLevel(bowLevel).DOTInterval;
+			dOTInfo.ratio = rangedWeapon.GetLevel(BowLevel).DOTDamageRatio;
+			dOTInfo.duration = rangedWeapon.GetLevel(BowLevel).DOTDuration;
+			dOTInfo.interval = rangedWeapon.GetLevel(BowLevel).DOTInterval;
 			result.dotInfo = dOTInfo;
 			switch ((ownerId != 0) ? Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.bowsCollected : Singleton<Profile>.Instance.MultiplayerData.CollectionLevel("bow"))
 			{
@@ -210,18 +210,18 @@ public class Hero : Character
 		return result;
 	}
 
-	public static string MaterialKey(string heroId, int collectionLevel)
+	public static string MaterialKey(string CurrentHeroId, int collectionLevel)
 	{
 		if (collectionLevel == 3)
 		{
-			return DataBundleRuntime.TableRecordKey("HeroMaterials", heroId + "_ArmorSet");
+			return DataBundleRuntime.TableRecordKey("HeroMaterials", CurrentHeroId + "_ArmorSet");
 		}
-		return DataBundleRuntime.TableRecordKey("HeroMaterials", heroId + "_Normal");
+		return DataBundleRuntime.TableRecordKey("HeroMaterials", CurrentHeroId + "_Normal");
 	}
 
 	private void AddExtraAnims(string id, GameObject character)
 	{
-		if (!Singleton<Profile>.Instance.inMultiplayerWave)
+		if (!Singleton<Profile>.Instance.IsInMultiplayerWave)
 		{
 			return;
 		}
@@ -272,7 +272,7 @@ public class Hero : Character
 		}
 	}
 
-	private void Init(Vector3 spawnPoint, int playerId, string heroId, bool isLocalPlayer)
+	private void Init(Vector3 spawnPoint, int playerId, string CurrentHeroId, bool isLocalPlayer)
 	{
 		base.isPlayer = true;
 		base.ownerId = playerId;
@@ -284,23 +284,16 @@ public class Hero : Character
 		meleeDamageModifier = 1f;
 		rangedDamageModifier = 1f;
 		bool includeSounds = playerId != 0 || isLocalPlayer;
-		Singleton<HeroesDatabase>.Instance.LoadInGameData(heroId, playerId);
-		mainData = Singleton<HeroesDatabase>.Instance[heroId];
-		if (Singleton<Profile>.Instance.inBonusWave)
-		{
-			base.controlledObject = CharacterSchema.Deserialize(mainData.resourcesGhost, includeSounds);
-		}
-		else
-		{
-			base.controlledObject = CharacterSchema.Deserialize(mainData.resources, includeSounds);
-		}
+		Singleton<HeroesDatabase>.Instance.LoadInGameData(CurrentHeroId, playerId);
+		mainData = Singleton<HeroesDatabase>.Instance[CurrentHeroId];
+		base.controlledObject = CharacterSchema.Deserialize(mainData.resources, includeSounds);
 		base.controller.position = spawnPoint;
 		base.controller.updatesNoSnap = 0;
-		base.controller.MaxBackPedalTime = Singleton<HeroesDatabase>.Instance[Singleton<Profile>.Instance.heroId].backPedalTime;
+		base.controller.MaxBackPedalTime = Singleton<HeroesDatabase>.Instance[Singleton<Profile>.Instance.CurrentHeroId].backPedalTime;
 		heroObject = base.controlledObject;
 		heroModel = base.controller.animPlayer.jointAnimation.gameObject;
-		AddExtraAnims(heroId, heroObject);
-		CheckForUpgradeFXArmor(heroId);
+		AddExtraAnims(CurrentHeroId, heroObject);
+		CheckForUpgradeFXArmor(CurrentHeroId);
 		ResetController();
 		SetDefaultFacing();
 		SetMirroredSkeleton(base.controller.facing == FacingType.Left);
@@ -313,13 +306,9 @@ public class Hero : Character
 			mPlayerControls.onDontMove = onDontMove;
 		}
 		CheckForUpgradeFXSword();
-		if (!Singleton<Profile>.Instance.inBonusWave)
-		{
-			RestoreMeleeWeapon();
-		}
 		if (base.ownerId != 0 && Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent != null)
 		{
-			base.resourceDrops.guaranteedCoinsAward = 25 * (Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.heroLevel + Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.meleeLevel + Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.bowLevel);
+			base.resourceDrops.guaranteedCoinsAward = 25 * (Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.CurrentHeroLevel + Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.meleeLevel + Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.BowLevel);
 		}
 		CheckForUpgradeFXBow();
 		RestoreRangedWeapon();
@@ -339,7 +328,7 @@ public class Hero : Character
 		}
 		base.BlocksHeroMovement = mainData.blocksHeroMovement || SingletonSpawningMonoBehaviour<DesignerVariables>.Instance.GetVariable("HeroBlockMovement", true);
 		if (!WeakGlobalMonoBehavior<InGameImpl>.Exists) return;
-		// if (Singleton<Profile>.Instance.inVSMultiplayerWave)
+		// if (Singleton<Profile>.Instance.IsInVSMultiplayerWave)
 		// {
 		// 	if (base.LeftToRight)
 		// 	{
@@ -383,7 +372,7 @@ public class Hero : Character
 		}
 	}
 
-	private void CheckForUpgradeFXArmor(string heroId)
+	private void CheckForUpgradeFXArmor(string CurrentHeroId)
 	{
 		int num = (base.ownerId != 0)
 			? Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.armorLevel
@@ -392,8 +381,8 @@ public class Hero : Character
 		Renderer componentInChildren = heroModel.GetComponentInChildren<Renderer>();
 		if (componentInChildren != null)
 		{
-			string costume = Singleton<Profile>.Instance.GetCostume(heroId);
-			matLookupHandle = new DataBundleRecordHandle<CostumeSchema>(heroId, costume);
+			string costume = Singleton<Profile>.Instance.GetCostume(CurrentHeroId);
+			matLookupHandle = new DataBundleRecordHandle<CostumeSchema>(CurrentHeroId, costume);
 			matLookupHandle.Load(null);
 			if (matLookupHandle.Data != null && matLookupHandle.Data.material != null)
 			{
@@ -581,10 +570,6 @@ public class Hero : Character
 		}
 		else
 		{
-			if (Singleton<Profile>.Instance.inBonusWave)
-			{
-				return;
-			}
 			if (IsInMeleeRangeOfOpponent(true))
 			{
 				SetRangeAttackMode(false);
@@ -754,7 +739,7 @@ public class Hero : Character
 		{
 			base.controller.constraintLeft = WeakGlobalMonoBehavior<InGameImpl>.Instance.heroWalkLeftEdge.position.z;
 			base.controller.constraintRight = WeakGlobalMonoBehavior<InGameImpl>.Instance.heroWalkRightEdge.position.z;
-			if (Singleton<Profile>.Instance.inVSMultiplayerWave)
+			if (Singleton<Profile>.Instance.IsInVSMultiplayerWave)
 			{
 				Hero hero = WeakGlobalMonoBehavior<InGameImpl>.Instance.GetHero(1 - base.ownerId);
 				if (hero != null && hero.health > 0f)
@@ -868,7 +853,7 @@ public class Hero : Character
 
 	public void Revive()
 	{
-		if (Singleton<Profile>.Instance.inVSMultiplayerWave && base.BlocksHeroMovement)
+		if (Singleton<Profile>.Instance.IsInVSMultiplayerWave && base.BlocksHeroMovement)
 		{
 			if (mIsLeftToRightGameplay)
 			{
@@ -1080,7 +1065,7 @@ public class Hero : Character
 		DestroyMeleeWeaponPrefabs();
 		WeaponSchema meleeWeapon = mainData.MeleeWeapon;
 		List<GameObject> list = new List<GameObject>();
-		int level = Singleton<Profile>.Instance.swordLevel;
+		int level = Singleton<Profile>.Instance.SwordLevel;
 		if (base.ownerId != 0)
 		{
 			level = Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.meleeLevel;
@@ -1097,12 +1082,12 @@ public class Hero : Character
 	{
 		Object.Destroy(base.rangedWeaponPrefab);
 		WeaponSchema rangedWeapon = mainData.RangedWeapon;
-		int bowLevel = Singleton<Profile>.Instance.bowLevel;
+		int BowLevel = Singleton<Profile>.Instance.BowLevel;
 		if (base.ownerId != 0)
 		{
-			bowLevel = Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.bowLevel;
+			BowLevel = Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.BowLevel;
 		}
-		base.rangedWeaponPrefab = rangedWeapon.GetLevel(bowLevel).prefab;
+		base.rangedWeaponPrefab = rangedWeapon.GetLevel(BowLevel).prefab;
 	}
 
 	public void onMoveLeft()

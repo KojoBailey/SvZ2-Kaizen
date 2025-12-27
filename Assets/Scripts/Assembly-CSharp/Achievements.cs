@@ -179,7 +179,7 @@ public class Achievements : Singleton<Achievements>
 					{
 						value.completedCount = value.achievement.Data.CompletionCount;
 						value.progress = 100f;
-						Singleton<Profile>.Instance.saveData.SetDictionaryValue("achievements", value.achievement.Data.id, value.completedCount);
+						Singleton<Profile>.Instance.SaveData.SetDictionaryValue("achievements", value.achievement.Data.id, value.completedCount);
 					}
 					if (value.achievement.Data.achievementType == AchievementType.MetaAchievement)
 					{
@@ -239,7 +239,7 @@ public class Achievements : Singleton<Achievements>
 	private void ReportProgress(AchievementTracker achievement, float progress)
 	{
 		bool flag = achievement.progress >= 100f;
-		Singleton<Profile>.Instance.saveData.SetDictionaryValue("achievements", achievement.achievement.Data.id, achievement.completedCount);
+		Singleton<Profile>.Instance.SaveData.SetDictionaryValue("achievements", achievement.achievement.Data.id, achievement.completedCount);
 		achievement.progress = progress;
 		if (!flag && achievement.progress >= 100f && achievement.achievement.Data.achievementType != AchievementType.DummyCountAchievement)
 		{
@@ -354,7 +354,7 @@ public class Achievements : Singleton<Achievements>
 			AchievementTracker achievementTracker = new AchievementTracker();
 			achievementTracker.achievement = dataBundleRecordHandle;
 			mAchievements[dataBundleRecordHandle.Data.id] = achievementTracker;
-			achievementTracker.completedCount = Singleton<Profile>.Instance.saveData.GetDictionaryValue<int>("achievements", dataBundleRecordHandle.Data.id);
+			achievementTracker.completedCount = Singleton<Profile>.Instance.SaveData.GetDictionaryValue<int>("achievements", dataBundleRecordHandle.Data.id);
 			if (achievementTracker.completedCount >= achievementTracker.achievement.Data.CompletionCount)
 			{
 				achievementTracker.progress = 100f;
@@ -418,7 +418,7 @@ public class Achievements : Singleton<Achievements>
 		{
 			AchievementTracker value = mAchievement.Value;
 			value.completedCount = 0;
-			Singleton<Profile>.Instance.saveData.SetDictionaryValue("achievements", value.achievement.Data.id, value.completedCount);
+			Singleton<Profile>.Instance.SaveData.SetDictionaryValue("achievements", value.achievement.Data.id, value.completedCount);
 		}
 	}
 }

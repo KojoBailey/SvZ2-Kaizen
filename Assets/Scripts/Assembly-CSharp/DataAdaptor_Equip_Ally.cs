@@ -67,13 +67,13 @@ public class DataAdaptor_Equip_Ally : DataAdaptorBase
 			{
 				active3 = true;
 			}
-			WaveSchema waveData = WaveManager.GetWaveData(Singleton<Profile>.Instance.waveToPlay, Singleton<Profile>.Instance.waveTypeToPlay);
-			if (Singleton<Profile>.Instance.inDailyChallenge)
+			WaveSchema waveData = WaveManager.GetWaveData(Singleton<Profile>.Instance.WaveToPlay, Singleton<Profile>.Instance.waveTypeToPlay);
+			if (Singleton<Profile>.Instance.IsInDailyChallenge)
 			{
 				flag2 = Singleton<Profile>.Instance.dailyChallengeHeroSchema.id == heroSchema.id;
 				flag = !flag2;
 			}
-			else if (waveData.recommendedHero != null && !Singleton<Profile>.Instance.inMultiplayerWave && !Singleton<Profile>.Instance.ChangingDefenseLoadout)
+			else if (waveData.recommendedHero != null && !Singleton<Profile>.Instance.IsInMultiplayerWave && !Singleton<Profile>.Instance.ChangingDefenseLoadout)
 			{
 				HeroSchema heroSchema2 = Singleton<HeroesDatabase>.Instance[waveData.recommendedHero.Key];
 				if (heroSchema2 != null)
@@ -106,7 +106,7 @@ public class DataAdaptor_Equip_Ally : DataAdaptorBase
 			{
 				texture2D2 = helperSchema.TryGetChampionIcon();
 			}
-			if (Singleton<Profile>.Instance.inDailyChallenge)
+			if (Singleton<Profile>.Instance.IsInDailyChallenge)
 			{
 				if (!Singleton<Profile>.Instance.dailyChallengeHelpers.Contains(helperSchema.id))
 				{
@@ -132,7 +132,7 @@ public class DataAdaptor_Equip_Ally : DataAdaptorBase
 					texture2D = helperSchema.TryGetHUDIcon();
 					flag = false;
 				}
-				if (helperSchema.id == "Farmer" && Singleton<Profile>.Instance.waveToPlay == 2 && Singleton<Profile>.Instance.GetWaveLevel(2) == 1 && !Singleton<Profile>.Instance.inVSMultiplayerWave && !Singleton<Profile>.Instance.ChangingDefenseLoadout)
+				if (helperSchema.id == "Farmer" && Singleton<Profile>.Instance.WaveToPlay == 2 && Singleton<Profile>.Instance.GetWaveCompletionCount(2) == 1 && !Singleton<Profile>.Instance.IsInVSMultiplayerWave && !Singleton<Profile>.Instance.ChangingDefenseLoadout)
 				{
 					flag2 = true;
 				}
@@ -143,7 +143,7 @@ public class DataAdaptor_Equip_Ally : DataAdaptorBase
 			AbilitySchema abilitySchema = (AbilitySchema)data;
 			text = StringUtils.GetStringFromStringRef(abilitySchema.displayName);
 			texture2D = ((!BundleUtils.GetSystemLanguage().StartsWith("English") && !(abilitySchema.iconNoText == null)) ? abilitySchema.iconNoText : abilitySchema.icon);
-			if (Singleton<Profile>.Instance.inDailyChallenge)
+			if (Singleton<Profile>.Instance.IsInDailyChallenge)
 			{
 				flag = !Singleton<Profile>.Instance.dailyChallengeAbilities.Contains(abilitySchema.id);
 				flag2 = !flag;

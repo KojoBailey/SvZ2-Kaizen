@@ -191,7 +191,7 @@ public class Helper : Character
 			{
 				base.controller.PlayVictoryAnim();
 			}
-			else if (Singleton<Profile>.Instance.inMultiplayerWave)
+			else if (Singleton<Profile>.Instance.IsInMultiplayerWave)
 			{
 				base.controller.Die();
 			}

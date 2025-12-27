@@ -128,7 +128,7 @@ public class PlayModesManager : Singleton<PlayModesManager>
 
 	public void DetermineGameDirection()
 	{
-		if (Singleton<Profile>.Instance.inVSMultiplayerWave && Attacking)
+		if (Singleton<Profile>.Instance.IsInVSMultiplayerWave && Attacking)
 		{
 			mGameDirection = GameDirection.RightToLeft;
 		}

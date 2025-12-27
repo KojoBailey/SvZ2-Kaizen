@@ -49,7 +49,7 @@ public class EquipListController : GluiSimpleCollectionController
 		foreach (HelperSchema helperSchema in array)
 		{
 			string text = helperSchema.requiredHero.Key.ToString();
-			if (!helperSchema.hideInEquip && (string.IsNullOrEmpty(text) || text == Singleton<Profile>.Instance.heroId))
+			if (!helperSchema.hideInEquip && (string.IsNullOrEmpty(text) || text == Singleton<Profile>.Instance.CurrentHeroId))
 			{
 				list.Add(helperSchema);
 			}

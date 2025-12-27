@@ -16,7 +16,7 @@ public class BannerStartWave : Banner
 	public BannerStartWave(float fTimeBeforeFade, int waveNumber)
 		: base(fTimeBeforeFade)
 	{
-		if (Singleton<Profile>.Instance.inDailyChallenge)
+		if (Singleton<Profile>.Instance.IsInDailyChallenge)
 		{
 			mWaveText = StringUtils.GetStringFromStringRef(Singleton<Profile>.Instance.dailyChallengeProceduralWaveSchema.waveDisplayName);
 		}
@@ -34,7 +34,7 @@ public class BannerStartWave : Banner
 		GluiText component5 = ObjectUtils.FindTransformInChildren(base.bannerInstance.transform, "SwapText_WaveTitle").gameObject.GetComponent<GluiText>();
 		GluiText component2 = ObjectUtils.FindTransformInChildren(base.bannerInstance.transform, "SwapText_TopLine").gameObject.GetComponent<GluiText>();
 		GluiText component3 = ObjectUtils.FindTransformInChildren(base.bannerInstance.transform, "SwapText_BottomLine").gameObject.GetComponent<GluiText>();
-		if (Singleton<Profile>.Instance.inMultiplayerWave)
+		if (Singleton<Profile>.Instance.IsInMultiplayerWave)
 		{
 			component.gameObject.SetActive(false);
 			component5.gameObject.SetActive(false);

@@ -67,7 +67,6 @@ public class ResultsMenuImpl : UIHandler<ResultsMenuImpl>, IGluiActionHandler
 		}
 		DrawPage();
 		Singleton<Achievements>.Instance.SuppressPartialReporting(false);
-		mCheckForRateMe = !Singleton<Profile>.Instance.neverShowRateMeAlertAgain;
 		if (!Singleton<PlayStatistics>.Instance.data.victory)
 		{
 			SingletonSpawningMonoBehaviour<UMusicManager>.Instance.PlayByKey("MusicEvents.Sting_Game_Lose_01");
@@ -90,14 +89,14 @@ public class ResultsMenuImpl : UIHandler<ResultsMenuImpl>, IGluiActionHandler
 			{
 				MysteryBoxImpl.BoxID = "MysteryBox";
 				GluiActionSender.SendGluiAction("POPUP_MYSTERY_BOX", base.gameObject, null);
-				if (Singleton<Profile>.Instance.inDailyChallenge)
+				if (Singleton<Profile>.Instance.IsInDailyChallenge)
 				{
 					Singleton<Profile>.Instance.lastCompletedDailyChallenge = Profile.GetDailyChallengeDaysSinceStart();
 					int dailyChallengesCompleted = Singleton<Profile>.Instance.dailyChallengesCompleted + 1;
 					Singleton<Profile>.Instance.dailyChallengesCompleted = dailyChallengesCompleted;
 				}
 			}
-			if (!Singleton<Profile>.Instance.inDailyChallenge)
+			if (!Singleton<Profile>.Instance.IsInDailyChallenge)
 			{
 				if (GetUpgradeUnlockedFeatures(true) != null)
 				{
@@ -175,7 +174,7 @@ public class ResultsMenuImpl : UIHandler<ResultsMenuImpl>, IGluiActionHandler
 	public static List<UnlockedFeature> GetUpgradeUnlockedFeatures(bool doPlayHavenRequest)
 	{
 		int wavePlayed = Singleton<PlayStatistics>.Instance.data.wavePlayed;
-		if (!Singleton<PlayStatistics>.Instance.data.victory || Singleton<Profile>.Instance.GetWaveLevel(wavePlayed) != 2)
+		if (!Singleton<PlayStatistics>.Instance.data.victory || Singleton<Profile>.Instance.GetWaveCompletionCount(wavePlayed) != 2)
 		{
 			return null;
 		}
@@ -225,7 +224,7 @@ public class ResultsMenuImpl : UIHandler<ResultsMenuImpl>, IGluiActionHandler
 	public static UnlockedFeature GetUnlockedHero()
 	{
 		int wavePlayed = Singleton<PlayStatistics>.Instance.data.wavePlayed;
-		if (!Singleton<PlayStatistics>.Instance.data.victory || Singleton<Profile>.Instance.GetWaveLevel(wavePlayed) != 2)
+		if (!Singleton<PlayStatistics>.Instance.data.victory || Singleton<Profile>.Instance.GetWaveCompletionCount(wavePlayed) != 2)
 		{
 			return null;
 		}
@@ -274,7 +273,7 @@ public class ResultsMenuImpl : UIHandler<ResultsMenuImpl>, IGluiActionHandler
 			{
 				base.gameObject.FindChild("Header_Multiplayer").SetActive(false);
 				GluiText gluiText = base.gameObject.FindChildComponent<GluiText>("Text_Wave");
-				if (Singleton<Profile>.Instance.inDailyChallenge)
+				if (Singleton<Profile>.Instance.IsInDailyChallenge)
 				{
 					gluiText.Text = StringUtils.GetStringFromStringRef(Singleton<Profile>.Instance.dailyChallengeProceduralWaveSchema.waveDisplayName);
 				}
@@ -284,7 +283,7 @@ public class ResultsMenuImpl : UIHandler<ResultsMenuImpl>, IGluiActionHandler
 				}
 				if (Singleton<PlayStatistics>.Instance.data.victory && FacebookButton != null)
 				{
-					if (Singleton<Profile>.Instance.inDailyChallenge)
+					if (Singleton<Profile>.Instance.IsInDailyChallenge)
 					{
 						//FacebookButton.gameObject.SetActive(true);
 						FacebookButton.onReleaseActions = new string[1] { "FACEBOOK_DAILY_CHALLENGE" };
@@ -431,16 +430,6 @@ public class ResultsMenuImpl : UIHandler<ResultsMenuImpl>, IGluiActionHandler
 		}
 	}
 
-	[MonoPInvokeCallback(typeof(NUF.RateMeDelegate))]
-	private static void OnNeverShowAlertAgain(int buttonIndex)
-	{
-		if (buttonIndex == 1 || buttonIndex == 2)
-		{
-			Singleton<Profile>.Instance.neverShowRateMeAlertAgain = true;
-			Singleton<Profile>.Instance.Save();
-		}
-	}
-
 	private static bool IsGettingMysteryBoxFromThisWave()
 	{
 		if (Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive())
@@ -451,7 +440,7 @@ public class ResultsMenuImpl : UIHandler<ResultsMenuImpl>, IGluiActionHandler
 		{
 			return false;
 		}
-		if (Singleton<Profile>.Instance.inDailyChallenge)
+		if (Singleton<Profile>.Instance.IsInDailyChallenge)
 		{
 			return Singleton<Profile>.Instance.lastCompletedDailyChallenge != Profile.GetDailyChallengeDaysSinceStart();
 		}
@@ -460,22 +449,5 @@ public class ResultsMenuImpl : UIHandler<ResultsMenuImpl>, IGluiActionHandler
 			return Singleton<PlayStatistics>.Instance.data.wavePlayedLevel == 1;
 		}
 		return false;
-	}
-
-	private void onRateMeClicked(string button)
-	{
-		int num = Convert.ToInt32(button);
-		if (num == -1)
-		{
-			if (!AJavaTools.Properties.IsBuildGoogle() || AJavaTools.Properties.GetBuildType().Equals("facebook"))
-			{
-				Singleton<Profile>.Instance.AddGems(5, "IncentivizedRateMe");
-				Singleton<Profile>.Instance.purchasedGems += 5;
-			}
-			Application.OpenURL(AJavaTools.Internet.GetGameURL());
-			AStats.Flurry.LogEvent("GameRated");
-			Singleton<Profile>.Instance.neverShowRateMeAlertAgain = true;
-			Singleton<Profile>.Instance.Save();
-		}
 	}
 }

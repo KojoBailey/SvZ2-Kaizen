@@ -118,7 +118,7 @@ public class EquipMenuImpl : UIHandler<EquipMenuImpl>, IGluiActionHandler
 		mCommonInfoText = base.gameObject.FindChildComponent<GluiText>("Text_Info");
 		if (!Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive() && !Singleton<Profile>.Instance.ChangingDefenseLoadout)
 		{
-			if (Singleton<Profile>.Instance.inDailyChallenge)
+			if (Singleton<Profile>.Instance.IsInDailyChallenge)
 			{
 				mPagesInfo.Add(new PageInfo(DailyChallengeWavePanel, (GameObject ui) => new EquipPageWaves(ui), false));
 			}
@@ -222,7 +222,7 @@ public class EquipMenuImpl : UIHandler<EquipMenuImpl>, IGluiActionHandler
 		{
 			TransitionToPage(mActivePageIndex - 1);
 		}
-		else if (Singleton<Profile>.Instance.inMultiplayerWave || Singleton<Profile>.Instance.ChangingDefenseLoadout)
+		else if (Singleton<Profile>.Instance.IsInMultiplayerWave || Singleton<Profile>.Instance.ChangingDefenseLoadout)
 		{
 			ClearPage();
 			GluiActionSender.SendGluiAction("ALERT_MULTIPLAYER_LOGIN", base.gameObject, null);
@@ -366,7 +366,7 @@ public class EquipMenuImpl : UIHandler<EquipMenuImpl>, IGluiActionHandler
 	private void SetupEnemiesShowCase()
 	{
 		Transform centerPos = base.gameObject.FindChild("Locator_Enemies_Middle").transform;
-		mEnemiesShowCase = new EnemiesShowCase(centerPos, base.gameObject.FindChild("BG_Dimmer_Enemies"), Singleton<Profile>.Instance.waveTypeToPlay, Singleton<Profile>.Instance.waveToPlay);
+		mEnemiesShowCase = new EnemiesShowCase(centerPos, base.gameObject.FindChild("BG_Dimmer_Enemies"), Singleton<Profile>.Instance.waveTypeToPlay, Singleton<Profile>.Instance.WaveToPlay);
 		mEnemiesShowCase.onCharacterTouched = OnCharacterTouched;
 	}
 

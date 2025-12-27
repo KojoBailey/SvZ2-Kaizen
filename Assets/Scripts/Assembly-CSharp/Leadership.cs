@@ -219,9 +219,9 @@ public class Leadership : WeakGlobalInstance<Leadership>
 		{
 			SetUniqueInstance(this);
 			mIsLeftToRightGameplay = Singleton<PlayModesManager>.Instance.gameDirection == PlayModesManager.GameDirection.LeftToRight;
-			mLeadershipData = DataBundleUtils.InitializeRecord<LeadershipSchema>(new DataBundleRecordKey(UdamanTable, Singleton<Profile>.Instance.heroId));
+			mLeadershipData = DataBundleUtils.InitializeRecord<LeadershipSchema>(new DataBundleRecordKey(UdamanTable, Singleton<Profile>.Instance.CurrentHeroId));
 			mMaxLevel = mLeadershipData.maxLevel;
-			SetLeadershipLevel(Singleton<Profile>.Instance.initialLeadershipLevel);
+			SetLeadershipLevel(Singleton<Profile>.Instance.InitialLeadershipLevel);
 			List<string> selectedHelpers = Singleton<Profile>.Instance.GetSelectedHelpers();
 			foreach (string item2 in selectedHelpers)
 			{

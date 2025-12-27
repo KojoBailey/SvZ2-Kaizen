@@ -23,12 +23,12 @@
 		tutorialToPlayNext = 
 		actionSendOnStart = TUTORIAL_STORE
 		actionSendOnDone = NULL
-	# Tutorial_Game01_ProtectGate:
-	# 	name = Tutorial_Game01_ProtectGate
-	# 	actionToTrigger = TUTORIAL_01_TRIGGER
-	# 	tutorialToPlayNext = 
-	# 	actionSendOnStart = TUTORIAL_GAME01_PROTECTGATE
-	# 	actionSendOnDone = NULL
+	Tutorial_Game01_ProtectGate:
+		name = Tutorial_Game01_ProtectGate
+		actionToTrigger = TUTORIAL_01_TRIGGER
+		tutorialToPlayNext = 
+		actionSendOnStart = TUTORIAL_GAME01_PROTECTGATE
+		actionSendOnDone = NULL
 	Tutorial_Game02_Movement:
 		name = Tutorial_Game02_Movement
 		actionToTrigger = TUTORIAL_02_TRIGGER

@@ -28,7 +28,7 @@ public class iCloudConfirmImpl : MonoBehaviour, IGluiActionHandler
 	private void Start()
 	{
 		string text = (string)SingletonSpawningMonoBehaviour<GluiPersistentDataCache>.Instance.GetData("ICLOUD_ACTION");
-		DeviceData deviceData = Singleton<Profile>.Instance.saveData.GetDeviceData("local");
+		DeviceData deviceData = Singleton<Profile>.Instance.SaveData.GetDeviceData("local");
 		DeviceData deviceData2 = ((Singleton<Profile>.Instance.CloudSaveResult != SaveProvider.Result.Success) ? null : Singleton<Profile>.Instance.CloudSave.GetDeviceData("cloud"));
 		int num;
 		int num2;
@@ -57,7 +57,6 @@ public class iCloudConfirmImpl : MonoBehaviour, IGluiActionHandler
 		}
 		slots[num].text_title.Text = StringUtils.GetStringFromStringRef("MenuFixedStrings", "iCloud_Local");
 		slots[num2].text_title.Text = StringUtils.GetStringFromStringRef("MenuFixedStrings", "iCloud_iCloud");
-		slots[num].text_currencyHard.Text = StringUtils.FormatAmountString(Singleton<Profile>.Instance.gems);
 		slots[num].text_currencySoft.Text = StringUtils.FormatAmountString(Singleton<Profile>.Instance.coins);
 		DateTime dateTime = deviceData.Current.SaveTime.ToLocalTime();
 		GluiText text_lastPlayed = slots[num].text_lastPlayed;

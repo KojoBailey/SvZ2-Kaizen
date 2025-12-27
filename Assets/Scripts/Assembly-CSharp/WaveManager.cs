@@ -324,7 +324,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	public void AddSpecialRewardsToCollectables()
 	{
-		if (waveRootData.Rewards != null && Singleton<Profile>.Instance.GetWaveLevel(mWaveIndex) == 1)
+		if (waveRootData.Rewards != null && Singleton<Profile>.Instance.GetWaveCompletionCount(mWaveIndex) == 1)
 		{
 			WeakGlobalInstance<CollectableManager>.Instance.GiveResource(ECollectableType.copperCoin, waveRootData.Rewards.coins); // [TODO] support all coin types
 			WeakGlobalInstance<CollectableManager>.Instance.GiveResource(ECollectableType.pachinkoBall, waveRootData.Rewards.pachinkoBalls);
@@ -343,7 +343,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 	public static void LoadSceneForWave()
 	{
 		Singleton<Profile>.Instance.ClearBonusWaveData();
-		WaveSchema waveData = GetWaveData(Singleton<Profile>.Instance.waveToPlay, Singleton<Profile>.Instance.waveTypeToPlay);
+		WaveSchema waveData = GetWaveData(Singleton<Profile>.Instance.WaveToPlay, Singleton<Profile>.Instance.waveTypeToPlay);
 		LoadingScreen.LoadLevel(waveData.scene);
 	}
 
@@ -479,14 +479,14 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	private void LoadLevelMultipliers()
 	{
-		if (Singleton<Profile>.Instance.inDailyChallenge || Singleton<Profile>.Instance.inMultiplayerWave)
+		if (Singleton<Profile>.Instance.IsInDailyChallenge || Singleton<Profile>.Instance.IsInMultiplayerWave)
 		{
 			return;
 		}
 		PlayModeSchema selectedModeData = Singleton<PlayModesManager>.Instance.selectedModeData;
 		if (mWaveIndex <= selectedModeData.maxBaseWave)
 		{
-			int num = Singleton<Profile>.Instance.GetWaveLevel(mWaveIndex);
+			int num = Singleton<Profile>.Instance.GetWaveCompletionCount(mWaveIndex);
 			if (num >= 2)
 			{
 				float @float = Singleton<Config>.Instance.data.GetFloat(TextDBSchema.ChildKey("waveLevelMultipliers", "enemiesHealth"));

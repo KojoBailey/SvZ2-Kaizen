@@ -5,13 +5,13 @@ public class AIEnemySchema
 	public string id;
 
 	[DataBundleSchemaFilter(typeof(HeroSchema), false)]
-	public DataBundleRecordKey heroId;
+	public DataBundleRecordKey CurrentHeroId;
 
-	public int heroLevel;
+	public int CurrentHeroLevel;
 
-	public int bowLevel;
+	public int BowLevel;
 
-	public int swordLevel;
+	public int SwordLevel;
 
 	public int armorLevel;
 

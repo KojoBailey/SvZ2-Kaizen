@@ -20,7 +20,7 @@ public class EquipPageAllies : EquipPage, UIHandlerComponent
 			WeakGlobalInstance<EnemiesShowCase>.Instance.highlight = false;
 		}
 		mScrollListRef = uiParent.FindChildComponent<GluiBouncyScrollList>("ScrollList_Allies_Available");
-		HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[Singleton<Profile>.Instance.heroId];
+		HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[Singleton<Profile>.Instance.CurrentHeroId];
 		AcquireSlotTransforms(uiParent, heroSchema.allySlots);
 		mDataSet = uiParent.FindChildComponent<EquipListController>("ScrollList_Allies_Available").data;
 		mListSlotManager = new ListToSlotDragManager(mSlotTransformsRef, mScrollListRef, mDataSet);
@@ -62,12 +62,12 @@ public class EquipPageAllies : EquipPage, UIHandlerComponent
 	public void Load()
 	{
 		List<string> list;
-		if (Singleton<Profile>.Instance.inDailyChallenge)
+		if (Singleton<Profile>.Instance.IsInDailyChallenge)
 		{
 			list = Singleton<Profile>.Instance.dailyChallengeHelpers;
 			mAlliesSelectionRequired = true;
 		}
-		else if (Singleton<Profile>.Instance.wave_SinglePlayerGame == 2 && Singleton<Profile>.Instance.GetWaveLevel(2) == 1 && !Singleton<Profile>.Instance.inMultiplayerWave)
+		else if (Singleton<Profile>.Instance.CurrentStoryWave == 2 && Singleton<Profile>.Instance.GetWaveCompletionCount(2) == 1 && !Singleton<Profile>.Instance.IsInMultiplayerWave)
 		{
 			list = new List<string>(new string[1] { "Farmer" });
 			mAlliesSelectionRequired = true;
@@ -131,6 +131,6 @@ public class EquipPageAllies : EquipPage, UIHandlerComponent
 	{
 		HelperSchema helperSchema = (HelperSchema)mDataSet[index];
 		string text = helperSchema.requiredHero.Key.ToString();
-		return !helperSchema.Locked && (string.IsNullOrEmpty(text) || text == Singleton<Profile>.Instance.heroId);
+		return !helperSchema.Locked && (string.IsNullOrEmpty(text) || text == Singleton<Profile>.Instance.CurrentHeroId);
 	}
 }
