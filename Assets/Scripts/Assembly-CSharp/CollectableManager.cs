@@ -96,20 +96,26 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 				switch (resourceSchema.type)
 				{
 				case ECollectableType.copperCoin:
-					buffer = "Copper";
+					buffer = "CoinCopperPickup";
 					break;
 				case ECollectableType.silverCoin:
-					buffer = "Silver";
+					buffer = "CoinSilverPickup";
 					break;
 				case ECollectableType.goldCoin:
-					buffer = "Gold";
+					buffer = "CoinGoldPickup";
+					break;
+				case ECollectableType.leadership:
+					buffer = "LeadershipPickup";
+					break;
+				case ECollectableType.soul:
+					buffer = "SoulsIcon";
 					break;
 				default:
 					UnityEngine.Debug.LogError("Unsupported collectable type.");
 					continue;
 				}
 
-				resourceSchema.prefab = Resources.Load<GameObject>(string.Format("FX/Coin{0}Pickup", buffer));
+				resourceSchema.prefab = Resources.Load<GameObject>("FX/" + buffer);
 
 				if (resourceSchema.prefab == null)
 				{
@@ -119,7 +125,7 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 
 			mResourceTemplates[i] = new ResourceTemplate
 			{
-				amount = resourceSchema.RandomValue,
+				amount = resourceSchema.Value,
 				prefab = resourceSchema.prefab,
 				dropRate = resourceSchema.dropRate,
 			};
@@ -197,11 +203,11 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 	{
 		foreach (var resourceSchema in mResourceSchemas)
 		{
-			if (UnityEngine.Random.value > resourceSchema.dropRate) return;
+			if (UnityEngine.Random.value > resourceSchema.dropRate) continue;
 			
 			mCollectables.Add(new Collectable(
 				resourceSchema,
-				resourceSchema.RandomValue,
+				resourceSchema.Value,
 				position,
 				FindNewCollectableFinalPosition(position)
 			));
@@ -215,7 +221,7 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 
 		mCollectables.Add(new Collectable(
 			resourceSchema,
-			resourceSchema.RandomValue,
+			resourceSchema.Value,
 			position,
 			FindNewCollectableFinalPosition(position)
 		));
@@ -303,7 +309,7 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 			}
 			break;
 		case ECollectableType.soul:
-			// [TODO] Give souls to soul meter or whatever.
+			WeakGlobalInstance<Souls>.Instance.souls += amount;
 			break;
 		case ECollectableType.leadership:
 			WeakGlobalInstance<Leadership>.Instance.resources += amount;
