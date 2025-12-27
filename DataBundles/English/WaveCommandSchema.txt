@@ -6,7 +6,7 @@
 		type = Tutorial
 		tutorial = Tutorial_Game02_Movement
 	*:
-		# Give some time for player to test movement controls.
+		# Give some time for player to read tutorial and test movement.
 		type = Delay
 		duration = 5
 	*:
