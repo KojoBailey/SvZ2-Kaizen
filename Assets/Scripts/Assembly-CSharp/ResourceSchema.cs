@@ -1,3 +1,5 @@
+using System.ComponentModel;
+using System.Diagnostics;
 using UnityEngine;
 
 [DataBundleClass(Category = "Design")]
@@ -18,9 +20,20 @@ public class ResourceSchema
     [DataBundleField]
     public int maxValue;
 
-    public int RandomValue
+    [DataBundleField]
+    [DataBundleDefaultValue(-1)]
+    public int constValue;
+
+    public int Value
     {
-        get { return UnityEngine.Random.Range(minValue, maxValue + 1); }
+        get
+        {
+            if (constValue == -1)
+            {
+                return UnityEngine.Random.Range(minValue, maxValue + 1);
+            }
+            return constValue;
+        }
     }
 
     [DataBundleField]
