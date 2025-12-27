@@ -1,19 +1,19 @@
 [Resources]
-  copperCoin:
-    type = copperCoin
-    minValue = 1
-    maxValue = 5
-    dropRate = 0.7
-    prefab = Assets/Game/Resources/FX/CoinCopperPickup.prefab
-  silverCoin:
-    type = silverCoin
-    minValue = 90
-    maxValue = 110
-    dropRate = 0.035
-    prefab = Assets/Game/Resources/FX/CoinSilverPickup.prefab
-  goldCoin:
-    type = goldCoin
-    minValue = 4500
-    maxValue = 5300
-    dropRate = 0.0007
-    prefab = Assets/Game/Resources/FX/CoinGoldPickup.prefab
+	copperCoin:
+		type = copperCoin
+		minValue = 1
+		maxValue = 5
+		dropRate = 0.7
+		prefab = Assets/Game/Resources/FX/CoinCopperPickup.prefab
+	silverCoin:
+		type = silverCoin
+		minValue = 90
+		maxValue = 110
+		dropRate = 0.035
+		prefab = Assets/Game/Resources/FX/CoinSilverPickup.prefab
+	goldCoin:
+		type = goldCoin
+		minValue = 4500
+		maxValue = 5300
+		dropRate = 0.0007
+		prefab = Assets/Game/Resources/FX/CoinGoldPickup.prefab

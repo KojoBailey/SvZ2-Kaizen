@@ -229,35 +229,35 @@ public class Profile : Singleton<Profile>
 		}
 	}
 
-    public DateTime? lastDailyRewardDate
-    {
-        get
-        {
-            string value = mSavedData.GetValue("lastDailyReward");
-            if (value != null)
-            {
-            }
-            DateTime result;
-            if (DateTime.TryParseExact(value, "O", null, DateTimeStyles.None, out result))
-            {
-                return result.ToUniversalTime();
-            }
-            return null;
-        }
-        set
-        {
-            if (value.HasValue)
-            {
-                mSavedData.SetValue("lastDailyReward", value.Value.ToString("O"));
-            }
-            else
-            {
-                mSavedData.SetValue("lastDailyReward", string.Empty);
-            }
-        }
-    }
+	public DateTime? lastDailyRewardDate
+	{
+		get
+		{
+			string value = mSavedData.GetValue("lastDailyReward");
+			if (value != null)
+			{
+			}
+			DateTime result;
+			if (DateTime.TryParseExact(value, "O", null, DateTimeStyles.None, out result))
+			{
+				return result.ToUniversalTime();
+			}
+			return null;
+		}
+		set
+		{
+			if (value.HasValue)
+			{
+				mSavedData.SetValue("lastDailyReward", value.Value.ToString("O"));
+			}
+			else
+			{
+				mSavedData.SetValue("lastDailyReward", string.Empty);
+			}
+		}
+	}
 
-    public int playerLevel
+	public int playerLevel
 	{
 		get
 		{
@@ -894,15 +894,15 @@ public class Profile : Singleton<Profile>
 	{
 		get
 		{
-			return GetHeroLevel(heroID);
+			return GetHeroLevel(heroId);
 		}
 		set
 		{
-			SetHeroLevel(heroID, value);
+			SetHeroLevel(heroId, value);
 		}
 	}
 
-	public string heroID
+	public string heroId
 	{
 		get
 		{
@@ -910,7 +910,9 @@ public class Profile : Singleton<Profile>
 			{
 				return SelectedDefendHero;
 			}
-			string text = ((!inDailyChallenge) ? mSavedData.GetValue("heroID", playModeSubSection) : mSavedData.GetValue("dailychallenge_heroID", playModeSubSection));
+			string text = (!inDailyChallenge)
+				? mSavedData.GetValue("heroId", playModeSubSection)
+				: mSavedData.GetValue("dailychallenge_heroID", playModeSubSection);
 			if (text == string.Empty && Singleton<PlayModesManager>.Exists && Singleton<PlayModesManager>.Instance.selectedModeData != null)
 			{
 				return Singleton<PlayModesManager>.Instance.selectedModeData.defaultHeroID;
@@ -930,33 +932,27 @@ public class Profile : Singleton<Profile>
 			}
 			else
 			{
-				mSavedData.SetValue("heroID", value, playModeSubSection);
+				mSavedData.SetValue("heroId", value, playModeSubSection);
 			}
 		}
 	}
 
 	public int initialLeadershipLevel
 	{
-		get
-		{
-			return GetLeadershipLevel(heroID);
-		}
-		set
-		{
-			SetLeadershipLevel(heroID, value);
-		}
+		get { return GetLeadershipLevel(heroId); }
+		set { SetLeadershipLevel(heroId, value); }
+	}
+
+	public int soulsLevel
+	{
+		get { return GetSoulsLevel(heroId); }
+		set { SetSoulsLevel(heroId, value); }
 	}
 
 	public int swordLevel
 	{
-		get
-		{
-			return GetMeleeWeaponLevel(heroID);
-		}
-		set
-		{
-			SetMeleeWeaponLevel(heroID, value);
-		}
+		get { return GetMeleeWeaponLevel(heroId); }
+		set { SetMeleeWeaponLevel(heroId, value); }
 	}
 
 	public string swordID
@@ -980,11 +976,11 @@ public class Profile : Singleton<Profile>
 	{
 		get
 		{
-			return GetRangedWeaponLevel(heroID);
+			return GetRangedWeaponLevel(heroId);
 		}
 		set
 		{
-			SetRangedWeaponLevel(heroID, value);
+			SetRangedWeaponLevel(heroId, value);
 		}
 	}
 
@@ -1009,11 +1005,11 @@ public class Profile : Singleton<Profile>
 	{
 		get
 		{
-			return GetArmorLevel(heroID);
+			return GetArmorLevel(heroId);
 		}
 		set
 		{
-			SetArmorLevel(heroID, value);
+			SetArmorLevel(heroId, value);
 		}
 	}
 
@@ -1201,7 +1197,7 @@ public class Profile : Singleton<Profile>
 	{
 		get
 		{
-			int num = Singleton<HeroesDatabase>.Instance[heroID].allySlots;
+			int num = Singleton<HeroesDatabase>.Instance[heroId].allySlots;
 			if (GetUpgradeLevel("AllySlot") > 0)
 			{
 				num++;
@@ -1214,7 +1210,7 @@ public class Profile : Singleton<Profile>
 	{
 		get
 		{
-			int num = Singleton<HeroesDatabase>.Instance[heroID].abilitySlots;
+			int num = Singleton<HeroesDatabase>.Instance[heroId].abilitySlots;
 			if (GetUpgradeLevel("AbilitySlot") > 0)
 			{
 				num++;
@@ -1532,7 +1528,7 @@ public class Profile : Singleton<Profile>
 		int index = dailyRandomizer.NextRange(0, count - 1, this);
 		string id = list[index];
 		dailyChallengeHeroSchema = Singleton<HeroesDatabase>.Instance[id];
-		heroID = dailyChallengeHeroSchema.id;
+		heroId = dailyChallengeHeroSchema.id;
 	}
 
 	private void RefreshDailyChallengeHelpers()
@@ -2258,59 +2254,71 @@ public class Profile : Singleton<Profile>
 		CalculateAttackRating();
 	}
 
-	public int GetLeadershipLevel(string heroID)
+	public int GetLeadershipLevel(string heroId)
 	{
-		return Mathf.Max(0, mSavedData.GetValueInt(heroStat(heroID, "initialLeadershipLevel"), playModeSubSection));
+		return Mathf.Max(0, mSavedData.GetValueInt(heroStat(heroId, "initialLeadershipLevel"), playModeSubSection));
 	}
 
-	public int SetLeadershipLevel(string heroID, int value)
+	public int SetLeadershipLevel(string heroId, int value)
 	{
 		int num = Mathf.Max(0, value);
-		mSavedData.SetValueInt(heroStat(heroID, "initialLeadershipLevel"), num, playModeSubSection);
+		mSavedData.SetValueInt(heroStat(heroId, "initialLeadershipLevel"), num, playModeSubSection);
 		CalculateAttackRating();
 		return num;
 	}
 
-	public int GetMeleeWeaponLevel(string heroID)
+	public int GetSoulsLevel(string heroId)
 	{
-		return Mathf.Max(1, mSavedData.GetValueInt(heroStat(heroID, "swordLevel"), playModeSubSection));
+		return Mathf.Max(1, mSavedData.GetValueInt(heroStat(heroId, "soulsLevel"), playModeSubSection));
 	}
 
-	public int SetMeleeWeaponLevel(string heroID, int value)
+	public int SetSoulsLevel(string heroId, int value)
+	{
+		int num = Mathf.Max(1, value);
+		mSavedData.SetValueInt(heroStat(heroId, "soulsLevel"), num, playModeSubSection);
+		return num;
+	}
+
+	public int GetMeleeWeaponLevel(string heroId)
+	{
+		return Mathf.Max(1, mSavedData.GetValueInt(heroStat(heroId, "swordLevel"), playModeSubSection));
+	}
+
+	public int SetMeleeWeaponLevel(string heroId, int value)
 	{
 		int num = Mathf.Max(0, value);
-		mSavedData.SetValueInt(heroStat(heroID, "swordLevel"), num, playModeSubSection);
+		mSavedData.SetValueInt(heroStat(heroId, "swordLevel"), num, playModeSubSection);
 		CalculateAttackRating();
 		return num;
 	}
 
-	public int GetRangedWeaponLevel(string heroID)
+	public int GetRangedWeaponLevel(string heroId)
 	{
-		return Mathf.Max(1, mSavedData.GetValueInt(heroStat(heroID, "bowLevel"), playModeSubSection));
+		return Mathf.Max(1, mSavedData.GetValueInt(heroStat(heroId, "bowLevel"), playModeSubSection));
 	}
 
-	public int SetRangedWeaponLevel(string heroID, int value)
+	public int SetRangedWeaponLevel(string heroId, int value)
 	{
 		int num = Mathf.Max(0, value);
-		mSavedData.SetValueInt(heroStat(heroID, "bowLevel"), num, playModeSubSection);
+		mSavedData.SetValueInt(heroStat(heroId, "bowLevel"), num, playModeSubSection);
 		CalculateAttackRating();
 		return num;
 	}
 
-	public int GetArmorLevel(string heroID)
+	public int GetArmorLevel(string heroId)
 	{
-		return Mathf.Max(1, mSavedData.GetValueInt(heroStat(heroID, "armorLevel"), playModeSubSection));
+		return Mathf.Max(1, mSavedData.GetValueInt(heroStat(heroId, "armorLevel"), playModeSubSection));
 	}
 
-	public int SetArmorLevel(string heroID, int value)
+	public int SetArmorLevel(string heroId, int value)
 	{
 		int num = Mathf.Max(0, value);
-		HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[heroID];
+		HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[heroId];
 		if (heroSchema != null && heroSchema.ArmorLevels != null)
 		{
 			num = Mathf.Min(heroSchema.ArmorLevels.Length, num);
 		}
-		mSavedData.SetValueInt(heroStat(heroID, "armorLevel"), num, playModeSubSection);
+		mSavedData.SetValueInt(heroStat(heroId, "armorLevel"), num, playModeSubSection);
 		CalculateAttackRating();
 		return num;
 	}
@@ -2379,7 +2387,7 @@ public class Profile : Singleton<Profile>
 		{
 			return FilterOutDuplicateIDs(activeSavedData.GetSubNodeValueList("dailychallenge_selectedHelpers", playModeSubSection));
 		}
-		return FilterOutDuplicateIDs(activeSavedData.GetSubNodeValueList(heroStat(heroID, "selectedHelpers"), playModeSubSection));
+		return FilterOutDuplicateIDs(activeSavedData.GetSubNodeValueList(heroStat(heroId, "selectedHelpers"), playModeSubSection));
 	}
 
 	public void SetSelectedHelpers(List<string> helpers)
@@ -2396,7 +2404,7 @@ public class Profile : Singleton<Profile>
 		}
 		else
 		{
-			activeSavedData.SetSubNodeValueList(heroStat(heroID, "selectedHelpers"), helpers, playModeSubSection);
+			activeSavedData.SetSubNodeValueList(heroStat(heroId, "selectedHelpers"), helpers, playModeSubSection);
 		}
 	}
 
@@ -2443,7 +2451,7 @@ public class Profile : Singleton<Profile>
 		{
 			return FilterOutDuplicateIDs(activeSavedData.GetSubNodeValueList("dailychallenge_selectedAbilities", playModeSubSection));
 		}
-		return FilterOutDuplicateIDs(activeSavedData.GetSubNodeValueList(heroStat(heroID, "selectedAbilities"), playModeSubSection));
+		return FilterOutDuplicateIDs(activeSavedData.GetSubNodeValueList(heroStat(heroId, "selectedAbilities"), playModeSubSection));
 	}
 
 	public void SetSelectedAbilities(List<string> abilities)
@@ -2459,7 +2467,7 @@ public class Profile : Singleton<Profile>
 		}
 		else
 		{
-			activeSavedData.SetSubNodeValueList(heroStat(heroID, "selectedAbilities"), FilterOutDuplicateIDs(abilities), playModeSubSection);
+			activeSavedData.SetSubNodeValueList(heroStat(heroId, "selectedAbilities"), FilterOutDuplicateIDs(abilities), playModeSubSection);
 		}
 	}
 
@@ -2488,18 +2496,18 @@ public class Profile : Singleton<Profile>
 			{
 				continue;
 			}
-			string text2 = heroID;
+			string text2 = heroId;
 			foreach (HeroSchema item in list)
 			{
-				heroID = item.id;
+				heroId = item.id;
 				List<string> selectedAbilities = GetSelectedAbilities();
-				if ((abilitySchema.levelToUnlock != 0f || !(heroID != heroJustUnlocked)) && selectedAbilities.Count < maxSelectedAbilities)
+				if ((abilitySchema.levelToUnlock != 0f || !(heroId != heroJustUnlocked)) && selectedAbilities.Count < maxSelectedAbilities)
 				{
 					selectedAbilities.Add(text);
 					SetSelectedAbilities(selectedAbilities);
 				}
 			}
-			heroID = text2;
+			heroId = text2;
 		}
 	}
 
@@ -2987,9 +2995,9 @@ public class Profile : Singleton<Profile>
 		}
 	}
 
-	private static string heroStat(string heroID, string statID)
+	private static string heroStat(string heroId, string statID)
 	{
-		return string.Format("{0}.{1}", heroID, statID);
+		return string.Format("{0}.{1}", heroId, statID);
 	}
 
 	private static List<string> FilterOutDuplicateIDs(List<string> lst)

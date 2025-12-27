@@ -20,7 +20,7 @@ public class EquipPageAllies : EquipPage, UIHandlerComponent
 			WeakGlobalInstance<EnemiesShowCase>.Instance.highlight = false;
 		}
 		mScrollListRef = uiParent.FindChildComponent<GluiBouncyScrollList>("ScrollList_Allies_Available");
-		HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[Singleton<Profile>.Instance.heroID];
+		HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[Singleton<Profile>.Instance.heroId];
 		AcquireSlotTransforms(uiParent, heroSchema.allySlots);
 		mDataSet = uiParent.FindChildComponent<EquipListController>("ScrollList_Allies_Available").data;
 		mListSlotManager = new ListToSlotDragManager(mSlotTransformsRef, mScrollListRef, mDataSet);
@@ -131,6 +131,6 @@ public class EquipPageAllies : EquipPage, UIHandlerComponent
 	{
 		HelperSchema helperSchema = (HelperSchema)mDataSet[index];
 		string text = helperSchema.requiredHero.Key.ToString();
-		return !helperSchema.Locked && (string.IsNullOrEmpty(text) || text == Singleton<Profile>.Instance.heroID);
+		return !helperSchema.Locked && (string.IsNullOrEmpty(text) || text == Singleton<Profile>.Instance.heroId);
 	}
 }

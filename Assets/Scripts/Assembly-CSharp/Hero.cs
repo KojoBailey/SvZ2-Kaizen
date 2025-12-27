@@ -102,24 +102,24 @@ public class Hero : Character
 
 	public Hero(Transform spawnPoint, int playerId)
 	{
-		string heroID = Singleton<Profile>.Instance.heroID;
+		string heroId = Singleton<Profile>.Instance.heroId;
 		if (playerId != 0)
 		{
-			heroID = Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.heroId;
+			heroId = Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.heroId;
 		}
-		Init(spawnPoint.position, playerId, heroID, playerId == 0);
+		Init(spawnPoint.position, playerId, heroId, playerId == 0);
 	}
 
-	public Hero(Vector3 spawnPoint, int playerId, string heroID, bool isLocalPlayer)
+	public Hero(Vector3 spawnPoint, int playerId, string heroId, bool isLocalPlayer)
 	{
-		Init(spawnPoint, playerId, heroID, isLocalPlayer);
+		Init(spawnPoint, playerId, heroId, isLocalPlayer);
 	}
 
 	public static CharacterStats GetHeroStats(HeroSchema mainData, int ownerId)
 	{
 		if (mainData == null)
 		{
-			mainData = Singleton<HeroesDatabase>.Instance[Singleton<Profile>.Instance.heroID];
+			mainData = Singleton<HeroesDatabase>.Instance[Singleton<Profile>.Instance.heroId];
 		}
 		int heroLevel = Singleton<Profile>.Instance.heroLevel;
 		int level = Singleton<Profile>.Instance.swordLevel;
@@ -210,13 +210,13 @@ public class Hero : Character
 		return result;
 	}
 
-	public static string MaterialKey(string heroID, int collectionLevel)
+	public static string MaterialKey(string heroId, int collectionLevel)
 	{
 		if (collectionLevel == 3)
 		{
-			return DataBundleRuntime.TableRecordKey("HeroMaterials", heroID + "_ArmorSet");
+			return DataBundleRuntime.TableRecordKey("HeroMaterials", heroId + "_ArmorSet");
 		}
-		return DataBundleRuntime.TableRecordKey("HeroMaterials", heroID + "_Normal");
+		return DataBundleRuntime.TableRecordKey("HeroMaterials", heroId + "_Normal");
 	}
 
 	private void AddExtraAnims(string id, GameObject character)
@@ -272,7 +272,7 @@ public class Hero : Character
 		}
 	}
 
-	private void Init(Vector3 spawnPoint, int playerId, string heroID, bool isLocalPlayer)
+	private void Init(Vector3 spawnPoint, int playerId, string heroId, bool isLocalPlayer)
 	{
 		base.isPlayer = true;
 		base.ownerId = playerId;
@@ -284,8 +284,8 @@ public class Hero : Character
 		meleeDamageModifier = 1f;
 		rangedDamageModifier = 1f;
 		bool includeSounds = playerId != 0 || isLocalPlayer;
-		Singleton<HeroesDatabase>.Instance.LoadInGameData(heroID, playerId);
-		mainData = Singleton<HeroesDatabase>.Instance[heroID];
+		Singleton<HeroesDatabase>.Instance.LoadInGameData(heroId, playerId);
+		mainData = Singleton<HeroesDatabase>.Instance[heroId];
 		if (Singleton<Profile>.Instance.inBonusWave)
 		{
 			base.controlledObject = CharacterSchema.Deserialize(mainData.resourcesGhost, includeSounds);
@@ -296,11 +296,11 @@ public class Hero : Character
 		}
 		base.controller.position = spawnPoint;
 		base.controller.updatesNoSnap = 0;
-		base.controller.MaxBackPedalTime = Singleton<HeroesDatabase>.Instance[Singleton<Profile>.Instance.heroID].backPedalTime;
+		base.controller.MaxBackPedalTime = Singleton<HeroesDatabase>.Instance[Singleton<Profile>.Instance.heroId].backPedalTime;
 		heroObject = base.controlledObject;
 		heroModel = base.controller.animPlayer.jointAnimation.gameObject;
-		AddExtraAnims(heroID, heroObject);
-		CheckForUpgradeFXArmor(heroID);
+		AddExtraAnims(heroId, heroObject);
+		CheckForUpgradeFXArmor(heroId);
 		ResetController();
 		SetDefaultFacing();
 		SetMirroredSkeleton(base.controller.facing == FacingType.Left);
@@ -911,22 +911,10 @@ public class Hero : Character
 		return mainData.Abilities;
 	}
 
-	public void DoGraveHands(string abilityID)
-	{
-	}
-
-	public void DoNightOfTheDead(string abilityID)
-	{
-	}
-
-	public void DoGroundShock(string abilityID)
-	{
-	}
-
 	private void DoAbility(string animName, AbilitiesDatabase.OnAbilityActivateFunc abilityActivateFunction, AbilitiesDatabase.OnAbilityExecuteFunc abilityExecutionFunction)
 	{
 		mPerformingSpecialAttack = true;
-		SetRangeAttackMode(false);
+		SetRangeAttackMode(false);	
 		if (abilityActivateFunction != null)
 		{
 			abilityActivateFunction(this);
@@ -959,31 +947,30 @@ public class Hero : Character
 
 	public bool DoAbility(string abilityName, bool bForce)
 	{
-		if (!bForce && (!CanUseAbility() || mPerformingSpecialAttack))
-		{
-			return false;
-		}
-		string animName = string.Empty;
-		AbilitiesDatabase.OnAbilityActivateFunc activateFunc = null;
-		AbilitiesDatabase.OnAbilityExecuteFunc execFunc = null;
+		if (!bForce && (!CanUseAbility() || mPerformingSpecialAttack)) return false;
+
+		string animName;
+		AbilitiesDatabase.OnAbilityActivateFunc activateFunc;
+		AbilitiesDatabase.OnAbilityExecuteFunc execFunc;
 		Singleton<AbilitiesDatabase>.Instance.GetAbilityInfoByName(abilityName, out animName, out activateFunc, out execFunc);
 		DoAbility(animName, activateFunc, execFunc);
+
 		AbilitySchema schema = Singleton<AbilitiesDatabase>.Instance.GetSchema(abilityName);
-		if (schema != null && schema.soundTheme != null)
+		if (schema == null || schema.soundTheme == null) return true;
+
+		UdamanSoundThemePlayer soundPlayer = base.controller.SoundPlayer;
+		if (soundPlayer != null)
 		{
-			UdamanSoundThemePlayer soundPlayer = base.controller.SoundPlayer;
-			if (soundPlayer != null)
+			if (schema.SoundEvent != null)
 			{
-				if (schema.SoundEvent != null)
-				{
-					soundPlayer.PlaySoundEvent(schema.SoundEvent, schema.soundTheme);
-				}
-				else
-				{
-					soundPlayer.PlaySoundEvent("Spawn", schema.soundTheme);
-				}
+				soundPlayer.PlaySoundEvent(schema.SoundEvent, schema.soundTheme);
+			}
+			else
+			{
+				soundPlayer.PlaySoundEvent("Spawn", schema.soundTheme);
 			}
 		}
+
 		return true;
 	}
 

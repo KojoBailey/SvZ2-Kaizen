@@ -71,13 +71,11 @@ public class AbilitiesDatabase : Singleton<AbilitiesDatabase>
 			: base(strID)
 		{
 			mAbilityHandler.schema = base.schema;
-			Initialize(delegate(Character executor)
-			{
-				mAbilityHandler.Activate(executor);
-			}, delegate(Character executor)
-			{
-				mAbilityHandler.Execute(executor);
-			}, onBuildStoreData);
+			Initialize(
+				delegate(Character executor) { mAbilityHandler.Activate(executor); },
+				delegate(Character executor) { mAbilityHandler.Execute(executor); },
+				onBuildStoreData
+			);
 		}
 	}
 
@@ -147,7 +145,7 @@ public class AbilitiesDatabase : Singleton<AbilitiesDatabase>
 	{
 		get
 		{
-			HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[Singleton<Profile>.Instance.heroID];
+			HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[Singleton<Profile>.Instance.heroId];
 			return heroSchema.Abilities;
 		}
 	}
@@ -173,47 +171,68 @@ public class AbilitiesDatabase : Singleton<AbilitiesDatabase>
 	public void ResetCachedData()
 	{
 		mData = new List<AbilityData>();
-		if (DataBundleRuntime.Instance != null && DataBundleRuntime.Instance.Initialized)
-		{
-			mData.Add(new AbilityDataHandler<KatanaSlashHandler>("KatanaSlash", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
-			mData.Add(new AbilityDataHandler<SummonLightningHandler>("SummonLightning", StoreAvailability_Abilities.GetAbilityUpgrade_SummonLightning));
-			mData.Add(new AbilityDataComponent<LethargyHandler>("Lethargy", StoreAvailability_Abilities.GetAbilityUpgrade_Lethargy));
-			mData.Add(new AbilityDataHandler<DivineInterventionHandler>("DivineIntervention", StoreAvailability_Abilities.GetAbilityUpgrade_DivineIntervention));
-			mData.Add(new AbilityDataComponent<SummonTornadoHandler>("SummonTornado", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
-			mData.Add(new AbilityDataComponent<TroopTrampleHandler>("GiantWave", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
-			mData.Add(new AbilityDataComponent<DivineWindHandler>("DivineWind", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
-			mData.Add(new AbilityDataComponent<ThunderStrikeHandler>("ThunderStrike", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
-			mData.Add(new AbilityDataComponent<DaggerBarrageHandler>("DaggerBarrage", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
-			mData.Add(new AbilityDataHandler<ExplosiveCartHandler>("ExplosiveCart", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
-			mData.Add(new AbilityDataHandler<DragonDamageHandler>("DragonDamage", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
-			mData.Add(new AbilityDataComponent<FlashBombHandler>("FlashBomb", StoreAvailability_Abilities.GetAbilityUpgrade_FlashBomb));
-			mData.Add(new AbilityDataComponent<SoulBurnHandler>("SoulBurn", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
-			mData.Add(new AbilityDataComponent<MysticFlameHandler>("MysticFlame", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
-			mData.Add(new AbilityDataHandler<RepelHandler>("Repel", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
-			mData.Add(new AbilityDataComponent<SetTrapHandler>("SetTrap", StoreAvailability_Abilities.GetAbilityUpgrade_SetTrap));
-			mData.Add(new AbilityDataComponent<InspireHandler>("Inspire", StoreAvailability_Abilities.GetAbilityUpgrade_Inspire));
-			mData.Add(new AbilityDataComponent<InvincibilityHandler>("Invincibility", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
-			mData.Add(new AbilityDataComponent<DestructionHandler>("Destruction", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
-			mData.Add(new AbilityDataHandler<TagTeamHandler>("TagTeam", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
-			mData.Add(new AbilityDataHandler<FriendshipHandler>("Friendship", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
-			mData.Add(new AbilityDataHandler<LegendaryStrikeLightningHandler>("LSLightningStrike", null));
-			mData.Add(new AbilityDataComponent<LegendaryStrikeArrowHandler>("LSArrowVolley", null));
-			mData.Add(new AbilityDataHandler<LegendaryStrikeRaiseDeadHandler>("LSRaiseDead", null));
-			mData.Add(new AbilityDataComponent<LegendaryStrikeTornadoHandler>("LSTornado", null));
-			CacheSimpleIDList();
-			mGlobalIDs = DataBundleRuntime.Instance.GetRecordKeys(typeof(AbilitiesListSchema), "AbilitiesGlobal", false);
-		}
+		if (DataBundleRuntime.Instance == null || !DataBundleRuntime.Instance.Initialized) return;
+
+		mData.Add(new AbilityDataHandler<KatanaSlashHandler>(
+			"KatanaSlash", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
+		mData.Add(new AbilityDataHandler<SummonLightningHandler>(
+			"SummonLightning", StoreAvailability_Abilities.GetAbilityUpgrade_SummonLightning));
+		mData.Add(new AbilityDataComponent<LethargyHandler>(
+			"Lethargy", StoreAvailability_Abilities.GetAbilityUpgrade_Lethargy));
+		mData.Add(new AbilityDataHandler<DivineInterventionHandler>(
+			"DivineIntervention", StoreAvailability_Abilities.GetAbilityUpgrade_DivineIntervention));
+		mData.Add(new AbilityDataComponent<SummonTornadoHandler>(
+			"SummonTornado", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
+		mData.Add(new AbilityDataComponent<TroopTrampleHandler>(
+			"GiantWave", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
+		mData.Add(new AbilityDataComponent<DivineWindHandler>(
+			"DivineWind", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
+		mData.Add(new AbilityDataComponent<ThunderStrikeHandler>(
+			"ThunderStrike", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
+		mData.Add(new AbilityDataComponent<DaggerBarrageHandler>(
+			"DaggerBarrage", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
+		mData.Add(new AbilityDataHandler<ExplosiveCartHandler>(
+			"ExplosiveCart", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
+		mData.Add(new AbilityDataHandler<DragonDamageHandler>(
+			"DragonDamage", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
+		mData.Add(new AbilityDataComponent<FlashBombHandler>(
+			"FlashBomb", StoreAvailability_Abilities.GetAbilityUpgrade_FlashBomb));
+		mData.Add(new AbilityDataComponent<SoulBurnHandler>(
+			"SoulBurn", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
+		mData.Add(new AbilityDataComponent<MysticFlameHandler>(
+			"MysticFlame", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
+		mData.Add(new AbilityDataHandler<RepelHandler>(
+			"Repel", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
+		mData.Add(new AbilityDataComponent<SetTrapHandler>(
+			"SetTrap", StoreAvailability_Abilities.GetAbilityUpgrade_SetTrap));
+		mData.Add(new AbilityDataComponent<InspireHandler>(
+			"Inspire", StoreAvailability_Abilities.GetAbilityUpgrade_Inspire));
+		mData.Add(new AbilityDataComponent<InvincibilityHandler>(
+			"Invincibility", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
+		mData.Add(new AbilityDataComponent<DestructionHandler>(
+			"Destruction", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
+		mData.Add(new AbilityDataHandler<TagTeamHandler>(
+			"TagTeam", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
+		mData.Add(new AbilityDataHandler<FriendshipHandler>(
+			"Friendship", StoreAvailability_Abilities.GetAbilityUpgrade_DamageOnly));
+		mData.Add(new AbilityDataHandler<LegendaryStrikeLightningHandler>(
+			"LSLightningStrike", null));
+		mData.Add(new AbilityDataComponent<LegendaryStrikeArrowHandler>(
+			"LSArrowVolley", null));
+		mData.Add(new AbilityDataHandler<LegendaryStrikeRaiseDeadHandler>(
+			"LSRaiseDead", null));
+		mData.Add(new AbilityDataComponent<LegendaryStrikeTornadoHandler>(
+			"LSTornado", null));
+		CacheSimpleIDList();
+		mGlobalIDs = DataBundleRuntime.Instance.GetRecordKeys(typeof(AbilitiesListSchema), "AbilitiesGlobal", false);
 	}
 
-	private void OnExecute_GraveHands(Character activator)
-	{
-	}
-
-	private void OnExecute_GroundShock(Character activator)
-	{
-	}
-
-	public void GetAbilityInfoByName(string abilityID, out string animName, out OnAbilityActivateFunc activateFunc, out OnAbilityExecuteFunc execFunc)
+	public void GetAbilityInfoByName(
+		string abilityID,
+		out string animName,
+		out OnAbilityActivateFunc activateFunc,
+		out OnAbilityExecuteFunc execFunc
+	)
 	{
 		AbilityData abilityData = Seek(abilityID);
 		if (abilityData.schema != null)

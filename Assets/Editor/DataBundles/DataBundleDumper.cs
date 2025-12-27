@@ -10,7 +10,7 @@ using System;
 
 public class DataBundleDumper
 {
-    [MenuItem("Data Bundles/Dump All")]
+    // [MenuItem("Data Bundles/Dump All")]
 	public static void DumpBundles()
     {
         foreach (string path in Directory.GetDirectories(Application.streamingAssetsPath))

@@ -72,7 +72,7 @@ public class HUDLeadership : UIHandlerComponent
 			string name2 = string.Format("Locator_FX_Upgrade{0:D2}", i + 1);
 			mUpgradeFXLocators[i] = ObjectUtils.FindTransformInChildren(mRootObject.transform, name2);
 		}
-		WeakGlobalMonoBehavior<HUD>.Instance.RegisterOnReleaseEvent(mUpgradeButton, "UPGRADE_LEADERSHIP");
+		WeakGlobalMonoBehavior<HUD>.Instance.RegisterOnReleaseEvent(mUpgradeButton, kUpgradeCommand);
 		UpdateVisuals(true);
 		RefreshLevelUpIndicators();
 	}
@@ -81,7 +81,7 @@ public class HUDLeadership : UIHandlerComponent
 	{
 		if (NewInput.upgradeLeadership)
 		{
-			OnUIEvent("UPGRADE_LEADERSHIP");
+			OnUIEvent(kUpgradeCommand);
 		}
 		if (mEnabled)
 		{
@@ -91,7 +91,7 @@ public class HUDLeadership : UIHandlerComponent
 
 	public bool OnUIEvent(string eventID)
 	{
-		if (eventID == "UPGRADE_LEADERSHIP")
+		if (eventID == kUpgradeCommand)
 		{
 			if (WeakGlobalInstance<Leadership>.Instance.isUpgradable)
 			{
@@ -104,9 +104,7 @@ public class HUDLeadership : UIHandlerComponent
 		return false;
 	}
 
-	public void OnPause(bool pause)
-	{
-	}
+	public void OnPause(bool pause) {}
 
 	private void ActivateMeter(int meterLevel)
 	{

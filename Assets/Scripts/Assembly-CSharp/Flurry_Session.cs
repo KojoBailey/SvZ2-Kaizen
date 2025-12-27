@@ -116,19 +116,19 @@ public class Flurry_Session
 		Singleton<Analytics>.Instance.LogEvent("WaveConsumableUse", Analytics.Param("WaveNumber", CurrentSPWave()), Analytics.Param("RevivesAtStart", Singleton<PlayStatistics>.Instance.data.revivesAtStart), Analytics.Param("RevivesUsed", Singleton<PlayStatistics>.Instance.data.revivesUsed), Analytics.Param("TeaAtStart", Singleton<PlayStatistics>.Instance.data.teaAtStart), Analytics.Param("TeaUsed", Singleton<PlayStatistics>.Instance.data.teaUsed), Analytics.Param("SushiAtStart", Singleton<PlayStatistics>.Instance.data.sushiAtStart), Analytics.Param("SushiUsed", Singleton<PlayStatistics>.Instance.data.sushiUsed), Analytics.Param("CharmUsed", WeakGlobalMonoBehavior<InGameImpl>.Instance.activeCharm ?? string.Empty));
 		if (Singleton<PlayStatistics>.Instance.data.revivesUsed > 0)
 		{
-			Singleton<Analytics>.Instance.KontagentEvent("Revive", "CONSUMABLE_USED", Singleton<Profile>.Instance.heroID, Singleton<Profile>.Instance.wave_SinglePlayerGame, Singleton<PlayStatistics>.Instance.data.revivesUsed, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()), Analytics.KParam("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon.ToString()));
+			Singleton<Analytics>.Instance.KontagentEvent("Revive", "CONSUMABLE_USED", Singleton<Profile>.Instance.heroId, Singleton<Profile>.Instance.wave_SinglePlayerGame, Singleton<PlayStatistics>.Instance.data.revivesUsed, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()), Analytics.KParam("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon.ToString()));
 		}
 		if (Singleton<PlayStatistics>.Instance.data.sushiUsed > 0)
 		{
-			Singleton<Analytics>.Instance.KontagentEvent("Sushi", "CONSUMABLE_USED", Singleton<Profile>.Instance.heroID, Singleton<Profile>.Instance.wave_SinglePlayerGame, Singleton<PlayStatistics>.Instance.data.sushiUsed, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()), Analytics.KParam("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon.ToString()));
+			Singleton<Analytics>.Instance.KontagentEvent("Sushi", "CONSUMABLE_USED", Singleton<Profile>.Instance.heroId, Singleton<Profile>.Instance.wave_SinglePlayerGame, Singleton<PlayStatistics>.Instance.data.sushiUsed, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()), Analytics.KParam("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon.ToString()));
 		}
 		if (Singleton<PlayStatistics>.Instance.data.teaUsed > 0)
 		{
-			Singleton<Analytics>.Instance.KontagentEvent("Tea", "CONSUMABLE_USED", Singleton<Profile>.Instance.heroID, Singleton<Profile>.Instance.wave_SinglePlayerGame, Singleton<PlayStatistics>.Instance.data.teaUsed, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()), Analytics.KParam("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon.ToString()));
+			Singleton<Analytics>.Instance.KontagentEvent("Tea", "CONSUMABLE_USED", Singleton<Profile>.Instance.heroId, Singleton<Profile>.Instance.wave_SinglePlayerGame, Singleton<PlayStatistics>.Instance.data.teaUsed, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()), Analytics.KParam("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon.ToString()));
 		}
 		if (!string.IsNullOrEmpty(WeakGlobalMonoBehavior<InGameImpl>.Instance.activeCharm))
 		{
-			Singleton<Analytics>.Instance.KontagentEvent(WeakGlobalMonoBehavior<InGameImpl>.Instance.activeCharm, "CONSUMABLE_USED", Singleton<Profile>.Instance.heroID, Singleton<Profile>.Instance.wave_SinglePlayerGame, 1, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()), Analytics.KParam("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon.ToString()));
+			Singleton<Analytics>.Instance.KontagentEvent(WeakGlobalMonoBehavior<InGameImpl>.Instance.activeCharm, "CONSUMABLE_USED", Singleton<Profile>.Instance.heroId, Singleton<Profile>.Instance.wave_SinglePlayerGame, 1, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()), Analytics.KParam("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon.ToString()));
 		}
 	}
 
@@ -137,14 +137,14 @@ public class Flurry_Session
 		Singleton<Analytics>.Instance.LogEvent(eventName, Analytics.Param("PlayerLevel", Singleton<Profile>.Instance.playerLevel));
 		CollectionItemSchema selectedCard = MultiplayerGlobalHelpers.GetSelectedCard();
 		string name = ((selectedCard == null) ? "UnknownItem" : selectedCard.CollectionID.ToString());
-		Singleton<Analytics>.Instance.KontagentEvent(name, eventName, Singleton<Profile>.Instance.heroID, 0, 0, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()));
+		Singleton<Analytics>.Instance.KontagentEvent(name, eventName, Singleton<Profile>.Instance.heroId, 0, 0, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()));
 	}
 
 	private void ReportSinglePlayerWaveStats(string eventName, string kEventName)
 	{
 		int num = (int)((float)WeakGlobalInstance<WaveManager>.Instance.enemiesKilledSoFar / (float)WeakGlobalInstance<WaveManager>.Instance.totalEnemies * 100f);
-		Singleton<Analytics>.Instance.LogEvent(eventName, Analytics.Param("WaveNumber", CurrentSPWave()), Analytics.Param("PercentCompleted", num), Analytics.Param("Hero", Singleton<Profile>.Instance.heroID), Analytics.Param("PlayerLevel", Singleton<Profile>.Instance.playerLevel));
-		Singleton<Analytics>.Instance.KontagentEvent(CurrentSPWave().ToString(), kEventName, Singleton<Profile>.Instance.heroID, 0, 0, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()));
+		Singleton<Analytics>.Instance.LogEvent(eventName, Analytics.Param("WaveNumber", CurrentSPWave()), Analytics.Param("PercentCompleted", num), Analytics.Param("Hero", Singleton<Profile>.Instance.heroId), Analytics.Param("PlayerLevel", Singleton<Profile>.Instance.playerLevel));
+		Singleton<Analytics>.Instance.KontagentEvent(CurrentSPWave().ToString(), kEventName, Singleton<Profile>.Instance.heroId, 0, 0, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()));
 		ReportWaveConsumableUse();
 	}
 
@@ -173,15 +173,15 @@ public class Flurry_Session
 		string text2 = SortAndSeparate(Singleton<Profile>.Instance.GetSelectedAbilities(), ",");
 		if (attack)
 		{
-			Singleton<Analytics>.Instance.LogEvent(eventName, Analytics.Param("MissionName", MultiplayerData.MultiplayerGameSessionData.missionName), Analytics.Param("AttemptNumber", 0), Analytics.Param("Hero", Singleton<Profile>.Instance.heroID), Analytics.Param("Allies", text), Analytics.Param("Abilities", text2), Analytics.Param("Charms", WeakGlobalMonoBehavior<InGameImpl>.Instance.activeCharm), Analytics.Param("IsRevengeAttack", revengeAttack), Analytics.Param("PlayerLevel", Singleton<Profile>.Instance.playerLevel));
+			Singleton<Analytics>.Instance.LogEvent(eventName, Analytics.Param("MissionName", MultiplayerData.MultiplayerGameSessionData.missionName), Analytics.Param("AttemptNumber", 0), Analytics.Param("Hero", Singleton<Profile>.Instance.heroId), Analytics.Param("Allies", text), Analytics.Param("Abilities", text2), Analytics.Param("Charms", WeakGlobalMonoBehavior<InGameImpl>.Instance.activeCharm), Analytics.Param("IsRevengeAttack", revengeAttack), Analytics.Param("PlayerLevel", Singleton<Profile>.Instance.playerLevel));
 		}
 		else
 		{
-			Singleton<Analytics>.Instance.LogEvent(eventName, Analytics.Param("MissionName", MultiplayerData.MultiplayerGameSessionData.missionName), Analytics.Param("AttemptNumber", 0), Analytics.Param("Hero", Singleton<Profile>.Instance.heroID), Analytics.Param("Allies", text), Analytics.Param("Abilities", text2), Analytics.Param("Charms", WeakGlobalMonoBehavior<InGameImpl>.Instance.activeCharm), Analytics.Param("PlayerLevel", Singleton<Profile>.Instance.playerLevel));
+			Singleton<Analytics>.Instance.LogEvent(eventName, Analytics.Param("MissionName", MultiplayerData.MultiplayerGameSessionData.missionName), Analytics.Param("AttemptNumber", 0), Analytics.Param("Hero", Singleton<Profile>.Instance.heroId), Analytics.Param("Allies", text), Analytics.Param("Abilities", text2), Analytics.Param("Charms", WeakGlobalMonoBehavior<InGameImpl>.Instance.activeCharm), Analytics.Param("PlayerLevel", Singleton<Profile>.Instance.playerLevel));
 		}
 		CollectionItemSchema selectedCard = MultiplayerGlobalHelpers.GetSelectedCard();
 		string name = ((selectedCard == null) ? "UnknownItem" : selectedCard.CollectionID.ToString());
-		Singleton<Analytics>.Instance.KontagentEvent(name, eventName, Singleton<Profile>.Instance.heroID, Singleton<Profile>.Instance.wave_SinglePlayerGame, 0, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()), Analytics.KParam("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon.ToString()), Analytics.KParam("Allies", text), Analytics.KParam("Abilities", text2), Analytics.KParam("Charm", WeakGlobalMonoBehavior<InGameImpl>.Instance.activeCharm));
+		Singleton<Analytics>.Instance.KontagentEvent(name, eventName, Singleton<Profile>.Instance.heroId, Singleton<Profile>.Instance.wave_SinglePlayerGame, 0, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()), Analytics.KParam("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon.ToString()), Analytics.KParam("Allies", text), Analytics.KParam("Abilities", text2), Analytics.KParam("Charm", WeakGlobalMonoBehavior<InGameImpl>.Instance.activeCharm));
 	}
 
 	private string SortAndSeparate(List<string> strings, string separator)
@@ -204,12 +204,12 @@ public class Flurry_Session
 		int waveAttemptCount = Singleton<Profile>.Instance.GetWaveAttemptCount(currentWave);
 		string text = SortAndSeparate(Singleton<Profile>.Instance.GetSelectedHelpers(), ",");
 		string text2 = SortAndSeparate(Singleton<Profile>.Instance.GetSelectedAbilities(), ",");
-		Singleton<Analytics>.Instance.LogEvent(eventName, new KeyValuePair<string, object>("WaveNumber", currentWave), new KeyValuePair<string, object>("AttemptNumber", waveAttemptCount), new KeyValuePair<string, object>("Hero", Singleton<Profile>.Instance.heroID), new KeyValuePair<string, object>("Allies", text), new KeyValuePair<string, object>("Abilities", text2), new KeyValuePair<string, object>("Charms", WeakGlobalMonoBehavior<InGameImpl>.Instance.activeCharm));
+		Singleton<Analytics>.Instance.LogEvent(eventName, new KeyValuePair<string, object>("WaveNumber", currentWave), new KeyValuePair<string, object>("AttemptNumber", waveAttemptCount), new KeyValuePair<string, object>("Hero", Singleton<Profile>.Instance.heroId), new KeyValuePair<string, object>("Allies", text), new KeyValuePair<string, object>("Abilities", text2), new KeyValuePair<string, object>("Charms", WeakGlobalMonoBehavior<InGameImpl>.Instance.activeCharm));
 		if (waveAttemptCount == 1)
 		{
 			Singleton<Analytics>.Instance.LogEvent("WaveStartedForFirstTime", new KeyValuePair<string, object>("WaveNumber", currentWave));
 		}
 		string st = ((!Singleton<Profile>.Instance.inDailyChallenge) ? "MISSION_START" : "DAILY_CHALLENGE_START");
-		Singleton<Analytics>.Instance.KontagentEvent(currentWave.ToString(), st, Singleton<Profile>.Instance.heroID, Singleton<Profile>.Instance.wave_SinglePlayerGame, waveAttemptCount, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()), Analytics.KParam("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon.ToString()), Analytics.KParam("Allies", text), Analytics.KParam("Abilities", text2), Analytics.KParam("Charm", WeakGlobalMonoBehavior<InGameImpl>.Instance.activeCharm));
+		Singleton<Analytics>.Instance.KontagentEvent(currentWave.ToString(), st, Singleton<Profile>.Instance.heroId, Singleton<Profile>.Instance.wave_SinglePlayerGame, waveAttemptCount, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()), Analytics.KParam("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon.ToString()), Analytics.KParam("Allies", text), Analytics.KParam("Abilities", text2), Analytics.KParam("Charm", WeakGlobalMonoBehavior<InGameImpl>.Instance.activeCharm));
 	}
 }

@@ -197,7 +197,7 @@ public class EquipPageWaves : EquipPage, UIHandlerComponent
 		WaveSchema waveData = WaveManager.GetWaveData(Singleton<Profile>.Instance.waveToPlay, Singleton<Profile>.Instance.waveTypeToPlay);
 		if (!onlyIfForced || (onlyIfForced && waveData.recommendedHeroIsRequired))
 		{
-			Singleton<Profile>.Instance.heroID = waveData.recommendedHero.InitializeRecord<HeroSchema>().id;
+			Singleton<Profile>.Instance.heroId = waveData.recommendedHero.InitializeRecord<HeroSchema>().id;
 		}
 	}
 

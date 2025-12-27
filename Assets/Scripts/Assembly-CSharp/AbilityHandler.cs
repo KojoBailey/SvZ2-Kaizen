@@ -8,10 +8,7 @@ public class AbilityHandler : IAbilityHandler
 
 	public float gravityAccel
 	{
-		get
-		{
-			return kGravityAccel;
-		}
+		get { return kGravityAccel; }
 	}
 
 	public bool leftToRightGameplay { get; set; }
@@ -20,10 +17,7 @@ public class AbilityHandler : IAbilityHandler
 
 	public string id
 	{
-		get
-		{
-			return schema.id;
-		}
+		get { return schema.id; }
 	}
 
 	public float levelDamage
@@ -37,32 +31,21 @@ public class AbilityHandler : IAbilityHandler
 			}
 			return num;
 		}
-		set
-		{
-		}
 	}
 
 	public int abilityLevel
 	{
-		get
-		{
-			return AbilityLevel(schema);
-		}
-		set
-		{
-		}
+		get { return AbilityLevel(schema); }
 	}
 
 	public int activatingPlayer { get; set; }
 
 	public virtual void Activate(Character executor)
 	{
-		activatingPlayer = ((executor == null) ? 1 : executor.ownerId);
+		activatingPlayer = (executor != null) ? executor.ownerId : 1;
 	}
 
-	public virtual void Execute(Character executor)
-	{
-	}
+	public virtual void Execute(Character executor) {}
 
 	private int AbilityLevel(AbilitySchema schema)
 	{

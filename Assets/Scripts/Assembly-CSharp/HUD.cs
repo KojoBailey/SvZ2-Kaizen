@@ -64,6 +64,7 @@ public class HUD : UIHandler<HUD>, IGluiActionHandler
 		mUI.transform.parent = base.gameObject.transform;
 		mComponents.Add(new HUDHealthBar(mUI, WeakGlobalMonoBehavior<InGameImpl>.Instance.hero));
 		mComponents.Add(new HUDLeadership(mUI));
+		mComponents.Add(new HUDSouls(mUI));
 		mComponents.Add(new HUDWaveInfo(mUI));
 		mComponents.Add(new HUDAllies(mUI));
 		mComponents.Add(new HUDAbilities(mUI));

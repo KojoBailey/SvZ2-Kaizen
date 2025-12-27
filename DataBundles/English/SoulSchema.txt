@@ -1,0 +1,13 @@
+[HeroBalanced]
+	1:
+		storeCost = 0
+		maxSouls = 10
+	2:
+		storeCost = 1000
+		maxSouls = 20
+	3:
+		storeCost = 10000
+		maxSouls = 30
+	4:
+		storeCost = 50000
+		maxSouls = 50

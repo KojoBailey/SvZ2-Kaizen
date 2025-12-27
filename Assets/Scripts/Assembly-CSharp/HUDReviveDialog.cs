@@ -59,7 +59,7 @@ public class HUDReviveDialog : MonoBehaviour, IGluiActionHandler
 		try
 		{
 			GluiSprite gluiSprite = base.gameObject.FindChildComponent<GluiSprite>("Art_PortraitDead");
-			HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[Singleton<Profile>.Instance.heroID];
+			HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[Singleton<Profile>.Instance.heroId];
 			gluiSprite.Texture = heroSchema.icon;
 		}
 		catch (Exception)

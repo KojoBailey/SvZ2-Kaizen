@@ -19,22 +19,17 @@ public class KatanaSlashHandler : AbilityHandler
 		var hero = executor as Hero;
 		if (hero == null) return;
 
-		float num = Extrapolate((AbilityLevelSchema als) => als.damage);
-		float num2 = Extrapolate((AbilityLevelSchema als) => als.damageMultEachTarget);
-		float num3 = num * Extrapolate((AbilityLevelSchema als) => als.lifeSteal);
+		float damage = Extrapolate((AbilityLevelSchema als) => als.damage);
+		float damageMultEachTarget = Extrapolate((AbilityLevelSchema als) => als.damageMultEachTarget);
+		float radius = Extrapolate((AbilityLevelSchema als) => als.radius);
+		var knockback = (int)Extrapolate((AbilityLevelSchema als) => als.effectModifier);
 
-		List<Character> enemiesAhead = hero.GetEnemiesAhead(Extrapolate((AbilityLevelSchema als) => als.radius));
+		List<Character> enemiesAhead = hero.GetEnemiesAhead(radius);
 		foreach (Character item in enemiesAhead)
 		{
-			item.RecievedAttack(EAttackType.Slice, num, executor);
-			item.TryKnockback((int)Extrapolate((AbilityLevelSchema als) => als.effectModifier));
-			num *= num2;
-		}
-
-		bool lifesteal = false;
-		if (lifesteal)
-		{
-			hero.health += num3;
+			item.RecievedAttack(EAttackType.Slice, damage, executor);
+			item.TryKnockback(knockback);
+			damage *= damageMultEachTarget;
 		}
 	}
 }

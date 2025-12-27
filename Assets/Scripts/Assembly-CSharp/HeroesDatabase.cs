@@ -66,9 +66,9 @@ public class HeroesDatabase : Singleton<HeroesDatabase>
 		return Array.Find(mAllIDs, (string s) => string.Compare(s, id, true) == 0) != null;
 	}
 
-	public int GetMaxLevel(string heroID)
+	public int GetMaxLevel(string heroId)
 	{
-		HeroSchema heroSchema = this[heroID];
+		HeroSchema heroSchema = this[heroId];
 		if (heroSchema != null)
 		{
 			return heroSchema.Levels.Length;

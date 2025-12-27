@@ -79,6 +79,8 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	private Leadership[] mLeadership = new Leadership[MaxPlayers];
 
+	private Souls[] mSouls = new Souls[MaxPlayers];
+
 	private VillageArchers mVillageArchers;
 
 	private float mTimeStarted;
@@ -440,7 +442,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 			string[] array2 = tagHeroes;
 			foreach (string hero in array2)
 			{
-				if (Singleton<Profile>.Instance.heroID != hero && (!Singleton<Profile>.Instance.inMultiplayerWave || Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.heroId != hero))
+				if (Singleton<Profile>.Instance.heroId != hero && (!Singleton<Profile>.Instance.inMultiplayerWave || Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.heroId != hero))
 				{
 					possibleTag.Add(hero);
 				}
@@ -572,7 +574,10 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		}
 		Singleton<EnemiesDatabase>.Instance.LoadInGameData(allEnemyKeys);
 		LoadingScreen.LogStep("EnemiesDatabase.Instance.LoadInGameData");
+
 		mLeadership[0] = new Leadership(0);
+		mSouls[0] = new Souls(0);
+
 		int defenderId = 0;
 		if (Singleton<Profile>.Instance.inVSMultiplayerWave && Singleton<PlayModesManager>.Instance.Attacking)
 		{
@@ -634,6 +639,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		mLeadership[0].helperSpawnArea = helpersSpawnArea;
 		mLeadership[0].helpersZTarget = enemiesSpawnArea.transform.position.z;
 		mLeadership[0].hero = mHero[0];
+		mSouls[0].hero = mHero[0];
 		if (mLeadership[1] != null)
 		{
 			mLeadership[1].characterManagerRef = mCharactersManager;
@@ -866,6 +872,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 				mLeadership[0].Clear();
 			}
 			mLeadership = null;
+			mSouls = null;
 			mBuffIconManager = null;
 			mHero = null;
 			mGate = null;
@@ -1014,6 +1021,15 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		if (playerIndex >= 0 && playerIndex < MaxPlayers)
 		{
 			return mLeadership[playerIndex];
+		}
+		return null;
+	}
+
+	public Souls GetSouls(int playerIndex)
+	{
+		if (playerIndex >= 0 && playerIndex < MaxPlayers)
+		{
+			return mSouls[playerIndex];
 		}
 		return null;
 	}
@@ -1327,7 +1343,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 				Singleton<Profile>.Instance.wavesSinceLastBonusWave++;
 			}
 			WaveSchema waveData = WaveManager.GetWaveData(Singleton<Profile>.Instance.wave_SinglePlayerGame, Singleton<Profile>.Instance.waveTypeToPlay);
-			Singleton<Profile>.Instance.heroID = waveData.recommendedHero.Key;
+			Singleton<Profile>.Instance.heroId = waveData.recommendedHero.Key;
 			if (Singleton<Profile>.Instance.GetWaveLevel(Singleton<PlayStatistics>.Instance.data.wavePlayed) == 2)
 			{
 				ResultsMenuImpl.UnlockedFeature unlockedHero = ResultsMenuImpl.GetUnlockedHero();

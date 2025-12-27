@@ -220,7 +220,7 @@ public class EnemyLeadership : Leadership
 					}
 					flag = false;
 					int num4 = num3;
-					if (uniqueLimited || mHelperTypes[num3].data.leadershipCost.leadership > mMaxResources || mHelperTypes[num3].data.isMount)
+					if (uniqueLimited || mHelperTypes[num3].data.leadershipCost.cost > mMaxResources || mHelperTypes[num3].data.isMount)
 					{
 						do
 						{
@@ -436,7 +436,7 @@ public class EnemyLeadership : Leadership
 		mTotalSpawnCount++;
 		mSpawnList[groupIndex].unitsToSpawn.Insert(0, helperIndex);
 		spawnCount[helperIndex]--;
-		mSpawnList[groupIndex].leadershipCost += mHelperTypes[helperIndex].data.leadershipCost.leadership;
+		mSpawnList[groupIndex].leadershipCost += mHelperTypes[helperIndex].data.leadershipCost.cost;
 		if (mHelperTypes[helperIndex].linkedHelper >= 0)
 		{
 			AddToGroup(mHelperTypes[helperIndex].linkedHelper, groupIndex, spawnCount);
@@ -445,7 +445,7 @@ public class EnemyLeadership : Leadership
 
 	private void BuildSpawnList()
 	{
-		mHelperTypes.Sort((HelperTypeData x, HelperTypeData y) => x.data.leadershipCost.leadership.CompareTo(y.data.leadershipCost.leadership));
+		mHelperTypes.Sort((HelperTypeData x, HelperTypeData y) => x.data.leadershipCost.cost.CompareTo(y.data.leadershipCost.cost));
 		mHelperCooldown = new float[mHelperTypes.Count];
 		foreach (HelperTypeData mHelperType in mHelperTypes)
 		{
@@ -472,7 +472,7 @@ public class EnemyLeadership : Leadership
 		mTotalSpawnCount = 0;
 		for (int j = 0; j < mHelperTypes.Count; j++)
 		{
-			array[j] = 1 + (int)(num4 / mHelperTypes[j].data.leadershipCost.leadership);
+			array[j] = 1 + (int)(num4 / mHelperTypes[j].data.leadershipCost.cost);
 			mTotalSpawnCount += array[j];
 		}
 		int num5 = mTotalSpawnCount / 4;

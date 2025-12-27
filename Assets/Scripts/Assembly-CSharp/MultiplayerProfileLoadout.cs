@@ -86,7 +86,7 @@ public class MultiplayerProfileLoadout
 	{
 		if (!Singleton<Profile>.Instance.HasSetupDefenses)
 		{
-			Singleton<Profile>.Instance.SelectedDefendHero = Singleton<Profile>.Instance.heroID;
+			Singleton<Profile>.Instance.SelectedDefendHero = Singleton<Profile>.Instance.heroId;
 			Singleton<Profile>.Instance.SetSelectedDefendHelpers(Singleton<Profile>.Instance.GetSelectedHelpers());
 			Singleton<Profile>.Instance.SetSelectedDefendAbilities(Singleton<Profile>.Instance.GetSelectedAbilities());
 		}

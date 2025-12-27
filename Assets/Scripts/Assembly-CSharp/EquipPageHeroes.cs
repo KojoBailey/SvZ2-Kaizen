@@ -118,11 +118,11 @@ public class EquipPageHeroes : EquipPage, UIHandlerComponent
 		{
 			mRequiredSelection = FindIndexFromID(waveData.recommendedHero.Key);
 			SelectHero(mRequiredSelection, false);
-			Singleton<Profile>.Instance.heroID = waveData.recommendedHero.Key;
+			Singleton<Profile>.Instance.heroId = waveData.recommendedHero.Key;
 		}
 		else
 		{
-			SelectHero(FindIndexFromID(Singleton<Profile>.Instance.heroID), false);
+			SelectHero(FindIndexFromID(Singleton<Profile>.Instance.heroId), false);
 		}
 		Singleton<Profile>.Instance.ForceOnboardingStage("OnboardingStep12_HeroSelect");
 	}
@@ -140,7 +140,7 @@ public class EquipPageHeroes : EquipPage, UIHandlerComponent
 		}
 		else if (eventID == "CHANGE_COSTUME")
 		{
-			string selectedHero = Singleton<Profile>.Instance.heroID;
+			string selectedHero = Singleton<Profile>.Instance.heroId;
 			if (Singleton<Profile>.Instance.GetCostume(selectedHero) == "Normal")
 			{
 				Singleton<Profile>.Instance.SetCostume(selectedHero, "Gold");
@@ -199,7 +199,7 @@ public class EquipPageHeroes : EquipPage, UIHandlerComponent
 			mSelectedHero = index;
 			Card card = mCards[index];
 			WeakGlobalMonoBehavior<EquipMenuImpl>.Instance.commonInfoDisplay = card.data;
-			Singleton<Profile>.Instance.heroID = card.id;
+			Singleton<Profile>.Instance.heroId = card.id;
 			if (mHeroModel != null)
 			{
 				Object.Destroy(mHeroModel.controlledObject);

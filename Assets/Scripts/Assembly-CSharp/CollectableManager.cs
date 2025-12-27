@@ -89,7 +89,7 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 			// [TODO] Need to figure out why this doesn't work in the first place... Band-aid solution for now.
 			if (resourceSchema.prefab == null)
 			{
-				UnityEngine.Debug.LogError(string.Format("Unable to load prefab for {0}.", resourceSchema.type));
+				UnityEngine.Debug.LogWarning(string.Format("Unable to load prefab for {0}.", resourceSchema.type));
 				
 				string buffer;
 
@@ -105,11 +105,11 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 					buffer = "Gold";
 					break;
 				default:
-					UnityEngine.Debug.LogError("Getting unsupported collectable type.");
+					UnityEngine.Debug.LogError("Unsupported collectable type.");
 					continue;
 				}
 
-    			resourceSchema.prefab = Resources.Load<GameObject>(string.Format("FX/Coin{0}Pickup", buffer));
+				resourceSchema.prefab = Resources.Load<GameObject>(string.Format("FX/Coin{0}Pickup", buffer));
 
 				if (resourceSchema.prefab == null)
 				{

@@ -1,424 +1,424 @@
 [Wave_001]
-  *:
-    type = Tutorial
-    tutorial = Tutorial_Game01_ProtectGate
-  *:
-    type = Tutorial
-    tutorial = Tutorial_Game02_Movement
-  *:
-    # Give some time for player to test movement controls.
-    type = Delay
-    duration = 10
-  *:
-    type = Spawn
-    enemy = Enemies.CrawlingTorso
-    count = 1
-    spacing = Loose
-  *:
-    type = Tutorial
-    tutorial = Tutorial_Attack
-  *:
-    type = Spawn
-    enemy = Enemies.CrawlingTorso
-    count = 3
-    spacing = Loose
-    spawnAt = Death
-  *:
-    type = Spawn
-    enemy = Enemies.LZombieMelee
-    count = 2
-    spacing = Loose
-  *:
-    # Should be shown as soon as has enough Souls.
-    type = Tutorial
-    tutorial = Tutorial_Game04_Ability
-  *:
-    type = MoveGate
-    gatePos = Middle
-    spawnAt = Death
-  *:
-    type = Spawn
-    enemy = Enemies.LZombieMelee
-    count = 2
-    spacing = Tight
-  *:
-    type = Spawn
-    enemy = Enemies.CrawlingTorso
-    count = 3
-    spacing = Moderate
-    spawnAt = NoDelay
-  *:
-    type = Spawn
-    enemy = Enemies.LZombieMelee
-    count = 3
-    spacing = Tight
+	*:
+		type = Tutorial
+		tutorial = Tutorial_Game01_ProtectGate
+	*:
+		type = Tutorial
+		tutorial = Tutorial_Game02_Movement
+	*:
+		# Give some time for player to test movement controls.
+		type = Delay
+		duration = 10
+	*:
+		type = Spawn
+		enemy = Enemies.CrawlingTorso
+		count = 1
+		spacing = Loose
+	*:
+		type = Tutorial
+		tutorial = Tutorial_Attack
+	*:
+		type = Spawn
+		enemy = Enemies.CrawlingTorso
+		count = 3
+		spacing = Loose
+		spawnAt = Death
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieMelee
+		count = 2
+		spacing = Loose
+	*:
+		# Should be shown as soon as has enough Souls.
+		type = Tutorial
+		tutorial = Tutorial_Game04_Ability
+	*:
+		type = MoveGate
+		gatePos = Middle
+		spawnAt = Death
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieMelee
+		count = 2
+		spacing = Tight
+	*:
+		type = Spawn
+		enemy = Enemies.CrawlingTorso
+		count = 3
+		spacing = Moderate
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieMelee
+		count = 3
+		spacing = Tight
 [Wave_002]
-  1:
-    type = Spawn
-    enemy = Enemies.CrawlingTorso
-    count = 2
-    spacing = Loose
-  2:
-    type = Spawn
-    enemy = Enemies.LZombieMelee
-    count = 2
-    spacing = Loose
-  3:
-    type = Spawn
-    enemy = Enemies.LZombieSword
-    count = 2
-    spacing = Moderate
-  4:
-    type = Spawn
-    enemy = Enemies.LZombieMelee
-    count = 2
-    spacing = Moderate
-  5:
-    type = Spawn
-    enemy = Enemies.CrawlingTorso
-    count = 1
-    spacing = Moderate
-    spawnAt = NoDelay
-  6:
-    type = Spawn
-    enemy = Enemies.LZombieAxe
-    count = 2
-    spacing = Tight
+	1:
+		type = Spawn
+		enemy = Enemies.CrawlingTorso
+		count = 2
+		spacing = Loose
+	2:
+		type = Spawn
+		enemy = Enemies.LZombieMelee
+		count = 2
+		spacing = Loose
+	3:
+		type = Spawn
+		enemy = Enemies.LZombieSword
+		count = 2
+		spacing = Moderate
+	4:
+		type = Spawn
+		enemy = Enemies.LZombieMelee
+		count = 2
+		spacing = Moderate
+	5:
+		type = Spawn
+		enemy = Enemies.CrawlingTorso
+		count = 1
+		spacing = Moderate
+		spawnAt = NoDelay
+	6:
+		type = Spawn
+		enemy = Enemies.LZombieAxe
+		count = 2
+		spacing = Tight
 [Wave_003]
-  1:
-    type = Spawn
-    enemy = Enemies.CrawlingTorso
-    count = 2
-    spacing = Loose
-  2:
-    type = Spawn
-    enemy = Enemies.LZombieMelee
-    count = 3
-    spacing = Loose
-    spawnAt = NoDelay
-  13:
-    type = MoveGate
-    gatePos = Middle
-  3:
-    type = Spawn
-    enemy = Enemies.LZombieAxe
-    count = 2
-    spacing = Moderate
-  4:
-    type = Spawn
-    enemy = Enemies.LZombieMelee
-    count = 3
-    spacing = Tight
-  5:
-    type = Spawn
-    enemy = Enemies.LZombieSpear
-    count = 3
-    spacing = Tight
-    spawnAt = NoDelay
-  6:
-    type = Spawn
-    enemy = Enemies.LZombieSword
-    count = 2
-    spacing = Moderate
-  7:
-    type = MoveGate
-    gatePos = Far
-    spawnAt = Death
-  8:
-    type = Spawn
-    enemy = Enemies.LZombieAxe
-    count = 2
-    spacing = Moderate
-  9:
-    type = Spawn
-    enemy = Enemies.LZombieSpear
-    count = 3
-    spacing = Loose
-  10:
-    type = Spawn
-    enemy = Enemies.LZombieSword
-    count = 3
-    spacing = Tight
-  11:
-    type = Spawn
-    enemy = Enemies.LZombieSpear
-    count = 3
-    spacing = Tight
-    spawnAt = NoDelay
-  12:
-    type = Spawn
-    enemy = Enemies.LZombieAxe
-    count = 2
-    spacing = Tight
-    spawnAt = NoDelay
+	1:
+		type = Spawn
+		enemy = Enemies.CrawlingTorso
+		count = 2
+		spacing = Loose
+	2:
+		type = Spawn
+		enemy = Enemies.LZombieMelee
+		count = 3
+		spacing = Loose
+		spawnAt = NoDelay
+	13:
+		type = MoveGate
+		gatePos = Middle
+	3:
+		type = Spawn
+		enemy = Enemies.LZombieAxe
+		count = 2
+		spacing = Moderate
+	4:
+		type = Spawn
+		enemy = Enemies.LZombieMelee
+		count = 3
+		spacing = Tight
+	5:
+		type = Spawn
+		enemy = Enemies.LZombieSpear
+		count = 3
+		spacing = Tight
+		spawnAt = NoDelay
+	6:
+		type = Spawn
+		enemy = Enemies.LZombieSword
+		count = 2
+		spacing = Moderate
+	7:
+		type = MoveGate
+		gatePos = Far
+		spawnAt = Death
+	8:
+		type = Spawn
+		enemy = Enemies.LZombieAxe
+		count = 2
+		spacing = Moderate
+	9:
+		type = Spawn
+		enemy = Enemies.LZombieSpear
+		count = 3
+		spacing = Loose
+	10:
+		type = Spawn
+		enemy = Enemies.LZombieSword
+		count = 3
+		spacing = Tight
+	11:
+		type = Spawn
+		enemy = Enemies.LZombieSpear
+		count = 3
+		spacing = Tight
+		spawnAt = NoDelay
+	12:
+		type = Spawn
+		enemy = Enemies.LZombieAxe
+		count = 2
+		spacing = Tight
+		spawnAt = NoDelay
 [Wave_004]
-  1:
-    type = Spawn
-    enemy = Enemies.Nobusuma
-    count = 3
-    spacing = Loose
-  2:
-    type = Spawn
-    enemy = Enemies.CrawlingTorso
-    count = 2
-    spacing = Loose
-  3:
-    type = Spawn
-    enemy = Enemies.Nobusuma
-    count = 2
-    spacing = Loose
-    spawnAt = NoDelay
-  4:
-    type = Spawn
-    enemy = Enemies.LZombieSword
-    count = 3
-    spacing = Moderate
-    spawnAt = NoDelay
-  5:
-    type = Spawn
-    enemy = Enemies.LZombieAxe
-    count = 3
-    spacing = Tight
-  6:
-    type = Spawn
-    enemy = Enemies.LZombieSpear
-    count = 4
-    spacing = Tight
-    spawnAt = NoDelay
-  7:
-    type = Spawn
-    enemy = Enemies.Nobusuma
-    count = 3
-    spacing = Moderate
-    spawnAt = NoDelay
-  12:
-    type = Banner
-    banner = Legion
-    spawnAt = Death
-  8:
-    type = Spawn
-    enemy = Enemies.LZombieMelee
-    count = 4
-    spacing = Tight
-  9:
-    type = Spawn
-    enemy = Enemies.Nobusuma
-    count = 2
-    spacing = Loose
-  10:
-    type = Spawn
-    enemy = Enemies.LZombieSpear
-    count = 3
-    spacing = Moderate
-  11:
-    type = Spawn
-    enemy = Enemies.Nobusuma
-    count = 4
-    spacing = Tight
-    spawnAt = NoDelay
+	1:
+		type = Spawn
+		enemy = Enemies.Nobusuma
+		count = 3
+		spacing = Loose
+	2:
+		type = Spawn
+		enemy = Enemies.CrawlingTorso
+		count = 2
+		spacing = Loose
+	3:
+		type = Spawn
+		enemy = Enemies.Nobusuma
+		count = 2
+		spacing = Loose
+		spawnAt = NoDelay
+	4:
+		type = Spawn
+		enemy = Enemies.LZombieSword
+		count = 3
+		spacing = Moderate
+		spawnAt = NoDelay
+	5:
+		type = Spawn
+		enemy = Enemies.LZombieAxe
+		count = 3
+		spacing = Tight
+	6:
+		type = Spawn
+		enemy = Enemies.LZombieSpear
+		count = 4
+		spacing = Tight
+		spawnAt = NoDelay
+	7:
+		type = Spawn
+		enemy = Enemies.Nobusuma
+		count = 3
+		spacing = Moderate
+		spawnAt = NoDelay
+	12:
+		type = Banner
+		banner = Legion
+		spawnAt = Death
+	8:
+		type = Spawn
+		enemy = Enemies.LZombieMelee
+		count = 4
+		spacing = Tight
+	9:
+		type = Spawn
+		enemy = Enemies.Nobusuma
+		count = 2
+		spacing = Loose
+	10:
+		type = Spawn
+		enemy = Enemies.LZombieSpear
+		count = 3
+		spacing = Moderate
+	11:
+		type = Spawn
+		enemy = Enemies.Nobusuma
+		count = 4
+		spacing = Tight
+		spawnAt = NoDelay
 [Wave_005]
-  1:
-    type = Spawn
-    enemy = Enemies.LZombieMelee
-    count = 3
-    spacing = Loose
-  2:
-    type = Spawn
-    enemy = Enemies.Nobusuma
-    count = 3
-    spacing = Loose
-    spawnAt = NoDelay
-  3:
-    type = Spawn
-    enemy = Enemies.LZombieArcher
-    count = 4
-    spacing = Moderate
-  4:
-    type = Spawn
-    enemy = Enemies.CrawlingTorso
-    count = 2
-    spacing = Moderate
-  5:
-    type = Spawn
-    enemy = Enemies.Nobusuma
-    count = 2
-    spacing = Tight
-    spawnAt = NoDelay
-  6:
-    type = Spawn
-    enemy = Enemies.LZombieAxe
-    count = 2
-    spacing = Tight
-  7:
-    type = Spawn
-    enemy = Enemies.LZombieArcher
-    count = 3
-    spacing = Tight
-    spawnAt = NoDelay
-  8:
-    type = Spawn
-    enemy = Enemies.LZombieSword
-    count = 2
-    spacing = Moderate
-  9:
-    type = Spawn
-    enemy = Enemies.LZombieSpear
-    count = 3
-    spacing = Tight
-    spawnAt = NoDelay
-  10:
-    type = Spawn
-    enemy = Enemies.LZombieArcher
-    count = 5
-    spacing = Moderate
-    spawnAt = NoDelay
-  18:
-    type = Banner
-    banner = Legion
-    spawnAt = Death
-  11:
-    type = Spawn
-    enemy = Enemies.LZombieMelee
-    count = 4
-    spacing = Loose
-  12:
-    type = Spawn
-    enemy = Enemies.CrawlingTorso
-    count = 2
-    spacing = Moderate
-  13:
-    type = Spawn
-    enemy = Enemies.LZombieSword
-    count = 3
-    spacing = Tight
-    spawnAt = NoDelay
-  14:
-    type = Spawn
-    enemy = Enemies.Nobusuma
-    count = 4
-    spacing = Tight
-    spawnAt = NoDelay
-  15:
-    type = Spawn
-    enemy = Enemies.LZombieAxe
-    count = 3
-    spacing = Tight
-    spawnAt = NoDelay
-  16:
-    type = Spawn
-    enemy = Enemies.LZombieArcher
-    count = 4
-    spacing = Tight
-    spawnAt = NoDelay
-  17:
-    type = Spawn
-    enemy = Enemies.LZombieSpear
-    count = 3
-    spacing = Tight
-    spawnAt = NoDelay
+	1:
+		type = Spawn
+		enemy = Enemies.LZombieMelee
+		count = 3
+		spacing = Loose
+	2:
+		type = Spawn
+		enemy = Enemies.Nobusuma
+		count = 3
+		spacing = Loose
+		spawnAt = NoDelay
+	3:
+		type = Spawn
+		enemy = Enemies.LZombieArcher
+		count = 4
+		spacing = Moderate
+	4:
+		type = Spawn
+		enemy = Enemies.CrawlingTorso
+		count = 2
+		spacing = Moderate
+	5:
+		type = Spawn
+		enemy = Enemies.Nobusuma
+		count = 2
+		spacing = Tight
+		spawnAt = NoDelay
+	6:
+		type = Spawn
+		enemy = Enemies.LZombieAxe
+		count = 2
+		spacing = Tight
+	7:
+		type = Spawn
+		enemy = Enemies.LZombieArcher
+		count = 3
+		spacing = Tight
+		spawnAt = NoDelay
+	8:
+		type = Spawn
+		enemy = Enemies.LZombieSword
+		count = 2
+		spacing = Moderate
+	9:
+		type = Spawn
+		enemy = Enemies.LZombieSpear
+		count = 3
+		spacing = Tight
+		spawnAt = NoDelay
+	10:
+		type = Spawn
+		enemy = Enemies.LZombieArcher
+		count = 5
+		spacing = Moderate
+		spawnAt = NoDelay
+	18:
+		type = Banner
+		banner = Legion
+		spawnAt = Death
+	11:
+		type = Spawn
+		enemy = Enemies.LZombieMelee
+		count = 4
+		spacing = Loose
+	12:
+		type = Spawn
+		enemy = Enemies.CrawlingTorso
+		count = 2
+		spacing = Moderate
+	13:
+		type = Spawn
+		enemy = Enemies.LZombieSword
+		count = 3
+		spacing = Tight
+		spawnAt = NoDelay
+	14:
+		type = Spawn
+		enemy = Enemies.Nobusuma
+		count = 4
+		spacing = Tight
+		spawnAt = NoDelay
+	15:
+		type = Spawn
+		enemy = Enemies.LZombieAxe
+		count = 3
+		spacing = Tight
+		spawnAt = NoDelay
+	16:
+		type = Spawn
+		enemy = Enemies.LZombieArcher
+		count = 4
+		spacing = Tight
+		spawnAt = NoDelay
+	17:
+		type = Spawn
+		enemy = Enemies.LZombieSpear
+		count = 3
+		spacing = Tight
+		spawnAt = NoDelay
 [Wave_006]
-  1:
-    type = Spawn
-    enemy = Enemies.Chochinobake
-    count = 3
-    spacing = Loose
-  2:
-    type = Spawn
-    enemy = Enemies.CrawlingTorso
-    count = 2
-    spacing = Loose
-    spawnAt = NoDelay
-  3:
-    type = Spawn
-    enemy = Enemies.LZombieSword
-    count = 2
-    spacing = Moderate
-  4:
-    type = Spawn
-    enemy = Enemies.LZombieArcher
-    count = 3
-    spacing = Moderate
-    spawnAt = NoDelay
-  5:
-    type = Spawn
-    enemy = Enemies.Chochinobake
-    count = 2
-    spacing = Loose
-  6:
-    type = Spawn
-    enemy = Enemies.LZombieSword
-    count = 3
-    spacing = Tight
-    spawnAt = NoDelay
-  7:
-    type = Spawn
-    enemy = Enemies.LZombieSpear
-    count = 3
-    spacing = Tight
-    spawnAt = NoDelay
-  8:
-    type = Spawn
-    enemy = Enemies.LZombieArcher
-    count = 3
-    spacing = Tight
-    spawnAt = NoDelay
-  10:
-    type = Spawn
-    enemy = Enemies.Chochinobake
-    count = 4
-    spacing = Loose
-  11:
-    type = Spawn
-    enemy = Enemies.LZombieAxe
-    count = 3
-    spacing = Moderate
-    spawnAt = NoDelay
-  12:
-    type = Spawn
-    enemy = Enemies.Nobusuma
-    count = 3
-    spacing = Moderate
-    spawnAt = NoDelay
-  13:
-    type = Spawn
-    enemy = Enemies.LZombieSword
-    count = 3
-    spacing = Moderate
-  9:
-    type = Banner
-    banner = Legion
-  14:
-    type = Spawn
-    enemy = Enemies.Chochinobake
-    count = 5
-    spacing = Moderate
-  15:
-    type = Spawn
-    enemy = Enemies.LZombieAxe
-    count = 3
-    spacing = Tight
-    spawnAt = NoDelay
-  16:
-    type = Spawn
-    enemy = Enemies.LZombieArcher
-    count = 4
-    spacing = Tight
-    spawnAt = NoDelay
-  17:
-    type = Spawn
-    enemy = Enemies.Nobusuma
-    count = 3
-    spacing = Moderate
-    spawnAt = NoDelay
-  18:
-    type = Spawn
-    enemy = Enemies.LZombieSpear
-    count = 3
-    spacing = Tight
-    spawnAt = NoDelay
-  19:
-    type = Spawn
-    enemy = Enemies.Chochinobake
-    count = 6
-    spacing = Tight
-    spawnAt = HighHealth
+	1:
+		type = Spawn
+		enemy = Enemies.Chochinobake
+		count = 3
+		spacing = Loose
+	2:
+		type = Spawn
+		enemy = Enemies.CrawlingTorso
+		count = 2
+		spacing = Loose
+		spawnAt = NoDelay
+	3:
+		type = Spawn
+		enemy = Enemies.LZombieSword
+		count = 2
+		spacing = Moderate
+	4:
+		type = Spawn
+		enemy = Enemies.LZombieArcher
+		count = 3
+		spacing = Moderate
+		spawnAt = NoDelay
+	5:
+		type = Spawn
+		enemy = Enemies.Chochinobake
+		count = 2
+		spacing = Loose
+	6:
+		type = Spawn
+		enemy = Enemies.LZombieSword
+		count = 3
+		spacing = Tight
+		spawnAt = NoDelay
+	7:
+		type = Spawn
+		enemy = Enemies.LZombieSpear
+		count = 3
+		spacing = Tight
+		spawnAt = NoDelay
+	8:
+		type = Spawn
+		enemy = Enemies.LZombieArcher
+		count = 3
+		spacing = Tight
+		spawnAt = NoDelay
+	10:
+		type = Spawn
+		enemy = Enemies.Chochinobake
+		count = 4
+		spacing = Loose
+	11:
+		type = Spawn
+		enemy = Enemies.LZombieAxe
+		count = 3
+		spacing = Moderate
+		spawnAt = NoDelay
+	12:
+		type = Spawn
+		enemy = Enemies.Nobusuma
+		count = 3
+		spacing = Moderate
+		spawnAt = NoDelay
+	13:
+		type = Spawn
+		enemy = Enemies.LZombieSword
+		count = 3
+		spacing = Moderate
+	9:
+		type = Banner
+		banner = Legion
+	14:
+		type = Spawn
+		enemy = Enemies.Chochinobake
+		count = 5
+		spacing = Moderate
+	15:
+		type = Spawn
+		enemy = Enemies.LZombieAxe
+		count = 3
+		spacing = Tight
+		spawnAt = NoDelay
+	16:
+		type = Spawn
+		enemy = Enemies.LZombieArcher
+		count = 4
+		spacing = Tight
+		spawnAt = NoDelay
+	17:
+		type = Spawn
+		enemy = Enemies.Nobusuma
+		count = 3
+		spacing = Moderate
+		spawnAt = NoDelay
+	18:
+		type = Spawn
+		enemy = Enemies.LZombieSpear
+		count = 3
+		spacing = Tight
+		spawnAt = NoDelay
+	19:
+		type = Spawn
+		enemy = Enemies.Chochinobake
+		count = 6
+		spacing = Tight
+		spawnAt = HighHealth

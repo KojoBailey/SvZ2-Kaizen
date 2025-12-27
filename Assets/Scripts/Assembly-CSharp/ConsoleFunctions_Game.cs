@@ -44,7 +44,7 @@ public class ConsoleFunctions_Game
 			hotkey2.SetChildHotkey(num3++, "Clear Souls", "clearcurrency souls", false);
 			console.add("profile", ModifyProfile);
 			GrConsole.Hotkey hotkeyA = hotkey.SetChildHotkey(num2++, "Hero", string.Empty, true);
-			AddUdamanButtonGroup(hotkeyA, 7, "profile set heroID", ModifyProfile, "Heroes", (HeroSchema s) => s.id);
+			AddUdamanButtonGroup(hotkeyA, 7, "profile set heroId", ModifyProfile, "Heroes", (HeroSchema s) => s.id);
 			hotkey.SetChildHotkey(num2++, "Unlock All Waves", "profile unlockallwaves", false);
 			hotkey.SetChildHotkey(num2++, "Reset Achievements", "profile resetachievements", false);
 			console.add("timers", Timers);
@@ -577,9 +577,9 @@ public class ConsoleFunctions_Game
 			switch (text)
 			{
 			case "set":
-				if (text2 == "heroID" && WeakGlobalMonoBehavior<InGameImpl>.Instance != null)
+				if (text2 == "heroId" && WeakGlobalMonoBehavior<InGameImpl>.Instance != null)
 				{
-					Singleton<Profile>.Instance.heroID = text3;
+					Singleton<Profile>.Instance.heroId = text3;
 					WeakGlobalMonoBehavior<InGameImpl>.Instance.CreateHero(0, WeakGlobalMonoBehavior<InGameImpl>.Instance.hero.controlledObject.transform);
 				}
 				else if (text2 == "wave")

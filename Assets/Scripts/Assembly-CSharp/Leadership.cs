@@ -14,12 +14,12 @@ public class Leadership : WeakGlobalInstance<Leadership>
 
 		public bool canAfford(int playerId)
 		{
-			return WeakGlobalMonoBehavior<InGameImpl>.Instance.GetLeadership(playerId).resources >= leadership;
+			return WeakGlobalMonoBehavior<InGameImpl>.Instance.GetLeadership(playerId).resources >= cost;
 		}
 
 		public void Spend(int playerId)
 		{
-			WeakGlobalMonoBehavior<InGameImpl>.Instance.GetLeadership(playerId).resources -= leadership;
+			WeakGlobalMonoBehavior<InGameImpl>.Instance.GetLeadership(playerId).resources -= cost;
 		}
 	}
 
@@ -122,128 +122,70 @@ public class Leadership : WeakGlobalInstance<Leadership>
 
 	protected Material mGoldenHelperMaterial;
 
-	public static string UdamanTable
-	{
-		get
-		{
-			return "Leadership";
-		}
-	}
+	public const string UdamanTable = "Leadership";
 
 	public int numTypes
 	{
-		get
-		{
-			return mHelperTypes.Count;
-		}
+		get { return mHelperTypes.Count; }
 	}
 
 	public List<HelperTypeData> availableHelperTypes
 	{
-		get
-		{
-			return mHelperTypes;
-		}
-		private set
-		{
-		}
+		get { return mHelperTypes; }
 	}
 
 	public CharactersManager characterManagerRef
 	{
-		get
-		{
-			return mCharManagerRef;
-		}
-		set
-		{
-			mCharManagerRef = value;
-		}
+		get { return mCharManagerRef; }
+		set { mCharManagerRef = value; }
 	}
 
 	public BoxCollider helperSpawnArea
 	{
-		get
-		{
-			return mHelperSpawnArea;
-		}
-		set
-		{
-			mHelperSpawnArea = value;
-		}
+		get { return mHelperSpawnArea; }
+		set { mHelperSpawnArea = value; }
 	}
 
 	public float helpersZTarget
 	{
-		get
-		{
-			return mHelpersZTarget;
-		}
-		set
-		{
-			mHelpersZTarget = value;
-		}
+		get { return mHelpersZTarget; }
+		set { mHelpersZTarget = value; }
 	}
 
 	public float maxResources
 	{
-		get
-		{
-			return mMaxResources;
-		}
+		get { return mMaxResources; }
 	}
 
 	public float resources
 	{
-		get
-		{
-			return mResources;
-		}
-		set
-		{
-			mResources = Mathf.Clamp(value, 0f, mMaxResources);
-		}
+		get { return mResources; }
+		set { mResources = Mathf.Clamp(value, 0f, mMaxResources); }
 	}
 
 	public int level
 	{
-		get
-		{
-			return mLevel;
-		}
-		set
-		{
-			SetLeadershipLevel(value);
-		}
+		get { return mLevel; }
+		set { SetLeadershipLevel(value); }
 	}
 
 	public int maxLevel
 	{
-		get
-		{
-			return mMaxLevel;
-		}
+		get { return mMaxLevel; }
 	}
 
 	public Hero hero { get; set; }
 
 	public float levelUpThreshold
 	{
-		get
-		{
-			return mLevelUpThreshold;
-		}
+		get { return mLevelUpThreshold; }
 	}
 
 	public bool isUpgradable
 	{
 		get
 		{
-			if (mLevel == mMaxLevel)
-			{
-				return false;
-			}
-			if (mResources < mLevelUpThreshold)
+			if (mLevel == mMaxLevel || mResources < mLevelUpThreshold)
 			{
 				return false;
 			}
@@ -253,42 +195,31 @@ public class Leadership : WeakGlobalInstance<Leadership>
 
 	public float ResourcesSpentOnHelpers
 	{
-		get
-		{
-			return mResourcesSpentOnHelpers;
-		}
-		set
-		{
-			mResourcesSpentOnHelpers = value;
-		}
+		get { return mResourcesSpentOnHelpers; }
+		set { mResourcesSpentOnHelpers = value; }
 	}
 
 	public float ResourcesSpentOnUpgrades
 	{
-		get
-		{
-			return mResourcesSpentOnUpgrades;
-		}
-		set
-		{
-			mResourcesSpentOnUpgrades = value;
-		}
+		get { return mResourcesSpentOnUpgrades; }
+		set { mResourcesSpentOnUpgrades = value; }
 	}
 
 	public bool CanDoRevolutionAchievement { get; set; }
 
-	public Leadership()
-	{
-	}
+	public Leadership() {}
 
 	public Leadership(int playerIndex)
 	{
 		mOwnerId = playerIndex;
+		mResourcesSpentOnHelpers = 0f;
+		mResourcesSpentOnUpgrades = 0f;
+		
 		if (playerIndex == 0)
 		{
 			SetUniqueInstance(this);
 			mIsLeftToRightGameplay = Singleton<PlayModesManager>.Instance.gameDirection == PlayModesManager.GameDirection.LeftToRight;
-			mLeadershipData = DataBundleUtils.InitializeRecord<LeadershipSchema>(new DataBundleRecordKey(UdamanTable, Singleton<Profile>.Instance.heroID));
+			mLeadershipData = DataBundleUtils.InitializeRecord<LeadershipSchema>(new DataBundleRecordKey(UdamanTable, Singleton<Profile>.Instance.heroId));
 			mMaxLevel = mLeadershipData.maxLevel;
 			SetLeadershipLevel(Singleton<Profile>.Instance.initialLeadershipLevel);
 			List<string> selectedHelpers = Singleton<Profile>.Instance.GetSelectedHelpers();
@@ -301,15 +232,13 @@ public class Leadership : WeakGlobalInstance<Leadership>
 			int num = Singleton<Profile>.Instance.MultiplayerData.CollectionLevel("Banner");
 			mResources = num * 10;
 		}
-		mResourcesSpentOnHelpers = 0f;
-		mResourcesSpentOnUpgrades = 0f;
 	}
 
 	public void ApplyLeadershipCostBuff(float leadershipChange)
 	{
 		foreach (HelperTypeData mHelperType in mHelperTypes)
 		{
-			mHelperType.data.leadershipCost.leadership = Mathf.Max(mHelperType.data.leadershipCost.leadership - leadershipChange, 3f);
+			mHelperType.data.leadershipCost.cost = Mathf.Max(mHelperType.data.leadershipCost.cost - leadershipChange, 3f);
 			WeakGlobalMonoBehavior<HUD>.Instance.ResetLeadershipCosts();
 		}
 	}
@@ -354,12 +283,15 @@ public class Leadership : WeakGlobalInstance<Leadership>
 
 	public int GetCost(int typeIndex)
 	{
-		return (int)mHelperTypes[typeIndex].data.leadershipCost.leadership;
+		return (int)mHelperTypes[typeIndex].data.leadershipCost.cost;
 	}
 
 	public bool IsAvailable(int typeIndex, out bool uniqueLimited)
 	{
 		uniqueLimited = false;
+
+		if (mHelperTypes[typeIndex].data.isMount && hero.health == 0f) return false;
+		
 		if (mHelperTypes[typeIndex].data.unique)
 		{
 			string id = mHelperTypes[typeIndex].data.id;
@@ -372,10 +304,7 @@ public class Leadership : WeakGlobalInstance<Leadership>
 				}
 			}
 		}
-		if (mHelperTypes[typeIndex].data.isMount && hero.health == 0f)
-		{
-			return false;
-		}
+
 		return GetCoolDown(typeIndex) == 1f && mHelperTypes[typeIndex].data.leadershipCost.canAfford(mOwnerId) && !uniqueLimited;
 	}
 
@@ -391,7 +320,7 @@ public class Leadership : WeakGlobalInstance<Leadership>
 				CharacterData data2 = mHelperType.data;
 				if ((canBuffFuncData == null || canBuffFuncData(data2)) && mHelperType != data)
 				{
-					data2.leadershipCost.leadership = modifierFunc((int)data2.leadershipCost.leadership, leadershipCostModifierBuff);
+					data2.leadershipCost.cost = modifierFunc((int)data2.leadershipCost.cost, leadershipCostModifierBuff);
 					flag = true;
 				}
 			}
@@ -440,7 +369,7 @@ public class Leadership : WeakGlobalInstance<Leadership>
 		}
 		helperTypeData.data.leadershipCost.Spend(mOwnerId);
 		helperTypeData.EngageCooldown();
-		mResourcesSpentOnHelpers += helperTypeData.data.leadershipCost.leadership;
+		mResourcesSpentOnHelpers += helperTypeData.data.leadershipCost.cost;
 		CheckForLeadershipCostBuff(helperTypeData, (int leadership, int modifier) => leadership + modifier);
 		return SpawnHelper(helperTypeData, mHelperSpawnArea.size.x, mHelperSpawnArea.transform.position);
 	}

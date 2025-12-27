@@ -42,7 +42,7 @@ public class DivineInterventionHandler : AbilityHandler
 		{
 			if (!item.data.unique)
 			{
-				float leadership2 = item.data.leadershipCost.leadership;
+				float leadership2 = item.data.leadershipCost.cost;
 				if (leadership2 < num4)
 				{
 					num4 = leadership2;
