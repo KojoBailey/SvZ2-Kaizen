@@ -28,6 +28,8 @@ Below is a list of changes that have already been implemented, at least partiall
   - To make writing Wave command data much simpler, the same enemy can be spawned in clusters rather than having to list them all out individually, and other parameters have been added to further customise this pattern.
 - The enemy portal/gate now starts much closer to the player's gate, and relocates multiple times throughout a Wave, going further back each time.
   - This was in part to combat the boredom of the Waves' early sections since you'd have to run across the entire map and wait for your Allies to catch up.
+- Abilities now cost Souls to use, which are guaranteed to drop from enemies.
+  - This is unrelated to Multiplayer Souls.
 - The progress UI no longer displays a percentage, but rather the exact number of enemies remaining.
 - The command/cheat menu has been re-enabled, but can only be accessed in debug builds.
 
