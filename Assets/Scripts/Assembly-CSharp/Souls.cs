@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime;
 using UnityEngine;
 
@@ -6,11 +7,16 @@ public class Souls : WeakGlobalInstance<Souls>
 {
 	private SoulSchema mSchema;
 
+	public float maxSouls
+	{
+		get { return mSchema.maxSouls; }
+	}
+
 	private int mSouls;
 	public int souls
 	{
 		get { return mSouls; }
-		set { mSouls = Mathf.Clamp(value, 0, mSouls); }
+		set { mSouls = Mathf.Clamp(value, 0, maxSouls); }
 	}
 
 	public Hero hero { get; set; }
@@ -18,11 +24,6 @@ public class Souls : WeakGlobalInstance<Souls>
 	public int level
 	{
 		get { return Singleton<Profile>.Instance.soulsLevel; }
-	}
-	
-	public float maxSouls
-	{
-		get { return mSchema.maxSouls; }
 	}
 
 	public Souls() {}
@@ -36,8 +37,6 @@ public class Souls : WeakGlobalInstance<Souls>
 			var dataBundleRecordKey = new DataBundleRecordKey(
 				Singleton<Profile>.Instance.heroId, Singleton<Profile>.Instance.soulsLevel.ToString());
 			mSchema = DataBundleUtils.InitializeRecord<SoulSchema>(dataBundleRecordKey);
-
-			UnityEngine.Debug.Log(string.Format("Max souls: {0}", maxSouls));
 		}
 	}
 }
