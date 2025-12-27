@@ -8,7 +8,7 @@
 	*:
 		# Give some time for player to test movement controls.
 		type = Delay
-		duration = 10
+		duration = 5
 	*:
 		type = Spawn
 		enemy = Enemies.CrawlingTorso
