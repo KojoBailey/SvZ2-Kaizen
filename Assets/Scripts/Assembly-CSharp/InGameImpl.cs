@@ -373,13 +373,9 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		if (CurrentWave == 1 && !ProfileData.HasWaveBeenCompleted(1))
 		{
 			WeakGlobalMonoBehavior<HUD>.Instance.alliesEnabled = false;
+			WeakGlobalMonoBehavior<HUD>.Instance.abilitiesEnabled = false;
 			StartCoroutine(CheckForHeroMovement());
 			StartCoroutine(CheckForHeroAttack());
-
-			ProfileData.SetSelectedAbilities(new List<string>(new string[1] { "KatanaSlash" }));
-			WeakGlobalMonoBehavior<HUD>.Instance.ResetAbilities();
-			WeakGlobalMonoBehavior<HUD>.Instance.abilitiesEnabled = true;
-			StartCoroutine(CheckForKatanaSlashUse());
 		}
 
 		InitializeHelpersAndAbilities();
@@ -426,7 +422,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 		RunAfterDelay(delegate {
 			WeakGlobalMonoBehavior<BannerManager>.Instance.OpenBanner(new BannerStartWave(5f, ProfileData.WaveToPlay));
-		}, SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game02_Movement") ? 4.5f : 2f);
+		}, SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game02_Movement") ? 4.5f : 1f);
 
 		IncrementWaveAttempts();
 
@@ -849,59 +845,59 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	private IEnumerator CheckTutorials()
 	{
-		while (!ProfileData.IsInStoryWave) yield return null;
-
-		if (mTimeToNextTutorial <= 0f)
+		while (ProfileData.IsInStoryWave)
 		{
-			if (CurrentWave <= 1)
+			var tutorialManager = Singleton<TutorialManager>.Instance;
+
+			if (mTimeToNextTutorial <= 0f)
 			{
-				if (SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game02_Movement"))
+				if (CurrentWave == 1 && !ProfileData.HasWaveBeenCompleted(1))
 				{
-					SingletonMonoBehaviour<TutorialMain>.Instance.StartTutorial("Tutorial_Game02_Movement");
-					yield return new WaitForSeconds(10f);
-					mTimeToNextTutorial = 0f;
-				}
-				else if (SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game04_Ability"))
-				{
-					List<Character> enemiesPlayerCanSee2 = WeakGlobalInstance<CharactersManager>.Instance.GetCharactersInRangeMaxCount(hero.controller.position.z, hero.controller.position.z + 4f, 1, 1f);
-					if (enemiesPlayerCanSee2.Count >= 1 && SingletonMonoBehaviour<TutorialMain>.Instance.GetCurrentTutorial_Key() != "Tutorial_Game04_Ability" && SingletonMonoBehaviour<TutorialMain>.Instance.TutorialStartIfNeeded("Tutorial_Game04_Ability"))
+					if (!tutorialManager.HasCompleted(ETutorial.MovingTheHero))
 					{
-						ProfileData.SetSelectedAbilities(new List<string>(new string[1] { "KatanaSlash" }));
-						WeakGlobalMonoBehavior<HUD>.Instance.ResetAbilities();
-						WeakGlobalMonoBehavior<HUD>.Instance.abilitiesEnabled = true;
-						StartCoroutine(CheckForKatanaSlashUse());
+						tutorialManager.StartTutorial(ETutorial.MovingTheHero);
 						mTimeToNextTutorial = 0f;
-						yield return new WaitForSeconds(5f);
+						yield return new WaitForSeconds(0f);
+					}
+					else if (!tutorialManager.HasCompleted(ETutorial.UsingAbilities))
+					{
+						List<Character> enemiesInSight = WeakGlobalInstance<CharactersManager>.Instance.GetCharactersInRangeMaxCount(
+							hero.controller.position.z, hero.controller.position.z + 4f, 1, 1f);
+						if (enemiesInSight.Count >= 2 && WeakGlobalInstance<Souls>.Instance.souls >= 3)
+						{
+							ProfileData.SetSelectedAbilities(new List<string>(new string[1] { "KatanaSlash" }));
+							WeakGlobalMonoBehavior<HUD>.Instance.abilitiesEnabled = true;
+							WeakGlobalMonoBehavior<HUD>.Instance.ResetAbilities();
+							tutorialManager.StartTutorial(ETutorial.UsingAbilities);
+							StartCoroutine(CheckForKatanaSlashUse());
+							mTimeToNextTutorial = 0f;
+							yield return new WaitForSeconds(5f);
+						}
 					}
 				}
-			}
-			else if (CurrentWave == 2 && SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game03_Ally") && SingletonMonoBehaviour<TutorialMain>.Instance.GetCurrentTutorial_Key() != "Tutorial_Game03_Ally")
-			{
-				if (SingletonMonoBehaviour<TutorialMain>.Instance.TutorialStartIfNeeded("Tutorial_Game03_Ally"))
+				else if (CurrentWave == 2 && !ProfileData.HasWaveBeenCompleted(2) && !tutorialManager.HasCompleted(ETutorial.SpawningAllies))
 				{
+					tutorialManager.StartTutorial(ETutorial.SpawningAllies);
 					WeakGlobalMonoBehavior<HUD>.Instance.alliesEnabled = true;
 					StartCoroutine(CheckForFarmerSpawn());
 					mTimeToNextTutorial = 0f;
 					yield return new WaitForSeconds(5f);
 				}
-			}
-			else
-			{
-				if (CurrentWave != 4 || !SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game05_Flying"))
+				else if (CurrentWave == 4 && !ProfileData.HasWaveBeenCompleted(4) && !tutorialManager.HasCompleted(ETutorial.UsingBowAgainstFlyingEnemies))
 				{
-					yield return null;
-				}
-				List<Character> enemiesPlayerCanSee = WeakGlobalInstance<CharactersManager>.Instance.GetCharactersInRange(hero.controller.position.z, hero.controller.position.z + 4f, 1);
-				int foundIndex = enemiesPlayerCanSee.FindIndex((Character c) => c.isFlying);
-				if (foundIndex >= 0 && SingletonMonoBehaviour<TutorialMain>.Instance.GetCurrentTutorial_Key() != "Tutorial_Game05_Flying" && SingletonMonoBehaviour<TutorialMain>.Instance.TutorialStartIfNeeded("Tutorial_Game05_Flying"))
-				{
-					mTimeToNextTutorial = 0f;
-					yield return new WaitForSeconds(5f);
+					List<Character> enemiesPlayerCanSee = WeakGlobalInstance<CharactersManager>.Instance.GetCharactersInRange(hero.controller.position.z, hero.controller.position.z + 4f, 1);
+					int foundIndex = enemiesPlayerCanSee.FindIndex((Character c) => c.isFlying);
+					if (foundIndex >= 0)
+					{
+						tutorialManager.StartTutorial(ETutorial.UsingBowAgainstFlyingEnemies);
+						mTimeToNextTutorial = 0f;
+						yield return new WaitForSeconds(5f);
+					}
 				}
 			}
+			mTimeToNextTutorial -= Time.deltaTime;
+			yield return new WaitForSeconds(0f);
 		}
-		mTimeToNextTutorial -= Time.deltaTime;
-		yield return new WaitForSeconds(0f);
 	}
 
 	private IEnumerator CheckForHeroMovement()

@@ -36,6 +36,7 @@ public class TutorialMain : SingletonMonoBehaviour<TutorialMain>, IGluiActionHan
 	private void SetTutorialDone(TutorialSchema record)
 	{
 		Singleton<Profile>.Instance.SetTutorialDone("Passive", record.name);
+		Singleton<TutorialManager>.Instance.FinishActiveTutorial();
 	}
 
 	private void ClearTutorialDone(TutorialSchema record)

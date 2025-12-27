@@ -88,6 +88,9 @@ public class HUDAbilities : UIHandlerComponent
 			mIconRef.Texture = texture;
 			mMeterRef.Texture = texture;
 			WeakGlobalMonoBehavior<HUD>.Instance.RegisterOnPressEvent(mButtonRef, kAbilityCmd + index);
+
+			// Start with no cooldown.
+			mCooldownCurrent = mCooldownMax;
 		}
 
 		public void Update(bool shouldUpdateExpensiveVisuals)
