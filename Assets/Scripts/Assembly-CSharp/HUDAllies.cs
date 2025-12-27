@@ -57,7 +57,7 @@ public class HUDAllies : UIHandlerComponent
 			mIconRef.Texture = WeakGlobalInstance<Leadership>.Instance.GetIconFile(mIndex);
 			mMeterRef.Texture = mIconRef.Texture;
 			RefreshCost();
-			WeakGlobalMonoBehavior<HUD>.Instance.RegisterOnPressEvent(mButtonRef, "SPAWN_ALLY:" + index);
+			WeakGlobalMonoBehavior<HUD>.Instance.RegisterOnPressEvent(mButtonRef, kSpawnCmd + index);
 		}
 
 		public void Update(bool updateExpensiveVisuals)
@@ -161,9 +161,10 @@ public class HUDAllies : UIHandlerComponent
 
 	public bool OnUIEvent(string eventID)
 	{
-		if (eventID.Length > "SPAWN_ALLY:".Length && eventID.Substring(0, "SPAWN_ALLY:".Length) == "SPAWN_ALLY:")
+		int kSpawnCmdLen = kSpawnCmd.Length;
+		if (eventID.Length > kSpawnCmdLen && eventID.Substring(0, kSpawnCmdLen) == kSpawnCmd)
 		{
-			TrySpawnAlly(int.Parse(eventID.Substring("SPAWN_ALLY:".Length)));
+			TrySpawnAlly(int.Parse(eventID.Substring(kSpawnCmdLen)));
 			return true;
 		}
 		return false;
