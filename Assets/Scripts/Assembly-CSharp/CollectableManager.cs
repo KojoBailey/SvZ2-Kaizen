@@ -221,70 +221,70 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 		));
 	}
 
-	public void OpenPresents(bool fromPlayerDeath)
-	{
-		foreach (CollectedPresent present in currentWaveSpoils.presents)
-		{
-			if (present.hasBeenOpened)
-			{
-				continue;
-			}
-			present.hasBeenOpened = true;
-			float num = 0f;
-			Dictionary<string, float> dictionary = null;
-			if (fromPlayerDeath)
-			{
-				num = UnityEngine.Random.Range(0f, mResourceTemplates[(int)present.type].postDeathContentsTotalWeight - float.Epsilon);
-				dictionary = mResourceTemplates[(int)present.type].postDeathContents;
-			}
-			else
-			{
-				num = UnityEngine.Random.Range(0f, mResourceTemplates[(int)present.type].contentsTotalWeight - float.Epsilon);
-				dictionary = mResourceTemplates[(int)present.type].contents;
-			}
-			if (dictionary != null)
-			{
-				try
-				{
-					foreach (KeyValuePair<string, float> item in dictionary)
-					{
-						num -= item.Value;
-						if (num < 0f)
-						{
-							present.contents = item.Key;
-							RemovePermenantItemFromFuturePresents(item.Key);
-							break;
-						}
-					}
-				}
-				catch (Exception)
-				{
-				}
-			}
-			Singleton<PlayStatistics>.Instance.data.AddLoot(present.contents, 1, present.type);
-			int valueInCoins = CashIn.GetValueInCoins(present.contents, 1);
-			Singleton<PlayStatistics>.Instance.data.totalLootDroppedValue += valueInCoins;
-			switch (CashIn.GetType(present.contents))
-			{
-			case CashIn.ItemType.Coins:
-				Singleton<PlayStatistics>.Instance.data.droppedCoins++;
-				break;
-			case CashIn.ItemType.Gems:
-				Singleton<PlayStatistics>.Instance.data.droppedGems++;
-				break;
-			case CashIn.ItemType.Souls:
-				Singleton<PlayStatistics>.Instance.data.droppedSouls++;
-				break;
-			case CashIn.ItemType.Helper:
-			case CashIn.ItemType.Ability:
-				Singleton<PlayStatistics>.Instance.data.droppedUnlockables++;
-				break;
-			default:
-				Singleton<PlayStatistics>.Instance.data.droppedOtherValue += valueInCoins;
-				break;
-			}
-		}
-	}
+	// public void OpenPresents(bool fromPlayerDeath)
+	// {
+	// 	foreach (CollectedPresent present in currentWaveSpoils.presents)
+	// 	{
+	// 		if (present.hasBeenOpened)
+	// 		{
+	// 			continue;
+	// 		}
+	// 		present.hasBeenOpened = true;
+	// 		float num = 0f;
+	// 		Dictionary<string, float> dictionary = null;
+	// 		if (fromPlayerDeath)
+	// 		{
+	// 			num = UnityEngine.Random.Range(0f, mResourceTemplates[(int)present.type].postDeathContentsTotalWeight - float.Epsilon);
+	// 			dictionary = mResourceTemplates[(int)present.type].postDeathContents;
+	// 		}
+	// 		else
+	// 		{
+	// 			num = UnityEngine.Random.Range(0f, mResourceTemplates[(int)present.type].contentsTotalWeight - float.Epsilon);
+	// 			dictionary = mResourceTemplates[(int)present.type].contents;
+	// 		}
+	// 		if (dictionary != null)
+	// 		{
+	// 			try
+	// 			{
+	// 				foreach (KeyValuePair<string, float> item in dictionary)
+	// 				{
+	// 					num -= item.Value;
+	// 					if (num < 0f)
+	// 					{
+	// 						present.contents = item.Key;
+	// 						RemovePermenantItemFromFuturePresents(item.Key);
+	// 						break;
+	// 					}
+	// 				}
+	// 			}
+	// 			catch (Exception)
+	// 			{
+	// 			}
+	// 		}
+	// 		Singleton<PlayStatistics>.Instance.data.AddLoot(present.contents, 1, present.type);
+	// 		int valueInCoins = CashIn.GetValueInCoins(present.contents, 1);
+	// 		Singleton<PlayStatistics>.Instance.data.totalLootDroppedValue += valueInCoins;
+	// 		switch (CashIn.GetType(present.contents))
+	// 		{
+	// 		case CashIn.ItemType.Coins:
+	// 			Singleton<PlayStatistics>.Instance.data.droppedCoins++;
+	// 			break;
+	// 		case CashIn.ItemType.Gems:
+	// 			Singleton<PlayStatistics>.Instance.data.droppedGems++;
+	// 			break;
+	// 		case CashIn.ItemType.Souls:
+	// 			Singleton<PlayStatistics>.Instance.data.droppedSouls++;
+	// 			break;
+	// 		case CashIn.ItemType.Helper:
+	// 		case CashIn.ItemType.Ability:
+	// 			Singleton<PlayStatistics>.Instance.data.droppedUnlockables++;
+	// 			break;
+	// 		default:
+	// 			Singleton<PlayStatistics>.Instance.data.droppedOtherValue += valueInCoins;
+	// 			break;
+	// 		}
+	// 	}
+	// }
 
 	public void GiveResource(ECollectableType type, int amount)
 	{
@@ -303,37 +303,25 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 			}
 			break;
 		case ECollectableType.soul:
-			if (Singleton<Profile>.Instance.GetUpgradeLevel("SoulsDouble") > 0)
-			{
-				currentWaveSpoils.souls += amount * 2;
-			}
-			else
-			{
-				currentWaveSpoils.souls += amount;
-			}
+			// [TODO] Give souls to soul meter or whatever.
 			break;
 		case ECollectableType.leadership:
 			WeakGlobalInstance<Leadership>.Instance.resources += amount;
-			currentWaveSpoils.leadership += amount;
 			break;
-		case ECollectableType.gem:
-			currentWaveSpoils.gems += amount;
-			Singleton<PlayStatistics>.Instance.data.AddLoot("gems", amount);
+		case ECollectableType.pachinkoBall:
+			currentWaveSpoils.pachinkoBalls += amount;
 			break;
-		case ECollectableType.pachinkoball:
-			currentWaveSpoils.balls += amount;
-			break;
-		case ECollectableType.presentA:
-		case ECollectableType.presentB:
-		case ECollectableType.presentC:
-		{
-			CollectedPresent collectedPresent = new CollectedPresent();
-			collectedPresent.type = type;
-			currentWaveSpoils.presents.Add(collectedPresent);
-			break;
-		}
-		case ECollectableType.presentD:
-			break;
+		// case ECollectableType.presentA:
+		// case ECollectableType.presentB:
+		// case ECollectableType.presentC:
+		// {
+		// 	CollectedPresent collectedPresent = new CollectedPresent();
+		// 	collectedPresent.type = type;
+		// 	currentWaveSpoils.presents.Add(collectedPresent);
+		// 	break;
+		// }
+		// case ECollectableType.presentD:
+		// 	break;
 		}
 	}
 
@@ -364,42 +352,37 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 			Singleton<PlayStatistics>.Instance.data.totalLootDroppedValue += amount;
 			Singleton<PlayStatistics>.Instance.data.droppedOtherValue += amount;
 			break;
-		case ECollectableType.gem:
-			Singleton<PlayStatistics>.Instance.data.totalLootDroppedValue += CashIn.GetValueInCoins("gems", amount);
-			Singleton<PlayStatistics>.Instance.data.droppedGems += amount;
-			break;
 		}
 	}
 
-	public void GiveSpecificPresent(string id, int amount)
-	{
-		if (amount > 0)
-		{
-			CollectedPresent collectedPresent = new CollectedPresent();
-			collectedPresent.type = ECollectableType.presentD;
-			collectedPresent.contents = id;
-			collectedPresent.hasBeenOpened = true;
-			collectedPresent.amount = amount;
-			currentWaveSpoils.presents.Add(collectedPresent);
-			Singleton<PlayStatistics>.Instance.data.AddLoot(id, amount);
-		}
-	}
+	// public void GiveSpecificPresent(string id, int amount)
+	// {
+	// 	if (amount > 0)
+	// 	{
+	// 		CollectedPresent collectedPresent = new CollectedPresent();
+	// 		collectedPresent.type = ECollectableType.presentD;
+	// 		collectedPresent.contents = id;
+	// 		collectedPresent.hasBeenOpened = true;
+	// 		collectedPresent.amount = amount;
+	// 		currentWaveSpoils.presents.Add(collectedPresent);
+	// 		Singleton<PlayStatistics>.Instance.data.AddLoot(id, amount);
+	// 	}
+	// }
 
 	public void BankAllResources()
 	{
 		Singleton<Profile>.Instance.ForceActiveSaveData(false);
 		Singleton<Profile>.Instance.AddCoins(currentWaveSpoils.coins, "Collectables");
-		Singleton<Profile>.Instance.AddGems(currentWaveSpoils.gems, "Collectables");
-		Singleton<Profile>.Instance.souls += currentWaveSpoils.souls;
-		Singleton<Profile>.Instance.pachinkoBalls += currentWaveSpoils.balls;
-		OpenPresents(false);
-		foreach (CollectedPresent present in currentWaveSpoils.presents)
-		{
-			int amount = present.amount;
-			if (CashIn.From(present.contents, amount, "Present"))
-			{
-			}
-		}
+		// Singleton<Profile>.Instance.souls += currentWaveSpoils.souls;
+		Singleton<Profile>.Instance.pachinkoBalls += currentWaveSpoils.pachinkoBalls;
+		// OpenPresents(false);
+		// foreach (CollectedPresent present in currentWaveSpoils.presents)
+		// {
+		// 	int amount = present.amount;
+		// 	if (CashIn.From(present.contents, amount, "Present"))
+		// 	{
+		// 	}
+		// }
 		Singleton<Profile>.Instance.ForceActiveSaveData(true);
 	}
 

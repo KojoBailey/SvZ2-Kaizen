@@ -1218,7 +1218,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		{
 			if ((Singleton<Profile>.Instance.wave_SinglePlayerGame > 1 || Singleton<Profile>.Instance.GetWaveLevel(1) > 1) && !mReviveOfferDismissed)
 			{
-				WeakGlobalInstance<CollectableManager>.Instance.OpenPresents(true);
+				// WeakGlobalInstance<CollectableManager>.Instance.OpenPresents(true);
 				GluiActionSender.SendGluiAction("POPUP_REVIVE", base.gameObject, null);
 				return;
 			}

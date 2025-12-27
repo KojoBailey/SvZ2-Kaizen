@@ -330,18 +330,16 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		if (waveRootData.Rewards != null && Singleton<Profile>.Instance.GetWaveLevel(mWaveIndex) == 1)
 		{
 			WeakGlobalInstance<CollectableManager>.Instance.GiveResource(ECollectableType.copperCoin, waveRootData.Rewards.coins); // [TODO] support all coin types
-			WeakGlobalInstance<CollectableManager>.Instance.GiveResource(ECollectableType.gem, waveRootData.Rewards.gems);
-			WeakGlobalInstance<CollectableManager>.Instance.GiveResource(ECollectableType.pachinkoball, waveRootData.Rewards.pachinkoBalls);
-			WeakGlobalInstance<CollectableManager>.Instance.GiveResource(ECollectableType.soul, waveRootData.Rewards.souls);
-			WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("revivePotion", waveRootData.Rewards.revive);
-			WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("power", waveRootData.Rewards.power);
-			WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("luck", waveRootData.Rewards.luck);
-			WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("friendship", waveRootData.Rewards.friendship);
-			WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("wealth", waveRootData.Rewards.wealth);
-			WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("haste", waveRootData.Rewards.haste);
-			WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("peace", waveRootData.Rewards.peace);
-			WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("healthPotion", waveRootData.Rewards.sushi);
-			WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("leadershipPotion", waveRootData.Rewards.tea);
+			WeakGlobalInstance<CollectableManager>.Instance.GiveResource(ECollectableType.pachinkoBall, waveRootData.Rewards.pachinkoBalls);
+			// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("revivePotion", waveRootData.Rewards.revive);
+			// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("power", waveRootData.Rewards.power);
+			// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("luck", waveRootData.Rewards.luck);
+			// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("friendship", waveRootData.Rewards.friendship);
+			// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("wealth", waveRootData.Rewards.wealth);
+			// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("haste", waveRootData.Rewards.haste);
+			// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("peace", waveRootData.Rewards.peace);
+			// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("healthPotion", waveRootData.Rewards.sushi);
+			// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("leadershipPotion", waveRootData.Rewards.tea);
 		}
 	}
 
