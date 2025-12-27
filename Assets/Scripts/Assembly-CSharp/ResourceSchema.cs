@@ -5,9 +5,6 @@ using UnityEngine;
 [DataBundleClass(Category = "Design")]
 public class ResourceSchema
 {
-    // [DataBundleKey]
-    // public string id;
-
     [DataBundleKey]
     public ECollectableType type;
 
