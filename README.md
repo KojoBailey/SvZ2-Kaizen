@@ -14,6 +14,7 @@ Below is a list of changes that have already been implemented, at least partiall
 - A very limited costume select has been added, currently allowing switching between normal and gold outfits for Heroes.
 - Glu Coins are on track to be abolished, with prices replaced with normal coins.
 - Resources dropped from enemies in general will now be auto-collected, as if you always have a Wealth Charm active.
+  - You will also gain them immediately upon collection, instead of after their disappearing animation finishes.
 - Premium Heroes are no longer locked behind a paywall, and are instead integrated into the game's progression like the other Heroes.
 - Rebalancing is being done to everything so as to make the game more strategic and challenging.
 - Characters have been renamed, either for accuracy or to lean heavier into the theme of feudal Japan.
