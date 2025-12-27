@@ -187,7 +187,9 @@ public class EquipPageWaves : EquipPage, UIHandlerComponent
 			}
 			if (mTimesCompleted != null)
 			{
-				mTimesCompleted.Text = string.Format(StringUtils.GetStringFromStringRef("MenuFixedStrings.Menu_MPCollectionTally"), Singleton<Profile>.Instance.GetWaveCompletionCount(mSelectedWave) - 1);
+				int waveCompletionCount = Singleton<Profile>.Instance.GetWaveCompletionCount(mSelectedWave) - 1;
+				mTimesCompleted.Text = string.Format(
+					StringUtils.GetStringFromStringRef("MenuFixedStrings.Menu_MPCollectionTally"), waveCompletionCount);
 			}
 		}
 	}

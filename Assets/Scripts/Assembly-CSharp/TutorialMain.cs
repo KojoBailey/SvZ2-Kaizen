@@ -25,8 +25,7 @@ public class TutorialMain : SingletonMonoBehaviour<TutorialMain>, IGluiActionHan
 
 	public bool IsTutorialNeeded(string tutorialName)
 	{
-		// return !Singleton<Profile>.Instance.IsTutorialDone("Passive", tutorialName);
-		return false;
+		return !Singleton<Profile>.Instance.IsTutorialDone("Passive", tutorialName);
 	}
 
 	private bool IsTutorialNeeded(TutorialSchema record)
@@ -62,8 +61,7 @@ public class TutorialMain : SingletonMonoBehaviour<TutorialMain>, IGluiActionHan
 
 	public bool TutorialStartIfNeeded(string name)
 	{
-		// return TutorialStartIfNeeded(GetTutorialRecord(name));
-		return false;
+		return TutorialStartIfNeeded(GetTutorialRecord(name));
 	}
 
 	private bool TutorialStartIfNeeded(TutorialSchema record)
@@ -78,7 +76,7 @@ public class TutorialMain : SingletonMonoBehaviour<TutorialMain>, IGluiActionHan
 
 	public void StartTutorial(string name)
 	{
-		// TutorialStart(GetTutorialRecord(name));
+		TutorialStart(GetTutorialRecord(name));
 	}
 
 	private void TutorialStart(TutorialSchema record)
@@ -105,7 +103,7 @@ public class TutorialMain : SingletonMonoBehaviour<TutorialMain>, IGluiActionHan
 
 	public void TutorialDone()
 	{
-		// TutorialDone(GetCurrentTutorial());
+		TutorialDone(GetCurrentTutorial());
 	}
 
 	private void TutorialDone(TutorialSchema record)

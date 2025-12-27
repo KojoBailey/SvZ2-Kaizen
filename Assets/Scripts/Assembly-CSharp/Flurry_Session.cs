@@ -100,11 +100,11 @@ public class Flurry_Session
 		}
 		if (!Singleton<Profile>.Instance.IsInDailyChallenge)
 		{
-			if (Singleton<Profile>.Instance.CurrentStoryWave == 1 && Singleton<Profile>.Instance.GetWaveCompletionCount(1) == 1)
+			if (Singleton<Profile>.Instance.CurrentStoryWave == 1 && Singleton<Profile>.Instance.GetIsWaveUnlocked(1))
 			{
 				Singleton<Profile>.Instance.ForceOnboardingStage("OnboardingStep7_CompleteWave1");
 			}
-			else if (Singleton<Profile>.Instance.CurrentStoryWave == 2 && Singleton<Profile>.Instance.GetWaveCompletionCount(2) == 1)
+			else if (Singleton<Profile>.Instance.CurrentStoryWave == 2 && Singleton<Profile>.Instance.GetIsWaveUnlocked(2))
 			{
 				Singleton<Profile>.Instance.ForceOnboardingStage("OnboardingStep19_CompleteWave2");
 			}
@@ -204,12 +204,31 @@ public class Flurry_Session
 		int waveAttemptCount = Singleton<Profile>.Instance.GetWaveAttemptCount(currentWave);
 		string text = SortAndSeparate(Singleton<Profile>.Instance.GetSelectedHelpers(), ",");
 		string text2 = SortAndSeparate(Singleton<Profile>.Instance.GetSelectedAbilities(), ",");
-		Singleton<Analytics>.Instance.LogEvent(eventName, new KeyValuePair<string, object>("WaveNumber", currentWave), new KeyValuePair<string, object>("AttemptNumber", waveAttemptCount), new KeyValuePair<string, object>("Hero", Singleton<Profile>.Instance.CurrentHeroId), new KeyValuePair<string, object>("Allies", text), new KeyValuePair<string, object>("Abilities", text2), new KeyValuePair<string, object>("Charms", WeakGlobalMonoBehavior<InGameImpl>.Instance.activeCharm));
+		Singleton<Analytics>.Instance.LogEvent(
+			eventName,
+			new KeyValuePair<string, object>("WaveNumber", currentWave),
+			new KeyValuePair<string, object>("AttemptNumber", waveAttemptCount),
+			new KeyValuePair<string, object>("Hero", Singleton<Profile>.Instance.CurrentHeroId),
+			new KeyValuePair<string, object>("Allies", text),
+			new KeyValuePair<string, object>("Abilities", text2),
+			new KeyValuePair<string, object>("Charms", WeakGlobalMonoBehavior<InGameImpl>.Instance.activeCharm)
+		);
 		if (waveAttemptCount == 1)
 		{
 			Singleton<Analytics>.Instance.LogEvent("WaveStartedForFirstTime", new KeyValuePair<string, object>("WaveNumber", currentWave));
 		}
-		string st = ((!Singleton<Profile>.Instance.IsInDailyChallenge) ? "MISSION_START" : "DAILY_CHALLENGE_START");
-		Singleton<Analytics>.Instance.KontagentEvent(currentWave.ToString(), st, Singleton<Profile>.Instance.CurrentHeroId, Singleton<Profile>.Instance.CurrentStoryWave, waveAttemptCount, Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()), Analytics.KParam("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon.ToString()), Analytics.KParam("Allies", text), Analytics.KParam("Abilities", text2), Analytics.KParam("Charm", WeakGlobalMonoBehavior<InGameImpl>.Instance.activeCharm));
+		string st = (!Singleton<Profile>.Instance.IsInDailyChallenge) ? "MISSION_START" : "DAILY_CHALLENGE_START";
+		Singleton<Analytics>.Instance.KontagentEvent(
+			currentWave.ToString(),
+			st,
+			Singleton<Profile>.Instance.CurrentHeroId,
+			Singleton<Profile>.Instance.CurrentStoryWave,
+			waveAttemptCount,
+			Analytics.KParam("PlayerLevel", Singleton<Profile>.Instance.playerLevel.ToString()),
+			Analytics.KParam("MPWavesWon", Singleton<Profile>.Instance.mpWavesWon.ToString()),
+			Analytics.KParam("Allies", text),
+			Analytics.KParam("Abilities", text2),
+			Analytics.KParam("Charm", WeakGlobalMonoBehavior<InGameImpl>.Instance.activeCharm)
+		);
 	}
 }

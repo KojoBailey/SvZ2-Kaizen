@@ -18,8 +18,6 @@ public class Profile : Singleton<Profile>
 	public const string kDailyChallengeLeaderboard = "SAMUZOMBIE2_DAILY_CHALLENGE";
 	public const string kMultiplayerLeaderboard = "SAMUZOMBIE2_MP_WINS";
 
-	public const string kWavePrefix = "Wave_";
-
 	protected int mPlayerAttackRating;
 	protected int[] mAttackRatingCategory = new int[14];
 
@@ -186,7 +184,7 @@ public class Profile : Singleton<Profile>
 
 	public bool wasBasicGameBeaten
 	{
-		get { return GetWaveCompletionCount(maxBaseWave) > 1; }
+		get { return HasWaveBeenCompleted(maxBaseWave); }
 	}
 
 	public DateTime timeStamp
@@ -257,7 +255,7 @@ public class Profile : Singleton<Profile>
 
 	public bool tutorialIsComplete
 	{
-		get { return GetWaveCompletionCount(3) > 0; }
+		get { return GetIsWaveUnlocked(3); }
 	}
 
 	public bool hasReportedUser
@@ -439,7 +437,7 @@ public class Profile : Singleton<Profile>
 		get
 		{
 			PlayModeSchema selectedModeData = Singleton<PlayModesManager>.Instance.selectedModeData;
-			return Singleton<Profile>.Instance.highestUnlockedWave > selectedModeData.maxBaseWave || GetWaveCompletionCount(selectedModeData.maxBaseWave) > 1;
+			return Singleton<Profile>.Instance.highestUnlockedWave > selectedModeData.maxBaseWave || HasWaveBeenCompleted(selectedModeData.maxBaseWave);
 		}
 	}
 
@@ -471,7 +469,7 @@ public class Profile : Singleton<Profile>
 
 	public bool DoesWaveAllowBow
 	{
-		get { return Singleton<Profile>.Instance.WaveToPlay > 1 || Singleton<Profile>.Instance.GetWaveCompletionCount(1) > 1; }
+		get { return Singleton<Profile>.Instance.WaveToPlay > 1 || Singleton<Profile>.Instance.HasWaveBeenCompleted(1); }
 	}
 
 	public bool IsInMultiplayerWave
@@ -486,6 +484,11 @@ public class Profile : Singleton<Profile>
 	{
 		get { return (string)SingletonSpawningMonoBehaviour<GluiPersistentDataCache>.Instance.GetData("GAME_MODE") == "Button_DailyChallenge"; }
 	}
+	public bool IsInStoryWave
+	{
+		get { return (string)SingletonSpawningMonoBehaviour<GluiPersistentDataCache>.Instance.GetData("GAME_MODE") == "Button_Story"; }
+	}
+
 
 	public SDFTreeSaveProvider ActiveSavedData
 	{
@@ -553,36 +556,10 @@ public class Profile : Singleton<Profile>
 		get { return GetMeleeWeaponLevel(CurrentHeroId); }
 		set { SetMeleeWeaponLevel(CurrentHeroId, value); }
 	}
-	public string SwordId
-	{
-		get
-		{
-			string value = mSavedData.GetValue("SwordId", playModeSubSection);
-			if (value == string.Empty)
-			{
-				return Singleton<PlayModesManager>.Instance.selectedModeData.defaultMeleeWeaponID;
-			}
-			return value;
-		}
-		set { mSavedData.SetValue("SwordId", value, playModeSubSection); }
-	}
 	public int BowLevel
 	{
 		get { return GetRangedWeaponLevel(CurrentHeroId); }
 		set { SetRangedWeaponLevel(CurrentHeroId, value); }
-	}
-	public string BowId
-	{
-		get
-		{
-			string value = mSavedData.GetValue("BowId", playModeSubSection);
-			if (value == string.Empty)
-			{
-				return Singleton<PlayModesManager>.Instance.selectedModeData.defaultRangeWeaponID;
-			}
-			return value;
-		}
-		set { mSavedData.SetValue("BowId", value, playModeSubSection); }
 	}
 	public int armorLevel
 	{
@@ -1900,15 +1877,15 @@ public class Profile : Singleton<Profile>
 
 	public bool GetIsWaveUnlocked(int waveIndex)
 	{
-		return mSavedData.GetDictionaryValue<bool>("wavesUnlocked", kWavePrefix + waveIndex, playModeSubSection);
+		return GetIsWaveUnlocked(waveIndex, playModeSubSection);
 	}
 	public bool GetIsWaveUnlocked(int waveIndex, string playMode)
 	{
-		return mSavedData.GetDictionaryValue<bool>("wavesUnlocked", kWavePrefix + waveIndex, playMode);
+		return mSavedData.GetDictionaryValue<bool>("wavesUnlocked", "w" + waveIndex, playMode);
 	}
 	public void SetIsWaveUnlocked(int waveIndex, bool isWaveUnlocked)
 	{
-		mSavedData.SetDictionaryValue("waveCompletionCounts", kWavePrefix + waveIndex, isWaveUnlocked, playModeSubSection);
+		mSavedData.SetDictionaryValue("wavesUnlocked", "w" + waveIndex, isWaveUnlocked, playModeSubSection);
 
 		if (waveIndex > mHighestUnlockedWave)
 		{
@@ -1918,17 +1895,17 @@ public class Profile : Singleton<Profile>
 
 	public int GetWaveCompletionCount(int waveIndex)
 	{
-		return mSavedData.GetDictionaryValue<int>("waveCompletionCounts", kWavePrefix + waveIndex, playModeSubSection);
+		return GetWaveCompletionCount(waveIndex, playModeSubSection);
 	}
 	public int GetWaveCompletionCount(int waveIndex, string playMode)
 	{
-		return mSavedData.GetDictionaryValue<int>("waveCompletionCounts", kWavePrefix + waveIndex, playMode);
+		return mSavedData.GetDictionaryValue<int>("waveCompletionCounts", "w" + waveIndex, playMode);
 	}
 	public void SetWaveCompletionCount(int waveIndex, int completionCount)
 	{
 		if (GetWaveCompletionCount(waveIndex) >= completionCount) return;
 
-		mSavedData.SetDictionaryValue("waveCompletionCounts", kWavePrefix + waveIndex, completionCount, playModeSubSection);
+		mSavedData.SetDictionaryValue("waveCompletionCounts", "w" + waveIndex, completionCount, playModeSubSection);
 
 		if (waveIndex == maxBaseWave && completionCount == 1)
 		{
@@ -1942,7 +1919,7 @@ public class Profile : Singleton<Profile>
 
 	public bool HasWaveBeenCompleted(int waveIndex)
 	{
-		return GetWaveCompletionCount(waveIndex) >= 1;
+		return GetWaveCompletionCount(waveIndex) >= 2;
 	}
 
 	public void GoToNextWave()
@@ -1969,7 +1946,7 @@ public class Profile : Singleton<Profile>
 		mHighestUnlockedWave = 1;
 		for (int i = 1; i <= 999; i++)
 		{
-			if (GetWaveCompletionCount(i) == 0)
+			if (!GetIsWaveUnlocked(i))
 			{
 				mHighestUnlockedWave = Mathf.Max(1, i - 1);
 				return;
@@ -1980,17 +1957,17 @@ public class Profile : Singleton<Profile>
 
 	public int GetWaveAttemptCount(int waveIndex)
 	{
-		return mSavedData.GetDictionaryValue<int>("waveAttemptCounts", kWavePrefix + waveIndex, playModeSubSection);
+		return GetWaveAttemptCount(waveIndex, playModeSubSection);
 	}
 
 	public int GetWaveAttemptCount(int waveIndex, string playMode)
 	{
-		return mSavedData.GetDictionaryValue<int>("waveAttemptCounts", kWavePrefix + waveIndex, playMode);
+		return mSavedData.GetDictionaryValue<int>("waveAttemptCounts", "w" + waveIndex, playMode);
 	}
 
 	public void IncrementWaveAttemptCount(int waveIndex)
 	{
-		mSavedData.SetDictionaryValue("waveAttemptCounts", kWavePrefix + waveIndex, GetWaveAttemptCount(waveIndex) + 1, playModeSubSection);
+		mSavedData.SetDictionaryValue("waveAttemptCounts", "w" + waveIndex, GetWaveAttemptCount(waveIndex) + 1, playModeSubSection);
 	}
 
 	public int GetMPWaveAttemptCount(string mpMission)
@@ -2195,7 +2172,7 @@ public class Profile : Singleton<Profile>
 			}
 		}
 		CalcHighestWave();
-		if (highestUnlockedWave == 50 && GetWaveCompletionCount(50) > 1)
+		if (highestUnlockedWave == 50 && HasWaveBeenCompleted(50))
 		{
 			CurrentStoryWave = 51;
 		}
@@ -2281,7 +2258,7 @@ public class Profile : Singleton<Profile>
 	{
 		int num = CurrentStoryWave;
 		int valueInt = mSavedData.GetValueInt("waveRecycle");
-		if (GetWaveCompletionCount(num) != 0)
+		if (GetIsWaveUnlocked(num))
 		{
 			return;
 		}
@@ -2310,7 +2287,7 @@ public class Profile : Singleton<Profile>
 	public void UpgradeToExtraWaves()
 	{
 		int num = highestUnlockedWave;
-		if (GetWaveCompletionCount(num) > 1)
+		if (HasWaveBeenCompleted(num))
 		{
 			int recordTableLength = DataBundleRuntime.Instance.GetRecordTableLength(typeof(WaveSchema), "Waves");
 			if (num + 1 < recordTableLength)

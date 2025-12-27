@@ -54,23 +54,11 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 		mCenterX = centerX;
 		currentWaveSpoils = new WaveSpoils();
 
-		if (/*WeakGlobalMonoBehavior<InGameImpl>.Instance.HasWealthCharm()*/ true)
-		{
-			CharmSchema charmSchema = Singleton<CharmsDatabase>.Instance["wealth"];
-			magnetMaxDist = charmSchema.magnetRange;
-			magnetMinSpeed = charmSchema.magnetMinPullSpeed;
-			magnetMaxSpeed = charmSchema.magnetMaxPullSpeed;
-		}
-		else
-		{
-			magnetMaxDist = 0f;
-			magnetMinSpeed = 0f;
-			magnetMaxSpeed = 0f;
-		}
-		
-		// TextDBSchema[] array = (!Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive()) ? DataBundleUtils.InitializeRecords<TextDBSchema>("resources") : DataBundleUtils.InitializeRecords<TextDBSchema>("resources_MP");
-
-		// if (array == null) return;
+		// Enable wealth charm effects by default.
+		CharmSchema charmSchema = Singleton<CharmsDatabase>.Instance["wealth"];
+		magnetMaxDist = charmSchema.magnetRange;
+		magnetMinSpeed = charmSchema.magnetMinPullSpeed;
+		magnetMaxSpeed = charmSchema.magnetMaxPullSpeed;
 
 		mResourceSchemas = DataBundleUtils.InitializeRecords<ResourceSchema>("Resources");
 		if (mResourceSchemas == null)

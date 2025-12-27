@@ -47,11 +47,11 @@ public class StoreMenuImpl : SingletonMonoBehaviour<StoreMenuImpl>, IGluiActionH
 		{
 			FrontEnd_HUD.SetDefenseRatingMode(false);
 		}
-		if (Singleton<Profile>.Instance.CurrentStoryWave == 2 && Singleton<Profile>.Instance.GetWaveCompletionCount(2) == 1)
+		if (Singleton<Profile>.Instance.CurrentStoryWave == 2 && Singleton<Profile>.Instance.GetIsWaveUnlocked(2))
 		{
 			Singleton<Profile>.Instance.ForceOnboardingStage("OnboardingStep8_StoreTutorial");
 		}
-		else if (Singleton<Profile>.Instance.CurrentStoryWave == 3 && Singleton<Profile>.Instance.GetWaveCompletionCount(3) == 1 && !Singleton<Profile>.Instance.IsOnboardingStageComplete("OnboardingStep20_StoreMain2"))
+		else if (Singleton<Profile>.Instance.CurrentStoryWave == 3 && Singleton<Profile>.Instance.GetIsWaveUnlocked(3) && !Singleton<Profile>.Instance.IsOnboardingStageComplete("OnboardingStep20_StoreMain2"))
 		{
 			Singleton<Profile>.Instance.ForceOnboardingStage("OnboardingStep20_StoreMain2");
 			if (PortableQualitySettings.GetQuality() != EPortableQualitySetting.Low)
@@ -224,24 +224,16 @@ public class StoreMenuImpl : SingletonMonoBehaviour<StoreMenuImpl>, IGluiActionH
 
 	private void Update()
 	{
-		UpdateTapJoyPoints(base.gameObject);
 		if (SingletonSpawningMonoBehaviour<GluIap>.Instance._storeNeedsRefresh)
 		{
 			SingletonSpawningMonoBehaviour<GluIap>.Instance.refreshRecommendations();
 		}
-		if (!tapjoyOpen && TapjoyInterface.InterfaceIsOpen())
-		{
-			tapjoyOpen = true;
-		}
-		else if (tapjoyOpen && !Tapjoy.isOfferwallOpen)
-		{
-			tapjoyOpen = false;
-			ApplicationUtilities.MakePlayHavenContentRequest("tj_closed");
-		}
+
 		if (ApplicationUtilities.PlayHavenGameLaunchQueued)
 		{
 			ApplicationUtilities.MakePlayHavenContentRequest("game_launch");
 		}
+
 		Singleton<Achievements>.Instance.Update();
 	}
 

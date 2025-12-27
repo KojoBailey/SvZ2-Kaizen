@@ -239,9 +239,6 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		}
 	}
 
-	[method: MethodImpl(32)]
-	public event OnLegionCallback onLegionStart;
-
 	public WaveManager(
 		WaveType waveType,
 		int waveIndex,
@@ -324,7 +321,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	public void AddSpecialRewardsToCollectables()
 	{
-		if (waveRootData.Rewards != null && Singleton<Profile>.Instance.GetWaveCompletionCount(mWaveIndex) == 1)
+		if (waveRootData.Rewards != null && Singleton<Profile>.Instance.GetIsWaveUnlocked(mWaveIndex))
 		{
 			WeakGlobalInstance<CollectableManager>.Instance.GiveResource(ECollectableType.copperCoin, waveRootData.Rewards.coins); // [TODO] support all coin types
 			WeakGlobalInstance<CollectableManager>.Instance.GiveResource(ECollectableType.pachinkoBall, waveRootData.Rewards.pachinkoBalls);
@@ -487,7 +484,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		if (mWaveIndex <= selectedModeData.maxBaseWave)
 		{
 			int num = Singleton<Profile>.Instance.GetWaveCompletionCount(mWaveIndex);
-			if (num >= 2)
+			if (Singleton<Profile>.Instance.HasWaveBeenCompleted(mWaveIndex))
 			{
 				float @float = Singleton<Config>.Instance.data.GetFloat(TextDBSchema.ChildKey("waveLevelMultipliers", "enemiesHealth"));
 				float float2 = Singleton<Config>.Instance.data.GetFloat(TextDBSchema.ChildKey("waveLevelMultipliers", "enemiesDamages"));

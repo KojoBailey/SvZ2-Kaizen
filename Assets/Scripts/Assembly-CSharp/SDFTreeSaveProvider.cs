@@ -42,7 +42,7 @@ public class SDFTreeSaveProvider : SaveProvider
 	{
 		if (dataStream == null)
 		{
-			UnityEngine.Debug.LogError("SDFTreeSaveProvider.Read: dataStream is null");
+			UnityEngine.Debug.LogWarning("SDFTreeSaveProvider.Read: dataStream is null");
 			return false;
 		}
 

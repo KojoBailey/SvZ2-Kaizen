@@ -67,7 +67,7 @@ public class EquipPageAllies : EquipPage, UIHandlerComponent
 			list = Singleton<Profile>.Instance.dailyChallengeHelpers;
 			mAlliesSelectionRequired = true;
 		}
-		else if (Singleton<Profile>.Instance.CurrentStoryWave == 2 && Singleton<Profile>.Instance.GetWaveCompletionCount(2) == 1 && !Singleton<Profile>.Instance.IsInMultiplayerWave)
+		else if (Singleton<Profile>.Instance.CurrentStoryWave == 2 && Singleton<Profile>.Instance.GetIsWaveUnlocked(2) && !Singleton<Profile>.Instance.IsInMultiplayerWave)
 		{
 			list = new List<string>(new string[1] { "Farmer" });
 			mAlliesSelectionRequired = true;

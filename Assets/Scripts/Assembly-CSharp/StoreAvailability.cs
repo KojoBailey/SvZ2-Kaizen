@@ -535,7 +535,6 @@ public class StoreAvailability
 			item.unlockCondition = string.Format(StringUtils.GetStringFromStringRef("LocalizedStrings", "store_unlockatwave"), item.unlockAtWave);
 		}
 		float salePercentage = SaleItemSchema.FindActiveSaleForItem("VillageArchers");
-		int costCoins = data2.costCoins;
 		item.cost = new Cost(data2.costCoins, Cost.Currency.Coin, salePercentage);
 		string stringFromStringRef = StringUtils.GetStringFromStringRef("LocalizedStrings", "village_archers_name");
 		if (Singleton<Profile>.Instance.archerLevel == 0)

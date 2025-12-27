@@ -1064,7 +1064,7 @@ public class Hero : Character
 	{
 		DestroyMeleeWeaponPrefabs();
 		WeaponSchema meleeWeapon = mainData.MeleeWeapon;
-		List<GameObject> list = new List<GameObject>();
+		var list = new List<GameObject>();
 		int level = Singleton<Profile>.Instance.SwordLevel;
 		if (base.ownerId != 0)
 		{

@@ -73,7 +73,6 @@ public static class Mathfx
 		float num = 0f;
 		float num2 = 360f;
 		float num3 = Mathf.Abs((num2 - num) / 2f);
-		float num4 = 0f;
 		float num5 = 0f;
 		if (end - start < 0f - num3)
 		{

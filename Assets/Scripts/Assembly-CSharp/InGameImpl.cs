@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
@@ -313,6 +314,27 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		get { return mTagAbilityID; }
 	}
 
+	public Profile ProfileData
+	{
+		get { return Singleton<Profile>.Instance; }
+	}
+
+	public int CurrentWave
+	{
+		get { return ProfileData.CurrentStoryWave; }
+	}
+
+	public int DefenderIndex
+	{
+		get { return (ProfileData.IsInVSMultiplayerWave && Singleton<PlayModesManager>.Instance.Attacking) ? 1 : 0; }
+	}
+
+	private List<float> enemyGateZPositions = new List<float>();
+
+	private List<string> adhocHelpers = new List<string>();
+
+	private List<string> allEnemyKeys = new List<string>();
+
 	private void Awake()
 	{
 		SetUniqueInstance(this);
@@ -327,121 +349,119 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	private IEnumerator Start()
 	{
-		while (!Singleton<Profile>.Instance.Initialized) yield return null;
+		while (!ProfileData.Initialized) yield return null;
 
 		ApplicationUtilities._allowAutoSave = true;
 		ResourceCache.DefaultCacheLevel = 1;
 		Singleton<Achievements>.Instance.SuppressPartialReporting(true);
 
-		fireworksResource = ResourceCache.GetCachedResource("FX/Fireworks", 1).Resource as GameObject;
-
-		int currentWave = Singleton<Profile>.Instance.CurrentStoryWave;
-
-		if (!Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive() && !Singleton<Profile>.Instance.IsInDailyChallenge)
+		// [TUTORIAL]
+		if (ProfileData.IsInStoryWave)
 		{
-			if (currentWave == 2 && Singleton<Profile>.Instance.GetWaveCompletionCount(2) == 1)
+			if (CurrentWave == 1 && !ProfileData.HasWaveBeenCompleted(1))
 			{
-				Singleton<Profile>.Instance.SetSelectedHelpers(new List<string>(new string[1] { "Farmer" }));
-				Singleton<Profile>.Instance.ForceOnboardingStage("OnboardingStep17_StartWave2");
-			}
-			else if (currentWave == 1 && Singleton<Profile>.Instance.GetWaveCompletionCount(1) == 1)
-			{
-				Singleton<Profile>.Instance.ForceOnboardingStage("OnboardingStep3_StartWave1");
+				ProfileData.ForceOnboardingStage("OnboardingStep3_StartWave1");
 				ApplicationUtilities.MakePlayHavenContentRequest("tutorial_start");
 			}
+			
+			if (CurrentWave == 2 && !ProfileData.HasWaveBeenCompleted(2))
+			{
+				ProfileData.SetSelectedHelpers(new List<string>(new string[1] { "Farmer" }));
+				ProfileData.ForceOnboardingStage("OnboardingStep17_StartWave2");
+			}
 		}
-
-		// LoadingScreen.LogStep("InGame Start BEGIN");
-		List<string> helpersToLoad = new List<string>();
-
-		if (currentWave == 1 && Singleton<Profile>.Instance.GetWaveCompletionCount(1) == 1)
+		if (CurrentWave == 1 && !ProfileData.HasWaveBeenCompleted(1))
 		{
 			WeakGlobalMonoBehavior<HUD>.Instance.alliesEnabled = false;
 			StartCoroutine(CheckForHeroMovement());
 			StartCoroutine(CheckForHeroAttack());
 
-			Singleton<Profile>.Instance.SetSelectedAbilities(new List<string>(new string[1] { "KatanaSlash" }));
+			ProfileData.SetSelectedAbilities(new List<string>(new string[1] { "KatanaSlash" }));
 			WeakGlobalMonoBehavior<HUD>.Instance.ResetAbilities();
 			WeakGlobalMonoBehavior<HUD>.Instance.abilitiesEnabled = true;
 			StartCoroutine(CheckForKatanaSlashUse());
 		}
 
+		InitializeHelpersAndAbilities();
+
+		UpdatePlayStatistics();
+
+		Profile.UpdatePlayMode();
+
+		mGameDirection = Singleton<PlayModesManager>.Instance.gameDirection;
+
+		InitializeWaveManager();
+		mCharactersManager = new CharactersManager();
+		mRailManager = new RailManager();
+		mProjectileManager = new ProjectileManager();
+		mShaderManager = new ProceduralShaderManager();
+		mCollectableManager = new CollectableManager(
+			heroWalkLeftEdge.position.z + 0.16f,
+			heroWalkRightEdge.position.z - 0.16f,
+			heroSpawnPoint.position.x
+		);
+
+		mBell = new Bell(bellRingerLocationObject, bellLocationObject, DefenderIndex);
+		mPit = new Pit(pitArea, DefenderIndex);
+		mVillageArchers = new VillageArchers();
+		InitializeGates();
+		InitializeHeroes();
+		InitializeEnemies();
+		InitializeLeadership();
+		InitializeSouls();
+
+		ApplyInitialCharmEffects();
+
+		mCameraYOffset = gameCamera.transform.position.y - heroSpawnPointLeft.transform.position.y;
+		RenderSettings.fog = false;
+
+		BeginWaveMusic();
+
+		WeakGlobalMonoBehavior<HUD>.Instance.Init();
+
+		WeakGlobalMonoBehavior<BannerManager>.Instance.Init();
+
+		SingletonMonoBehaviour<TutorialMain>.Instance.Init();
+		StartCoroutine(CheckTutorials());
+
+		RunAfterDelay(delegate {
+			WeakGlobalMonoBehavior<BannerManager>.Instance.OpenBanner(new BannerStartWave(5f, ProfileData.WaveToPlay));
+		}, 2f);
+
+		IncrementWaveAttempts();
+
+		LogInitializationData();
+
+		CacheResources();
+
+		InitializeTimers();
+
+		Singleton<PlayerWaveEventData>.Instance.StartWave();
+
+		Shader.WarmupAllShaders();
+		MemoryWarningHandler.Instance.unloadOnMemoryWarning = true;
+		AdjustEffectQuality();
+	}
+
+	private void InitializeHelpersAndAbilities()
+	{
 		List<string> abilitiesToLoad = new List<string>();
-		foreach (string ability in Singleton<Profile>.Instance.GetSelectedAbilities())
+		foreach (string ability in ProfileData.GetSelectedAbilities())
 		{
 			abilitiesToLoad.Add(ability);
 		}
 
-		activeCharm = Singleton<Profile>.Instance.selectedCharm;
-		if (!string.IsNullOrEmpty(activeCharm))
-		{
-			CharmSchema charm = Singleton<CharmsDatabase>.Instance[activeCharm];
-			string helperName = FriendshipHelperID;
-			string abilityName = DataBundleRuntime.RecordKey(charm.abilityToActivate.Key.ToString());
-			if (!string.IsNullOrEmpty(helperName) || !string.IsNullOrEmpty(abilityName))
-			{
-				List<string> currentAbilities = Singleton<Profile>.Instance.GetSelectedAbilities();
-				if (!string.IsNullOrEmpty(abilityName))
-				{
-					currentAbilities.Add(abilityName);
-				}
-				else
-				{
-					currentAbilities.Add("ActiveCharm");
-				}
-				Singleton<Profile>.Instance.SetSelectedAbilities(currentAbilities);
-				if (!string.IsNullOrEmpty(helperName) && !helpersToLoad.Contains(helperName))
-				{
-					helpersToLoad.Add(helperName);
-				}
-				if (!string.IsNullOrEmpty(abilityName) && !abilitiesToLoad.Contains(abilityName))
-				{
-					abilitiesToLoad.Add(abilityName);
-				}
-			}
-		}
+		List<string> helpersToLoad = new List<string>();
 
-		if (Singleton<Profile>.Instance.GetSelectedAbilities().Contains("DivineIntervention") && Singleton<Profile>.Instance.GetSelectedHelpers().FindIndex((string s) => !Singleton<HelpersDatabase>.Instance[s].unique) < 0)
-		{
-			helpersToLoad.Add("Farmer");
-		}
-		foreach (string helper in Singleton<Profile>.Instance.GetSelectedHelpers())
-		{
-			if (!helpersToLoad.Contains(helper))
-			{
-				helpersToLoad.Add(helper);
-			}
-		}
-
-		if (Singleton<Profile>.Instance.IsInVSMultiplayerWave)
-		{
-			foreach (string ability2 in Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.abilityIdList)
-			{
-				if (!string.IsNullOrEmpty(ability2) && abilitiesToLoad.Contains(ability2))
-				{
-					abilitiesToLoad.Add(ability2);
-				}
-			}
-			string[] aiHelpers = Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.GetSelectedHelperIDs();
-			string[] array = aiHelpers;
-			foreach (string helper2 in array)
-			{
-				if (!string.IsNullOrEmpty(helper2) && !helpersToLoad.Contains(helper2))
-				{
-					helpersToLoad.Add(helper2);
-				}
-			}
-		}
-		Singleton<CharmsDatabase>.Instance.LoadInGameData(Singleton<Profile>.Instance.selectedCharm, true);
-		LoadingScreen.LogStep("CharmsDatabase.Instance.LoadInGameData");
-		if (Singleton<Profile>.Instance.selectedCharm == "TagTeam")
+		Singleton<CharmsDatabase>.Instance.LoadInGameData(activeCharm, true);
+		if (activeCharm == "TagTeam")
 		{
 			List<string> possibleTag = new List<string>();
 			string[] tagHeroes = new string[3] { "HeroBalanced", "HeroAttack", "HeroDefense" };
-			string[] array2 = tagHeroes;
-			foreach (string hero in array2)
+			foreach (string hero in tagHeroes)
 			{
-				if (Singleton<Profile>.Instance.CurrentHeroId != hero && (!Singleton<Profile>.Instance.IsInMultiplayerWave || Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.CurrentHeroId != hero))
+				bool isMultiplayerOpponentDifferentHero = ProfileData.MultiplayerData.CurrentOpponent.loadout.CurrentHeroId != hero;
+				if (ProfileData.CurrentHeroId != hero && (!ProfileData.IsInMultiplayerWave || isMultiplayerOpponentDifferentHero))
 				{
 					possibleTag.Add(hero);
 				}
@@ -464,31 +484,95 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 			{
 				abilitiesToLoad.Add(mTagAbilityID);
 			}
+
+			// [???] Why is the Hero created and immediately destroyed?
 			Vector3 spawnPos = new Vector3(0f, -100f, 0f);
 			Hero tagHero = new Hero(spawnPos, 0, TagHeroID, false);
 			UnityEngine.Object.Destroy(tagHero.controlledObject);
 			tagHero.Destroy();
 		}
-		Singleton<AbilitiesDatabase>.Instance.LoadInGameData(abilitiesToLoad, true);
-		LoadingScreen.LogStep("AbilitiesDatabase.Instance.LoadInGameData");
-		List<string> adhocHelpers = new List<string>();
-		Singleton<HelpersDatabase>.Instance.LoadInGameData(helpersToLoad, adhocHelpers);
-		LoadingScreen.LogStep("HelpersDatabase.Instance.LoadInGameData");
-		Singleton<PotionsDatabase>.Instance.LoadInGameData();
-		LoadingScreen.LogStep("PotionsDatabase.Instance.LoadInGameData");
-		Singleton<PlayStatistics>.Instance.Reset();
-		Singleton<PlayStatistics>.Instance.data.wavePlayed = Singleton<Profile>.Instance.WaveToPlay;
-		Singleton<PlayStatistics>.Instance.data.wavePlayedLevel = Singleton<Profile>.Instance.GetWaveCompletionCount(Singleton<Profile>.Instance.WaveToPlay);
-		Singleton<PlayStatistics>.Instance.data.waveTypePlayed = Singleton<Profile>.Instance.waveTypeToPlay;
-		Profile.UpdatePlayMode();
-		mGameDirection = Singleton<PlayModesManager>.Instance.gameDirection;
-		HideUnusedGate();
-		mRailManager = new RailManager();
-		mProjectileManager = new ProjectileManager();
-		List<string> allEnemyKeys = new List<string>();
-		if (!Singleton<Profile>.Instance.IsInVSMultiplayerWave)
+
+		activeCharm = ProfileData.selectedCharm;
+		if (!string.IsNullOrEmpty(activeCharm))
 		{
-			var enemyGateZPositions = new List<float>();
+			CharmSchema charm = Singleton<CharmsDatabase>.Instance[activeCharm];
+			string helperName = FriendshipHelperID;
+			string abilityName = DataBundleRuntime.RecordKey(charm.abilityToActivate.Key.ToString());
+			if (!string.IsNullOrEmpty(helperName) || !string.IsNullOrEmpty(abilityName))
+			{
+				List<string> currentAbilities = ProfileData.GetSelectedAbilities();
+				if (!string.IsNullOrEmpty(abilityName))
+				{
+					currentAbilities.Add(abilityName);
+				}
+				else
+				{
+					currentAbilities.Add("ActiveCharm");
+				}
+				ProfileData.SetSelectedAbilities(currentAbilities);
+				if (!string.IsNullOrEmpty(helperName) && !helpersToLoad.Contains(helperName))
+				{
+					helpersToLoad.Add(helperName);
+				}
+				if (!string.IsNullOrEmpty(abilityName) && !abilitiesToLoad.Contains(abilityName))
+				{
+					abilitiesToLoad.Add(abilityName);
+				}
+			}
+		}
+
+		bool noNonUniqueAllySelected =
+			ProfileData.GetSelectedHelpers().FindIndex((string s) => !Singleton<HelpersDatabase>.Instance[s].unique) < 0;
+		if (ProfileData.GetSelectedAbilities().Contains("DivineIntervention") && noNonUniqueAllySelected)
+		{
+			helpersToLoad.Add("Farmer");
+		}
+
+		foreach (string helper in ProfileData.GetSelectedHelpers())
+		{
+			if (!helpersToLoad.Contains(helper))
+			{
+				helpersToLoad.Add(helper);
+			}
+		}
+
+		if (ProfileData.IsInVSMultiplayerWave)
+		{
+			foreach (string ability2 in ProfileData.MultiplayerData.CurrentOpponent.loadout.abilityIdList)
+			{
+				if (!string.IsNullOrEmpty(ability2) && abilitiesToLoad.Contains(ability2))
+				{
+					abilitiesToLoad.Add(ability2);
+				}
+			}
+			string[] aiHelpers = ProfileData.MultiplayerData.CurrentOpponent.loadout.GetSelectedHelperIDs();
+			string[] array = aiHelpers;
+			foreach (string helper2 in array)
+			{
+				if (!string.IsNullOrEmpty(helper2) && !helpersToLoad.Contains(helper2))
+				{
+					helpersToLoad.Add(helper2);
+				}
+			}
+		}
+
+		Singleton<AbilitiesDatabase>.Instance.LoadInGameData(abilitiesToLoad, true);
+		Singleton<HelpersDatabase>.Instance.LoadInGameData(helpersToLoad, adhocHelpers);
+		Singleton<PotionsDatabase>.Instance.LoadInGameData();
+	}
+
+	private void UpdatePlayStatistics()
+	{
+		Singleton<PlayStatistics>.Instance.Reset();
+		Singleton<PlayStatistics>.Instance.data.wavePlayed = ProfileData.WaveToPlay;
+		Singleton<PlayStatistics>.Instance.data.wavePlayedLevel = ProfileData.GetWaveCompletionCount(ProfileData.WaveToPlay) + 1;
+		Singleton<PlayStatistics>.Instance.data.waveTypePlayed = ProfileData.waveTypeToPlay;
+	}
+
+	private void InitializeWaveManager()
+	{
+		if (!ProfileData.IsInVSMultiplayerWave)
+		{
 			for (int i = 1; true; i++)
 			{
 				// [TODO] Implement in every stage
@@ -499,8 +583,8 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 			}
 
 			mWaveManager = new WaveManager(
-				Singleton<Profile>.Instance.waveTypeToPlay,
-				Singleton<Profile>.Instance.WaveToPlay,
+				ProfileData.waveTypeToPlay,
+				ProfileData.WaveToPlay,
 				enemyGateZPositions,
 				enemyGateGroup,
 				enemiesSpawnArea,
@@ -512,7 +596,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 			{
 				DataBundleTableHandle<HelperEnemySwapSchema> swapData = WeakGlobalInstance<WaveManager>.Instance.GetHelperSwapData();
 				HelperEnemySwapSchema[] swapSchemas = swapData.Data;
-				List<string> selectedHelpers = Singleton<Profile>.Instance.GetSelectedHelpers();
+				List<string> selectedHelpers = ProfileData.GetSelectedHelpers();
 				HelperEnemySwapSchema[] array3 = swapSchemas;
 				foreach (HelperEnemySwapSchema swapSchema2 in array3)
 				{
@@ -524,11 +608,11 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 				}
 			}
 		}
-		if (Singleton<Profile>.Instance.IsInDailyChallenge)
-		{
-			mGameTimer = Singleton<Profile>.Instance.dailyChallengeProceduralWaveSchema.maxTime;
-		}
-		if (Singleton<Profile>.Instance.IsInMultiplayerWave)
+	}
+
+	private void InitializeEnemies()
+	{
+		if (ProfileData.IsInMultiplayerWave)
 		{
 			mLegendaryStrikeEnemies = DataBundleRuntime.Instance.GetRecordKeys(typeof(EnemyListSchema), "LegendaryStrikeEnemies", false);
 			foreach (string enemy in mLegendaryStrikeEnemies)
@@ -538,12 +622,8 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 					allEnemyKeys.Add(enemy);
 				}
 			}
-			if (Singleton<PlayModesManager>.Instance.Attacking)
-			{
-				mGameTimer = SingletonSpawningMonoBehaviour<DesignerVariables>.Instance.GetVariable("AttackTime", 300f);
-			}
 		}
-		if (!Singleton<Profile>.Instance.IsInVSMultiplayerWave)
+		if (!ProfileData.IsInVSMultiplayerWave)
 		{
 			List<string> enemiesSoFar = new List<string>(allEnemyKeys);
 			foreach (string enemyID in enemiesSoFar)
@@ -572,27 +652,107 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 			}
 		}
 		Singleton<EnemiesDatabase>.Instance.LoadInGameData(allEnemyKeys);
-		LoadingScreen.LogStep("EnemiesDatabase.Instance.LoadInGameData");
+	}
 
-		mLeadership[0] = new Leadership(0);
-		mSouls[0] = new Souls(0);
+	private void InitializeGates()
+	{
+		mGate[DefenderIndex] = new Gate(enemiesTargetLeft, DefenderIndex);
 
-		int defenderId = 0;
-		if (Singleton<Profile>.Instance.IsInVSMultiplayerWave && Singleton<PlayModesManager>.Instance.Attacking)
+		if (mGate[0] != null)
 		{
-			defenderId = 1;
+			mCharactersManager.AddCharacter(mGate[0]);
 		}
-		mGate[defenderId] = new Gate(enemiesTargetLeft, defenderId);
-		if (Singleton<Profile>.Instance.IsInVSMultiplayerWave)
+		if (mGate[1] != null)
+		{
+			mCharactersManager.AddCharacter(mGate[1]);
+		}
+	}
+
+	private void InitializeHeroes()
+	{
+		CreateHero(0, heroSpawnPoint);
+
+		if (ProfileData.IsInVSMultiplayerWave)
+		{
+			CreateHero(1, enemySpawnPoint);
+		}
+	}
+
+	private void InitializeLeadership()
+	{
+		mLeadership[0] = new Leadership(0);
+		mLeadership[0].characterManagerRef = mCharactersManager;
+		mLeadership[0].helperSpawnArea = helpersSpawnArea;
+		mLeadership[0].helpersZTarget = enemiesSpawnArea.transform.position.z;
+		mLeadership[0].hero = mHero[0];
+
+		if (ProfileData.IsInVSMultiplayerWave)
 		{
 			mLeadership[1] = new EnemyLeadership(1);
+			mLeadership[1].characterManagerRef = mCharactersManager;
+			mLeadership[1].helperSpawnArea = enemiesSpawnArea;
+			mLeadership[1].helpersZTarget = enemiesTarget.transform.position.z;
+			mLeadership[1].hero = mHero[1];
+			mLeadership[0].helpersZTarget = heroTarget.transform.position.z;
 		}
-		mBell = new Bell(bellRingerLocationObject, bellLocationObject, defenderId);
-		mPit = new Pit(pitArea, defenderId);
-		int bannerLevel = Singleton<Profile>.Instance.MultiplayerData.CollectionLevel("Banner");
-		if (Singleton<Profile>.Instance.IsInVSMultiplayerWave && Singleton<PlayModesManager>.Instance.Attacking)
+	}
+
+	private void InitializeSouls()
+	{
+		mSouls[0] = new Souls(0);
+		mSouls[0].hero = mHero[0];
+	}
+
+	private void BeginWaveMusic()
+	{
+		var musicManager = SingletonSpawningMonoBehaviour<UMusicManager>.Instance;
+		if (mWaveManager != null && !DataBundleRecordKey.IsNullOrEmpty(mWaveManager.Data.music))
 		{
-			bannerLevel = Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.bannersCollected;
+			musicManager.PlayByKey(mWaveManager.Data.music);
+		}
+		else
+		{
+			var designerVariables = SingletonSpawningMonoBehaviour<DesignerVariables>.Instance;
+			var defaultWaveMusic = designerVariables.GetVariable<string>("DefaultWaveMusic");
+			musicManager.PlayByKey(new DataBundleRecordKey(defaultWaveMusic));
+		}
+	}
+
+	private void IncrementWaveAttempts()
+	{
+		if (!ProfileData.IsInDailyChallenge)
+		{
+			if (!ProfileData.MultiplayerData.IsMultiplayerGameSessionActive())
+			{
+				ProfileData.IncrementWaveAttemptCount(CurrentWave);
+			}
+			else
+			{
+				ProfileData.IncrementMPWaveAttemptCount(ProfileData.MultiplayerData.MultiplayerGameSessionData.missionName);
+			}
+		}
+	}
+
+	private void LogInitializationData()
+	{
+		ProfileData.FlurrySession.ReportWaveStarted();
+
+		Singleton<Analytics>.Instance.LogEvent(
+			"AudioSettings",
+			Analytics.Param("DeviceVolume", NUF.GetHardwareVolume()),
+			Analytics.Param("GameMusicVolume", AudioUtils.MasterMusicVolume),
+			Analytics.Param("GameSfxVolume", AudioUtils.MasterSoundThemeVolume)
+		);
+	}
+
+	private void CacheResources()
+	{
+		fireworksResource = ResourceCache.GetCachedResource("FX/Fireworks", 1).Resource as GameObject;
+
+		int bannerLevel = ProfileData.MultiplayerData.CollectionLevel("Banner");
+		if (ProfileData.IsInVSMultiplayerWave && Singleton<PlayModesManager>.Instance.Attacking)
+		{
+			bannerLevel = ProfileData.MultiplayerData.CurrentOpponent.loadout.bannersCollected;
 		}
 		SharedResourceLoader.SharedResource res3;
 		if (bannerLocObject != null && bannerLevel > 0)
@@ -603,116 +763,44 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 				UnityEngine.Object.Instantiate(res3.Resource, bannerLocObject.position, Quaternion.identity);
 			}
 		}
-		int flowerCount = Singleton<Profile>.Instance.MultiplayerData.CollectionLevel("Flower");
-		if (Singleton<Profile>.Instance.IsInVSMultiplayerWave && Singleton<PlayModesManager>.Instance.Attacking)
+
+		int flowerCount = ProfileData.MultiplayerData.CollectionLevel("Flower");
+		if (ProfileData.IsInVSMultiplayerWave && Singleton<PlayModesManager>.Instance.Attacking)
 		{
-			flowerCount = Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.flowersCollected;
+			flowerCount = ProfileData.MultiplayerData.CurrentOpponent.loadout.flowersCollected;
 		}
 		if (flowerCount > 0)
 		{
 			res3 = ResourceCache.GetCachedResource("Assets/Game/Resources/FX/GateDefense.prefab", 1);
 			if (res3 != null)
 			{
-				mGate[defenderId].controller.SpawnEffectAt(res3.Resource as GameObject, gate.transform.position);
+				mGate[DefenderIndex].controller.SpawnEffectAt(res3.Resource as GameObject, gate.transform.position);
 			}
 		}
-		mShaderManager = new ProceduralShaderManager();
-		mCollectableManager = new CollectableManager(heroWalkLeftEdge.position.z + 0.16f, heroWalkRightEdge.position.z - 0.16f, heroSpawnPoint.position.x);
-		mVillageArchers = new VillageArchers();
-		mCharactersManager = new CharactersManager();
-		if (mGate[0] != null)
-		{
-			mCharactersManager.AddCharacter(mGate[0]);
-		}
-		if (mGate[1] != null)
-		{
-			mCharactersManager.AddCharacter(mGate[1]);
-		}
-		LoadingScreen.LogStep("InGame load misc");
-		CreateHero(0, heroSpawnPoint);
-		if (Singleton<Profile>.Instance.IsInVSMultiplayerWave)
-		{
-			CreateHero(1, enemySpawnPoint);
-		}
-		mLeadership[0].characterManagerRef = mCharactersManager;
-		mLeadership[0].helperSpawnArea = helpersSpawnArea;
-		mLeadership[0].helpersZTarget = enemiesSpawnArea.transform.position.z;
-		mLeadership[0].hero = mHero[0];
-		mSouls[0].hero = mHero[0];
-		if (mLeadership[1] != null)
-		{
-			mLeadership[1].characterManagerRef = mCharactersManager;
-			mLeadership[1].helperSpawnArea = enemiesSpawnArea;
-			mLeadership[1].helpersZTarget = enemiesTarget.transform.position.z;
-			mLeadership[1].hero = mHero[1];
-			mLeadership[0].helpersZTarget = heroTarget.transform.position.z;
-		}
-		ApplyInitialCharmEffects();
-		LoadingScreen.LogStep("InGame load hero");
-		mCameraYOffset = gameCamera.transform.position.y - heroSpawnPointLeft.transform.position.y;
-		RenderSettings.fog = false;
-		if (mWaveManager != null && !DataBundleRecordKey.IsNullOrEmpty(mWaveManager.Data.music))
-		{
-			SingletonSpawningMonoBehaviour<UMusicManager>.Instance.PlayByKey(mWaveManager.Data.music);
-		}
-		else
-		{
-			SingletonSpawningMonoBehaviour<UMusicManager>.Instance.PlayByKey(new DataBundleRecordKey(SingletonSpawningMonoBehaviour<DesignerVariables>.Instance.GetVariable<string>("DefaultWaveMusic")));
-		}
-		WeakGlobalMonoBehavior<HUD>.Instance.Init();
-		WeakGlobalMonoBehavior<BannerManager>.Instance.Init();
-		SingletonMonoBehaviour<TutorialMain>.Instance.Init();
-		mTimeStarted = Time.time;
-		if (!Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive() && 
-			!Singleton<Profile>.Instance.IsInDailyChallenge && 
-			SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game01_ProtectGate"))
-		{
-			SingletonMonoBehaviour<TutorialMain>.Instance.StartTutorial("Tutorial_Game01_ProtectGate");
-			WeakGlobalMonoBehavior<HUD>.Instance.abilitiesEnabled = false;
-			WeakGlobalMonoBehavior<HUD>.Instance.alliesEnabled = false;
-			mTimeToNextTutorial = 7f;
-		}
-		else
-		{
-			mTimeToNextTutorial = 5f;
-			RunAfterDelay(delegate
-			{
-				WeakGlobalMonoBehavior<BannerManager>.Instance.OpenBanner(new BannerStartWave(5f, Singleton<Profile>.Instance.WaveToPlay));
-			}, 2f);
-		}
-		if (currentWave == 1 && Singleton<Profile>.Instance.GetWaveCompletionCount(1) == 1)
-		{
-			WeakGlobalMonoBehavior<HUD>.Instance.alliesEnabled = false;
-			StartCoroutine(CheckForHeroMovement());
-			StartCoroutine(CheckForHeroAttack());
 
-			Singleton<Profile>.Instance.SetSelectedAbilities(new List<string>(new string[1] { "KatanaSlash" }));
-			WeakGlobalMonoBehavior<HUD>.Instance.ResetAbilities();
-			WeakGlobalMonoBehavior<HUD>.Instance.abilitiesEnabled = true;
-			StartCoroutine(CheckForKatanaSlashUse());
-		}
-		// StartCoroutine(CheckTutorials());
-		if (!Singleton<Profile>.Instance.IsInDailyChallenge)
-		{
-			if (!Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive())
-			{
-				Singleton<Profile>.Instance.IncrementWaveAttemptCount(currentWave);
-			}
-			else
-			{
-				Singleton<Profile>.Instance.IncrementMPWaveAttemptCount(Singleton<Profile>.Instance.MultiplayerData.MultiplayerGameSessionData.missionName);
-			}
-		}
-		Singleton<Profile>.Instance.FlurrySession.ReportWaveStarted();
-		Singleton<Analytics>.Instance.LogEvent("AudioSettings", Analytics.Param("DeviceVolume", NUF.GetHardwareVolume()), Analytics.Param("GameMusicVolume", AudioUtils.MasterMusicVolume), Analytics.Param("GameSfxVolume", AudioUtils.MasterSoundThemeVolume));
 		res3 = ResourceCache.GetCachedResource("Assets/Game/Resources/FX/FullScreenBloodEffect.prefab", 1);
 		if (res3 != null)
 		{
-			this.hero.HUDBloodEffect = UnityEngine.Object.Instantiate(res3.Resource) as GameObject;
+			hero.HUDBloodEffect = UnityEngine.Object.Instantiate(res3.Resource) as GameObject;
 		}
-		Singleton<PlayerWaveEventData>.Instance.StartWave();
-		Shader.WarmupAllShaders();
-		MemoryWarningHandler.Instance.unloadOnMemoryWarning = true;
+	}
+
+	private void InitializeTimers()
+	{
+		if (ProfileData.IsInDailyChallenge)
+		{
+			mGameTimer = ProfileData.dailyChallengeProceduralWaveSchema.maxTime;
+		}
+		else if (ProfileData.IsInMultiplayerWave && Singleton<PlayModesManager>.Instance.Attacking)
+		{
+			mGameTimer = SingletonSpawningMonoBehaviour<DesignerVariables>.Instance.GetVariable("AttackTime", 300f);
+		}
+
+		mTimeStarted = Time.time;
+	}
+
+	private void AdjustEffectQuality()
+	{
 		if (PortableQualitySettings.GetQuality() == EPortableQualitySetting.Low)
 		{
 			mHitEffectFrequency = 4f;
@@ -725,7 +813,6 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		{
 			mHitEffectFrequency = 0.5f;
 		}
-		LoadingScreen.LogStep("InGame Start COMPLETE");
 	}
 
 	private IEnumerator CheckForKatanaSlashUse()
@@ -738,7 +825,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 				if (!WeakGlobalMonoBehavior<HUD>.Instance.FindHUD<HUDAbilities>().IsAvailable("KatanaSlash"))
 				{
 					SingletonMonoBehaviour<TutorialMain>.Instance.TutorialDone();
-					Singleton<Profile>.Instance.ForceOnboardingStage("OnboardingStep6_AbilityWave1");
+					ProfileData.ForceOnboardingStage("OnboardingStep6_AbilityWave1");
 					yield break;
 				}
 
@@ -757,65 +844,63 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		while (!(SingletonMonoBehaviour<TutorialMain>.Instance.GetCurrentTutorial_Key() == "Tutorial_Game03_Ally") || (WeakGlobalInstance<CharactersManager>.Instance.helpersCount <= 0 && !mGameOver));
 		
 		SingletonMonoBehaviour<TutorialMain>.Instance.TutorialDone();
-		Singleton<Profile>.Instance.ForceOnboardingStage("OnboardingStep18_SummonFarmer");
+		ProfileData.ForceOnboardingStage("OnboardingStep18_SummonFarmer");
 	}
 
 	private IEnumerator CheckTutorials()
 	{
-		while (!Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive() && !Singleton<Profile>.Instance.IsInDailyChallenge)
+		while (!ProfileData.IsInStoryWave) yield return null;
+
+		if (mTimeToNextTutorial <= 0f)
 		{
-			int currentWave = Singleton<Profile>.Instance.CurrentStoryWave;
-			if (mTimeToNextTutorial <= 0f)
+			if (CurrentWave <= 1)
 			{
-				if (currentWave <= 1)
+				if (SingletonMonoBehaviour<TutorialMain>.Instance.TutorialStartIfNeeded("Tutorial_Game02_Movement"))
 				{
-					if (SingletonMonoBehaviour<TutorialMain>.Instance.TutorialStartIfNeeded("Tutorial_Game02_Movement"))
-					{
-						yield return new WaitForSeconds(20f);
-						mTimeToNextTutorial = 0f;
-					}
-					else if (SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game04_Ability"))
-					{
-						List<Character> enemiesPlayerCanSee2 = WeakGlobalInstance<CharactersManager>.Instance.GetCharactersInRangeMaxCount(hero.controller.position.z, hero.controller.position.z + 4f, 1, 1f);
-						if (enemiesPlayerCanSee2.Count >= 1 && SingletonMonoBehaviour<TutorialMain>.Instance.GetCurrentTutorial_Key() != "Tutorial_Game04_Ability" && SingletonMonoBehaviour<TutorialMain>.Instance.TutorialStartIfNeeded("Tutorial_Game04_Ability"))
-						{
-							Singleton<Profile>.Instance.SetSelectedAbilities(new List<string>(new string[1] { "KatanaSlash" }));
-							WeakGlobalMonoBehavior<HUD>.Instance.ResetAbilities();
-							WeakGlobalMonoBehavior<HUD>.Instance.abilitiesEnabled = true;
-							StartCoroutine(CheckForKatanaSlashUse());
-							mTimeToNextTutorial = 0f;
-							yield return new WaitForSeconds(5f);
-						}
-					}
+					yield return new WaitForSeconds(20f);
+					mTimeToNextTutorial = 0f;
 				}
-				else if (currentWave == 2 && SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game03_Ally") && SingletonMonoBehaviour<TutorialMain>.Instance.GetCurrentTutorial_Key() != "Tutorial_Game03_Ally")
+				else if (SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game04_Ability"))
 				{
-					if (SingletonMonoBehaviour<TutorialMain>.Instance.TutorialStartIfNeeded("Tutorial_Game03_Ally"))
+					List<Character> enemiesPlayerCanSee2 = WeakGlobalInstance<CharactersManager>.Instance.GetCharactersInRangeMaxCount(hero.controller.position.z, hero.controller.position.z + 4f, 1, 1f);
+					if (enemiesPlayerCanSee2.Count >= 1 && SingletonMonoBehaviour<TutorialMain>.Instance.GetCurrentTutorial_Key() != "Tutorial_Game04_Ability" && SingletonMonoBehaviour<TutorialMain>.Instance.TutorialStartIfNeeded("Tutorial_Game04_Ability"))
 					{
-						WeakGlobalMonoBehavior<HUD>.Instance.alliesEnabled = true;
-						StartCoroutine(CheckForFarmerSpawn());
-						mTimeToNextTutorial = 0f;
-						yield return new WaitForSeconds(5f);
-					}
-				}
-				else
-				{
-					if (currentWave != 4 || !SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game05_Flying"))
-					{
-						break;
-					}
-					List<Character> enemiesPlayerCanSee = WeakGlobalInstance<CharactersManager>.Instance.GetCharactersInRange(hero.controller.position.z, hero.controller.position.z + 4f, 1);
-					int foundIndex = enemiesPlayerCanSee.FindIndex((Character c) => c.isFlying);
-					if (foundIndex >= 0 && SingletonMonoBehaviour<TutorialMain>.Instance.GetCurrentTutorial_Key() != "Tutorial_Game05_Flying" && SingletonMonoBehaviour<TutorialMain>.Instance.TutorialStartIfNeeded("Tutorial_Game05_Flying"))
-					{
+						ProfileData.SetSelectedAbilities(new List<string>(new string[1] { "KatanaSlash" }));
+						WeakGlobalMonoBehavior<HUD>.Instance.ResetAbilities();
+						WeakGlobalMonoBehavior<HUD>.Instance.abilitiesEnabled = true;
+						StartCoroutine(CheckForKatanaSlashUse());
 						mTimeToNextTutorial = 0f;
 						yield return new WaitForSeconds(5f);
 					}
 				}
 			}
-			mTimeToNextTutorial -= Time.deltaTime;
-			yield return new WaitForSeconds(0f);
+			else if (CurrentWave == 2 && SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game03_Ally") && SingletonMonoBehaviour<TutorialMain>.Instance.GetCurrentTutorial_Key() != "Tutorial_Game03_Ally")
+			{
+				if (SingletonMonoBehaviour<TutorialMain>.Instance.TutorialStartIfNeeded("Tutorial_Game03_Ally"))
+				{
+					WeakGlobalMonoBehavior<HUD>.Instance.alliesEnabled = true;
+					StartCoroutine(CheckForFarmerSpawn());
+					mTimeToNextTutorial = 0f;
+					yield return new WaitForSeconds(5f);
+				}
+			}
+			else
+			{
+				if (CurrentWave != 4 || !SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game05_Flying"))
+				{
+					break;
+				}
+				List<Character> enemiesPlayerCanSee = WeakGlobalInstance<CharactersManager>.Instance.GetCharactersInRange(hero.controller.position.z, hero.controller.position.z + 4f, 1);
+				int foundIndex = enemiesPlayerCanSee.FindIndex((Character c) => c.isFlying);
+				if (foundIndex >= 0 && SingletonMonoBehaviour<TutorialMain>.Instance.GetCurrentTutorial_Key() != "Tutorial_Game05_Flying" && SingletonMonoBehaviour<TutorialMain>.Instance.TutorialStartIfNeeded("Tutorial_Game05_Flying"))
+				{
+					mTimeToNextTutorial = 0f;
+					yield return new WaitForSeconds(5f);
+				}
+			}
 		}
+		mTimeToNextTutorial -= Time.deltaTime;
+		yield return new WaitForSeconds(0f);
 	}
 
 	private IEnumerator CheckForHeroMovement()
@@ -824,7 +909,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		{
 			yield return new WaitForSeconds(0f);
 		}
-		Singleton<Profile>.Instance.ForceOnboardingStage("OnboardingStep4_MoveWave1");
+		ProfileData.ForceOnboardingStage("OnboardingStep4_MoveWave1");
 	}
 
 	private IEnumerator CheckForHeroAttack()
@@ -833,7 +918,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		{
 			yield return new WaitForSeconds(0f);
 		}
-		Singleton<Profile>.Instance.ForceOnboardingStage("OnboardingStep5_AttackWave1");
+		ProfileData.ForceOnboardingStage("OnboardingStep5_AttackWave1");
 	}
 
 	public void CreateHero(int index, Transform spawnPoint)
@@ -910,7 +995,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	private void Update()
 	{
-		if (!Singleton<Profile>.Instance.Initialized) return;
+		if (!ProfileData.Initialized) return;
 
 		if (gamePaused)
 		{
@@ -945,7 +1030,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 		if (Debug.isDebugBuild && !WeakGlobalMonoBehavior<HUD>.Instance.gameObject.activeInHierarchy && Input.touchCount >= 2)
 		{
-			string text = Singleton<Profile>.Instance.GetSelectedAbilities()[0];
+			string text = ProfileData.GetSelectedAbilities()[0];
 			if (!string.IsNullOrEmpty(text))
 			{
 				hero.DoAbility(text);
@@ -999,7 +1084,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	private void LateUpdate()
 	{
-		if (Singleton<Profile>.Instance.Initialized)
+		if (ProfileData.Initialized)
 		{
 			UpdateCamera();
 		}
@@ -1088,16 +1173,16 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	public void Win()
 	{
-		Singleton<Profile>.Instance.FlurrySession.ReportWaveWon();
+		ProfileData.FlurrySession.ReportWaveWon();
 		Singleton<PlayStatistics>.Instance.data.victory = true;
 		mGameOver = true;
 		if (mWaveManager != null)
 		{
-			Singleton<Profile>.Instance.AddSeenEnemies(mWaveManager.allDifferentEnemies);
+			ProfileData.AddSeenEnemies(mWaveManager.allDifferentEnemies);
 		}
-		if (Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive())
+		if (ProfileData.MultiplayerData.IsMultiplayerGameSessionActive())
 		{
-			Singleton<Profile>.Instance.MultiplayerData.FinishMultiplayerGameSession(true);
+			ProfileData.MultiplayerData.FinishMultiplayerGameSession(true);
 		}
 		if (fireworksResource != null)
 		{
@@ -1105,7 +1190,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		}
 		CreateWinDialog();
 		StartCoroutine(PostWinDelay());
-		if (!Singleton<Profile>.Instance.IsInMultiplayerWave && Singleton<Profile>.Instance.WaveToPlay > 2)
+		if (!ProfileData.IsInMultiplayerWave && ProfileData.WaveToPlay > 2)
 		{
 			if (mGate[0] != null && mGate[0].NoDamage)
 			{
@@ -1139,15 +1224,15 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	public void Lose()
 	{
-		Singleton<Profile>.Instance.FlurrySession.ReportWaveLost();
+		ProfileData.FlurrySession.ReportWaveLost();
 		mGameOver = true;
-		if (Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive())
+		if (ProfileData.MultiplayerData.IsMultiplayerGameSessionActive())
 		{
-			Singleton<Profile>.Instance.MultiplayerData.FinishMultiplayerGameSession(false);
+			ProfileData.MultiplayerData.FinishMultiplayerGameSession(false);
 		}
 		CreateLoseDialog();
-		Singleton<Profile>.Instance.Save();
-		if (Singleton<Profile>.Instance.CurrentStoryWave == 1 && Singleton<Profile>.Instance.GetWaveCompletionCount(1) == 1 && !Singleton<Profile>.Instance.IsInMultiplayerWave)
+		ProfileData.Save();
+		if (ProfileData.CurrentStoryWave == 1 && ProfileData.GetIsWaveUnlocked(1) && !ProfileData.IsInMultiplayerWave)
 		{
 			Restart();
 		}
@@ -1167,14 +1252,14 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 	{
 		if (!string.IsNullOrEmpty(activeCharm))
 		{
-			List<string> selectedAbilities = Singleton<Profile>.Instance.GetSelectedAbilities();
+			List<string> selectedAbilities = ProfileData.GetSelectedAbilities();
 			CharmSchema charmSchema = Singleton<CharmsDatabase>.Instance[activeCharm];
 			string text = charmSchema.abilityToActivate;
 			if (!string.IsNullOrEmpty(text))
 			{
 				string item = DataBundleRuntime.RecordKey(text);
 				selectedAbilities.Remove(item);
-				Singleton<Profile>.Instance.SetSelectedAbilities(selectedAbilities);
+				ProfileData.SetSelectedAbilities(selectedAbilities);
 				WeakGlobalMonoBehavior<HUD>.Instance.ResetAbilities();
 			}
 		}
@@ -1184,15 +1269,15 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 	{
 		hero.Revive();
 		mReviveOfferDismissed = false;
-		Singleton<Profile>.Instance.globalPlayerRating += 20;
+		ProfileData.globalPlayerRating += 20;
 		Singleton<Achievements>.Instance.IncrementAchievement("UseRevive", 1);
-		if (Singleton<Profile>.Instance.IsInVSMultiplayerWave && Singleton<PlayModesManager>.Instance.Attacking)
+		if (ProfileData.IsInVSMultiplayerWave && Singleton<PlayModesManager>.Instance.Attacking)
 		{
 			mGameTimer = SingletonSpawningMonoBehaviour<DesignerVariables>.Instance.GetVariable("AttackTime", 300f);
 		}
-		else if (Singleton<Profile>.Instance.IsInDailyChallenge)
+		else if (ProfileData.IsInDailyChallenge)
 		{
-			mGameTimer = Singleton<Profile>.Instance.dailyChallengeProceduralWaveSchema.maxTime;
+			mGameTimer = ProfileData.dailyChallengeProceduralWaveSchema.maxTime;
 		}
 	}
 
@@ -1203,7 +1288,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	private void onFinishGameRequest()
 	{
-		if (Singleton<Profile>.Instance.waveTypeToPlay == WaveManager.WaveType.Wave_SinglePlayer && Singleton<PlayStatistics>.Instance.data.victory)
+		if (ProfileData.waveTypeToPlay == WaveManager.WaveType.Wave_SinglePlayer && Singleton<PlayStatistics>.Instance.data.victory)
 		{
 			Singleton<Achievements>.Instance.CheckThresholdAchievement("CompleteWave1", Singleton<PlayStatistics>.Instance.data.wavePlayed);
 			Singleton<Achievements>.Instance.CheckThresholdAchievement("CompleteWave2", Singleton<PlayStatistics>.Instance.data.wavePlayed);
@@ -1234,7 +1319,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		bool flag = false;
 		if (mHero[0].isOver)
 		{
-			if ((Singleton<Profile>.Instance.CurrentStoryWave > 1 || Singleton<Profile>.Instance.GetWaveCompletionCount(1) > 1) && !mReviveOfferDismissed)
+			if ((ProfileData.CurrentStoryWave > 1 || ProfileData.HasWaveBeenCompleted(1)) && !mReviveOfferDismissed)
 			{
 				// WeakGlobalInstance<CollectableManager>.Instance.OpenPresents(true);
 				GluiActionSender.SendGluiAction("POPUP_REVIVE", base.gameObject, null);
@@ -1258,7 +1343,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		{
 			Lose();
 		}
-		else if (Singleton<Profile>.Instance.IsInVSMultiplayerWave)
+		else if (ProfileData.IsInVSMultiplayerWave)
 		{
 			if (Singleton<PlayModesManager>.Instance.Attacking)
 			{
@@ -1321,7 +1406,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 			WeakGlobalInstance<WaveManager>.Instance.AddSpecialRewardsToCollectables();
 		}
 		WeakGlobalInstance<CollectableManager>.Instance.BankAllResources();
-		Singleton<Profile>.Instance.GoToNextWave();
+		ProfileData.GoToNextWave();
 	}
 
 	private IEnumerator RunAfterDelayInternal(Action fn, float delay)
@@ -1344,12 +1429,12 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	private void SpendCharm()
 	{
-		string selectedCharm = Singleton<Profile>.Instance.selectedCharm;
+		string selectedCharm = ProfileData.selectedCharm;
 		if (selectedCharm != string.Empty)
 		{
-			Singleton<Profile>.Instance.SetNumCharms(selectedCharm, Mathf.Max(0, Singleton<Profile>.Instance.GetNumCharms(selectedCharm) - 1));
-			Singleton<Profile>.Instance.selectedCharm = string.Empty;
-			Singleton<Profile>.Instance.globalPlayerRating += 20;
+			ProfileData.SetNumCharms(selectedCharm, Mathf.Max(0, ProfileData.GetNumCharms(selectedCharm) - 1));
+			ProfileData.selectedCharm = string.Empty;
+			ProfileData.globalPlayerRating += 20;
 		}
 	}
 
@@ -1365,18 +1450,8 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 	public void UseCharm()
 	{
 		CharmSchema charmSchema = Singleton<CharmsDatabase>.Instance[activeCharm];
-		if (charmSchema == null)
-		{
-			return;
-		}
-		if (charmSchema.id == "Friendship")
-		{
-			string table = "FriendshipCharmHelpers";
-			DataBundleRecordTable dataBundleRecordTable = new DataBundleRecordTable(table);
-			HelperListSchema[] array = dataBundleRecordTable.InitializeRecords<HelperListSchema>();
-			int num = UnityEngine.Random.Range(0, array.Length);
-			DataBundleRecordKey dataBundleRecordKey = new DataBundleRecordKey(array[num].ability);
-		}
+		if (charmSchema == null) return;
+
 		if (!string.IsNullOrEmpty(charmSchema.abilityToActivate.Key))
 		{
 			Singleton<Achievements>.Instance.IncrementAchievement("UseCharm", 1);
@@ -1389,6 +1464,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 			}
 			Singleton<Achievements>.Instance.IncrementAchievement("UseCharm", 1);
 		}
+
 		SpendCharm();
 	}
 
@@ -1447,57 +1523,24 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		return false;
 	}
 
-	private void HideUnusedGate()
-	{
-		if (Singleton<Profile>.Instance.IsInVSMultiplayerWave) return;
-		// switch (mGameDirection)
-		// {
-		// case PlayModesManager.GameDirection.LeftToRight:
-		// 	if (enemiesTargetRight != null)
-		// 	{
-		// 		UnityEngine.Object.DestroyImmediate(enemiesTargetRight, true);
-		// 		enemiesTargetRight = null;
-		// 	}
-		// 	break;
-		// case PlayModesManager.GameDirection.RightToLeft:
-		// 	if (enemiesTargetLeft != null)
-		// 	{
-		// 		UnityEngine.Object.DestroyImmediate(enemiesTargetLeft, true);
-		// 		enemiesTargetLeft = null;
-		// 		if (vortexLeft != null)
-		// 		{
-		// 			UnityEngine.Object.DestroyImmediate(vortexLeft, true);
-		// 			vortexLeft = null;
-		// 		}
-		// 		if (gateSparklesLeft != null)
-		// 		{
-		// 			UnityEngine.Object.DestroyImmediate(gateSparklesLeft, true);
-		// 			gateSparklesLeft = null;
-		// 		}
-		// 	}
-		// 	break;
-		// }
-	}
-
 	public bool SetCheatAbility(string ability)
 	{
 		if (Singleton<AbilitiesDatabase>.Instance.GetSchema(ability) != null) return false;
 
-		List<string> list = new List<string>(1);
-		list.Add(ability);
-		Singleton<Profile>.Instance.SetSelectedAbilities(list);
+		List<string> list = new List<string>{ability};
+		ProfileData.SetSelectedAbilities(list);
 		return true;
 	}
 
 	public void SetHeroInvulnByDefault(bool toSet)
 	{
-		Singleton<Profile>.Instance.debugHeroInvuln = toSet;
+		ProfileData.debugHeroInvuln = toSet;
 		ResetHeroInvulnToDefault(0);
 	}
 
 	public void ResetHeroInvulnToDefault(int ownerID)
 	{
-		bool invuln = ownerID == 0 && Singleton<Profile>.Instance.debugHeroInvuln;
+		bool invuln = ownerID == 0 && ProfileData.debugHeroInvuln;
 		GetHero(ownerID).invuln = invuln;
 		if (GetGate(ownerID) != null)
 		{

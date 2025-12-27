@@ -20,14 +20,9 @@ public class StoreAvailability_Helpers
 	{
 		if (helper.hideInStore && !force) return;
 		string id = helper.id;
-		bool flag = false;
 		int helperLevel = Singleton<Profile>.Instance.GetHelperLevel(id);
 		int helperMaxLevel = helper.Levels.Length;
-		if (helper.Locked)
-		{
-			flag = true;
-		}
-		else
+		if (!helper.Locked)
 		{
 			helperLevel = Singleton<HelpersDatabase>.Instance.EnsureProperInitialHelperLevel(id);
 		}

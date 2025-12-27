@@ -64,40 +64,11 @@ public class StartScreenImpl : MonoBehaviour, IGluiActionHandler
 				spriteGameTitle.Texture = res.Resource as Texture2D;
 			}
 		}
-		while (!Singleton<Profile>.Instance.Initialized)
-		{
-			yield return null;
-		}
+		while (!Singleton<Profile>.Instance.Initialized) yield return null;
 		Singleton<Profile>.Instance.ForceOnboardingStage("OnboardingStep2_StartScreen");
-		if (!GeneralConfig.IsLive)
-		{
-			bool iCloudEnabled = FileManager.CheckCloudStorageAvailability();
-			string iCloudPath = FileManager.GetCloudContainerDirectoryPath();
-		}
 		SingletonSpawningMonoBehaviour<ApplicationUtilities>.Instance.canAwardGems = true;
-		// _leaderboardsButton = GameObject.Find("Button_Leaderboard");
-		// _achievementsButton = GameObject.Find("Button_Achievement");
-		// _gameCenterButton = GameObject.Find("Button_GameCenter");
-		// _iCloudButton = GameObject.Find("Button_iCloud");
-		// Vector3 _currentPosition2 = _leaderboardsButton.transform.localPosition;
-		// _achievementsButton.transform.localPosition = new Vector3(_currentPosition2.x + 140f, _currentPosition2.y, _currentPosition2.z);
-		// _iCloudButton.transform.localPosition = new Vector3(_currentPosition2.x + 280f, _currentPosition2.y, _currentPosition2.z);
-		// _leaderboardsButton.gameObject.SetActive(false);
-		// _achievementsButton.gameObject.SetActive(false);
-		// _iCloudButton.gameObject.SetActive(false);
-		// _gameCenterButton.gameObject.SetActive(false);
-		GameObject _anchor = GameObject.Find("Anchor_LeftBottom");
 		PlayerPrefs.SetInt("gameLoadedCorrectly", 1);
 		PlayerPrefs.SetString("gameTag", AJavaTools.Properties.GetBuildTag());
-		/*if (PlayerPrefs.GetInt("pgsSignIn", 0) == 0)
-		{
-			AJavaTools.UI.ShowAlert(base.gameObject.name, "pgsSignInCallback", StringUtils.GetStringFromStringRef("LocalizedStrings", "IDS_G_SI_REQUIRED"), StringUtils.GetStringFromStringRef("LocalizedStrings", "SI_GOOGLE_CLOUD"), StringUtils.GetStringFromStringRef("LocalizedStrings", "IDS_SIGN_IN"), StringUtils.GetStringFromStringRef("LocalizedStrings", "IDS_SKIP"), string.Empty);
-			Time.timeScale = 0f;
-			PlayerPrefs.SetInt("pgsSignIn", 1);
-		}
-		if (AJavaTools.Properties.GetBuildType() == "tstore" && Singleton<Profile>.Instance != null)
-		{
-		}*/
 	}
 
 	private void Update()
@@ -134,7 +105,7 @@ public class StartScreenImpl : MonoBehaviour, IGluiActionHandler
 		switch (action)
 		{
 		case "START_GAME":
-			if (Singleton<Profile>.Instance.GetWaveCompletionCount(1) == 1)
+			if (Singleton<Profile>.Instance.GetIsWaveUnlocked(1))
 			{
 				Singleton<Profile>.Instance.CurrentStoryWave = 1;
 				string value = DataBundleRuntime.Instance.GetValue<string>(typeof(WaveSchema), Singleton<PlayModesManager>.Instance.selectedModeData.waves.RecordTable, Singleton<Profile>.Instance.CurrentStoryWave.ToString(), "scene", false);

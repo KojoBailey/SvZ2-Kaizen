@@ -174,10 +174,8 @@ public class ResultsMenuImpl : UIHandler<ResultsMenuImpl>, IGluiActionHandler
 	public static List<UnlockedFeature> GetUpgradeUnlockedFeatures(bool doPlayHavenRequest)
 	{
 		int wavePlayed = Singleton<PlayStatistics>.Instance.data.wavePlayed;
-		if (!Singleton<PlayStatistics>.Instance.data.victory || Singleton<Profile>.Instance.GetWaveCompletionCount(wavePlayed) != 2)
-		{
+		if (!Singleton<PlayStatistics>.Instance.data.victory || !Singleton<Profile>.Instance.HasWaveBeenCompleted(wavePlayed))
 			return null;
-		}
 		List<UnlockedFeature> list = new List<UnlockedFeature>();
 		string[] allIDs = Singleton<AbilitiesDatabase>.Instance.allIDs;
 		foreach (string id in allIDs)
@@ -224,7 +222,7 @@ public class ResultsMenuImpl : UIHandler<ResultsMenuImpl>, IGluiActionHandler
 	public static UnlockedFeature GetUnlockedHero()
 	{
 		int wavePlayed = Singleton<PlayStatistics>.Instance.data.wavePlayed;
-		if (!Singleton<PlayStatistics>.Instance.data.victory || Singleton<Profile>.Instance.GetWaveCompletionCount(wavePlayed) != 2)
+		if (!Singleton<PlayStatistics>.Instance.data.victory || !Singleton<Profile>.Instance.HasWaveBeenCompleted(wavePlayed))
 		{
 			return null;
 		}

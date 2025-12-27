@@ -276,9 +276,8 @@ public class Helper : Character
 		{
 			GameObject gameObject = base.controlledObject;
 			Transform transform = gameObject.transform;
-			int childCount = transform.GetChildCount();
 			string text = Singleton<HelpersDatabase>.Instance.ModelName(base.id, base.ownerId);
-			for (int i = 0; i < childCount; i++)
+			for (int i = 0; i < transform.childCount; i++)
 			{
 				Transform child = transform.GetChild(0);
 				if (child.name != text)

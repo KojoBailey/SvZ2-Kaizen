@@ -600,7 +600,7 @@ public class Leadership : WeakGlobalInstance<Leadership>
 				renderer.sharedMaterial = material;
 			}
 			Transform transform = obj.transform;
-			for (int i = 0; i < transform.GetChildCount(); i++)
+			for (int i = 0; i < transform.childCount; i++)
 			{
 				SwapMaterialsOnGameObjectAndChildren(transform.GetChild(i).gameObject, objectsToNotMaterialSwitch, newMat);
 			}

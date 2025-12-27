@@ -219,17 +219,17 @@ public class BundleUtils
 
 	public static string GetSystemLanguage()
 	{
-		return "English"; // implement later!!!
-		string language = NUF.GetLanguage();
-		string[] supportedLanguages = GeneralConfig.SupportedLanguages;
-		foreach (string text in supportedLanguages)
-		{
-			if (text == language)
-			{
-				return language;
-			}
-		}
-		return GeneralConfig.SupportedLanguages[0];
+		return "English"; // [TODO] Support more languages
+		// string language = NUF.GetLanguage();
+		// string[] supportedLanguages = GeneralConfig.SupportedLanguages;
+		// foreach (string text in supportedLanguages)
+		// {
+		// 	if (text == language)
+		// 	{
+		// 		return language;
+		// 	}
+		// }
+		// return GeneralConfig.SupportedLanguages[0];
 	}
 
 	public static void UpdateLocalDataBundleInfo(string dbVersion, string incrBuild, string dbPath, string dbType)
