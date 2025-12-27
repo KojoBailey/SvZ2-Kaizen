@@ -9,18 +9,18 @@
 		type = silverCoin
 		minValue = 90
 		maxValue = 110
-		dropRate = 0.035
+		dropRate = 0.07
 		prefab = Assets/Game/Resources/FX/CoinSilverPickup.prefab
 	goldCoin:
 		type = goldCoin
 		minValue = 4500
 		maxValue = 5300
-		dropRate = 0.0007
+		dropRate = 0.0028
 		prefab = Assets/Game/Resources/FX/CoinGoldPickup.prefab
 	leadership:
 		type = leadership
 		constValue = 1
-		dropRate = 1
+		dropRate = 0.4
 		prefab = Assets/Game/Resources/FX/LeadershipPickup.prefab
 	soul:
 		type = soul
