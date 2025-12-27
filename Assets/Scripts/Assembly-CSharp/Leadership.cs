@@ -5,75 +5,21 @@ public class Leadership : WeakGlobalInstance<Leadership>
 {
 	public struct LeadershipCost
 	{
-		public float leadership;
+		public float cost;
 
-		public int gems;
-
-		public int coins;
-
-		public LeadershipCost(string data)
+		public LeadershipCost(float _cost)
 		{
-			leadership = 0f;
-			gems = 0;
-			coins = 0;
-			string[] array = data.Split(',');
-			if (array.Length >= 1)
-			{
-				leadership = float.Parse(array[0]);
-			}
-			if (array.Length >= 2)
-			{
-				gems = int.Parse(array[1]);
-			}
-			if (array.Length >= 3)
-			{
-				coins = int.Parse(array[2]);
-			}
-		}
-
-		public LeadershipCost(float cost)
-		{
-			leadership = cost;
-			gems = 0;
-			coins = 0;
+			cost = _cost;
 		}
 
 		public bool canAfford(int playerId)
 		{
-			if (leadership > 0f)
-			{
-				return WeakGlobalMonoBehavior<InGameImpl>.Instance.GetLeadership(playerId).resources >= leadership;
-			}
-			if (gems > 0)
-			{
-				return Singleton<Profile>.Instance.gems >= gems;
-			}
-			if (coins > 0)
-			{
-				return Singleton<Profile>.Instance.coins >= coins;
-			}
-			return false;
+			return WeakGlobalMonoBehavior<InGameImpl>.Instance.GetLeadership(playerId).resources >= leadership;
 		}
 
 		public void Spend(int playerId)
 		{
-			if (leadership > 0f)
-			{
-				WeakGlobalMonoBehavior<InGameImpl>.Instance.GetLeadership(playerId).resources -= leadership;
-			}
-			else if (gems > 0)
-			{
-				if (playerId == 0)
-				{
-					Singleton<Profile>.Instance.SpendGems(gems);
-					Singleton<Profile>.Instance.gems -= gems;
-				}
-			}
-			else if (coins > 0 && playerId == 0)
-			{
-				Singleton<Profile>.Instance.SpendCoins(coins);
-				Singleton<Profile>.Instance.gems -= coins;
-			}
+			WeakGlobalMonoBehavior<InGameImpl>.Instance.GetLeadership(playerId).resources -= leadership;
 		}
 	}
 
