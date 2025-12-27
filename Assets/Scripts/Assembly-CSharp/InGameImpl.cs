@@ -664,7 +664,9 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		WeakGlobalMonoBehavior<BannerManager>.Instance.Init();
 		SingletonMonoBehaviour<TutorialMain>.Instance.Init();
 		mTimeStarted = Time.time;
-		if (!Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive() && !Singleton<Profile>.Instance.inDailyChallenge && SingletonMonoBehaviour<TutorialMain>.Instance.TutorialStartIfNeeded("Tutorial_Game01_ProtectGate"))
+		if (!Singleton<Profile>.Instance.MultiplayerData.IsMultiplayerGameSessionActive() && 
+			!Singleton<Profile>.Instance.inDailyChallenge && 
+			SingletonMonoBehaviour<TutorialMain>.Instance.TutorialStartIfNeeded("Tutorial_Game01_ProtectGate"))
 		{
 			WeakGlobalMonoBehavior<HUD>.Instance.abilitiesEnabled = false;
 			WeakGlobalMonoBehavior<HUD>.Instance.alliesEnabled = false;

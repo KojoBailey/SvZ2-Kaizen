@@ -29,6 +29,11 @@ public class HUD : UIHandler<HUD>, IGluiActionHandler
 			{
 				hUDAbilities.enabled = value;
 			}
+			HUDSouls hUDSouls = FindHUD<HUDSouls>();
+			if (hUDSouls != null)
+			{
+				hUDSouls.enabled = value;
+			}
 		}
 	}
 

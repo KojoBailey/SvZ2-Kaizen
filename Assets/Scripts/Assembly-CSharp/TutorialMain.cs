@@ -76,23 +76,23 @@ public class TutorialMain : SingletonMonoBehaviour<TutorialMain>, IGluiActionHan
 
 	private void TutorialStart(TutorialSchema record)
 	{
-		if (record != null)
+		if (record == null) return;
+		
+		bool flag = false;
+		if (!string.IsNullOrEmpty(GetCurrentTutorial_Key()))
 		{
-			bool flag = false;
-			if (!string.IsNullOrEmpty(GetCurrentTutorial_Key()))
-			{
-				TutorialDone();
-				flag = true;
-			}
-			SingletonSpawningMonoBehaviour<GluiPersistentDataCache>.Instance.Save("CURRENT_TUTORIAL", record.name);
-			if (flag)
-			{
-				GluiDelayedAction.Create(record.actionSendOnStart, 1.5f, base.gameObject, false);
-			}
-			else
-			{
-				GluiActionSender.SendGluiAction(record.actionSendOnStart, base.gameObject, null);
-			}
+			TutorialDone();
+			flag = true;
+		}
+		SingletonSpawningMonoBehaviour<GluiPersistentDataCache>.Instance.Save("CURRENT_TUTORIAL", record.name);
+
+		if (flag)
+		{
+			GluiDelayedAction.Create(record.actionSendOnStart, 1.5f, base.gameObject, false);
+		}
+		else
+		{
+			GluiActionSender.SendGluiAction(record.actionSendOnStart, base.gameObject, null);
 		}
 	}
 
@@ -121,10 +121,8 @@ public class TutorialMain : SingletonMonoBehaviour<TutorialMain>, IGluiActionHan
 
 	public bool HandleAction(string action, GameObject sender, object data)
 	{
-		if (tutorialData == null)
-		{
-			return false;
-		}
+		if (tutorialData == null) return false;
+
 		foreach (TutorialSchema tutorialDatum in tutorialData)
 		{
 			if (tutorialDatum.actionToTrigger == action)
@@ -136,14 +134,14 @@ public class TutorialMain : SingletonMonoBehaviour<TutorialMain>, IGluiActionHan
 				return true;
 			}
 		}
-		switch (action)
+
+		if (action == "TUTORIAL_DONE")
 		{
-		case "TUTORIAL_DONE":
 			TutorialDone();
 			return true;
-		default:
-			return false;
 		}
+		
+		return false;
 	}
 
 	public void SetAllTutorialDoneFlags(bool isDone)

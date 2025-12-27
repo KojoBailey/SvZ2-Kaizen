@@ -190,10 +190,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	public string tutorial
 	{
-		get
-		{
-			return mTutorial;
-		}
+		get { return mTutorial; }
 	}
 
 	public WaveRecyclingMultipliers multipliers
