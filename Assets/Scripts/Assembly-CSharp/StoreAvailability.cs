@@ -98,21 +98,21 @@ public class StoreAvailability
 		}
 	}
 
-	private static void GetHero(string CurrentHeroId, List<StoreData.Item> items)
+	private static void GetHero(string heroId, List<StoreData.Item> items)
 	{
-		HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[CurrentHeroId];
-		int CurrentHeroLevel = Singleton<Profile>.Instance.GetHeroLevel(CurrentHeroId);
+		HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[heroId];
+		int CurrentHeroLevel = Singleton<Profile>.Instance.GetHeroLevel(heroId);
 		int num = CurrentHeroLevel + 1;
 		int num2 = heroSchema.Levels.Length;
 		bool isLastUpgrade = num == num2;
 		StoreData.Item item = new StoreData.Item(delegate
 		{
-			LevelUpHero(CurrentHeroId, isLastUpgrade);
+			LevelUpHero(heroId, isLastUpgrade);
 		});
 		bool purchased = heroSchema.Purchased;
 		item.details.SetColumns(CurrentHeroLevel, num);
 		item.details.AddStat("health_stats", Mathf.RoundToInt(heroSchema.Extrapolate(CurrentHeroLevel, (HeroLevelSchema ls) => ls.health, (HeroSchema s) => s.infiniteUpgradeHealth)).ToString(), Mathf.RoundToInt(heroSchema.Extrapolate(num, (HeroLevelSchema ls) => ls.health, (HeroSchema s) => s.infiniteUpgradeHealth)).ToString());
-		float salePercentage = SaleItemSchema.FindActiveSaleForItem(CurrentHeroId + ".Level");
+		float salePercentage = SaleItemSchema.FindActiveSaleForItem(heroId + ".Level");
 		if (num <= num2)
 		{
 			item.cost = new Cost(heroSchema.Levels[num - 1].cost, salePercentage);
@@ -121,14 +121,14 @@ public class StoreAvailability
 		{
 			item.cost = new Cost(heroSchema.infiniteUpgradeCost, salePercentage);
 		}
-		item.id = CurrentHeroId;
+		item.id = heroId;
 		item.LoadIcon(heroSchema.IconPath);
 		item.title = string.Format(StringUtils.GetStringFromStringRef(heroSchema.store_levelup), num);
 		item.details.Name = item.title;
 		item.details.AddSmallDescription(StringUtils.GetStringFromStringRef(heroSchema.desc));
 		item.analyticsEvent = "UpgradePurchased";
 		item.analyticsParams = new Dictionary<string, object>();
-		item.analyticsParams["ItemName"] = CurrentHeroId + ".CurrentHeroLevel";
+		item.analyticsParams["ItemName"] = heroId + ".CurrentHeroLevel";
 		item.analyticsParams["UpgradeLevel"] = num;
 		string stringFromStringRef = StringUtils.GetStringFromStringRef(heroSchema.displayName);
 		if (CurrentHeroLevel >= heroSchema.Levels.Length)
@@ -138,17 +138,17 @@ public class StoreAvailability
 			item.details.Name = stringFromStringRef;
 		}
 		items.Add(item);
-		GetLeadership(CurrentHeroId, items);
-		GetWeapon(heroSchema.MeleeWeapon, Singleton<Profile>.Instance.GetMeleeWeaponLevel(CurrentHeroId), CurrentHeroId, items);
+		GetLeadership(heroId, items);
+		GetWeapon(heroSchema.MeleeWeapon, Singleton<Profile>.Instance.GetMeleeWeaponLevel(heroId), heroId, items);
 		if (heroSchema.ArmorLevels != null)
 		{
-			GetArmor(heroSchema.ArmorLevels, Singleton<Profile>.Instance.GetArmorLevel(CurrentHeroId), CurrentHeroId, items);
+			GetArmor(heroSchema.ArmorLevels, Singleton<Profile>.Instance.GetArmorLevel(heroId), heroId, items);
 		}
 		else if (!DataBundleRecordKey.IsNullOrEmpty(heroSchema.rangedWeapon))
 		{
-			GetWeapon(heroSchema.RangedWeapon, Singleton<Profile>.Instance.GetRangedWeaponLevel(CurrentHeroId), CurrentHeroId, items);
+			GetWeapon(heroSchema.RangedWeapon, Singleton<Profile>.Instance.GetRangedWeaponLevel(heroId), heroId, items);
 		}
-		if (CurrentHeroId.Equals("HeroBalanced"))
+		if (heroId.Equals("HeroBalanced"))
 		{
 			StoreAvailability_Helpers.Get("Mount_Balanced", true, items);
 		}
@@ -182,7 +182,7 @@ public class StoreAvailability
 		}
 	}
 
-	private static void GetWeapon(WeaponSchema mainData, int curLevel, string CurrentHeroId, List<StoreData.Item> items)
+	private static void GetWeapon(WeaponSchema mainData, int curLevel, string heroId, List<StoreData.Item> items)
 	{
 		int num = curLevel + 1;
 		int num2 = mainData.Levels.Length;
@@ -192,11 +192,11 @@ public class StoreAvailability
 		{
 			if (isRanged)
 			{
-				LevelUpBow(CurrentHeroId, isLastUpgrade);
+				LevelUpBow(heroId, isLastUpgrade);
 			}
 			else
 			{
-				LevelUpSword(CurrentHeroId, isLastUpgrade);
+				LevelUpSword(heroId, isLastUpgrade);
 			}
 		});
 		item.details.SetColumns(curLevel, num);
@@ -207,7 +207,7 @@ public class StoreAvailability
 		item.details.AddSmallDescription(StringUtils.GetStringFromStringRef(weaponLevelSchema.desc));
 		item.title = string.Format(StringUtils.GetStringFromStringRef(weaponLevelSchema.title), num);
 		item.details.Name = item.title;
-		float salePercentage = SaleItemSchema.FindActiveSaleForItem(CurrentHeroId + ((!isRanged) ? ".MeleeWeapon" : ".RangedWeapon"));
+		float salePercentage = SaleItemSchema.FindActiveSaleForItem(heroId + ((!isRanged) ? ".MeleeWeapon" : ".RangedWeapon"));
 		if (num <= num2)
 		{
 			item.cost = new Cost(weaponLevelSchema.cost, salePercentage);
@@ -219,12 +219,12 @@ public class StoreAvailability
 		item.id = mainData.id;
 		item.analyticsEvent = "UpgradePurchased";
 		item.analyticsParams = new Dictionary<string, object>();
-		item.analyticsParams["ItemName"] = CurrentHeroId + ((!isRanged) ? ".MeleeWeapon" : ".RangedWeapon");
+		item.analyticsParams["ItemName"] = heroId + ((!isRanged) ? ".MeleeWeapon" : ".RangedWeapon");
 		item.analyticsParams["UpgradeLevel"] = num;
 		items.Add(item);
 	}
 
-	private static void GetArmor(ArmorLevelSchema[] levelData, int curLevel, string CurrentHeroId, List<StoreData.Item> items)
+	private static void GetArmor(ArmorLevelSchema[] levelData, int curLevel, string heroId, List<StoreData.Item> items)
 	{
 		curLevel--;
 		int num = levelData.Length - 1;
@@ -233,7 +233,7 @@ public class StoreAvailability
 		bool isLastUpgrade = num2 == num;
 		StoreData.Item item = new StoreData.Item(delegate
 		{
-			LevelUpArmor(CurrentHeroId, isLastUpgrade);
+			LevelUpArmor(heroId, isLastUpgrade);
 		});
 		item.details.SetColumns(curLevel + 1, num2 + 1);
 		if (levelData[curLevel].meleeDamageModifier != levelData[num2].meleeDamageModifier)
@@ -259,29 +259,29 @@ public class StoreAvailability
 		else
 		{
 			item.title = string.Format(StringUtils.GetStringFromStringRef("LocalizedStrings", "store_format_upgrade_tolevel"), stringFromStringRef, num2 + 1);
-			float salePercentage = SaleItemSchema.FindActiveSaleForItem(CurrentHeroId + ".Armor");
+			float salePercentage = SaleItemSchema.FindActiveSaleForItem(heroId + ".Armor");
 			item.cost = new Cost(levelData[num2].costCoins + "," + levelData[num2].costGems, salePercentage);
 		}
 		item.id = levelData[num2].level.ToString();
 		item.details.Name = stringFromStringRef;
 		item.analyticsEvent = "UpgradePurchased";
 		item.analyticsParams = new Dictionary<string, object>();
-		item.analyticsParams["ItemName"] = CurrentHeroId + ".Armor";
+		item.analyticsParams["ItemName"] = heroId + ".Armor";
 		item.analyticsParams["UpgradeLevel"] = num2;
 		items.Add(item);
 	}
 
-	private static void GetLeadership(string CurrentHeroId, List<StoreData.Item> items)
+	private static void GetLeadership(string heroId, List<StoreData.Item> items)
 	{
-		LeadershipSchema leadershipSchema = DataBundleUtils.InitializeRecord<LeadershipSchema>(new DataBundleRecordKey(Leadership.UdamanTable, CurrentHeroId));
-		int leadershipLevel = Singleton<Profile>.Instance.GetLeadershipLevel(CurrentHeroId);
+		LeadershipSchema leadershipSchema = DataBundleUtils.InitializeRecord<LeadershipSchema>(new DataBundleRecordKey(Leadership.UdamanTable, heroId));
+		int leadershipLevel = Singleton<Profile>.Instance.GetLeadershipLevel(heroId);
 		int num = leadershipLevel + 1;
 		int maxLevel = leadershipSchema.maxLevel;
 		bool flag = leadershipLevel >= leadershipSchema.hideInStoreLevel;
 		bool isLastUpgrade = num == maxLevel - 1;
 		StoreData.Item item = new StoreData.Item(delegate
 		{
-			LevelUpLeadership(CurrentHeroId, isLastUpgrade);
+			LevelUpLeadership(heroId, isLastUpgrade);
 		});
 		item.id = "Leadership";
 		item.LoadIcon(Singleton<PlayModesManager>.Instance.selectedModeData.IconPath);
@@ -294,7 +294,7 @@ public class StoreAvailability
 		else
 		{
 			item.title = string.Format(StringUtils.GetStringFromStringRef(leadershipSchema.purchaseText), num + 1);
-			float salePercentage = SaleItemSchema.FindActiveSaleForItem(CurrentHeroId + ".Leadership");
+			float salePercentage = SaleItemSchema.FindActiveSaleForItem(heroId + ".Leadership");
 			switch (num)
 			{
 			case 0:
@@ -315,7 +315,7 @@ public class StoreAvailability
 		item.details.Name = stringFromStringRef;
 		item.analyticsEvent = "UpgradePurchased";
 		item.analyticsParams = new Dictionary<string, object>();
-		item.analyticsParams["ItemName"] = CurrentHeroId + "." + item.id;
+		item.analyticsParams["ItemName"] = heroId + "." + item.id;
 		item.analyticsParams["UpgradeLevel"] = num;
 		items.Add(item);
 	}
@@ -817,14 +817,14 @@ public class StoreAvailability
 		items.Add(item);
 	}
 
-	public static void GetHeroMysteryBox(string CurrentHeroId, List<StoreData.Item> items)
+	public static void GetHeroMysteryBox(string heroId, List<StoreData.Item> items)
 	{
 		if (SingletonSpawningMonoBehaviour<DesignerVariables>.Instance.GetVariable("HeroMysteryBox", false))
 		{
-			string table = CurrentHeroId + "MysteryBox";
+			string table = heroId + "MysteryBox";
 			TextDBSchema[] data = DataBundleUtils.InitializeRecords<TextDBSchema>(table);
 			Texture2D overrideIcon = null;
-			string path = "UI/Textures/DynamicIcons/Misc/Present_" + CurrentHeroId;
+			string path = "UI/Textures/DynamicIcons/Misc/Present_" + heroId;
 			SharedResourceLoader.SharedResource cachedResource = ResourceCache.GetCachedResource(path, 1);
 			if (cachedResource != null)
 			{
@@ -833,7 +833,7 @@ public class StoreAvailability
 			StoreData.Item item = new StoreData.Item(delegate
 			{
 				MysteryBoxImpl.SetOverrideTexture(overrideIcon);
-				MysteryBoxImpl.BoxID = CurrentHeroId + "MysteryBox";
+				MysteryBoxImpl.BoxID = heroId + "MysteryBox";
 				GenericTriggerAction("POPUP_MYSTERY_BOX");
 			});
 			float salePercentage = SaleItemSchema.FindActiveSaleForItem("MysteryBox");
@@ -853,13 +853,13 @@ public class StoreAvailability
 			item.packOverrideFunc = delegate
 			{
 				MysteryBoxImpl.SetOverrideTexture(overrideIcon);
-				MysteryBoxImpl.BoxID = CurrentHeroId + "MysteryBox";
+				MysteryBoxImpl.BoxID = heroId + "MysteryBox";
 				GenericTriggerAction("POPUP_MYSTERY_BOX_5");
 			};
 			item.isConsumable = true;
 			item.analyticsEvent = "MysteryBoxPurchased";
 			item.analyticsParams = new Dictionary<string, object>();
-			item.analyticsParams["ItemName"] = item.id + CurrentHeroId;
+			item.analyticsParams["ItemName"] = item.id + heroId;
 			items.Add(item);
 		}
 	}
@@ -895,30 +895,30 @@ public class StoreAvailability
 		}
 	}
 
-	private static void LevelUpHero(string CurrentHeroId, bool isLastUpgrade)
+	private static void LevelUpHero(string heroId, bool isLastUpgrade)
 	{
-		Singleton<Profile>.Instance.SetHeroLevel(CurrentHeroId, Singleton<Profile>.Instance.GetHeroLevel(CurrentHeroId) + 1);
+		Singleton<Profile>.Instance.SetHeroLevel(heroId, Singleton<Profile>.Instance.GetHeroLevel(heroId) + 1);
 		Singleton<Profile>.Instance.Save();
 		if (isLastUpgrade)
 		{
-			HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[CurrentHeroId];
+			HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[heroId];
 			if (heroSchema != null && heroSchema.upgradeAchievement != null && !string.IsNullOrEmpty(heroSchema.upgradeAchievement.Key))
 			{
 				Singleton<Achievements>.Instance.SetAchievementCompletionCount(heroSchema.upgradeAchievement.Key, 1);
 				Singleton<Achievements>.Instance.CheckMetaAchievement("AllUpgrades");
 			}
 		}
-		SingletonSpawningMonoBehaviour<GluiAgent_CentralDispatch>.Instance.SendSimpleOrder("Store", CurrentHeroId, GluiAgentBase.Order.Redraw, null, null);
+		SingletonSpawningMonoBehaviour<GluiAgent_CentralDispatch>.Instance.SendSimpleOrder("Store", heroId, GluiAgentBase.Order.Redraw, null, null);
 	}
 
-	private static void LevelUpLeadership(string CurrentHeroId, bool isLastUpgrade)
+	private static void LevelUpLeadership(string heroId, bool isLastUpgrade)
 	{
-		Singleton<Profile>.Instance.SetLeadershipLevel(CurrentHeroId, Singleton<Profile>.Instance.GetLeadershipLevel(CurrentHeroId) + 1);
+		Singleton<Profile>.Instance.SetLeadershipLevel(heroId, Singleton<Profile>.Instance.GetLeadershipLevel(heroId) + 1);
 		Singleton<Profile>.Instance.Save();
-		SingletonSpawningMonoBehaviour<GluiAgent_CentralDispatch>.Instance.SendSimpleOrder("Store", CurrentHeroId, GluiAgentBase.Order.Redraw, null, null);
+		SingletonSpawningMonoBehaviour<GluiAgent_CentralDispatch>.Instance.SendSimpleOrder("Store", heroId, GluiAgentBase.Order.Redraw, null, null);
 		if (isLastUpgrade)
 		{
-			HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[CurrentHeroId];
+			HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[heroId];
 			if (heroSchema != null && heroSchema.leadershipAchievement != null && !string.IsNullOrEmpty(heroSchema.leadershipAchievement.Key))
 			{
 				Singleton<Achievements>.Instance.SetAchievementCompletionCount(heroSchema.leadershipAchievement.Key, 1);
@@ -927,14 +927,14 @@ public class StoreAvailability
 		}
 	}
 
-	private static void LevelUpSword(string CurrentHeroId, bool isLastUpgrade)
+	private static void LevelUpSword(string heroId, bool isLastUpgrade)
 	{
-		Singleton<Profile>.Instance.SetMeleeWeaponLevel(CurrentHeroId, Singleton<Profile>.Instance.GetMeleeWeaponLevel(CurrentHeroId) + 1);
+		Singleton<Profile>.Instance.SetMeleeWeaponLevel(heroId, Singleton<Profile>.Instance.GetMeleeWeaponLevel(heroId) + 1);
 		Singleton<Profile>.Instance.Save();
-		SingletonSpawningMonoBehaviour<GluiAgent_CentralDispatch>.Instance.SendSimpleOrder("Store", CurrentHeroId, GluiAgentBase.Order.Redraw, null, null);
+		SingletonSpawningMonoBehaviour<GluiAgent_CentralDispatch>.Instance.SendSimpleOrder("Store", heroId, GluiAgentBase.Order.Redraw, null, null);
 		if (isLastUpgrade)
 		{
-			HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[CurrentHeroId];
+			HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[heroId];
 			if (heroSchema != null && heroSchema.meleeAchievement != null && !string.IsNullOrEmpty(heroSchema.meleeAchievement.Key))
 			{
 				Singleton<Achievements>.Instance.SetAchievementCompletionCount(heroSchema.meleeAchievement.Key, 1);
@@ -943,14 +943,14 @@ public class StoreAvailability
 		}
 	}
 
-	private static void LevelUpBow(string CurrentHeroId, bool isLastUpgrade)
+	private static void LevelUpBow(string heroId, bool isLastUpgrade)
 	{
-		Singleton<Profile>.Instance.SetRangedWeaponLevel(CurrentHeroId, Singleton<Profile>.Instance.GetRangedWeaponLevel(CurrentHeroId) + 1);
+		Singleton<Profile>.Instance.SetRangedWeaponLevel(heroId, Singleton<Profile>.Instance.GetRangedWeaponLevel(heroId) + 1);
 		Singleton<Profile>.Instance.Save();
-		SingletonSpawningMonoBehaviour<GluiAgent_CentralDispatch>.Instance.SendSimpleOrder("Store", CurrentHeroId, GluiAgentBase.Order.Redraw, null, null);
+		SingletonSpawningMonoBehaviour<GluiAgent_CentralDispatch>.Instance.SendSimpleOrder("Store", heroId, GluiAgentBase.Order.Redraw, null, null);
 		if (isLastUpgrade)
 		{
-			HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[CurrentHeroId];
+			HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[heroId];
 			if (heroSchema != null && heroSchema.rangedAchievement != null && !string.IsNullOrEmpty(heroSchema.rangedAchievement.Key))
 			{
 				Singleton<Achievements>.Instance.SetAchievementCompletionCount(heroSchema.rangedAchievement.Key, 1);
@@ -959,14 +959,14 @@ public class StoreAvailability
 		}
 	}
 
-	private static void LevelUpArmor(string CurrentHeroId, bool isLastUpgrade)
+	private static void LevelUpArmor(string heroId, bool isLastUpgrade)
 	{
-		Singleton<Profile>.Instance.SetArmorLevel(CurrentHeroId, Singleton<Profile>.Instance.GetArmorLevel(CurrentHeroId) + 1);
+		Singleton<Profile>.Instance.SetArmorLevel(heroId, Singleton<Profile>.Instance.GetArmorLevel(heroId) + 1);
 		Singleton<Profile>.Instance.Save();
-		SingletonSpawningMonoBehaviour<GluiAgent_CentralDispatch>.Instance.SendSimpleOrder("Store", CurrentHeroId, GluiAgentBase.Order.Redraw, null, null);
+		SingletonSpawningMonoBehaviour<GluiAgent_CentralDispatch>.Instance.SendSimpleOrder("Store", heroId, GluiAgentBase.Order.Redraw, null, null);
 		if (isLastUpgrade)
 		{
-			HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[CurrentHeroId];
+			HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[heroId];
 			if (heroSchema != null && heroSchema.rangedAchievement != null && !string.IsNullOrEmpty(heroSchema.rangedAchievement.Key))
 			{
 				Singleton<Achievements>.Instance.SetAchievementCompletionCount(heroSchema.rangedAchievement.Key, 1);

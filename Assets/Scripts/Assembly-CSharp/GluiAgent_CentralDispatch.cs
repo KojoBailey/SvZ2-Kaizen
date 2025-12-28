@@ -109,9 +109,9 @@ public class GluiAgent_CentralDispatch : SingletonSpawningMonoBehaviour<GluiAgen
 
 	private void SendOrderPacket(GluiAgentBase agent, GluiOrderPacket orderPacket)
 	{
-		// if (!(agent == null) && orderPacket.order != GluiAgentBase.Order.None)
-		// {
-		// 	bool flag = agent.HandleOrder(orderPacket);
-		// }
+		if (!(agent == null) && orderPacket.order != GluiAgentBase.Order.None)
+		{
+			bool flag = agent.HandleOrder(orderPacket);
+		}
 	}
 }

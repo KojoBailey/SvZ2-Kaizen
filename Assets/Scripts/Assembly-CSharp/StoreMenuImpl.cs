@@ -35,23 +35,27 @@ public class StoreMenuImpl : SingletonMonoBehaviour<StoreMenuImpl>, IGluiActionH
 	private IEnumerator Start()
 	{
 		ApplicationUtilities._allowAutoSave = false;
+
 		UpdateNewBadge(badge_newHeroes, StringUtils.GetStringFromStringRef("MenuFixedStrings", "store_items_global"), Singleton<HeroesDatabase>.Instance.AllIDs);
 		UpdateNewBadge(badge_newAllies, "Helpers");
 		UpdateNewBadge(bage_newExtras, "Consumables");
+		
 		yield return StartCoroutine(Profile.CheckForUpdates());
 		if (SingletonSpawningMonoBehaviour<UpdateSystem>.Instance.DataBundlesModified)
 		{
 			Profile.ShowRestartPopup();
 		}
+
 		if (FrontEnd_HUD.Instance != null)
 		{
 			FrontEnd_HUD.SetDefenseRatingMode(false);
 		}
-		if (Singleton<Profile>.Instance.CurrentStoryWave == 2 && Singleton<Profile>.Instance.GetIsWaveUnlocked(2))
+
+		if (Singleton<Profile>.Instance.CurrentStoryWave == 2 && !Singleton<Profile>.Instance.HasWaveBeenCompleted(2))
 		{
 			Singleton<Profile>.Instance.ForceOnboardingStage("OnboardingStep8_StoreTutorial");
 		}
-		else if (Singleton<Profile>.Instance.CurrentStoryWave == 3 && Singleton<Profile>.Instance.GetIsWaveUnlocked(3) && !Singleton<Profile>.Instance.IsOnboardingStageComplete("OnboardingStep20_StoreMain2"))
+		else if (Singleton<Profile>.Instance.CurrentStoryWave == 3 && !Singleton<Profile>.Instance.HasWaveBeenCompleted(3) && !Singleton<Profile>.Instance.IsOnboardingStageComplete("OnboardingStep20_StoreMain2"))
 		{
 			Singleton<Profile>.Instance.ForceOnboardingStage("OnboardingStep20_StoreMain2");
 			if (PortableQualitySettings.GetQuality() != EPortableQualitySetting.Low)
@@ -60,6 +64,7 @@ public class StoreMenuImpl : SingletonMonoBehaviour<StoreMenuImpl>, IGluiActionH
 			}
 			ApplicationUtilities.MakePlayHavenContentRequest("tutorial_end");
 		}
+		
 		bool customPlayHavenContentRequest = false;
 		if (ReturnedFromGame)
 		{
@@ -182,10 +187,8 @@ public class StoreMenuImpl : SingletonMonoBehaviour<StoreMenuImpl>, IGluiActionH
 
 	private void UpdateNewBadge(GameObject go, string firstKey, params string[] moreKeys)
 	{
-		if (go == null)
-		{
-			return;
-		}
+		if (go == null) return;
+
 		object[] records;
 		Get_GluiData(firstKey, null, null, out records);
 		object[] array = records;
@@ -218,9 +221,7 @@ public class StoreMenuImpl : SingletonMonoBehaviour<StoreMenuImpl>, IGluiActionH
 		go.SetActive(false);
 	}
 
-	public static void UpdateTapJoyPoints(GameObject sender)
-	{
-	}
+	public static void UpdateTapJoyPoints(GameObject sender) {}
 
 	private void Update()
 	{
