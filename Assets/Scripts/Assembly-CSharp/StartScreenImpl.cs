@@ -92,30 +92,6 @@ public class StartScreenImpl : MonoBehaviour, IGluiActionHandler
 				GluiActionSender.SendGluiAction("MENU_MAIN_STORE", sender, data);
 			}
 			return true;
-		// case "FACEBOOK_LOGIN":
-		// 	FacebookButton.Visible = false;
-		// 	if (Application.internetReachability == NetworkReachability.NotReachable)
-		// 	{
-		// 		AJavaTools.UI.ShowToast(StringUtils.GetStringFromStringRef("LocalizedStrings", "IDS_ICLOUD_REQUIRE_INTERNET_ANDROID"));
-		// 	}
-		// 	else
-		// 	{
-		// 		Glu.Plugins.ASocial.Facebook.Login();
-		// 	}
-		// 	return true;
-		case "GAMECENTER_LOGIN":
-			if (AJavaTools.Properties.IsBuildAmazon())
-			{
-				Amazon.ShowLeaderBoards();
-			}
-			else if (!AJavaTools.Properties.IsBuildAmazon())
-			{
-				if (Application.internetReachability == NetworkReachability.NotReachable)
-				{
-					AJavaTools.UI.ShowToast(StringUtils.GetStringFromStringRef("LocalizedStrings", "IDS_ICLOUD_REQUIRE_INTERNET_ANDROID"));
-				}
-			}
-			return true;
 		case "POPUP_ACHIEVEMENTS":
 			return true;
 		case "POPUP_LEADERBOARDS":
