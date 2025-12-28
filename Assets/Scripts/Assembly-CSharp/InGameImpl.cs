@@ -355,29 +355,6 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		ResourceCache.DefaultCacheLevel = 1;
 		Singleton<Achievements>.Instance.SuppressPartialReporting(true);
 
-		// [TUTORIAL]
-		if (ProfileData.IsInStoryWave)
-		{
-			if (CurrentWave == 1 && !ProfileData.HasWaveBeenCompleted(1))
-			{
-				ProfileData.ForceOnboardingStage("OnboardingStep3_StartWave1");
-				ApplicationUtilities.MakePlayHavenContentRequest("tutorial_start");
-			}
-			
-			if (CurrentWave == 2 && !ProfileData.HasWaveBeenCompleted(2))
-			{
-				ProfileData.SetSelectedHelpers(new List<string>(new string[1] { "Farmer" }));
-				ProfileData.ForceOnboardingStage("OnboardingStep17_StartWave2");
-			}
-		}
-		if (CurrentWave == 1 && !ProfileData.HasWaveBeenCompleted(1))
-		{
-			WeakGlobalMonoBehavior<HUD>.Instance.alliesEnabled = false;
-			WeakGlobalMonoBehavior<HUD>.Instance.abilitiesEnabled = false;
-			StartCoroutine(CheckForHeroMovement());
-			StartCoroutine(CheckForHeroAttack());
-		}
-
 		InitializeHelpersAndAbilities();
 
 		UpdatePlayStatistics();
@@ -434,6 +411,29 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 		Singleton<PlayerWaveEventData>.Instance.StartWave();
 
+		// [TUTORIAL]
+		if (ProfileData.IsInStoryWave)
+		{
+			if (CurrentWave == 1 && !ProfileData.HasWaveBeenCompleted(1))
+			{
+				ProfileData.ForceOnboardingStage("OnboardingStep3_StartWave1");
+				ApplicationUtilities.MakePlayHavenContentRequest("tutorial_start");
+			}
+			
+			if (CurrentWave == 2 && !ProfileData.HasWaveBeenCompleted(2))
+			{
+				ProfileData.SetSelectedHelpers(new List<string>(new string[1] { "Farmer" }));
+				ProfileData.ForceOnboardingStage("OnboardingStep17_StartWave2");
+			}
+		}
+		if (CurrentWave == 1 && !ProfileData.HasWaveBeenCompleted(1))
+		{
+			WeakGlobalMonoBehavior<HUD>.Instance.alliesEnabled = false;
+			WeakGlobalMonoBehavior<HUD>.Instance.abilitiesEnabled = false;
+			StartCoroutine(CheckForHeroMovement());
+			StartCoroutine(CheckForHeroAttack());
+		}
+
 		Shader.WarmupAllShaders();
 		MemoryWarningHandler.Instance.unloadOnMemoryWarning = true;
 		AdjustEffectQuality();
@@ -456,7 +456,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 			string[] tagHeroes = new string[3] { "HeroBalanced", "HeroAttack", "HeroDefense" };
 			foreach (string hero in tagHeroes)
 			{
-				bool isMultiplayerOpponentDifferentHero = ProfileData.MultiplayerData.CurrentOpponent.loadout.CurrentHeroId != hero;
+				bool isMultiplayerOpponentDifferentHero = ProfileData.MultiplayerData.CurrentOpponent.loadout.heroId != hero;
 				if (ProfileData.CurrentHeroId != hero && (!ProfileData.IsInMultiplayerWave || isMultiplayerOpponentDifferentHero))
 				{
 					possibleTag.Add(hero);
@@ -1524,7 +1524,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 	{
 		if (Singleton<AbilitiesDatabase>.Instance.GetSchema(ability) != null) return false;
 
-		List<string> list = new List<string>{ability};
+		List<string> list = new List<string>(1){ability};
 		ProfileData.SetSelectedAbilities(list);
 		return true;
 	}

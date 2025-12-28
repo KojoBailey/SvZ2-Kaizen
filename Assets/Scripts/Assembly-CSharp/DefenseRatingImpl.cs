@@ -76,8 +76,8 @@ public class DefenseRatingImpl : MonoBehaviour, IGluiActionHandler
 		GameObject gameObject = Object.Instantiate(IconPrefab, HeroIconLocator.position, HeroIconLocator.rotation) as GameObject;
 		DefenseRatingWidgetImpl component = gameObject.GetComponent<DefenseRatingWidgetImpl>();
 		gameObject.transform.parent = HeroIconLocator;
-		HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[loadoutToDisplay.CurrentHeroId];
-		component.SetupWidget(heroSchema.icon, null, loadoutToDisplay.CurrentHeroLevel);
+		HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[loadoutToDisplay.heroId];
+		component.SetupWidget(heroSchema.icon, null, loadoutToDisplay.heroLevel);
 		int num = Mathf.Min(HelperIconLocator.Length, loadoutToDisplay.selectedHelpers.Length);
 		for (int i = 0; i < num; i++)
 		{

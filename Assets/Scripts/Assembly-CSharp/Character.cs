@@ -189,8 +189,7 @@ public class Character : Weakable
 		}
 		set
 		{
-			List<GameObject> list = new List<GameObject>(1);
-			list.Add(value);
+			List<GameObject> list = new List<GameObject>(1){value};
 			meleeWeaponPrefabAsList = list;
 		}
 	}

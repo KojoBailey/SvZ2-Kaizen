@@ -92,17 +92,25 @@ public class HeroesDatabase : Singleton<HeroesDatabase>
 
 	public void LoadInGameData(string id, int ownerId)
 	{
-		DataBundleResourceGroup groupToLoad = ((!WeakGlobalMonoBehavior<InGameImpl>.Exists) ? DataBundleResourceGroup.Preview : DataBundleResourceGroup.InGame);
+		DataBundleResourceGroup groupToLoad = !WeakGlobalMonoBehavior<InGameImpl>.Exists
+			? DataBundleResourceGroup.Preview
+			: DataBundleResourceGroup.InGame;
 		foreach (DataBundleRecordHandle<HeroSchema> mDatum in mData)
 		{
 			if (string.Equals(id, mDatum.Data.id))
 			{
-				int SwordLevel = ((ownerId != 0) ? Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.meleeLevel : Singleton<Profile>.Instance.GetMeleeWeaponLevel(mDatum.Data.id));
-				int BowLevel = ((ownerId != 0) ? Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.BowLevel : Singleton<Profile>.Instance.GetRangedWeaponLevel(mDatum.Data.id));
-				int armorLevel = ((ownerId != 0) ? Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.armorLevel : Singleton<Profile>.Instance.GetArmorLevel(mDatum.Data.id));
+				int swordLevel = (ownerId != 0)
+					? Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.meleeLevel
+					: Singleton<Profile>.Instance.GetMeleeWeaponLevel(mDatum.Data.id);
+				int bowLevel = (ownerId != 0)
+					? Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.bowLevel
+					: Singleton<Profile>.Instance.GetRangedWeaponLevel(mDatum.Data.id);
+				int armorLevel = (ownerId != 0)
+					? Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.armorLevel
+					: Singleton<Profile>.Instance.GetArmorLevel(mDatum.Data.id);
 				mDatum.Load(groupToLoad, true, delegate(HeroSchema s)
 				{
-					s.LoadCachedResources(SwordLevel, BowLevel, armorLevel, false);
+					s.LoadCachedResources(swordLevel, bowLevel, armorLevel, false);
 				});
 			}
 		}

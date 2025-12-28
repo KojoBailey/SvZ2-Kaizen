@@ -10,15 +10,15 @@ public class MultiplayerProfileLoadout
 
 	private int mVersion;
 
-	public string CurrentHeroId = string.Empty;
+	public string heroId = string.Empty;
 
-	public int CurrentHeroLevel;
+	public int heroLevel;
 
 	public int leadershipLevel;
 
 	public int meleeLevel;
 
-	public int BowLevel;
+	public int bowLevel;
 
 	public int armorLevel;
 
@@ -92,12 +92,12 @@ public class MultiplayerProfileLoadout
 		}
 		playerName = string.Empty;
 		mVersion = CollectionStatusRecord.kCollectionVersion;
-		UpdateString(ref CurrentHeroId, Singleton<Profile>.Instance.SelectedDefendHero);
-		UpdateInt(ref CurrentHeroLevel, Singleton<Profile>.Instance.CurrentHeroLevel);
+		UpdateString(ref heroId, Singleton<Profile>.Instance.SelectedDefendHero);
+		UpdateInt(ref heroLevel, Singleton<Profile>.Instance.CurrentHeroLevel);
 		UpdateInt(ref leadershipLevel, Singleton<Profile>.Instance.InitialLeadershipLevel);
-		UpdateInt(ref meleeLevel, Singleton<Profile>.Instance.GetMeleeWeaponLevel(CurrentHeroId));
-		UpdateInt(ref BowLevel, Singleton<Profile>.Instance.GetRangedWeaponLevel(CurrentHeroId));
-		UpdateInt(ref armorLevel, Singleton<Profile>.Instance.GetArmorLevel(CurrentHeroId));
+		UpdateInt(ref meleeLevel, Singleton<Profile>.Instance.GetMeleeWeaponLevel(heroId));
+		UpdateInt(ref bowLevel, Singleton<Profile>.Instance.GetRangedWeaponLevel(heroId));
+		UpdateInt(ref armorLevel, Singleton<Profile>.Instance.GetArmorLevel(heroId));
 		UpdateInt(ref baseLevel, Singleton<Profile>.Instance.baseLevel);
 		UpdateInt(ref archerLevel, Singleton<Profile>.Instance.archerLevel);
 		UpdateInt(ref bellLevel, Singleton<Profile>.Instance.bellLevel);
@@ -209,10 +209,10 @@ public class MultiplayerProfileLoadout
 	{
 		defenseRating = 0;
 		heroRating = 0;
-		HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[CurrentHeroId];
+		HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[heroId];
 		if (heroSchema != null)
 		{
-			heroRating += heroSchema.defenseRating * CurrentHeroLevel;
+			heroRating += heroSchema.defenseRating * heroLevel;
 			WeaponSchema meleeWeapon = heroSchema.MeleeWeapon;
 			if (meleeWeapon != null)
 			{
@@ -221,7 +221,7 @@ public class MultiplayerProfileLoadout
 			meleeWeapon = heroSchema.RangedWeapon;
 			if (meleeWeapon != null)
 			{
-				heroRating += meleeWeapon.defenseRating * BowLevel;
+				heroRating += meleeWeapon.defenseRating * bowLevel;
 			}
 			if (armorLevel > 0 && heroSchema.ArmorLevels != null)
 			{
@@ -264,11 +264,11 @@ public class MultiplayerProfileLoadout
 	public void UpdateFromAISchema(AIEnemySchema aiSchema)
 	{
 		mVersion = CollectionStatusRecord.kCollectionVersion;
-		CurrentHeroId = aiSchema.CurrentHeroId.Key;
-		CurrentHeroLevel = aiSchema.CurrentHeroLevel;
-		BowLevel = aiSchema.BowLevel;
+		heroId = aiSchema.heroId.Key;
+		heroLevel = aiSchema.heroLevel;
+		bowLevel = aiSchema.bowLevel;
 		armorLevel = aiSchema.armorLevel;
-		meleeLevel = aiSchema.SwordLevel;
+		meleeLevel = aiSchema.swordLevel;
 		baseLevel = aiSchema.gateLevel;
 		archerLevel = aiSchema.archerLevel;
 		bellLevel = aiSchema.bellLevel;
@@ -374,11 +374,11 @@ public class MultiplayerProfileLoadout
 			mVersion = (int)binaryReader.ReadUInt64();
 			if (mVersion == CollectionStatusRecord.kCollectionVersion)
 			{
-				CurrentHeroId = binaryReader.ReadString();
-				CurrentHeroLevel = binaryReader.ReadByte();
+				heroId = binaryReader.ReadString();
+				heroLevel = binaryReader.ReadByte();
 				leadershipLevel = binaryReader.ReadByte();
 				meleeLevel = binaryReader.ReadByte();
-				BowLevel = binaryReader.ReadByte();
+				bowLevel = binaryReader.ReadByte();
 				armorLevel = binaryReader.ReadByte();
 				baseLevel = binaryReader.ReadByte();
 				archerLevel = binaryReader.ReadByte();
@@ -458,11 +458,11 @@ public class MultiplayerProfileLoadout
 		MemoryStream memoryStream = new MemoryStream();
 		BinaryWriter binaryWriter = new BinaryWriter(memoryStream);
 		binaryWriter.Write((ulong)mVersion);
-		binaryWriter.Write(CurrentHeroId);
-		binaryWriter.Write((byte)CurrentHeroLevel);
+		binaryWriter.Write(heroId);
+		binaryWriter.Write((byte)heroLevel);
 		binaryWriter.Write((byte)leadershipLevel);
 		binaryWriter.Write((byte)meleeLevel);
-		binaryWriter.Write((byte)BowLevel);
+		binaryWriter.Write((byte)bowLevel);
 		binaryWriter.Write((byte)armorLevel);
 		binaryWriter.Write((byte)baseLevel);
 		binaryWriter.Write((byte)archerLevel);

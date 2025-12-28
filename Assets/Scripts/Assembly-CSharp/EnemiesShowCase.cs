@@ -122,8 +122,7 @@ public class EnemiesShowCase : WeakGlobalInstance<EnemiesShowCase>
 			{
 				return;
 			}
-			list = new List<string>();
-			list.Add(Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.CurrentHeroId);
+			list = new List<string>(1){Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.heroId};
 			string text = WaveManager.SpecialBossName(Singleton<Profile>.Instance.MultiplayerData.MultiplayerGameSessionData.defensiveBuffs[0]);
 			if (text != string.Empty)
 			{
