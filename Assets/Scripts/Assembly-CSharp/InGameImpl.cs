@@ -397,7 +397,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		SingletonMonoBehaviour<TutorialMain>.Instance.Init();
 		StartCoroutine(CheckTutorials());
 
-		int waveBannerDelay =
+		float waveBannerDelay =
 			SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game02_Movement") ? 4.5f :
 			(SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game03_Ally") ? 6.0f :
 			1f);
