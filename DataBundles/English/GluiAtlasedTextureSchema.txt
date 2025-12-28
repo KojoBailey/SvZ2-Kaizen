@@ -652,6 +652,97 @@
     AtlasPosY = 0.03125
     ActualSizeX = 83
     ActualSizeY = 32
+[SoulsHud]
+  SoulsBase:
+    TextureName = SoulsBase
+    SourceAssetPath = Assets/Content/UI/Textures/HUD/SoulsBase.png
+    AtlasTexture = Assets/Game/Resources/UI/Textures/SpriteAtlas/SoulsHud.png
+    AtlasSizeX = 0.2285156
+    AtlasSizeY = 0.3847656
+    AtlasPosX = 0.001953125
+    AtlasPosY = 0.4550781
+    ActualSizeX = 117
+    ActualSizeY = 197
+  SoulsMeterBase3:
+    TextureName = SoulsMeterBase3
+    SourceAssetPath = Assets/Content/UI/Textures/HUD/SoulsMeterBase3.png
+    AtlasTexture = Assets/Game/Resources/UI/Textures/SpriteAtlas/SoulsHud.png
+    AtlasSizeX = 0.6445313
+    AtlasSizeY = 0.09960938
+    AtlasPosX = 0.234375
+    AtlasPosY = 0.7402344
+    ActualSizeX = 330
+    ActualSizeY = 51
+  SoulsMeterBase2:
+    TextureName = SoulsMeterBase2
+    SourceAssetPath = Assets/Content/UI/Textures/HUD/SoulsMeterBase2.png
+    AtlasTexture = Assets/Game/Resources/UI/Textures/SpriteAtlas/SoulsHud.png
+    AtlasSizeX = 0.6445313
+    AtlasSizeY = 0.09960938
+    AtlasPosX = 0.234375
+    AtlasPosY = 0.6367188
+    ActualSizeX = 330
+    ActualSizeY = 51
+  SoulsMeterBase1:
+    TextureName = SoulsMeterBase1
+    SourceAssetPath = Assets/Content/UI/Textures/HUD/SoulsMeterBase1.png
+    AtlasTexture = Assets/Game/Resources/UI/Textures/SpriteAtlas/SoulsHud.png
+    AtlasSizeX = 0.6445313
+    AtlasSizeY = 0.09960938
+    AtlasPosX = 0.234375
+    AtlasPosY = 0.5332031
+    ActualSizeX = 330
+    ActualSizeY = 51
+  SoulsMeterBase0:
+    TextureName = SoulsMeterBase0
+    SourceAssetPath = Assets/Content/UI/Textures/HUD/SoulsMeterBase0.png
+    AtlasTexture = Assets/Game/Resources/UI/Textures/SpriteAtlas/SoulsHud.png
+    AtlasSizeX = 0.6445313
+    AtlasSizeY = 0.09960938
+    AtlasPosX = 0.001953125
+    AtlasPosY = 0.3515625
+    ActualSizeX = 330
+    ActualSizeY = 51
+  SoulsMeter_Fill_3:
+    TextureName = SoulsMeter_Fill_3
+    SourceAssetPath = Assets/Content/UI/Textures/HUD/SoulsMeter_Fill_3.png
+    AtlasTexture = Assets/Game/Resources/UI/Textures/SpriteAtlas/SoulsHud.png
+    AtlasSizeX = 0.6308594
+    AtlasSizeY = 0.0625
+    AtlasPosX = 0.234375
+    AtlasPosY = 0.4667969
+    ActualSizeX = 323
+    ActualSizeY = 32
+  SoulsMeter_Fill_2:
+    TextureName = SoulsMeter_Fill_2
+    SourceAssetPath = Assets/Content/UI/Textures/HUD/SoulsMeter_Fill_2.png
+    AtlasTexture = Assets/Game/Resources/UI/Textures/SpriteAtlas/SoulsHud.png
+    AtlasSizeX = 0.4746094
+    AtlasSizeY = 0.0625
+    AtlasPosX = 0.4609375
+    AtlasPosY = 0.1367188
+    ActualSizeX = 243
+    ActualSizeY = 32
+  SoulsMeter_Fill_1:
+    TextureName = SoulsMeter_Fill_1
+    SourceAssetPath = Assets/Content/UI/Textures/HUD/SoulsMeter_Fill_1.png
+    AtlasTexture = Assets/Game/Resources/UI/Textures/SpriteAtlas/SoulsHud.png
+    AtlasSizeX = 0.3183594
+    AtlasSizeY = 0.0625
+    AtlasPosX = 0.6503906
+    AtlasPosY = 0.3886719
+    ActualSizeX = 163
+    ActualSizeY = 32
+  SoulsMeter_Fill_0:
+    TextureName = SoulsMeter_Fill_0
+    SourceAssetPath = Assets/Content/UI/Textures/HUD/SoulsMeter_Fill_0.png
+    AtlasTexture = Assets/Game/Resources/UI/Textures/SpriteAtlas/SoulsHud.png
+    AtlasSizeX = 0.1621094
+    AtlasSizeY = 0.0625
+    AtlasPosX = 0.001953125
+    AtlasPosY = 0.03125
+    ActualSizeX = 83
+    ActualSizeY = 32
 [Narrative_Collections]
   Collections_01:
     TextureName = Collections_01

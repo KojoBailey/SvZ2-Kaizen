@@ -4738,15 +4738,15 @@ MonoBehaviour:
   anchor: 0
   handler: {fileID: 0}
   gluiTexture:
-    Texture: {fileID: 2800000, guid: c7e453596339a4640822a37fa190d4d8, type: 3}
+    Texture: {fileID: 2800000, guid: 152548659c53078469da3e30bc845a29, type: 3}
     UVs:
       serializedVersion: 2
       x: 0.001953125
       y: 0.4550781
       width: 0.2285156
       height: 0.3847656
-    AtlasRecordKey: Hud.LeadershipBase
-    sourceAssetPath: Assets/Content/UI/Textures/HUD/LeadershipBase.png
+    AtlasRecordKey: SoulsHud.SoulsBase
+    sourceAssetPath: Assets/Content/UI/Textures/HUD/SoulsBase.png
   color: {r: 1, g: 1, b: 1, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   material: {fileID: 0}
@@ -5339,15 +5339,15 @@ MonoBehaviour:
   anchor: 0
   handler: {fileID: 0}
   gluiTexture:
-    Texture: {fileID: 2800000, guid: c7e453596339a4640822a37fa190d4d8, type: 3}
+    Texture: {fileID: 2800000, guid: 152548659c53078469da3e30bc845a29, type: 3}
     UVs:
       serializedVersion: 2
       x: 0.001953125
       y: 0.3515625
       width: 0.6445313
       height: 0.09960938
-    AtlasRecordKey: Hud.LeadershipMeterBase0
-    sourceAssetPath: Assets/Content/UI/Textures/HUD/LeadershipMeterBase0.png
+    AtlasRecordKey: SoulsHud.SoulsMeterBase0
+    sourceAssetPath: Assets/Content/UI/Textures/HUD/SoulsMeterBase0.png
   color: {r: 1, g: 1, b: 1, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   material: {fileID: 0}
@@ -5806,15 +5806,15 @@ MonoBehaviour:
   anchor: 0
   handler: {fileID: 0}
   gluiTexture:
-    Texture: {fileID: 2800000, guid: c7e453596339a4640822a37fa190d4d8, type: 3}
+    Texture: {fileID: 2800000, guid: 152548659c53078469da3e30bc845a29, type: 3}
     UVs:
       serializedVersion: 2
       x: 0.001953125
       y: 0.03125
       width: 0.1621094
       height: 0.0625
-    AtlasRecordKey: Hud.LeadershipMeter_Fill_0
-    sourceAssetPath: Assets/Content/UI/Textures/HUD/LeadershipMeter_Fill_0.png
+    AtlasRecordKey: SoulsHud.SoulsMeter_Fill_0
+    sourceAssetPath: Assets/Content/UI/Textures/HUD/SoulsMeter_Fill_0.png
   color: {r: 0.12156863, g: 0.654902, b: 0.972549, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   material: {fileID: 0}
@@ -6274,15 +6274,15 @@ MonoBehaviour:
   anchor: 0
   handler: {fileID: 0}
   gluiTexture:
-    Texture: {fileID: 2800000, guid: c7e453596339a4640822a37fa190d4d8, type: 3}
+    Texture: {fileID: 2800000, guid: 152548659c53078469da3e30bc845a29, type: 3}
     UVs:
       serializedVersion: 2
       x: 0.234375
       y: 0.4667969
       width: 0.6308594
       height: 0.0625
-    AtlasRecordKey: Hud.LeadershipMeter_Fill_3
-    sourceAssetPath: Assets/Content/UI/Textures/HUD/LeadershipMeter_Fill_3.png
+    AtlasRecordKey: SoulsHud.SoulsMeter_Fill_3
+    sourceAssetPath: Assets/Content/UI/Textures/HUD/SoulsMeter_Fill_3.png
   color: {r: 0.12156863, g: 0.654902, b: 0.972549, a: 1}
   disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   material: {fileID: 0}
