@@ -617,7 +617,7 @@
 		VsModeAIOpponent = CollectionEnemies.EasyBalanced
 	10:
 		title = Demon King
-		BossEnemy = Enemies.oni_boss
+		BossEnemy = Enemies.OniBoss
 		scene = ZenGarden_night
 		music = MusicEvents.BGM_ZenGarden_Night
 		rewards = Reward_Table.Reward_Wave_10

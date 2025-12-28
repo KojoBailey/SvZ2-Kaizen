@@ -408,8 +408,8 @@
     bluntImpactEffect = 
     bluntCriticalImpactEffect = 
     snapToGround = True
-  LZombieWarH:
-    id = LZombieWarH
+  LZombieWarHammer:
+    id = LZombieWarHammer
     animatedWalkSpeed = 1
     arrowImpactEffect = Assets/Game/Resources/FX/BloodSplatMedium.prefab
     bladeImpactEffect = Assets/Game/Resources/FX/BloodSplatMedium.prefab

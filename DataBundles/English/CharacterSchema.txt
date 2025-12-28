@@ -546,17 +546,17 @@
     paperdollData = LZombieTaiko
     characterModelControllerData = Character.LZombieTaiko
     soundTheme = Themes.EnemyTaiko
-  LZombieWarH:
-    id = LZombieWarH
+  LZombieWarHammer:
+    id = LZombieWarHammer
     prefab = Assets/Game/Resources/Characters/CharacterPrefab.prefab
     model = Assets/Game/Resources/Characters/LightZombieMelee/lzombiemelee.prefab
     material = Assets/Game/Resources/Characters/LightZombieMelee/Materials/zombie_blueD.mat
     scaleX = 1
     scaleY = 1
     scaleZ = 1
-    taggedAnimPlayerData = Character.LZombieWarH
-    paperdollData = LZombieWarH
-    characterModelControllerData = Character.LZombieWarH
+    taggedAnimPlayerData = Character.LZombieWarHammer
+    paperdollData = LZombieWarHammer
+    characterModelControllerData = Character.LZombieWarHammer
     soundTheme = Themes.EnemyLZombieMelee
   Necromancer:
     id = Necromancer

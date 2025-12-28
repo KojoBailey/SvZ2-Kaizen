@@ -3,7 +3,7 @@
     index = 1
     minWaitTime = 1
     maxWaitTime = 1
-    enemy_1 = Enemies.oni_small
+    enemy_1 = Enemies.OniSmall
     quantity_1 = 2
     enemy_2 = Enemies.tengu_air
     quantity_2 = 3
@@ -177,7 +177,7 @@
     index = 5
     minWaitTime = 1
     maxWaitTime = 1
-    enemy_1 = Enemies.oni
+    enemy_1 = Enemies.Oni
     quantity_1 = 1
     enemy_2 = 
     quantity_2 = 0
@@ -239,7 +239,7 @@
     index = 1
     minWaitTime = 1
     maxWaitTime = 1
-    enemy_1 = Enemies.oni_small
+    enemy_1 = Enemies.OniSmall
     quantity_1 = 1
     enemy_2 = 
     quantity_2 = 0
@@ -372,7 +372,7 @@
     index = 2
     minWaitTime = 0.1
     maxWaitTime = 0.3
-    enemy_1 = Enemies.oni
+    enemy_1 = Enemies.Oni
     quantity_1 = 0
     enemy_2 = 
     quantity_2 = 0
@@ -911,7 +911,7 @@
     index = 5
     minWaitTime = 0.1
     maxWaitTime = 0.1
-    enemy_1 = Enemies.oni
+    enemy_1 = Enemies.Oni
     quantity_1 = 0
     enemy_2 = 
     quantity_2 = 0
@@ -982,7 +982,7 @@
     index = 5
     minWaitTime = 0.1
     maxWaitTime = 0.1
-    enemy_1 = Enemies.oni
+    enemy_1 = Enemies.Oni
     quantity_1 = 3
     enemy_2 = 
     quantity_2 = 0
@@ -1006,13 +1006,13 @@
     quantity_1 = 1
     enemy_2 = Enemies.wayundo_wood
     quantity_2 = 2
-    enemy_3 = Enemies.oni
+    enemy_3 = Enemies.Oni
     quantity_3 = 0
   8:
     index = 8
     minWaitTime = 0.1
     maxWaitTime = 0.1
-    enemy_1 = Enemies.oni
+    enemy_1 = Enemies.Oni
     quantity_1 = 2
     enemy_2 = Enemies.wayundo_fire
     quantity_2 = 0

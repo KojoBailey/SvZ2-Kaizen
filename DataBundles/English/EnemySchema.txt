@@ -489,7 +489,7 @@
   evil_zombie_warhammer:
     id = evil_zombie_warhammer
     displayName = LocalizedStrings.enemy_l_zombie_s_name
-    resources = Character.LZombieWarH
+    resources = Character.LZombieWarHammer
     meleeWeaponPrefab = Assets/Game/Resources/Props/Weapons/warhammer.fbx
     health = 2100
     speedMin = 1.15
@@ -858,7 +858,7 @@
   LZombieWarHammer:
     id = LZombieWarHammer
     displayName = LocalizedStrings.Enemy_Info_06_name
-    resources = Character.LZombieWarH
+    resources = Character.LZombieWarHammer
     meleeWeaponPrefab = Assets/Game/Resources/Props/Weapons/warhammer.fbx
     health = 210
     speedMin = 0.85
@@ -913,8 +913,8 @@
     previewPriority = 1
     flying = True
     previewScale = 0
-  oni:
-    id = oni
+  Oni:
+    id = Oni
     displayName = LocalizedStrings.Enemy_Info_23_name
     resources = Character.Oni
     meleeWeaponPrefab = Assets/Game/Resources/Props/Weapons/club.fbx
@@ -933,8 +933,8 @@
     previewPriority = 1
     boss = True
     lane = Lane.back
-  oni_boss:
-    id = oni_boss
+  OniBoss:
+    id = OniBoss
     displayName = LocalizedStrings.Enemy_Info_23_name
     resources = Character.Oni
     meleeWeaponPrefab = Assets/Game/Resources/Props/Weapons/club.fbx
@@ -953,8 +953,8 @@
     previewPriority = 2
     boss = True
     lane = Lane.center
-  oni_small:
-    id = oni_small
+  OniSmall:
+    id = OniSmall
     displayName = LocalizedStrings.Enemy_Info_24_name
     resources = Character.OniSmall
     meleeWeaponPrefab = Assets/Game/Resources/Props/Weapons/club.fbx

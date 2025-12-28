@@ -5113,7 +5113,7 @@
 		offsetScaleX = 0
 		offsetScaleY = 0
 		offsetScaleZ = 0
-[LZombieWarH]
+[LZombieWarHammer]
 	melee_weapon:
 		label = JointLabel.melee_weapon
 		jointName = lzombiemelee:prop

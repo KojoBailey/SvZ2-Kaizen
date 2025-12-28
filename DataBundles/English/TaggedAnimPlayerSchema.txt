@@ -235,8 +235,8 @@
 		defaultBlendSpeed = 0.3
 		specificAnimSettings = LZombieTaiko
 		alsoPlayOnAllChildren = True
-	LZombieWarH:
-		id = LZombieWarH
+	LZombieWarHammer:
+		id = LZombieWarHammer
 		defaultBlendSpeed = 0.1
 		alsoPlayOnAllChildren = True
 		overrideAnimFolder = Assets/Game/Resources/Characters/LightZombieMelee/lzombiemelee_anim_tags
