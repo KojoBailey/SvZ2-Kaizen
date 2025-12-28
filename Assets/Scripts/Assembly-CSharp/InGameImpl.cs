@@ -397,9 +397,12 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		SingletonMonoBehaviour<TutorialMain>.Instance.Init();
 		StartCoroutine(CheckTutorials());
 
+		bool delayWaveBanner =
+			SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game02_Movement") ||
+			SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game03_Ally");
 		RunAfterDelay(delegate {
 			WeakGlobalMonoBehavior<BannerManager>.Instance.OpenBanner(new BannerStartWave(5f, ProfileData.WaveToPlay));
-		}, SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game02_Movement") ? 4.5f : 1f);
+		}, delayWaveBanner ? 4.5f : 1f);
 
 		IncrementWaveAttempts();
 
@@ -410,29 +413,6 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		InitializeTimers();
 
 		Singleton<PlayerWaveEventData>.Instance.StartWave();
-
-		// [TUTORIAL]
-		if (ProfileData.IsInStoryWave)
-		{
-			if (CurrentWave == 1 && !ProfileData.HasWaveBeenCompleted(1))
-			{
-				ProfileData.ForceOnboardingStage("OnboardingStep3_StartWave1");
-				ApplicationUtilities.MakePlayHavenContentRequest("tutorial_start");
-			}
-			
-			if (CurrentWave == 2 && !ProfileData.HasWaveBeenCompleted(2))
-			{
-				ProfileData.SetSelectedHelpers(new List<string>(new string[1] { "Farmer" }));
-				ProfileData.ForceOnboardingStage("OnboardingStep17_StartWave2");
-			}
-		}
-		if (CurrentWave == 1 && !ProfileData.HasWaveBeenCompleted(1))
-		{
-			WeakGlobalMonoBehavior<HUD>.Instance.alliesEnabled = false;
-			WeakGlobalMonoBehavior<HUD>.Instance.abilitiesEnabled = false;
-			StartCoroutine(CheckForHeroMovement());
-			StartCoroutine(CheckForHeroAttack());
-		}
 
 		Shader.WarmupAllShaders();
 		MemoryWarningHandler.Instance.unloadOnMemoryWarning = true;
@@ -845,14 +825,28 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 
 	private IEnumerator CheckTutorials()
 	{
-		while (ProfileData.IsInStoryWave)
-		{
-			var tutorialManager = Singleton<TutorialManager>.Instance;
+		if (!ProfileData.IsInStoryWave && !ProfileData.HasWaveBeenCompleted(CurrentWave)) yield break;
 
+		var tutorialManager = Singleton<TutorialManager>.Instance;
+
+		switch (CurrentWave)
+		{
+		case 1:
+			WeakGlobalMonoBehavior<HUD>.Instance.alliesEnabled = false;
+			WeakGlobalMonoBehavior<HUD>.Instance.abilitiesEnabled = false;
+			break;
+		case 2:
+			ProfileData.SetSelectedHelpers(new List<string>(new string[1] { "Farmer" }));
+			break;
+		}
+
+		while (true)
+		{
 			if (mTimeToNextTutorial <= 0f)
 			{
-				if (CurrentWave == 1 && !ProfileData.HasWaveBeenCompleted(1))
+				switch (CurrentWave)
 				{
+				case 1:
 					if (!tutorialManager.HasCompleted(ETutorial.MovingTheHero))
 					{
 						tutorialManager.StartTutorial(ETutorial.MovingTheHero);
@@ -874,48 +868,36 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 							yield return new WaitForSeconds(5f);
 						}
 					}
-				}
-				else if (CurrentWave == 2 && !ProfileData.HasWaveBeenCompleted(2) && !tutorialManager.HasCompleted(ETutorial.SpawningAllies))
-				{
-					tutorialManager.StartTutorial(ETutorial.SpawningAllies);
-					WeakGlobalMonoBehavior<HUD>.Instance.alliesEnabled = true;
-					StartCoroutine(CheckForFarmerSpawn());
-					mTimeToNextTutorial = 0f;
-					yield return new WaitForSeconds(5f);
-				}
-				else if (CurrentWave == 4 && !ProfileData.HasWaveBeenCompleted(4) && !tutorialManager.HasCompleted(ETutorial.UsingBowAgainstFlyingEnemies))
-				{
-					List<Character> enemiesPlayerCanSee = WeakGlobalInstance<CharactersManager>.Instance.GetCharactersInRange(hero.controller.position.z, hero.controller.position.z + 4f, 1);
-					int foundIndex = enemiesPlayerCanSee.FindIndex((Character c) => c.isFlying);
-					if (foundIndex >= 0)
+					break;
+				case 2:
+					if (!tutorialManager.HasCompleted(ETutorial.SpawningAllies))
 					{
-						tutorialManager.StartTutorial(ETutorial.UsingBowAgainstFlyingEnemies);
+						tutorialManager.StartTutorial(ETutorial.SpawningAllies);
+						WeakGlobalMonoBehavior<HUD>.Instance.alliesEnabled = true;
+						StartCoroutine(CheckForFarmerSpawn());
 						mTimeToNextTutorial = 0f;
 						yield return new WaitForSeconds(5f);
 					}
+					break;
+				case 4:
+					if (!tutorialManager.HasCompleted(ETutorial.UsingBowAgainstFlyingEnemies))
+					{
+						List<Character> enemiesPlayerCanSee = WeakGlobalInstance<CharactersManager>.Instance.GetCharactersInRange(hero.controller.position.z, hero.controller.position.z + 4f, 1);
+						int foundIndex = enemiesPlayerCanSee.FindIndex((Character c) => c.isFlying);
+						if (foundIndex >= 0)
+						{
+							tutorialManager.StartTutorial(ETutorial.UsingBowAgainstFlyingEnemies);
+							mTimeToNextTutorial = 0f;
+							yield return new WaitForSeconds(5f);
+						}
+					}
+					break;
 				}
 			}
+
 			mTimeToNextTutorial -= Time.deltaTime;
 			yield return new WaitForSeconds(0f);
 		}
-	}
-
-	private IEnumerator CheckForHeroMovement()
-	{
-		while (!hero.controller.isMoving)
-		{
-			yield return new WaitForSeconds(0f);
-		}
-		ProfileData.ForceOnboardingStage("OnboardingStep4_MoveWave1");
-	}
-
-	private IEnumerator CheckForHeroAttack()
-	{
-		while (!hero.controller.isAttacking)
-		{
-			yield return new WaitForSeconds(0f);
-		}
-		ProfileData.ForceOnboardingStage("OnboardingStep5_AttackWave1");
 	}
 
 	public void CreateHero(int index, Transform spawnPoint)
@@ -1370,10 +1352,15 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		{
 			mBaseTimeScale = 0.1f;
 			Time.timeScale = mBaseTimeScale;
-			gameCamera.transform.position = new Vector3(gameCamera.transform.position.x - 2f, gameCamera.transform.position.y, gameCamera.transform.position.z);
+			gameCamera.transform.position = new Vector3(
+				gameCamera.transform.position.x - 2f,
+				gameCamera.transform.position.y,
+				gameCamera.transform.position.z
+			);
 			mCameraYOffset /= 2f;
 			mStartedSlowMoFinisher = true;
 		}
+		
 		RunAfterDelay(delegate
 		{
 			WeakGlobalMonoBehavior<BannerManager>.Instance.OpenBanner(new BannerWinGame(5f * timeScalar));
@@ -1465,59 +1452,27 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		SpendCharm();
 	}
 
-	public bool HasHasteCharm()
-	{
-		return activeCharm == "haste" || activeCharm.Contains("+haste");
-	}
+	public bool HasHasteCharm() { return activeCharm == "haste" || activeCharm.Contains("+haste"); }
+	public bool HasPowerCharm() { return activeCharm == "power" || activeCharm.Contains("+power"); }
+	public bool HasWealthCharm() { return activeCharm == "wealth" || activeCharm.Contains("+wealth"); }
+	public bool HasPeaceCharm() { return activeCharm == "peace" || activeCharm.Contains("+peace"); }
+	public bool HasLuckCharm() { return activeCharm == "luck" || activeCharm.Contains("+luck"); }
+	public bool HasCommandCharm() { return activeCharm == "command"; }
+	public bool HasMagicCharm() { return activeCharm == "magic"; }
 
-	public bool HasPowerCharm()
-	{
-		return activeCharm == "power" || activeCharm.Contains("+power");
-	}
-
-	public bool HasWealthCharm()
-	{
-		return activeCharm == "wealth" || activeCharm.Contains("+wealth");
-	}
-
-	public bool HasPeaceCharm()
-	{
-		return activeCharm == "peace" || activeCharm.Contains("+peace");
-	}
-
-	public bool HasLuckCharm()
-	{
-		return activeCharm == "luck" || activeCharm.Contains("+luck");
-	}
-
-	public bool HasCommandCharm()
-	{
-		return activeCharm == "command";
-	}
-
-	public bool HasMagicCharm()
-	{
-		return activeCharm == "magic";
-	}
-
-	private void ShowReviveDialog()
-	{
-	}
+	private void ShowReviveDialog() {}
 
 	public bool SpawnFriendshipHelper()
 	{
-		if (!string.IsNullOrEmpty(FriendshipHelperID))
-		{
-			Character character = WeakGlobalInstance<Leadership>.Instance.ForceSpawn(FriendshipHelperID);
-			if (character != null && mWaveManager != null)
-			{
-				character.maxHealth *= mWaveManager.multipliers.enemiesHealth;
-				character.health = character.maxHealth;
-				character.meleeDamage *= mWaveManager.multipliers.enemiesDamages;
-				return true;
-			}
-		}
-		return false;
+		if (string.IsNullOrEmpty(FriendshipHelperID)) return false;
+
+		Character character = WeakGlobalInstance<Leadership>.Instance.ForceSpawn(FriendshipHelperID);
+		if (character == null || mWaveManager == null) return false;
+
+		character.maxHealth *= mWaveManager.multipliers.enemiesHealth;
+		character.health = character.maxHealth;
+		character.meleeDamage *= mWaveManager.multipliers.enemiesDamages;
+		return true;
 	}
 
 	public bool SetCheatAbility(string ability)
@@ -1539,9 +1494,11 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 	{
 		bool invuln = ownerID == 0 && ProfileData.debugHeroInvuln;
 		GetHero(ownerID).invuln = invuln;
-		if (GetGate(ownerID) != null)
+
+		var gate = GetGate(ownerID);
+		if (gate != null)
 		{
-			GetGate(ownerID).invuln = invuln;
+			gate.invuln = invuln;
 		}
 	}
 }
