@@ -35319,18 +35319,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1275bb4af3ca2af96ab7a9d502d577f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heroSpawnPointLeft: {fileID: 0}
+  heroSpawnPointLeft: {fileID: 767681698}
   heroSpawnPointRight: {fileID: 226}
   enemiesTargetLeft: {fileID: 23}
   enemiesTargetRight: {fileID: 40}
-  enemyGateGroup: {fileID: 0}
-  enemyGatePositions: {fileID: 0}
+  enemyGateGroup: {fileID: 1825554509}
+  enemyGatePositions: {fileID: 182755541}
   vortexLeft: {fileID: 1786420764793537, guid: 7bfac34ef983ba84bbc2e5cacf60ab13, type: 2}
   vortexRight: {fileID: 154}
   gateSparklesLeft: {fileID: 1722903437797423, guid: a4d5e05c053b4be438acb1300e11efa4,
     type: 2}
   gameCamera: {fileID: 355}
-  heroWalkLeftEdge: {fileID: 0}
+  heroWalkLeftEdge: {fileID: 1110954408}
   heroWalkRightEdge: {fileID: 239}
   enemiesSpawnAreaRight: {fileID: 447}
   helpersSpawnAreaLeft: {fileID: 448}
