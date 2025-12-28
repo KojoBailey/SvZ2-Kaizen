@@ -16,11 +16,13 @@
 		minValue = 4500
 		maxValue = 5300
 		dropRate = 0.0028
+		notBeforeWave = 5
 		prefab = Assets/Game/Resources/FX/CoinGoldPickup.prefab
 	leadership:
 		type = leadership
 		constValue = 1
 		dropRate = 0.4
+		notBeforeWave = 2
 		prefab = Assets/Game/Resources/FX/LeadershipPickup.prefab
 	soul:
 		type = soul

@@ -35,4 +35,8 @@ public class ResourceSchema
 
     [DataBundleField]
     public float dropRate;
+
+    [DataBundleField]
+    [DataBundleDefaultValue(1)]
+    public int notBeforeWave;
 }

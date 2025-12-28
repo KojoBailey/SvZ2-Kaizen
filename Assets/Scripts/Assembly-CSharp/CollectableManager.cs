@@ -191,7 +191,9 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 	{
 		foreach (var resourceSchema in mResourceSchemas)
 		{
-			if (UnityEngine.Random.value > resourceSchema.dropRate) continue;
+			if (!Singleton<Profile>.Instance.GetIsWaveUnlocked(resourceSchema.notBeforeWave) ||
+				UnityEngine.Random.value > resourceSchema.dropRate)
+				continue;
 			
 			mCollectables.Add(new Collectable(
 				resourceSchema,

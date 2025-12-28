@@ -1077,7 +1077,6 @@ public class Hero : Character
 			list.Add(meleeWeapon.GetLevel(level).prefab);
 		}
 		base.meleeWeaponPrefabAsList = list;
-		UnityEngine.Debug.Log(base.meleeWeaponPrefabAsList == null);
 	}
 
 	private void RestoreRangedWeapon()
@@ -1090,7 +1089,6 @@ public class Hero : Character
 			bowLevel = Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.bowLevel;
 		}
 		base.rangedWeaponPrefab = rangedWeapon.GetLevel(bowLevel).prefab;
-		UnityEngine.Debug.Log(base.rangedWeaponPrefab == null);
 	}
 
 	public void onMoveLeft()
