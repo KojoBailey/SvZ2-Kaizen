@@ -1919,7 +1919,7 @@ public class Profile : Singleton<Profile>
 
 	public bool HasWaveBeenCompleted(int waveIndex)
 	{
-		return GetWaveCompletionCount(waveIndex) >= 2;
+		return GetWaveCompletionCount(waveIndex) > 0;
 	}
 
 	public void GoToNextWave()

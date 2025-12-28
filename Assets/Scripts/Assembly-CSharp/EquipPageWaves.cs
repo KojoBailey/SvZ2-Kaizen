@@ -40,7 +40,9 @@ public class EquipPageWaves : EquipPage, UIHandlerComponent
 		mButtonInc = uiParent.FindChildComponent<GluiStandardButtonContainer>("Button_WaveUp");
 		mButtonDec_10 = uiParent.FindChildComponent<GluiStandardButtonContainer>("Button_WaveDown_10");
 		mButtonInc_10 = uiParent.FindChildComponent<GluiStandardButtonContainer>("Button_WaveUp_10");
-		mLabel = ((!Singleton<Profile>.Instance.IsInDailyChallenge) ? uiParent.FindChildComponent<GluiText>("SwapText_Digit") : uiParent.FindChildComponent<GluiText>("SwapText_Title"));
+		mLabel = (!Singleton<Profile>.Instance.IsInDailyChallenge)
+			? uiParent.FindChildComponent<GluiText>("SwapText_Digit")
+			: uiParent.FindChildComponent<GluiText>("SwapText_Title");
 		mTimesCompleted = uiParent.FindChildComponent<GluiText>("Text_TimesCompleted");
 		SelectWave(Singleton<Profile>.Instance.WaveToPlay);
 		SetDefaultHero(true);
@@ -162,31 +164,32 @@ public class EquipPageWaves : EquipPage, UIHandlerComponent
 
 	private void SelectWave(int newWave)
 	{
-		if (newWave != mSelectedWave)
+		if (newWave == mSelectedWave) return;
+
+		if (newWave < 1)
 		{
-			if (newWave < 1)
-			{
-				newWave = Singleton<Profile>.Instance.highestUnlockedWave;
-			}
-			else if (newWave > Singleton<Profile>.Instance.highestUnlockedWave)
-			{
-				newWave = 1;
-			}
-			mSelectedWave = newWave;
-			if (Singleton<Profile>.Instance.IsInDailyChallenge)
-			{
-				mLabel.Text = StringUtils.GetStringFromStringRef(Singleton<Profile>.Instance.dailyChallengeProceduralWaveSchema.waveDisplayName);
-			}
-			else
-			{
-				mLabel.Text = mSelectedWave.ToString();
-			}
-			if (mTimesCompleted != null)
-			{
-				int waveCompletionCount = Singleton<Profile>.Instance.GetWaveCompletionCount(mSelectedWave);
-				mTimesCompleted.Text = string.Format(
-					StringUtils.GetStringFromStringRef("MenuFixedStrings.Menu_MPCollectionTally"), waveCompletionCount);
-			}
+			newWave = Singleton<Profile>.Instance.highestUnlockedWave;
+		}
+		else if (newWave > Singleton<Profile>.Instance.highestUnlockedWave)
+		{
+			newWave = 1;
+		}
+
+		mSelectedWave = newWave;
+		if (Singleton<Profile>.Instance.IsInDailyChallenge)
+		{
+			mLabel.Text = StringUtils.GetStringFromStringRef(Singleton<Profile>.Instance.dailyChallengeProceduralWaveSchema.waveDisplayName);
+		}
+		else
+		{
+			mLabel.Text = mSelectedWave.ToString();
+		}
+		
+		if (mTimesCompleted != null)
+		{
+			int waveCompletionCount = Singleton<Profile>.Instance.GetWaveCompletionCount(mSelectedWave);
+			mTimesCompleted.Text = string.Format(
+				StringUtils.GetStringFromStringRef("MenuFixedStrings.Menu_MPCollectionTally"), waveCompletionCount);
 		}
 	}
 

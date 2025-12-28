@@ -11,18 +11,6 @@ public class StartScreenImpl : MonoBehaviour, IGluiActionHandler
 
 	private float timeScaleBackup;
 
-	public static GameObject _leaderboardsButton;
-
-	public static GameObject _achievementsButton;
-
-	public static GameObject _gameCenterButton;
-
-	public static GameObject _googlePlusButton;
-
-	public static GameObject _playerButton;
-
-	public static GameObject _iCloudButton;
-
 	private void Awake()
 	{
 		DebugMain instance = SingletonSpawningMonoBehaviour<DebugMain>.Instance;
@@ -84,18 +72,6 @@ public class StartScreenImpl : MonoBehaviour, IGluiActionHandler
 		ResourceCache.UnCache(titleLogoFileName);
 	}
 
-	// private void OnFBLogin(bool success)
-	// {
-	// 	if (FacebookButton != null)
-	// 	{
-	// 		FacebookButton.Visible = !success;
-	// 		if (success)
-	// 		{
-	// 			UnityEngine.Object.Destroy(FacebookButton.gameObject);
-	// 		}
-	// 	}
-	// }
-
 	public bool HandleAction(string action, GameObject sender, object data)
 	{
 		if (!Singleton<Profile>.Instance.Initialized)
@@ -105,7 +81,7 @@ public class StartScreenImpl : MonoBehaviour, IGluiActionHandler
 		switch (action)
 		{
 		case "START_GAME":
-			if (Singleton<Profile>.Instance.GetIsWaveUnlocked(1))
+			if (!Singleton<Profile>.Instance.HasWaveBeenCompleted(1))
 			{
 				Singleton<Profile>.Instance.CurrentStoryWave = 1;
 				string value = DataBundleRuntime.Instance.GetValue<string>(typeof(WaveSchema), Singleton<PlayModesManager>.Instance.selectedModeData.waves.RecordTable, Singleton<Profile>.Instance.CurrentStoryWave.ToString(), "scene", false);
@@ -192,13 +168,5 @@ public class StartScreenImpl : MonoBehaviour, IGluiActionHandler
 	private IEnumerator checkButtons()
 	{
 		yield return new WaitForSeconds(0.25f);
-		if (_leaderboardsButton != null && _achievementsButton != null && _googlePlusButton != null && _iCloudButton != null)
-		{
-			_leaderboardsButton.gameObject.SetActive(false);
-			_achievementsButton.gameObject.SetActive(false);
-			_iCloudButton.gameObject.SetActive(false);
-			_playerButton.gameObject.SetActive(false);
-			_googlePlusButton.gameObject.SetActive(true);
-		}
 	}
 }

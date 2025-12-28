@@ -512,30 +512,6 @@ public class ApplicationUtilities : SingletonSpawningMonoBehaviour<ApplicationUt
 	{
 	}
 
-	private void onGPGS_SignInSuccess(object sender, EventArgs args)
-	{
-	}
-
-	private void onGPGS_SignOutSuccess(object sender, EventArgs args)
-	{
-		if (StartScreenImpl._leaderboardsButton != null && StartScreenImpl._achievementsButton != null && StartScreenImpl._googlePlusButton != null)
-		{
-			StartScreenImpl._leaderboardsButton.gameObject.SetActive(false);
-			StartScreenImpl._achievementsButton.gameObject.SetActive(false);
-			StartScreenImpl._iCloudButton.gameObject.SetActive(false);
-			StartScreenImpl._googlePlusButton.gameObject.SetActive(true);
-		}
-	}
-
-	private void onGPGS_FriendsLoaded(object sender, EventArgs args)
-	{
-		SingletonSpawningMonoBehaviour<ApplicationUtilities>.Instance.AndroidGoogleFriendsRead();
-	}
-
-	private void onGPGS_ConnectionToPGSFailed(object sender, EventArgs args)
-	{
-	}
-
 	private IEnumerator onFacebookLoginTasks()
 	{
 		float seconds = 5f;
