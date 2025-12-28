@@ -2011,7 +2011,7 @@
   001:
     id = 001
     cost = 200,0
-    health = 197
+    health = 300
     speedMin = 1
     speedMax = 1
     meleeRange = 1.05

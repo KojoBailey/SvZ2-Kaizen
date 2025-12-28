@@ -837,3 +837,174 @@
 		count = 6
 		spacing = Moderate
 		spawnAt = NoDelay
+[Wave_009]
+# With the Yari Samurai unlocked, get the player to start thinking
+# about how to set up their own formations, sending combinations of enemies
+# that make it difficult to get away with weak, spammy strategies.
+	*:
+		type = Spawn
+		enemy = Enemies.OniSmall
+		count = 1
+	*:
+		type = Spawn
+		enemy = Enemies.CrawlingTorso
+		count = 15
+		spacing = Moderate
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.Nobusuma
+		count = 3
+		spacing = Loose
+		spawnAt = HighHealth
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieMelee
+		count = 4
+		spacing = Moderate
+	*:
+		type = Spawn
+		enemy = Enemies.Chochinobake
+		count = 3
+		spacing = Moderate
+		spawnAt = VeryLowHealth
+	*:
+		type = MoveGate
+		gatePos = Middle
+		spawnAt = Death
+	*:
+		type = Spawn
+		enemy = Enemies.Chochinobake
+		count = 15
+		spacing = Tight
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieWarHammer
+		count = 4
+		spacing = Tight
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieArcher
+		count = 10
+		spacing = Loose
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.Nobusuma
+		count = 4
+		spacing = Moderate
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieSword
+		count = 2
+		spacing = Tight
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.OniSmall
+		count = 1
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieSpear
+		count = 4
+		spacing = Tight
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieMelee
+		count = 5
+		spacing = Tight
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieWarHammer
+		count = 5
+		spacing = Tight
+		spawnAt = NoDelay
+	*:
+		type = MoveGate
+		gatePos = Far
+	*:
+		type = Spawn
+		enemy = Enemies.OniSmall
+		count = 1
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.CrawlingTorso
+		count = 3
+		spacing = Tight
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieSpear
+		count = 5
+		spacing = Moderate
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.Nobusuma
+		count = 4
+		spacing = Tight
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.OniSmall
+		count = 2
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieArcher
+		count = 5
+		spacing = Tight
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieAxe
+		count = 3
+		spacing = Tight
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieSpear
+		count = 4
+		spacing = Tight
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.Chochinobake
+		count = 6
+		spacing = Moderate
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieWarHammer
+		count = 4
+		spacing = Tight
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieSword
+		count = 6
+		spacing = Tight
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieArcher
+		count = 4
+		spacing = Tight
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.OniSmall
+		count = 2
+		spacing = Loose
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.Nobusuma
+		count = 7
+		spacing = Tight
+		spawnAt = NoDelay

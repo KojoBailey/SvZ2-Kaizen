@@ -966,7 +966,7 @@
     meleeDamage = 100
     attackFrequency = 3
     knockbackPower = 50
-    knockbackResistance = 75
+    knockbackResistance = 90
     award = 45
     resourceDropMin = 0
     resourceDropMax = 3

@@ -1,547 +1,12 @@
-[EndlessWaves]
-	1:
-		index = 1
-		scene = Battlefield
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_Battlefield
-		rewards = 
-		commands = EndlessWave_01
-		recommendedHero = Heroes.HeroBalanced
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
-		showRateMe = False
-		awardMysteryBox = False
-		BossEnemy = 
-	2:
-		index = 2
-		scene = Battlefield
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_Battlefield
-		rewards = 
-		commands = EndlessWave_01
-		recommendedHero = Heroes.HeroDefense
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
-		showRateMe = False
-		awardMysteryBox = False
-		BossEnemy = 
-	3:
-		index = 3
-		scene = Battlefield
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_Battlefield
-		rewards = 
-		commands = EndlessWave_01
-		recommendedHero = Heroes.HeroAttack
-		recommendedHeroIsRequired = True
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
-		showRateMe = False
-		awardMysteryBox = False
-		BossEnemy = 
-	4:
-		index = 4
-		scene = Battlefield
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_Battlefield
-		rewards = 
-		commands = EndlessWave_01
-		recommendedHero = Heroes.HeroBalanced
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
-		showRateMe = False
-		awardMysteryBox = False
-		BossEnemy = 
-	5:
-		index = 5
-		scene = Battlefield
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_Battlefield
-		rewards = 
-		commands = EndlessWave_01
-		recommendedHero = Heroes.HeroAttack
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
-		showRateMe = False
-		awardMysteryBox = False
-		BossEnemy = 
-	6:
-		index = 6
-		scene = Battlefield
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_Battlefield
-		rewards = 
-		commands = EndlessWave_01
-		recommendedHero = Heroes.HeroDefense
-		recommendedHeroIsRequired = True
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
-		showRateMe = False
-		awardMysteryBox = False
-		BossEnemy = 
-	7:
-		index = 7
-		scene = Battlefield
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_Battlefield
-		rewards = 
-		commands = EndlessWave_01
-		recommendedHero = Heroes.HeroAttack
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
-		showRateMe = False
-		awardMysteryBox = False
-		BossEnemy = 
-	8:
-		index = 8
-		scene = Battlefield
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_Battlefield
-		rewards = 
-		commands = EndlessWave_01
-		recommendedHero = Heroes.HeroDefense
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
-		showRateMe = False
-		awardMysteryBox = False
-		BossEnemy = 
-	9:
-		index = 9
-		scene = Battlefield
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_Battlefield
-		rewards = 
-		commands = EndlessWave_01
-		recommendedHero = Heroes.HeroBalanced
-		recommendedHeroIsRequired = True
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
-		showRateMe = False
-		awardMysteryBox = False
-		BossEnemy = 
-[EndlessWaves_Boss]
-	1:
-		index = 1
-		scene = Battlefield
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_Walledfortress_Night
-		rewards = Reward_Table.EndlessWave_Boss_01
-		commands = EndlessWave_Boss_01
-		recommendedHero = Heroes.HeroBalanced
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
-		showRateMe = False
-		awardMysteryBox = True
-		BossEnemy = Enemies.ShutenDoji_Kin
-	2:
-		index = 2
-		scene = Battlefield
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_Walledfortress_Night
-		rewards = Reward_Table.EndlessWave_Boss_01
-		commands = EndlessWave_Boss_01
-		recommendedHero = Heroes.HeroAttack
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
-		showRateMe = False
-		awardMysteryBox = True
-		BossEnemy = Enemies.ShutenDoji_Kin
-	3:
-		index = 3
-		scene = Battlefield
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_Walledfortress_Night
-		rewards = Reward_Table.EndlessWave_Boss_01
-		commands = EndlessWave_Boss_01
-		recommendedHero = Heroes.HeroDefense
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
-		showRateMe = False
-		awardMysteryBox = True
-		BossEnemy = Enemies.ShutenDoji_Kin
-[MultiplayerWaves]
-	0:
-		index = 0
-		scene = ZenGarden_day
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_ZenGarden_Day
-		rewards = 
-		commands = Wave101
-		recommendedHero = 
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
-	1:
-		index = 1
-		scene = ZenGarden_day
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_ZenGarden_Day
-		rewards = 
-		commands = Wave102
-		recommendedHero = 
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
-	2:
-		index = 2
-		scene = ZenGarden_day
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_ZenGarden_Day
-		rewards = 
-		commands = Wave103
-		recommendedHero = 
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
-	3:
-		index = 3
-		scene = MountainLookout
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_MountainOutlook_Day
-		rewards = 
-		commands = Wave104
-		recommendedHero = 
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
-	4:
-		index = 4
-		scene = MountainLookout_Night
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_MountainOutlook_Night
-		rewards = 
-		commands = Wave105
-		recommendedHero = 
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
-[Multiplayer_Waves_Easy]
-	0:
-		index = 0
-		scene = ZenGarden_day
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_ZenGarden_Day
-		rewards = 
-		commands = Wave_MP_01
-		recommendedHero = 
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
-	1:
-		index = 1
-		scene = ZenGarden_day
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_ZenGarden_Day
-		rewards = 
-		commands = Wave_MP_02
-		recommendedHero = 
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.EasyAttack
-	2:
-		index = 2
-		scene = ZenGarden_night
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_ZenGarden_Night
-		rewards = 
-		commands = Wave_MP_03
-		recommendedHero = 
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.EasyDefense
-[Multiplayer_Waves_Expert]
-	0:
-		index = 0
-		scene = ZenGarden_day
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_ZenGarden_Day
-		rewards = 
-		commands = Wave_MP_05
-		recommendedHero = 
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.VeryHardBalanced
-	1:
-		index = 1
-		scene = MountainLookout
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_MountainOutlook_Day
-		rewards = 
-		commands = Wave_MP_06
-		recommendedHero = 
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.VeryHardAttack
-	2:
-		index = 2
-		scene = MountainLookout_Night
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_MountainOutlook_Night
-		rewards = 
-		commands = Wave_MP_07
-		recommendedHero = 
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.VeryHardDefense
-[Multiplayer_Waves_Hard]
-	0:
-		index = 0
-		scene = MountainLookout
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_MountainOutlook_Day
-		rewards = 
-		commands = Wave_MP_03
-		recommendedHero = 
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.HardBalanced
-	1:
-		index = 1
-		scene = MountainLookout
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_MountainOutlook_Day
-		rewards = 
-		commands = Wave_MP_04
-		recommendedHero = 
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.HardAttack
-	2:
-		index = 2
-		scene = MountainLookout
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_MountainOutlook_Night
-		rewards = 
-		commands = Wave_MP_05
-		recommendedHero = 
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.HardDefense
-[Multiplayer_Waves_Medium]
-	0:
-		index = 0
-		scene = ZenGarden_day
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_ZenGarden_Day
-		rewards = 
-		commands = Wave_MP_02
-		recommendedHero = 
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.MediumBalanced
-	1:
-		index = 1
-		scene = ZenGarden_night
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_ZenGarden_Night
-		rewards = 
-		commands = Wave_MP_03
-		recommendedHero = 
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.MediumAttack
-	2:
-		index = 2
-		scene = ZenGarden_day
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_ZenGarden_Day
-		rewards = 
-		commands = Wave_MP_04
-		recommendedHero = 
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.MediumDefense
-[Multiplayer_Waves_VeryEasy]
-	0:
-		index = 0
-		scene = ZenGarden_day
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_ZenGarden_Day
-		rewards = 
-		commands = Wave_MP_Easy_001
-		recommendedHero = 
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
-	1:
-		index = 1
-		scene = ZenGarden_day
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_ZenGarden_Day
-		rewards = 
-		commands = Wave_MP_Easy_002
-		recommendedHero = 
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
-[Multiplayer_Waves_VeryHard]
-	0:
-		index = 0
-		scene = MountainLookout_Night
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_MountainOutlook_Night
-		rewards = 
-		commands = Wave_MP_04
-		recommendedHero = 
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.VeryHardBalanced
-	1:
-		index = 1
-		scene = MountainLookout_Night
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_MountainOutlook_Night
-		rewards = 
-		commands = Wave_MP_05
-		recommendedHero = 
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.VeryHardAttack
-	2:
-		index = 2
-		scene = MountainLookout_Night
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = MusicEvents.BGM_MountainOutlook_Night
-		rewards = 
-		commands = Wave_MP_06
-		recommendedHero = 
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.VeryHardDefense
-[ProceduralWaves]
-	1:
-		index = 1
-		scene = MountainLookout
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = 
-		rewards = 
-		commands = ArcherOnly
-		recommendedHero = 
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = 
-		showRateMe = False
-		awardMysteryBox = True
-	2:
-		index = 2
-		scene = MountainLookout
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = 
-		rewards = 
-		commands = ProceduralWaveHard
-		recommendedHero = 
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = 
-		showRateMe = False
-		awardMysteryBox = True
-	3:
-		index = 3
-		scene = MountainLookout
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = 
-		rewards = 
-		commands = ProceduralWaveReallyHard
-		recommendedHero = 
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = 
-		showRateMe = False
-		awardMysteryBox = True
-	4:
-		index = 4
-		scene = MountainLookout
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = 
-		rewards = 
-		commands = ProceduralWaveSuperHard
-		recommendedHero = 
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = 
-		showRateMe = False
-		awardMysteryBox = True
-	5:
-		index = 5
-		scene = MountainLookout
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = 
-		rewards = 
-		commands = DC_ShogunShowdown
-		recommendedHero = 
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = 
-		showRateMe = False
-		awardMysteryBox = True
-	6:
-		index = 6
-		scene = MountainLookout
-		tutorial = NULL
-		bell = 0
-		villageArchers = 0
-		music = 
-		rewards = 
-		commands = DC_TimeTrial
-		recommendedHero = 
-		recommendedHeroIsRequired = False
-		VsModeAIOpponent = 
-		showRateMe = False
-		awardMysteryBox = True
-		BossEnemy = 
 [Waves]
 	1:
 		title = Dawn of the Dead
 		scene = ZenGarden_day
 		music = MusicEvents.BGM_ZenGarden_Day
-		rewards = Reward_Table.Reward_Wave_01
+		rewards = 
 		commands = Wave_001
 		recommendedHero = Heroes.HeroBalanced
 		recommendedHeroIsRequired = True
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
 	2:
 		title = Attack of the Ashigaru
 		scene = ZenGarden_day
@@ -550,16 +15,14 @@
 		commands = Wave_002
 		recommendedHero = Heroes.HeroBalanced
 		recommendedHeroIsRequired = True
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
 	3:
 		title = From Behind
 		scene = ZenGarden_day
 		music = MusicEvents.BGM_ZenGarden_Day
-		rewards = Reward_Table.Reward_Wave_03
+		rewards = 
 		commands = Wave_003
 		recommendedHero = Heroes.HeroBalanced
 		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
 	4:
 		title = Flying Squirrels
 		scene = ZenGarden_day
@@ -568,25 +31,22 @@
 		commands = Wave_004
 		recommendedHero = Heroes.HeroBalanced
 		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
 	5:
 		title = Quiver
 		scene = ZenGarden_day
 		music = MusicEvents.BGM_ZenGarden_Day
-		rewards = Reward_Table.Reward_Wave_05
+		rewards = 
 		commands = Wave_005
 		recommendedHero = Heroes.HeroBalanced
 		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
 	6:
 		title = Gate Rushers
 		scene = ZenGarden_night
 		music = MusicEvents.BGM_ZenGarden_Night
-		rewards = Reward_Table.Reward_Wave_06
+		rewards = 
 		commands = Wave_006
 		recommendedHero = Heroes.HeroBalanced
 		recommendedHeroIsRequired = True
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
 	7:
 		title = 40,000
 		scene = ZenGarden_day
@@ -596,7 +56,6 @@
 		commands = Wave_007
 		recommendedHero = Heroes.HeroBalanced
 		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
 	8:
 		title = Bismillah Kebabish
 		scene = ZenGarden_day
@@ -605,23 +64,20 @@
 		commands = Wave_008
 		recommendedHero = Heroes.HeroBalanced
 		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
 	9:
 		title = 
-		scene = ZenGarden_day
+		scene = ZenGarden_night
 		music = MusicEvents.BGM_ZenGarden_Day
 		rewards = 
 		commands = Wave_009
 		recommendedHero = Heroes.HeroBalanced
 		recommendedHeroIsRequired = False
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
 	10:
 		title = Demon King
 		BossEnemy = Enemies.OniBoss
 		scene = ZenGarden_night
 		music = MusicEvents.BGM_ZenGarden_Night
-		rewards = Reward_Table.Reward_Wave_10
+		rewards = 
 		commands = Wave_010
 		recommendedHero = Heroes.HeroBalanced
 		recommendedHeroIsRequired = True
-		VsModeAIOpponent = CollectionEnemies.EasyBalanced
