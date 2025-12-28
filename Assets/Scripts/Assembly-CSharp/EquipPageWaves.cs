@@ -72,7 +72,7 @@ public class EquipPageWaves : EquipPage, UIHandlerComponent
 			DecWave(-num4);
 			mTimeSinceChange = 0.001f;
 		}
-		else if ((float)minChange != 0f)
+		else if (minChange != 0f)
 		{
 			if (mWaveTicksPerSecond > 0f)
 			{
@@ -156,13 +156,9 @@ public class EquipPageWaves : EquipPage, UIHandlerComponent
 		return false;
 	}
 
-	public void OnPause(bool pause)
-	{
-	}
+	public void OnPause(bool pause) {}
 
-	public void Save()
-	{
-	}
+	public void Save() {}
 
 	private void SelectWave(int newWave)
 	{
@@ -187,7 +183,7 @@ public class EquipPageWaves : EquipPage, UIHandlerComponent
 			}
 			if (mTimesCompleted != null)
 			{
-				int waveCompletionCount = Singleton<Profile>.Instance.GetWaveCompletionCount(mSelectedWave) - 1;
+				int waveCompletionCount = Singleton<Profile>.Instance.GetWaveCompletionCount(mSelectedWave);
 				mTimesCompleted.Text = string.Format(
 					StringUtils.GetStringFromStringRef("MenuFixedStrings.Menu_MPCollectionTally"), waveCompletionCount);
 			}
