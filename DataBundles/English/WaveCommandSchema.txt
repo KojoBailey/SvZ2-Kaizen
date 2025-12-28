@@ -642,15 +642,198 @@
 		count = 3
 		spacing = Tight
 [Wave_008]
+# Tease the Lord Oni boss by sending weaker but still powerful Oni
+# that can tank for enemy support units and give Allies a hard time.
 	*:
 		type = Spawn
-		enemy = Enemies.Oni
-		count = 1
+		enemy = Enemies.CrawlingTorso
+		count = 3
+		spacing = Loose
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieMelee
+		count = 2
+		spacing = Loose
+	*:
+		type = Spawn
+		enemy = Enemies.Chochinobake
+		count = 3
+		spacing = Loose
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieWarHammer
+		count = 2
+		spacing = Moderate
+		spawnAt = HighHealth
+	*:
+		type = MoveGate
+		gatePos = Middle
+		spawnAt = Death
 	*:
 		type = Spawn
 		enemy = Enemies.OniSmall
 		count = 1
 	*:
 		type = Spawn
-		enemy = Enemies.OniBoss
-		count = 1
+		enemy = Enemies.Chochinobake
+		count = 4
+		spacing = Moderate
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieArcher
+		count = 3
+		spacing = Tight
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieSpear
+		count = 3
+		spacing = Moderate
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.Nobusuma
+		count = 3
+		spacing = Moderate
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieArcher
+		count = 2
+		spacing = Tight
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieSword
+		count = 3
+		spacing = Tight
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieArcher
+		count = 3
+		spacing = Tight
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieAxe
+		count = 4
+		spacing = Tight
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.Chochinobake
+		count = 6
+		spacing = Loose
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.Nobusuma
+		count = 4
+		spacing = Moderate
+		spawnAt = LowHealth
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieWarHammer
+		count = 3
+		spacing = Moderate
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieSpear
+		count = 4
+		spacing = Tight
+		spawnAt = NoDelay
+	*:
+		type = MoveGate
+		gatePos = Far
+		spawnAt = LowHealth
+	*:
+		type = Spawn
+		enemy = Enemies.OniSmall
+		count = 2
+		spacing = Loose
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieArcher
+		count = 4
+		spacing = Moderate
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.Nobusuma
+		count = 4
+		spacing = Moderate
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.Chochinobake
+		count = 5
+		spacing = Tight
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieWarHammer
+		count = 4
+		spacing = Moderate
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieSpear
+		count = 5
+		spacing = Loose
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.CrawlingTorso
+		count = 4
+		spacing = Tight
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieArcher
+		count = 2
+		spacing = Moderate
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieAxe
+		count = 3
+		spacing = Tight
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieArcher
+		count = 3
+		spacing = Moderate
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.Nobusuma
+		count = 6
+		spacing = Moderate
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.Chochinobake
+		count = 8
+		spacing = Moderate
+		spawnAt = VeryLowHealth
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieSpear
+		count = 4
+		spacing = Tight
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieSword
+		count = 4
+		spacing = Tight
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieArcher
+		count = 6
+		spacing = Moderate
+		spawnAt = NoDelay
