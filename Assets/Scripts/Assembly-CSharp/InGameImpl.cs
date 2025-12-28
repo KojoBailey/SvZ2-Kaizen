@@ -397,12 +397,13 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 		SingletonMonoBehaviour<TutorialMain>.Instance.Init();
 		StartCoroutine(CheckTutorials());
 
-		bool delayWaveBanner =
-			SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game02_Movement") ||
-			SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game03_Ally");
+		int waveBannerDelay =
+			SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game02_Movement") ? 4.5f :
+			(SingletonMonoBehaviour<TutorialMain>.Instance.IsTutorialNeeded("Tutorial_Game03_Ally") ? 6.0f :
+			1f);
 		RunAfterDelay(delegate {
 			WeakGlobalMonoBehavior<BannerManager>.Instance.OpenBanner(new BannerStartWave(5f, ProfileData.WaveToPlay));
-		}, delayWaveBanner ? 4.5f : 1f);
+		}, waveBannerDelay);
 
 		IncrementWaveAttempts();
 
