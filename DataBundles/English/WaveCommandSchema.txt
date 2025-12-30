@@ -903,11 +903,6 @@
 		spawnAt = NoDelay
 	*:
 		type = Spawn
-		enemy = Enemies.OniSmall
-		count = 1
-		spawnAt = NoDelay
-	*:
-		type = Spawn
 		enemy = Enemies.LZombieSpear
 		count = 4
 		spacing = Tight
@@ -927,6 +922,8 @@
 	*:
 		type = MoveGate
 		gatePos = Far
+		spawnAt = Death
+		# [TODO] Make sure spawnAt only triggers when all previous enemies have finished spawning.
 	*:
 		type = Spawn
 		enemy = Enemies.OniSmall
@@ -937,6 +934,7 @@
 		enemy = Enemies.CrawlingTorso
 		count = 3
 		spacing = Tight
+		spawnAt = NoDelay
 	*:
 		type = Spawn
 		enemy = Enemies.LZombieSpear
@@ -953,6 +951,7 @@
 		type = Spawn
 		enemy = Enemies.OniSmall
 		count = 2
+		spacing = Loose
 		spawnAt = NoDelay
 	*:
 		type = Spawn

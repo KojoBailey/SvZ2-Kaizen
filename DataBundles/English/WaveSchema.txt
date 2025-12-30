@@ -65,9 +65,9 @@
 		recommendedHero = Heroes.HeroBalanced
 		recommendedHeroIsRequired = False
 	9:
-		title = 
+		title = Test Your Might
 		scene = ZenGarden_night
-		music = MusicEvents.BGM_ZenGarden_Day
+		music = MusicEvents.BGM_ZenGarden_Night
 		rewards = 
 		commands = Wave_009
 		recommendedHero = Heroes.HeroBalanced

@@ -180,7 +180,7 @@ public class DataBundleCompiler : MonoBehaviour
 
                     if (currentKey == "*")
                     {
-                        int highestIntegerKey = 1;
+                        int highestIntegerKey = 0;
                         foreach (string key in currentClass.tables[currentTable].Keys)
                         {
                             int keyInt;
@@ -190,7 +190,6 @@ public class DataBundleCompiler : MonoBehaviour
                                 highestIntegerKey = keyInt;
                             }
                         }
-
                         currentKey = (highestIntegerKey + 1).ToString();
                     }
 
