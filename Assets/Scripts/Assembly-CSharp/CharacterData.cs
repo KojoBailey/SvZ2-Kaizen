@@ -66,6 +66,8 @@ public class CharacterData
 
 	public int knockbackPower;
 
+	public bool knockbackable;
+
 	public int knockbackResistance;
 
 	public string projectile;
@@ -170,6 +172,7 @@ public class CharacterData
 		c.meleeDamage = meleeDamage;
 		c.bowDamage = bowDamage;
 		c.knockbackPower = knockbackPower;
+		c.knockbackable = knockbackable;
 		c.knockbackResistance = knockbackResistance;
 		c.isFlying = isFlying;
 		c.canMeleeFliers = canMeleeFliers;
@@ -234,6 +237,7 @@ public class CharacterData
 		bladedWeapon = data.usesBladeWeapon;
 		attackFrequency = (baseAttackFrequency = data.attackFrequency);
 		knockbackPower = level2.knockbackPower;
+		knockbackable = level2.knockbackable;
 		knockbackResistance = level2.knockbackResistance;
 		totalCooldown = data.cooldownTimer;
 		swordAttackRange = level2.meleeRange;
@@ -284,6 +288,7 @@ public class CharacterData
 		bladedWeapon = data.usesBladeWeapon;
 		attackFrequency = (baseAttackFrequency = data.attackFrequency);
 		knockbackPower = data.knockbackPower;
+		knockbackable = data.knockbackable;
 		knockbackResistance = data.knockbackResistance;
 		swordAttackRange = data.meleeRange;
 		meleeDamage = data.meleeDamage;

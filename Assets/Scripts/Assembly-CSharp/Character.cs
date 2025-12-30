@@ -263,10 +263,7 @@ public class Character : Weakable
 
 	public CharacterStats stats
 	{
-		get
-		{
-			return mStats;
-		}
+		get { return mStats; }
 		set
 		{
 			mStats = value;
@@ -827,6 +824,14 @@ public class Character : Weakable
 		}
 	}
 
+	public float knockbackMeter;
+
+	public bool knockbackable
+	{
+		get { return mStats.knockbackable; }
+		set { mStats.knockbackable = value; }
+	}
+
 	public float bowAttackRange
 	{
 		get
@@ -1170,14 +1175,8 @@ public class Character : Weakable
 
 	public bool LeftToRight
 	{
-		get
-		{
-			return mIsLeftToRightGameplay;
-		}
-		set
-		{
-			mIsLeftToRightGameplay = value;
-		}
+		get { return mIsLeftToRightGameplay; }
+		set { mIsLeftToRightGameplay = value; }
 	}
 
 	public bool BlocksHeroMovement { get; set; }
@@ -1672,29 +1671,24 @@ public class Character : Weakable
 
 	public bool TryKnockback(int attemptPower, bool force, Vector3 positionAdjust)
 	{
-		if ((!force && knockbackResistance >= 100) || attemptPower <= 0 || health <= 0f || isBase || isInKnockback)
-		{
+		if (!knockbackable || attemptPower <= 0 || isInKnockback || isBase || health <= 0f)
 			return false;
-		}
-		if (attemptPower < 100)
+
+		knockbackMeter += attemptPower;
+		
+		if (knockbackMeter >= knockbackResistance)
 		{
-			attemptPower -= knockbackResistance;
-		}
-		if (attemptPower <= 1)
-		{
-			attemptPower = 1;
-		}
-		if (UnityEngine.Random.Range(0, 100) < attemptPower)
-		{
+			knockbackMeter = 0f;
 			ForceKnockback(positionAdjust);
 			return true;
 		}
+
 		return false;
 	}
 
 	public void ForceKnockback(Vector3 positionAdjustment)
 	{
-		if (!(health <= 0f) && !isBase)
+		if (health > 0f && !isBase)
 		{
 			controller.Knockback(positionAdjustment);
 		}
@@ -2160,7 +2154,6 @@ public class Character : Weakable
 	{
 		mMeleeAttackDelivered = true;
 		List<Character> charactersInRange = WeakGlobalInstance<CharactersManager>.Instance.GetCharactersInRange(meleeAttackHitGameRange, 1 - ownerId);
-		int num = knockbackPower;
 		float num2 = meleeFreeze;
 		foreach (Character item in charactersInRange)
 		{
@@ -2170,7 +2163,7 @@ public class Character : Weakable
 				EAttackType attackType = EAttackType.Blunt;
 				if (meleeWeaponIsABlade)
 				{
-					attackType = ((!(num3 > 0f)) ? EAttackType.Blade : EAttackType.BladeCritical);
+					attackType = (!(num3 > 0f)) ? EAttackType.Blade : EAttackType.BladeCritical;
 				}
 				else if (num3 > 0f)
 				{
@@ -2180,9 +2173,9 @@ public class Character : Weakable
 				{
 					attackType = EAttackType.Explosion;
 				}
-				PerformKnockback(item, num, false, Vector3.zero);
+				PerformKnockback(item, knockbackPower, false, Vector3.zero);
 				item.RecievedAttack(attackType, meleeDamage + randomCriticalDamage, this);
-				num -= 100;
+
 				if (num2 > 0f)
 				{
 					item.ApplyIceEffect(num2, this);
@@ -2194,6 +2187,7 @@ public class Character : Weakable
 
 	public virtual void PerformKnockback(Character target, int knockbackPower, bool force, Vector3 positionAdjust)
 	{
+		positionAdjust.z = (positionAdjust.z + 1f) * (0f - (float)target.controller.facing);
 		target.TryKnockback(knockbackPower, force, positionAdjust);
 	}
 
@@ -2221,7 +2215,7 @@ public class Character : Weakable
 		mRangedAttackDelivered = true;
 		List<Character> list = new List<Character>();
 		List<Character> charactersInRange = WeakGlobalInstance<CharactersManager>.Instance.GetCharactersInRange(bowAttackHitGameRange, ownerId);
-		float num = ((!(mountedHealthMax > 0f)) ? (health / maxHealth) : (mountedHealth / mountedHealthMax));
+		float num = !(mountedHealthMax <= 0f) ? (health / maxHealth) : (mountedHealth / mountedHealthMax);
 		foreach (Character item in charactersInRange)
 		{
 			if (item.health >= item.maxHealth)

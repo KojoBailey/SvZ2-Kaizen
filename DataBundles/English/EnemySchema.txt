@@ -11,7 +11,7 @@
     bowRange = 0
     meleeDamage = 25
     attackFrequency = 2.5
-    knockbackPower = 0
+    knockbackPower = 10
     knockbackResistance = 10
     award = 15
     resourceDropMin = 0
@@ -793,8 +793,8 @@
     bowRange = 0
     meleeDamage = 14
     attackFrequency = 2
-    knockbackPower = 0
-    knockbackResistance = 0
+    knockbackPower = 2
+    knockbackResistance = 4
     award = 10
     resourceDropMin = 0
     resourceDropMax = 3
@@ -965,8 +965,8 @@
     bowRange = 0
     meleeDamage = 100
     attackFrequency = 3
-    knockbackPower = 50
-    knockbackResistance = 90
+    knockbackPower = 10
+    knockbackResistance = 20
     award = 45
     resourceDropMin = 0
     resourceDropMax = 3
@@ -1149,8 +1149,8 @@
     meleeDamage = 14
     bowDamage = 0
     attackFrequency = 1.5
-    knockbackPower = 0
-    knockbackResistance = 10
+    knockbackPower = 1
+    knockbackResistance = 2
     damageBuffPercent = 0
     award = 10
     resourceDropMin = 0

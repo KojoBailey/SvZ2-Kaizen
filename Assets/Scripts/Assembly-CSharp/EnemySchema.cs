@@ -41,6 +41,10 @@ public class EnemySchema
 
 	public int knockbackPower;
 
+	[DataBundleField]
+	[DataBundleDefaultValue(true)]
+	public bool knockbackable;
+
 	public int knockbackResistance;
 
 	public float damageBuffPercent;

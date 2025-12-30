@@ -40,6 +40,8 @@ public struct CharacterStats
 
 	public int knockbackPowerRanged;
 
+	public bool knockbackable;
+
 	public int knockbackResistance;
 
 	public float meleeAttackRange;

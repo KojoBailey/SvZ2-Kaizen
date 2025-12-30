@@ -128,8 +128,8 @@
     speedMax = 1
     meleeRange = 1
     meleeDamage = 12
-    knockbackPower = 5
-    knockbackResistance = 10
+    knockbackPower = 1
+    knockbackResistance = 3
   002:
     id = 002
     cost = 275,0
@@ -138,8 +138,8 @@
     speedMax = 1
     meleeRange = 1
     meleeDamage = 15
-    knockbackPower = 5
-    knockbackResistance = 10
+    knockbackPower = 1
+    knockbackResistance = 4
   003:
     id = 003
     cost = 850,0
@@ -148,8 +148,8 @@
     speedMax = 1
     meleeRange = 1
     meleeDamage = 19
-    knockbackPower = 5
-    knockbackResistance = 10
+    knockbackPower = 1
+    knockbackResistance = 5
   004:
     id = 004
     cost = 1850,0
@@ -158,8 +158,8 @@
     speedMax = 1
     meleeRange = 1
     meleeDamage = 30
-    knockbackPower = 5
-    knockbackResistance = 10
+    knockbackPower = 1
+    knockbackResistance = 6
   005:
     id = 005
     cost = 3700,0
@@ -168,8 +168,8 @@
     speedMax = 1
     meleeRange = 1
     meleeDamage = 38
-    knockbackPower = 5
-    knockbackResistance = 10
+    knockbackPower = 1
+    knockbackResistance = 9
   006:
     id = 006
     cost = 0,8
@@ -178,7 +178,7 @@
     speedMax = 1
     meleeRange = 1
     meleeDamage = 55
-    knockbackPower = 5
+    knockbackPower = 1
     knockbackResistance = 10
   007:
     id = 007
@@ -188,7 +188,7 @@
     speedMax = 1
     meleeRange = 1
     meleeDamage = 76
-    knockbackPower = 5
+    knockbackPower = 1
     knockbackResistance = 10
   008:
     id = 008
@@ -198,7 +198,7 @@
     speedMax = 1
     meleeRange = 1
     meleeDamage = 107
-    knockbackPower = 5
+    knockbackPower = 1
     knockbackResistance = 10
   009:
     id = 009
@@ -208,7 +208,7 @@
     speedMax = 1
     meleeRange = 1
     meleeDamage = 151
-    knockbackPower = 5
+    knockbackPower = 1
     knockbackResistance = 10
   010:
     id = 010
@@ -218,7 +218,7 @@
     speedMax = 1
     meleeRange = 1
     meleeDamage = 220
-    knockbackPower = 5
+    knockbackPower = 1
     knockbackResistance = 10
   011:
     id = 011
@@ -230,7 +230,7 @@
     bowRange = 0
     meleeDamage = 325
     bowDamage = 0
-    knockbackPower = 5
+    knockbackPower = 1
     knockbackResistance = 10
     projectile = 
     upgradeAlliesFrom = 
@@ -2016,7 +2016,7 @@
     speedMax = 1
     meleeRange = 1.05
     meleeDamage = 9
-    knockbackPower = 15
+    knockbackPower = 2
     knockbackResistance = 10
   002:
     id = 002

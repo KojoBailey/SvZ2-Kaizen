@@ -22,6 +22,10 @@ public class HelperLevelSchema
 
 	public int knockbackPower;
 
+	[DataBundleField]
+	[DataBundleDefaultValue(true)]
+	public bool knockbackable;
+
 	public int knockbackResistance;
 
 	[DataBundleSchemaFilter(typeof(DynamicEnum), false)]

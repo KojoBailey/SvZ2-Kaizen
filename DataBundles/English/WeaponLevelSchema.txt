@@ -438,7 +438,7 @@
 		attackRange = 1.45
 		attackFrequency = 1.5
 		damage = 8
-		knockbackPower = 100
+		knockbackPower = 4
 		prefab = Assets/Game/Resources/Props/Weapons/KatanaPF.prefab
 		icon = Assets/Game/Resources/UI/Textures/DynamicIcons/Upgrades/Samurai_Sword.png
 		desc = LocalizedStrings
@@ -449,7 +449,7 @@
 		attackRange = 1.45
 		attackFrequency = 1.5
 		damage = 11
-		knockbackPower = 100
+		knockbackPower = 4
 		prefab = Assets/Game/Resources/Props/Weapons/KatanaUpgradePF.prefab
 		icon = Assets/Game/Resources/UI/Textures/DynamicIcons/Upgrades/Samurai_Sword.png
 		desc = LocalizedStrings.katana_desc
@@ -460,7 +460,7 @@
 		attackRange = 1.45
 		attackFrequency = 1.5
 		damage = 17
-		knockbackPower = 100
+		knockbackPower = 4
 		prefab = Assets/Game/Resources/Props/Weapons/KatanaUpgrade1PF.prefab
 		icon = Assets/Game/Resources/UI/Textures/DynamicIcons/Upgrades/Samurai_Sword_Flaming.png
 		desc = LocalizedStrings.katanafire_desc
@@ -471,7 +471,7 @@
 		attackRange = 1.45
 		attackFrequency = 1.5
 		damage = 21
-		knockbackPower = 125
+		knockbackPower = 4
 		prefab = Assets/Game/Resources/Props/Weapons/KatanaUpgrade2PF.prefab
 		icon = Assets/Game/Resources/UI/Textures/DynamicIcons/Upgrades/Samurai_Sword_FlamingBlue.png
 		desc = LocalizedStrings.katanablue_desc
