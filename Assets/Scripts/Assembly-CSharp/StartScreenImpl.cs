@@ -54,7 +54,6 @@ public class StartScreenImpl : MonoBehaviour, IGluiActionHandler
 		}
 		while (!Singleton<Profile>.Instance.Initialized) yield return null;
 		Singleton<Profile>.Instance.ForceOnboardingStage("OnboardingStep2_StartScreen");
-		SingletonSpawningMonoBehaviour<ApplicationUtilities>.Instance.canAwardGems = true;
 		PlayerPrefs.SetInt("gameLoadedCorrectly", 1);
 		PlayerPrefs.SetString("gameTag", AJavaTools.Properties.GetBuildTag());
 	}

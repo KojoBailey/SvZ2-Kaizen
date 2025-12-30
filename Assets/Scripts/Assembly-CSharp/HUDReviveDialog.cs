@@ -160,7 +160,6 @@ public class HUDReviveDialog : MonoBehaviour, IGluiActionHandler
 		{
 			numRevivesPurchased += mBundles[bundleIndex].quantity;
 			mBundles[bundleIndex].cost.Spend();
-			mBundles[bundleIndex].cost.gwalletSpend(mBundles[bundleIndex].cost, "DEBIT_IN_APP_PURCHASE", "Revive");
 			Singleton<Profile>.Instance.SetNumPotions("revivePotion", numRevivePotions + mBundles[bundleIndex].quantity);
 			Use();
 		}

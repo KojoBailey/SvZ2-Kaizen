@@ -71,7 +71,6 @@ public class iCloudConfirmImpl : MonoBehaviour, IGluiActionHandler
 			slots[num2].text_currencySoft.gameObject.SetActive(true);
 			slots[num2].text_lastPlayed.gameObject.SetActive(true);
 			slots[num2].text_powerRating.gameObject.SetActive(true);
-			slots[num2].text_currencyHard.Text = StringUtils.FormatAmountString(Singleton<Profile>.Instance.CloudSave.GetValueInt("gems"));
 			slots[num2].text_currencySoft.Text = StringUtils.FormatAmountString(Singleton<Profile>.Instance.CloudSave.GetValueInt("coins"));
 			dateTime = deviceData2.Latest.SaveTime.ToLocalTime();
 			GluiText text_lastPlayed2 = slots[num2].text_lastPlayed;

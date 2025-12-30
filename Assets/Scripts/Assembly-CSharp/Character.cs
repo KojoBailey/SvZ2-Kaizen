@@ -2159,13 +2159,13 @@ public class Character : Weakable
 		{
 			if (CheckIfTargetValid(item) && (!item.isFlying || canMeleeFliers))
 			{
-				float num3 = randomCriticalDamage;
+				float criticalDamage = randomCriticalDamage;
 				EAttackType attackType = EAttackType.Blunt;
 				if (meleeWeaponIsABlade)
 				{
-					attackType = (!(num3 > 0f)) ? EAttackType.Blade : EAttackType.BladeCritical;
+					attackType = (criticalDamage <= 0f) ? EAttackType.Blade : EAttackType.BladeCritical;
 				}
-				else if (num3 > 0f)
+				else if (criticalDamage > 0f)
 				{
 					attackType = EAttackType.BluntCritical;
 				}

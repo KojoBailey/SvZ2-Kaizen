@@ -78,9 +78,6 @@ public class DailyRewardsImpl : MonoBehaviour
 		case DailyRewardSchema.Type.Coins:
 			CashIn.From("coins", dayData.num, "DailyRewards");
 			break;
-		case DailyRewardSchema.Type.Gems:
-			CashIn.From("gems", dayData.num, "DailyRewards");
-			break;
 		case DailyRewardSchema.Type.Revives:
 			CashIn.From("revivePotion", dayData.num, "DailyRewards");
 			break;

@@ -347,7 +347,6 @@ public class GlobalActions : GluiGlobalActionHandler
 				else
 				{
 					item.packCost.Spend();
-					item.packCost.gwalletSpend(item.packCost, "DEBIT_IN_APP_PURCHASE", item.title);
 				}
 				if (item.packOverrideFunc != null)
 				{
@@ -386,7 +385,6 @@ public class GlobalActions : GluiGlobalActionHandler
 			else if (item.id != "mpshield" || SingletonSpawningMonoBehaviour<ApplicationUtilities>.Instance.SNTPTime.SNTPSuccessful)
 			{
 				cost.Spend();
-				cost.gwalletSpend(item.cost, "DEBIT_IN_APP_PURCHASE", item.title);
 			}
 			item.Apply(packPurchased);
 			if (!item.triggersOwnPopup)

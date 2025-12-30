@@ -6,8 +6,6 @@ public class WaveRewardSchema
 
 	public int coins;
 
-	public int gems;
-
 	public int souls;
 
 	public int pachinkoBalls;

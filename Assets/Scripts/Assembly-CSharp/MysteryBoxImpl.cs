@@ -237,10 +237,8 @@ public class MysteryBoxImpl : MonoBehaviour, IGluiActionHandler
 
 	private void CashInContent()
 	{
-		if (mPrize == null)
-		{
-			return;
-		}
+		if (mPrize == null) return;
+
 		if (mPrize.id == "dealpack")
 		{
 			StoreAvailability.CashInDealPackFromString(mPrize.packId, 1);
@@ -250,7 +248,6 @@ public class MysteryBoxImpl : MonoBehaviour, IGluiActionHandler
 			CashIn.From(mPrize.id, mPrize.num, "Mystery Box");
 		}
 		cost.Spend();
-		cost.gwalletSpend(cost, "DEBIT_IN_APP_PURCHASE", "Mystery Box");
 		if (FacebookButton != null)
 		{
 			CashIn.ItemType type = CashIn.GetType(mPrize.id);

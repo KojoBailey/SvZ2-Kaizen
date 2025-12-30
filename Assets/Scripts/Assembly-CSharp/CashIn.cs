@@ -6,7 +6,6 @@ public class CashIn
 	{
 		Unknown = 0,
 		Coins = 1,
-		Gems = 2,
 		Balls = 3,
 		BoosterPack = 4,
 		Potion = 5,
@@ -20,8 +19,6 @@ public class CashIn
 		Souls = 13,
 		Leadership = 14
 	}
-
-	private static float gemsToCoins;
 
 	private static float soulsToCoins;
 
@@ -178,10 +175,6 @@ public class CashIn
 		{
 			return ItemType.Coins;
 		}
-		if (string.Compare(keyValuePair.Key, "gems", true) == 0 || string.Compare(keyValuePair.Key, "gem", true) == 0)
-		{
-			return ItemType.Gems;
-		}
 		if (string.Compare(keyValuePair.Key, "balls", true) == 0 || string.Compare(keyValuePair.Key, "ball", true) == 0)
 		{
 			return ItemType.Balls;
@@ -241,10 +234,6 @@ public class CashIn
 		{
 			return keyValuePair.Value;
 		}
-		if (GetType(keyValuePair.Key) == ItemType.Gems)
-		{
-			return ConvertGemsValueToCoins(keyValuePair.Value);
-		}
 		if (GetType(keyValuePair.Key) == ItemType.Souls)
 		{
 			return ConvertSoulsValueToCoins(keyValuePair.Value);
@@ -277,19 +266,6 @@ public class CashIn
 			}
 		}
 		return 0;
-	}
-
-	public static int ConvertGemsValueToCoins(int amount)
-	{
-		if (gemsToCoins == 0f)
-		{
-			IAPSchema iAPSchema = SingletonSpawningMonoBehaviour<GluIap>.Instance.Products.Find((IAPSchema s) => string.Equals(s.productId, "com.glu.samuzombie2.PACK_GEMS_199"));
-			IAPSchema iAPSchema2 = SingletonSpawningMonoBehaviour<GluIap>.Instance.Products.Find((IAPSchema s) => string.Equals(s.productId, "com.glu.samuzombie2.PACK_COINS_199"));
-			int num = (iAPSchema == null) ? 40 : iAPSchema.hardCurrencyAmount;
-			int num2 = (iAPSchema2 == null) ? 2000 : iAPSchema2.softCurrencyAmount;
-			gemsToCoins = (float)num2 / (float)num;
-		}
-		return (int)((float)amount * gemsToCoins);
 	}
 
 	public static int ConvertSoulsValueToCoins(int amount)

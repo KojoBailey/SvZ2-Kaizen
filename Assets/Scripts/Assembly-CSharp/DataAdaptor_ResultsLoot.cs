@@ -65,10 +65,6 @@ public class DataAdaptor_ResultsLoot : DataAdaptorBase
 					texture2D = ResourceCache.GetCachedResource(GetSoulsIconPath(keyValuePair.Value)).Resource as Texture2D;
 				}
 				break;
-			case CashIn.ItemType.Gems:
-				text = StringUtils.GetStringFromStringRef("MenuFixedStrings", "gems");
-				texture2D = ResourceCache.GetCachedResource(GetGemsIconPath(keyValuePair.Value), 1).Resource as Texture2D;
-				break;
 			case CashIn.ItemType.Potion:
 			{
 				PotionSchema potionSchema = Singleton<PotionsDatabase>.Instance[keyValuePair.Key];

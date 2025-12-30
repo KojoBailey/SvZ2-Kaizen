@@ -4,13 +4,9 @@ public class WidgetPriceSpawner : MonoBehaviour
 {
 	public string widgetPath = "UI/Prefabs/Global/Widget_Price_Store";
 
-	private void Start()
-	{
-	}
+	private void Start() {}
 
-	private void Update()
-	{
-	}
+	private void Update() {}
 
 	public void SetCost(string customPriceString)
 	{
@@ -32,10 +28,8 @@ public class WidgetPriceSpawner : MonoBehaviour
 
 	private WidgetPriceHandler SpawnHandler()
 	{
-		if (widgetPath == string.Empty)
-		{
-			return null;
-		}
+		if (widgetPath == string.Empty) return null;
+
 		GameObject gameObject = base.gameObject.FindChild("WidgetPrice");
 		if (gameObject == null)
 		{

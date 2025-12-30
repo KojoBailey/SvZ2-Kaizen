@@ -78,9 +78,6 @@ public class PlayStatistics : Singleton<PlayStatistics>
 			{
 			case CashIn.ItemType.Unknown:
 				return;
-			case CashIn.ItemType.Gems:
-				id = "gems";
-				break;
 			case CashIn.ItemType.Coins:
 				id = "coins";
 				break;

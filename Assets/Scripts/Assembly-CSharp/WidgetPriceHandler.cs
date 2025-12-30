@@ -144,15 +144,15 @@ public class WidgetPriceHandler : MonoBehaviour
 		if (string.IsNullOrEmpty(mCustomPriceString))
 		{
 			currencyIcon.gameObject.SetActive(true);
-			switch (mCost.currency)
-			{
-			case Cost.Currency.Coin:
-				currencyIcon.ApplyGluiAtlasedTexture("Global_A.T_Currency_Soft.1");
-				break;
-			case Cost.Currency.Soul:
-				currencyIcon.ApplyGluiAtlasedTexture("Global_A.T_Currency_Soul.1");
-				break;
-			}
+			// switch (mCost.currency)
+			// {
+			// case Cost.Currency.Coin:
+			// 	currencyIcon.ApplyGluiAtlasedTexture("Global_A.T_Currency_Soft.1");
+			// 	break;
+			// case Cost.Currency.Soul:
+			// 	currencyIcon.ApplyGluiAtlasedTexture("Global_A.T_Currency_Soul.1");
+			// 	break;
+			// }
 		}
 		else
 		{

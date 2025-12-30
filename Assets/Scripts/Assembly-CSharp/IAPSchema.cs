@@ -82,23 +82,16 @@ public class IAPSchema
 	public void updateWithIapRecommendation(GWIAPRecommendation_Unity item)
 	{
 		referenceId = item.m_itemName;
-		string text = ((!item.m_itemName.Contains("GEM")) ? "Coins" : "Glu Credits");
+		string text = "Coins";
 		productId = item.m_storeSkuCode;
 		hidden = false;
-		description = "Purchase " + item.m_currencyValue + ((!item.m_itemName.Contains("gem")) ? " Coins" : " Glu Credits");
-		if (text == "Glu Credits")
-		{
-			hardCurrencyAmount = Convert.ToInt32(item.m_displayUrl);
-		}
-		else
-		{
-			softCurrencyAmount = Convert.ToInt32(item.m_displayUrl);
-		}
+		description = "Purchase " + item.m_currencyValue + " Coins";
+		softCurrencyAmount = Convert.ToInt32(item.m_displayUrl);
 	}
 
 	public void updateWithSubscriptionRecommendation(GWSubscriptionRecommendation_Unity sub, int amount)
 	{
-		string text = ((!sub.m_storeSkuCode.Contains("gem")) ? "Coins" : "Glu Credits");
+		string text = "Coins";
 		productId = sub.m_storeSkuCode;
 		referenceId = "SAMUZOMBIE2 " + sub.m_storeSkuCode.Substring(20);
 		description = "Purchase " + amount + " " + text + ".";
@@ -106,13 +99,6 @@ public class IAPSchema
 		percentBonus = 50;
 		int num = amount / 2;
 		displayedName = amount + " " + text + " plus " + num + " FREE";
-		if (text == "Glu Credits")
-		{
-			hardCurrencyAmount = amount + num;
-		}
-		else
-		{
-			softCurrencyAmount = amount + num;
-		}
+		softCurrencyAmount = amount + num;
 	}
 }
