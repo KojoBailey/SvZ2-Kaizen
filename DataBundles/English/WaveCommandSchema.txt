@@ -887,7 +887,7 @@
 		type = Spawn
 		enemy = Enemies.LZombieArcher
 		count = 10
-		spacing = Loose
+		spacing = Tight
 		spawnAt = NoDelay
 	*:
 		type = Spawn
@@ -923,7 +923,6 @@
 		type = MoveGate
 		gatePos = Far
 		spawnAt = Death
-		# [TODO] Make sure spawnAt only triggers when all previous enemies have finished spawning.
 	*:
 		type = Spawn
 		enemy = Enemies.OniSmall

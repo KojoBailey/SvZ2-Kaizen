@@ -551,7 +551,8 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 		if (!mSpawnTimer.IsDone) return;
 
-		if (mNextCommand != null && (mQueueTimer.IsDone || mRemainingEnemyHealthPercent <= mNextCommand.spawnAtPercent))
+		bool enoughEnemiesDefeated = mSpawnQueue.Count == 0 && mRemainingEnemyHealthPercent <= mNextCommand.spawnAtPercent;
+		if (mNextCommand != null && (mQueueTimer.IsDone || enoughEnemiesDefeated))
 		{
 			mQueueTimer.Reset();
 
