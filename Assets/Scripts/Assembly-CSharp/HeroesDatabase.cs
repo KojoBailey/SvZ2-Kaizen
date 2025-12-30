@@ -66,16 +66,6 @@ public class HeroesDatabase : Singleton<HeroesDatabase>
 		return Array.Find(mAllIDs, (string s) => string.Compare(s, id, true) == 0) != null;
 	}
 
-	public int GetMaxLevel(string CurrentHeroId)
-	{
-		HeroSchema heroSchema = this[CurrentHeroId];
-		if (heroSchema != null)
-		{
-			return heroSchema.Levels.Length;
-		}
-		return -1;
-	}
-
 	public void LoadFrontEndData()
 	{
 		foreach (DataBundleRecordHandle<HeroSchema> mDatum in mData)

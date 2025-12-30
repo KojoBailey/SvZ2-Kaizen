@@ -5,120 +5,12 @@
 		health = 250
 		healthRecovery = 5
 		speed = 4
-	2:
-		level = 2
-		cost = 250,0
-		health = 300
-		healthRecovery = 6
-		speed = 4
-	3:
-		level = 3
-		cost = 850,0
-		health = 350
-		healthRecovery = 8
-		speed = 4
-	4:
-		level = 4
-		cost = 2000,0
-		health = 450
-		healthRecovery = 10
-		speed = 4
-	5:
-		level = 5
-		cost = 4500,0
-		health = 750
-		healthRecovery = 11
-		speed = 4
-	6:
-		level = 6
-		cost = 9000,0
-		health = 1100
-		healthRecovery = 16
-		speed = 4
-	7:
-		level = 7
-		cost = 16500,0
-		health = 1500
-		healthRecovery = 14
-		speed = 4
-	8:
-		level = 8
-		cost = 29500,0
-		health = 1750
-		healthRecovery = 17
-		speed = 4
-	9:
-		level = 9
-		cost = 50000,0
-		health = 2100
-		healthRecovery = 50
-		speed = 4
-	10:
-		level = 10
-		cost = 82500,0
-		health = 2500
-		healthRecovery = 75
-		speed = 4
 [HeroAttack]
 	1:
 		level = 1
 		cost = 0,0
 		health = 100
 		healthRecovery = 6
-		speed = 5
-	2:
-		level = 2
-		cost = 250,0
-		health = 125
-		healthRecovery = 8
-		speed = 5
-	3:
-		level = 3
-		cost = 850,0
-		health = 175
-		healthRecovery = 11
-		speed = 5
-	4:
-		level = 4
-		cost = 2000,0
-		health = 225
-		healthRecovery = 14
-		speed = 5
-	5:
-		level = 5
-		cost = 4500,0
-		health = 275
-		healthRecovery = 18
-		speed = 5
-	6:
-		level = 6
-		cost = 9000,0
-		health = 425
-		healthRecovery = 23
-		speed = 5
-	7:
-		level = 7
-		cost = 16500,0
-		health = 600
-		healthRecovery = 35
-		speed = 5
-	8:
-		level = 8
-		cost = 29500,0
-		health = 825
-		healthRecovery = 50
-		speed = 5
-	9:
-		level = 9
-		cost = 50000,0
-		health = 1250
-		healthRecovery = 75
-		speed = 5
-	10:
-		level = 10
-		cost = 82500,0
-		health = 1600
-		healthRecovery = 100
 		speed = 5
 [HeroBalanced]
 	1:
@@ -127,60 +19,6 @@
 		health = 200
 		healthRecovery = 4
 		speed = 3
-	2:
-		level = 2
-		cost = 250,0
-		health = 250
-		healthRecovery = 5
-		speed = 3
-	3:
-		level = 3
-		cost = 850,0
-		health = 350
-		healthRecovery = 7
-		speed = 3
-	4:
-		level = 4
-		cost = 2000,0
-		health = 450
-		healthRecovery = 9
-		speed = 3
-	5:
-		level = 5
-		cost = 4500,0
-		health = 550
-		healthRecovery = 10
-		speed = 3
-	6:
-		level = 6
-		cost = 9000,0
-		health = 845
-		healthRecovery = 15
-		speed = 3
-	7:
-		level = 7
-		cost = 16500,0
-		health = 1140
-		healthRecovery = 22.75
-		speed = 3
-	8:
-		level = 8
-		cost = 29500,0
-		health = 1710
-		healthRecovery = 35
-		speed = 3
-	9:
-		level = 9
-		cost = 50000,0
-		health = 2225
-		healthRecovery = 50
-		speed = 3
-	10:
-		level = 10
-		cost = 82500,0
-		health = 2756
-		healthRecovery = 75
-		speed = 3
 [HeroDefense]
 	1:
 		level = 1
@@ -188,118 +26,10 @@
 		health = 400
 		healthRecovery = 8
 		speed = 1.5
-	2:
-		level = 2
-		cost = 250,0
-		health = 500
-		healthRecovery = 10
-		speed = 1.5
-	3:
-		level = 3
-		cost = 850,0
-		health = 700
-		healthRecovery = 14
-		speed = 1.5
-	4:
-		level = 4
-		cost = 2000,0
-		health = 900
-		healthRecovery = 18
-		speed = 1.5
-	5:
-		level = 5
-		cost = 4500,0
-		health = 1100
-		healthRecovery = 24
-		speed = 1.5
-	6:
-		level = 6
-		cost = 9000,0
-		health = 1600
-		healthRecovery = 36
-		speed = 1.5
-	7:
-		level = 7
-		cost = 16500,0
-		health = 2000
-		healthRecovery = 50
-		speed = 1.5
-	8:
-		level = 8
-		cost = 29500,0
-		health = 2500
-		healthRecovery = 70
-		speed = 1.5
-	9:
-		level = 9
-		cost = 50000,0
-		health = 3000
-		healthRecovery = 100
-		speed = 1.5
-	10:
-		level = 10
-		cost = 82500,0
-		health = 3500
-		healthRecovery = 150
-		speed = 1.5
 [HeroLeadership]
 	1:
 		level = 1
 		cost = 0,0
 		health = 300
 		healthRecovery = 5
-		speed = 3.5
-	2:
-		level = 2
-		cost = 250,0
-		health = 350
-		healthRecovery = 6
-		speed = 3.5
-	3:
-		level = 3
-		cost = 850,0
-		health = 400
-		healthRecovery = 8
-		speed = 3.5
-	4:
-		level = 4
-		cost = 2000,0
-		health = 550
-		healthRecovery = 10
-		speed = 3.5
-	5:
-		level = 5
-		cost = 4500,0
-		health = 850
-		healthRecovery = 11
-		speed = 3.5
-	6:
-		level = 6
-		cost = 9000,0
-		health = 1200
-		healthRecovery = 16
-		speed = 3.5
-	7:
-		level = 7
-		cost = 16500,0
-		health = 1600
-		healthRecovery = 14
-		speed = 3.5
-	8:
-		level = 8
-		cost = 29500,0
-		health = 1850
-		healthRecovery = 17
-		speed = 3.5
-	9:
-		level = 9
-		cost = 50000,0
-		health = 2200
-		healthRecovery = 50
-		speed = 3.5
-	10:
-		level = 10
-		cost = 82500,0
-		health = 2600
-		healthRecovery = 75
 		speed = 3.5

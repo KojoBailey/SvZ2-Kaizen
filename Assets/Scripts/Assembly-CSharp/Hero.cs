@@ -133,10 +133,10 @@ public class Hero : Character
 		var result = default(CharacterStats);
 		result.isPlayer = true;
 		result.knockbackResistance = 100;
-		result.maxHealth = mainData.MaxHealth(heroLevel);
+		result.maxHealth = mainData.health;
 		result.health = result.maxHealth;
-		result.autoHealthRecovery = mainData.HealthRecovery(heroLevel);
-		result.speed = mainData.GetLevel(heroLevel).speed;
+		result.autoHealthRecovery = mainData.healthRecovery;
+		result.speed = mainData.speed;
 		WeaponSchema meleeWeapon = mainData.MeleeWeapon;
 		result.meleeWeaponIsABlade = meleeWeapon.isBladeWeapon;
 		result.meleeAttackRange = meleeWeapon.GetLevel(level).attackRange;

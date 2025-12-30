@@ -89,17 +89,6 @@ public class CashIn
 				{
 					Singleton<Achievements>.Instance.IncrementAchievement(heroSchema.unlockAchievement.Key, 1);
 				}
-				if (!string.IsNullOrEmpty(heroSchema.unlockPlayhavenRequest))
-				{
-					if (!SingletonMonoBehaviour<StoreMenuImpl>.Exists)
-					{
-						StoreMenuImpl.queuedPlayhavenRequest = heroSchema.unlockPlayhavenRequest;
-					}
-					else
-					{
-						ApplicationUtilities.MakePlayHavenContentRequest(heroSchema.unlockPlayhavenRequest);
-					}
-				}
 				break;
 			}
 			case ItemType.HeroUpgrade:

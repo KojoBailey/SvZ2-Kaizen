@@ -42,35 +42,43 @@ public class HeroSchema
 	[DataBundleRecordTableFilter("Weapons")]
 	public DataBundleRecordKey rangedWeapon;
 
-	public string infiniteUpgradeCost;
-
-	public float infiniteUpgradeHealth;
-
-	public float infiniteUpgradeHealthRecovery;
-
-	[DataBundleSchemaFilter(typeof(HeroLevelSchema), false)]
-	public DataBundleRecordTable levels;
-
 	[DataBundleSchemaFilter(typeof(AbilitiesListSchema), false)]
 	public DataBundleRecordTable PotentialAbilties;
 
 	[DataBundleSchemaFilter(typeof(ArmorLevelSchema), false)]
 	public DataBundleRecordTable armorLevels;
 
+	[DataBundleField]
+	public int health;
+
+	[DataBundleField]
+	public float healthRecovery;
+
+	[DataBundleField]
+	public float speed;
+
+	[DataBundleField]
 	public int allySlots;
 
+	[DataBundleField]
 	public int abilitySlots;
 
+	[DataBundleField]
 	public bool canMeleeFliers;
 
+	[DataBundleField]
 	public int waveToUnlock;
 
+	[DataBundleField]
 	public bool purchaseToUnlock;
 
+	[DataBundleField]
 	public bool hideUntilUnlocked;
 
+	[DataBundleField]
 	public bool overrideRequirements;
 
+	[DataBundleField]
 	public bool disabled;
 
 	[DataBundleSchemaFilter(typeof(AchievementSchema), false)]
@@ -88,16 +96,14 @@ public class HeroSchema
 	[DataBundleSchemaFilter(typeof(AchievementSchema), false)]
 	public DataBundleRecordKey leadershipAchievement;
 
-	public string unlockPlayhavenRequest;
-
 	[DataBundleDefaultValue(1.3f)]
 	public float backPedalTime;
 
+	[DataBundleField]
 	public bool blocksHeroMovement;
 
+	[DataBundleField]
 	public int defenseRating;
-
-	public HeroLevelSchema[] Levels { get; set; }
 
 	public AbilitySchema[] Abilities { get; private set; }
 
@@ -109,32 +115,17 @@ public class HeroSchema
 
 	public bool Locked
 	{
-		get
-		{
-			return !Purchased || Singleton<Profile>.Instance.highestUnlockedWave < waveToUnlock;
-		}
+		get { return !Purchased || Singleton<Profile>.Instance.highestUnlockedWave < waveToUnlock; }
 	}
 
 	public bool Purchased
 	{
-		get
-		{
-			return !purchaseToUnlock || Singleton<Profile>.Instance.GetHeroPurchased(id);
-		}
+		get { return !purchaseToUnlock || Singleton<Profile>.Instance.GetHeroPurchased(id); }
 	}
 
 	public string IconPath { get; private set; }
 
 	public HeroStarsSchema HeroStarsSchema { get; set; }
-
-	public HeroLevelSchema GetLevel(int level)
-	{
-		if (Levels != null && Levels.Length > 0)
-		{
-			return Levels[Mathf.Clamp(level - 1, 0, Levels.Length - 1)];
-		}
-		return null;
-	}
 
 	public ArmorLevelSchema GetArmorLevel(int level)
 	{
@@ -145,47 +136,8 @@ public class HeroSchema
 		return null;
 	}
 
-	public float MaxHealth(int level)
-	{
-		level--;
-		int num = Levels.Length - 1;
-		if (level <= num)
-		{
-			return Levels[level].health;
-		}
-		return InfiniteUpgrades.Extrapolate(Levels[num].health, infiniteUpgradeHealth, level - num);
-	}
-
-	public float HealthRecovery(int level)
-	{
-		level--;
-		int num = Levels.Length - 1;
-		if (level <= num)
-		{
-			return Levels[level].healthRecovery;
-		}
-		return InfiniteUpgrades.Extrapolate(Levels[num].healthRecovery, infiniteUpgradeHealthRecovery, level - num);
-	}
-
-	public float Extrapolate(LevelValueAccessor accessor, InfiniteUpgradeAccessor upgradeAccessor)
-	{
-		return Extrapolate(Singleton<Profile>.Instance.GetHeroLevel(id), accessor, upgradeAccessor);
-	}
-
-	public float Extrapolate(int level, LevelValueAccessor accessor, InfiniteUpgradeAccessor upgradeAccessor)
-	{
-		level = Mathf.Max(0, level - 1);
-		int num = Levels.Length - 1;
-		if (level <= num)
-		{
-			return accessor(Levels[level]);
-		}
-		return InfiniteUpgrades.Extrapolate(accessor(Levels[num]), upgradeAccessor(this), level - num);
-	}
-
 	public void Initialize(string tableName)
 	{
-		Levels = levels.InitializeRecords<HeroLevelSchema>();
 		if (PotentialAbilties != null)
 		{
 			AbilitiesListSchema[] array = PotentialAbilties.InitializeRecords<AbilitiesListSchema>();

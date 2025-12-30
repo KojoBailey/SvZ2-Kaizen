@@ -241,10 +241,6 @@ public class ResultsMenuImpl : UIHandler<ResultsMenuImpl>, IGluiActionHandler
 				{
 					Singleton<Achievements>.Instance.IncrementAchievement(heroSchema.unlockAchievement.Key, 1);
 				}
-				if (!string.IsNullOrEmpty(heroSchema.unlockPlayhavenRequest))
-				{
-					ApplicationUtilities.MakePlayHavenContentRequest(heroSchema.unlockPlayhavenRequest);
-				}
 				return unlockedFeature;
 			}
 		}

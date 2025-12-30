@@ -103,7 +103,7 @@ public class DataBundleCompiler : MonoBehaviour
 
                     if (fieldInfo == null)
                     {
-                        UnityEngine.Debug.LogError("fieldInfo null! " + fieldName);
+                        UnityEngine.Debug.LogError("fieldInfo null! " + fieldName + " for " + currentTable);
                         continue;
                     }
 

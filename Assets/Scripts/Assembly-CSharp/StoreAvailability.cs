@@ -101,37 +101,24 @@ public class StoreAvailability
 	private static void GetHero(string heroId, List<StoreData.Item> items)
 	{
 		HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[heroId];
-		int CurrentHeroLevel = Singleton<Profile>.Instance.GetHeroLevel(heroId);
-		int num = CurrentHeroLevel + 1;
-		int num2 = heroSchema.Levels.Length;
-		bool isLastUpgrade = num == num2;
 		StoreData.Item item = new StoreData.Item(delegate
 		{
-			LevelUpHero(heroId, isLastUpgrade);
+			LevelUpHero(heroId, true);
 		});
 		bool purchased = heroSchema.Purchased;
-		item.details.SetColumns(CurrentHeroLevel, num);
-		item.details.AddStat("health_stats", Mathf.RoundToInt(heroSchema.Extrapolate(CurrentHeroLevel, (HeroLevelSchema ls) => ls.health, (HeroSchema s) => s.infiniteUpgradeHealth)).ToString(), Mathf.RoundToInt(heroSchema.Extrapolate(num, (HeroLevelSchema ls) => ls.health, (HeroSchema s) => s.infiniteUpgradeHealth)).ToString());
-		float salePercentage = SaleItemSchema.FindActiveSaleForItem(heroId + ".Level");
-		if (num <= num2)
-		{
-			item.cost = new Cost(heroSchema.Levels[num - 1].cost, salePercentage);
-		}
-		else
-		{
-			item.cost = new Cost(heroSchema.infiniteUpgradeCost, salePercentage);
-		}
+		// item.details.SetColumns(CurrentHeroLevel, num);
+		item.details.AddStat("health_stats", heroSchema.health.ToString(), heroSchema.health.ToString());
+
 		item.id = heroId;
 		item.LoadIcon(heroSchema.IconPath);
-		item.title = string.Format(StringUtils.GetStringFromStringRef(heroSchema.store_levelup), num);
+		// item.title = string.Format(StringUtils.GetStringFromStringRef(heroSchema.store_levelup), num);
 		item.details.Name = item.title;
 		item.details.AddSmallDescription(StringUtils.GetStringFromStringRef(heroSchema.desc));
 		item.analyticsEvent = "UpgradePurchased";
 		item.analyticsParams = new Dictionary<string, object>();
 		item.analyticsParams["ItemName"] = heroId + ".CurrentHeroLevel";
-		item.analyticsParams["UpgradeLevel"] = num;
 		string stringFromStringRef = StringUtils.GetStringFromStringRef(heroSchema.displayName);
-		if (CurrentHeroLevel >= heroSchema.Levels.Length)
+		if (true)
 		{
 			item.maxlevel = true;
 			item.title = string.Format(StringUtils.GetStringFromStringRef("LocalizedStrings", "store_upgrades_complete"), stringFromStringRef);
