@@ -23,10 +23,8 @@ public class SaleItemSchema
 			List<SaleEventSchema> list = SaleEventSchema.FindActiveSales();
 			foreach (SaleEventSchema item in list)
 			{
-				if (item.SaleItems == null)
-				{
-					continue;
-				}
+				if (item.SaleItems == null) continue;
+
 				foreach (SaleItemSchema saleItem in item.SaleItems)
 				{
 					if (string.Equals(saleItem.item, itemID))

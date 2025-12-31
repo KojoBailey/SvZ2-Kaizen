@@ -112,12 +112,13 @@ public class StoreAvailability
 			item.details.Name = item.title;
 			item.details.AddSmallDescription(StringUtils.GetStringFromStringRef(heroSchema.desc));
 			item.details.AddStat("health_stats", heroSchema.health.ToString());
-			item.details.AddStat("duration", heroSchema.speed.ToString());
+			item.details.AddStat("speed", heroSchema.speed.ToString());
 			item.isUpgradable = false;
 			items.Add(item);
 		}
 
 		GetLeadership(heroId, items);
+		GetSoulJar(heroId, items);
 
 		GetWeapon(heroSchema.MeleeWeapon, Singleton<Profile>.Instance.GetMeleeWeaponLevel(heroId), heroId, items);
 
@@ -292,6 +293,48 @@ public class StoreAvailability
 		item.analyticsParams = new Dictionary<string, object>();
 		item.analyticsParams["ItemName"] = heroId + "." + item.id;
 		item.analyticsParams["UpgradeLevel"] = num;
+		items.Add(item);
+	}
+
+	private static void GetSoulJar(string heroId, List<StoreData.Item> items)
+	{
+		int soulJarLevel = Singleton<Profile>.Instance.GetSoulsLevel(heroId);
+		int nextLevel = soulJarLevel + 1;
+		int maxLevel = 4;
+		bool isMaxLevel = soulJarLevel == maxLevel;
+		bool isLastUpgrade = nextLevel == maxLevel - 1;
+
+		var soulSchema = DataBundleUtils.InitializeRecord<SoulSchema>(new DataBundleRecordKey(heroId, soulJarLevel.ToString()));
+
+		StoreData.Item item = new StoreData.Item(delegate
+		{
+			LevelUpLeadership(heroId, isLastUpgrade);
+		});
+		item.id = "SoulJar";
+		item.LoadIcon("UI/Textures/DynamicIcons/Upgrades/Extras_SoulJar");
+
+		string soulJarName = StringUtils.GetStringFromStringRef("LocalizedStrings", "Upgrade_Soul_Jar");
+
+		if (!isMaxLevel)
+		{
+			var nextSoulSchema = DataBundleUtils.InitializeRecord<SoulSchema>(new DataBundleRecordKey(heroId, nextLevel.ToString()));
+
+			item.title = string.Format(StringUtils.GetStringFromStringRef("LocalizedStrings", "Store_Format_SoulJar_LevelUp"), nextLevel + 1);
+			float salePercentage = SaleItemSchema.FindActiveSaleForItem(heroId + ".SoulJar");
+			item.cost = new Cost(nextSoulSchema.storeCost, Cost.Currency.Coin, salePercentage);
+		}
+		else
+		{
+			item.maxlevel = true;
+			item.title = string.Format(StringUtils.GetStringFromStringRef("LocalizedStrings", "store_upgrades_complete"), soulJarName);
+		}
+
+		item.details.AddSmallDescription(StringUtils.GetStringFromStringRef("LocalizedStrings", "ab_SoulJar"));
+		item.details.Name = soulJarName;
+		item.analyticsEvent = "UpgradePurchased";
+		item.analyticsParams = new Dictionary<string, object>();
+		item.analyticsParams["ItemName"] = heroId + "." + item.id;
+		item.analyticsParams["UpgradeLevel"] = nextLevel;
 		items.Add(item);
 	}
 

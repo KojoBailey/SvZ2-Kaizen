@@ -5,6 +5,9 @@
 	strength_stats:
 		id = strength_stats
 		icon = Assets/Game/Resources/UI/Textures/DynamicIcons/Misc/Stat_AttackPower.png
+	speed:
+		id = speed
+		icon = Assets/Game/Resources/UI/Textures/DynamicIcons/Charms/Charm_Haste.png
 	duration:
 		id = duration
 		icon = Assets/Game/Resources/UI/Textures/DynamicIcons/Misc/Stat_Time.png

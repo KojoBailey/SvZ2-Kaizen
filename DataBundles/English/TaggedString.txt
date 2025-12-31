@@ -483,6 +483,9 @@
 	ab_leadership:
 		tag = ab_leadership
 		stringValue = Upgrade to increase the Hero's starting Leadership Level. Use Leadership to summon Troops in battle!
+	ab_SoulJar:
+		tag = ab_SoulJar
+		stringValue = Upgrade to increase the Hero's Soul Jar capacity. Use Souls to activate Abilities in battle!
 	ab_brains:
 		tag = ab_brains
 		stringValue = Upgrade to increase the Hero's starting Brains Level. Use Brains to summon Troops in battle!
@@ -789,6 +792,9 @@
 	store_format_smithy_levelup:
 		tag = store_format_smithy_levelup
 		stringValue = Upgrade Leadership to Level {0}
+	Store_Format_SoulJar_LevelUp:
+		tag = Store_Format_SoulJar_LevelUp
+		stringValue = Upgrade Soul Jar to Level {0}
 	store_format_gate_levelup:
 		tag = store_format_gate_levelup
 		stringValue = Upgrade Sacred Gate to Level {0}
