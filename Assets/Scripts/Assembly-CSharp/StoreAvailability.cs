@@ -308,7 +308,7 @@ public class StoreAvailability
 
 		StoreData.Item item = new StoreData.Item(delegate
 		{
-			LevelUpLeadership(heroId, isLastUpgrade);
+			LevelUpSoulJar(heroId, isLastUpgrade);
 		});
 		item.id = "SoulJar";
 		item.LoadIcon("UI/Textures/DynamicIcons/Upgrades/Extras_SoulJar");
@@ -319,7 +319,7 @@ public class StoreAvailability
 		{
 			var nextSoulSchema = DataBundleUtils.InitializeRecord<SoulSchema>(new DataBundleRecordKey(heroId, nextLevel.ToString()));
 
-			item.title = string.Format(StringUtils.GetStringFromStringRef("LocalizedStrings", "Store_Format_SoulJar_LevelUp"), nextLevel + 1);
+			item.title = string.Format(StringUtils.GetStringFromStringRef("LocalizedStrings", "Store_Format_SoulJar_LevelUp"), nextLevel);
 			float salePercentage = SaleItemSchema.FindActiveSaleForItem(heroId + ".SoulJar");
 			item.cost = new Cost(nextSoulSchema.storeCost, Cost.Currency.Coin, salePercentage);
 		}
@@ -943,6 +943,13 @@ public class StoreAvailability
 				Singleton<Achievements>.Instance.CheckMetaAchievement("AllUpgrades");
 			}
 		}
+	}
+
+	private static void LevelUpSoulJar(string heroId, bool isLastUpgrade)
+	{
+		Singleton<Profile>.Instance.SetSoulsLevel(heroId, Singleton<Profile>.Instance.GetSoulsLevel(heroId) + 1);
+		Singleton<Profile>.Instance.Save();
+		SingletonSpawningMonoBehaviour<GluiAgent_CentralDispatch>.Instance.SendSimpleOrder("Store", heroId, GluiAgentBase.Order.Redraw, null, null);
 	}
 
 	private static void LevelUpSword(string heroId, bool isLastUpgrade)
