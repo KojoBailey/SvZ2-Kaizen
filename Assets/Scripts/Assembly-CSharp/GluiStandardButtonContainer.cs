@@ -50,12 +50,15 @@ public class GluiStandardButtonContainer : GluiButtonContainerBase
 
 	public Func<object> GetActionData { get; set; }
 
+	public bool isActive
+	{
+		get { return gameObject.activeInHierarchy; }
+		set { gameObject.SetActive(value); }
+	}
+
 	public bool Locked
 	{
-		get
-		{
-			return isLocked;
-		}
+		get { return isLocked; }
 		set
 		{
 			isLocked = value;

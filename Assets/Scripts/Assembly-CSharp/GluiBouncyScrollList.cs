@@ -421,7 +421,7 @@ public class GluiBouncyScrollList : GluiWidget, IInputContainer
 				}
 			}
 		}
-		int num2 = (cellsRecycling ? FindOffset((direction != Direction.Horizontal) ? newPos.y : (0f - newPos.x)) : 0);
+		int num2 = cellsRecycling ? (FindOffset((direction != Direction.Horizontal) ? newPos.y : (0f - newPos.x))) : 0;
 		for (int i = num2; i < mCtrl.dataCount; i++)
 		{
 			if (cellsRecycling)

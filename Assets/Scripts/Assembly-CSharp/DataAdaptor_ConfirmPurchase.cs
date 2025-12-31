@@ -124,17 +124,19 @@ public class DataAdaptor_ConfirmPurchase : DataAdaptorBase
 	public override void SetData(object data)
 	{
 		context = data;
+		
 		PurchaseAlert.SetActive(false);
-		if (!(data is StoreData.Item))
-		{
-			return;
-		}
+
+		if (!(data is StoreData.Item)) return;
 		item = data as StoreData.Item;
+
 		button_cancelPurchase.GetActionData = () => context;
+
 		if (SingletonMonoBehaviour<StoreMenuImpl>.Exists && item.isNew)
 		{
 			SingletonMonoBehaviour<StoreMenuImpl>.Instance.SetHasViewedNewItem(item.id);
 		}
+
 		if (!item.locked)
 		{
 			SetGluiTextInChild(text_name, item.title);
@@ -145,6 +147,7 @@ public class DataAdaptor_ConfirmPurchase : DataAdaptorBase
 			SetGluiTextInChild(text_name, item.unlockTitle);
 			SetGluiTextInChild(text_description, item.unlockCondition);
 		}
+
 		if (sprite_goldStar != null)
 		{
 			if (Singleton<HelpersDatabase>.Instance.Contains(item.id) && Singleton<Profile>.Instance.GetGoldenHelperUnlocked(item.id))
@@ -157,7 +160,9 @@ public class DataAdaptor_ConfirmPurchase : DataAdaptorBase
 				sprite_goldStar.SetActive(false);
 			}
 		}
+
 		SetGluiSpriteInChild(sprite_icon, item.icon);
+
 		if (item.id == "mpshield")
 		{
 			root_purchaseShield.SetActive(true);
@@ -178,27 +183,32 @@ public class DataAdaptor_ConfirmPurchase : DataAdaptorBase
 		}
 		else if (!item.isConsumable)
 		{
-			button_buy.GetActionData = () => context;
+			// [TODO] Fix this entire dogshit system. Really inflexible.
+
 			root_purchaseConsumables.SetActive(false);
 			root_purchaseShield.SetActive(false);
 			root_saleBadge.SetActive(false);
-			bool flag = false;
+
+			bool hasValidUpgradeData = false;
 			foreach (KeyValuePair<string, string[]> stat in item.details.Stats)
 			{
 				if (stat.Value.Length == 2 && stat.Value[0] != stat.Value[1] && !string.IsNullOrEmpty(stat.Value[0]))
 				{
-					flag = true;
+					hasValidUpgradeData = true;
 					break;
 				}
 			}
-			if (!item.locked && !item.maxlevel)
+
+			if (!item.locked && !item.maxlevel && item.isUpgradable)
 			{
+				button_buy.GetActionData = () => context;
 				SpawnPriceWidget(upgradePriceLocator, item.cost);
 			}
 			else
 			{
-				button_buy.gameObject.SetActive(false);
+				button_buy.isActive = false;
 			}
+
 			if (item.details.MaxLevel.HasValue && (item.details.LevelA != item.details.LevelB || item.maxlevel) && !item.locked)
 			{
 				SetGluiTextFormatInChild(text_quantity, item.details.LevelA, item.details.MaxLevel.Value);
@@ -207,15 +217,73 @@ public class DataAdaptor_ConfirmPurchase : DataAdaptorBase
 			{
 				text_quantity.SetActive(false);
 			}
-			if (!flag || item.locked || item.maxlevel)
+
+			if (item.isUpgradable)
 			{
-				root_textStats.SetActive(false);
-				root_numericalStats.SetActive(false);
+				if (!item.locked && !item.maxlevel && hasValidUpgradeData)
+				{
+					root_textStats.SetActive(item.details.UpgradeDisplayAsText);
+					root_numericalStats.SetActive(!item.details.UpgradeDisplayAsText);
+
+					if (!item.details.UpgradeDisplayAsText)
+					{
+						if (item.details.Stats[0].Key == "icon")
+						{
+							SetGluiSpriteInChild(sprite_numericalIconStatA, item.icon);
+						}
+						else
+						{
+							string value = DataBundleRuntime.Instance.GetValue<string>(typeof(IconSchema), "StatIcons", item.details.Stats[0].Key, "icon", true);
+							statIconRes1 = SharedResourceLoader.LoadAsset(value);
+							if (statIconRes1.Resource != null)
+							{
+								SetGluiSpriteInChild(sprite_numericalIconStatA, statIconRes1.Resource as Texture2D);
+							}
+						}
+
+						SetGluiTextInChild(text_numericalStatCurrentA, item.details.Stats[0].Value[0]);
+						SetGluiTextInChild(text_numericalStatNextA, item.details.Stats[0].Value[1]);
+
+						if (item.details.Stats.Count > 1 && item.details.Stats[1].Value[0] != item.details.Stats[1].Value[1] && !item.maxlevel)
+						{
+							string value2 = DataBundleRuntime.Instance.GetValue<string>(typeof(IconSchema), "StatIcons", item.details.Stats[1].Key, "icon", true);
+							statIconRes2 = SharedResourceLoader.LoadAsset(value2);
+							if (statIconRes2.Resource != null)
+							{
+								SetGluiSpriteInChild(sprite_numericalIconStatB, statIconRes2.Resource as Texture2D);
+							}
+							SetGluiTextInChild(text_numericalStatCurrentB, item.details.Stats[1].Value[0]);
+							SetGluiTextInChild(text_numericalStatNextB, item.details.Stats[1].Value[1]);
+						}
+						else
+						{
+							root_numericalStatB.SetActive(false);
+						}
+					}
+					else
+					{
+						string value3 = DataBundleRuntime.Instance.GetValue<string>(typeof(IconSchema), "StatIcons", item.details.Stats[0].Key, "icon", true);
+						statIconRes1 = SharedResourceLoader.LoadAsset(value3);
+						if (statIconRes1.Resource != null)
+						{
+							SetGluiSpriteInChild(sprite_textIconStatA, statIconRes1.Resource as Texture2D);
+							SetGluiSpriteInChild(sprite_textIconStatB, statIconRes1.Resource as Texture2D);
+						}
+						SetGluiTextInChild(text_textStatNextA, item.details.Stats[0].Value[0]);
+						SetGluiTextInChild(text_textStatNextB, item.details.Stats[0].Value[1]);
+					}
+				}
+				else
+				{
+					root_textStats.SetActive(false);
+					root_numericalStats.SetActive(false);
+				}
 			}
 			else
 			{
 				root_textStats.SetActive(item.details.UpgradeDisplayAsText);
 				root_numericalStats.SetActive(!item.details.UpgradeDisplayAsText);
+
 				if (!item.details.UpgradeDisplayAsText)
 				{
 					if (item.details.Stats[0].Key == "icon")
@@ -231,9 +299,11 @@ public class DataAdaptor_ConfirmPurchase : DataAdaptorBase
 							SetGluiSpriteInChild(sprite_numericalIconStatA, statIconRes1.Resource as Texture2D);
 						}
 					}
+
 					SetGluiTextInChild(text_numericalStatCurrentA, item.details.Stats[0].Value[0]);
-					SetGluiTextInChild(text_numericalStatNextA, item.details.Stats[0].Value[1]);
-					if (item.details.Stats.Count > 1 && item.details.Stats[1].Value[0] != item.details.Stats[1].Value[1] && !item.maxlevel)
+					text_numericalStatNextA.SetActive(false);
+
+					if (item.details.Stats.Count > 1)
 					{
 						string value2 = DataBundleRuntime.Instance.GetValue<string>(typeof(IconSchema), "StatIcons", item.details.Stats[1].Key, "icon", true);
 						statIconRes2 = SharedResourceLoader.LoadAsset(value2);
@@ -242,7 +312,7 @@ public class DataAdaptor_ConfirmPurchase : DataAdaptorBase
 							SetGluiSpriteInChild(sprite_numericalIconStatB, statIconRes2.Resource as Texture2D);
 						}
 						SetGluiTextInChild(text_numericalStatCurrentB, item.details.Stats[1].Value[0]);
-						SetGluiTextInChild(text_numericalStatNextB, item.details.Stats[1].Value[1]);
+						text_numericalStatNextB.SetActive(false);
 					}
 					else
 					{
@@ -318,6 +388,7 @@ public class DataAdaptor_ConfirmPurchase : DataAdaptorBase
 				SetGluiSpriteInChild(child, item.icon);
 			}
 		}
+		
 		if (item.id == "mysterybox")
 		{
 			string text3 = ((item.analyticsParams == null || !item.analyticsParams.ContainsKey("ItemName")) ? item.id : item.analyticsParams["ItemName"].ToString());

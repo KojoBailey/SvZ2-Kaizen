@@ -34,6 +34,8 @@ public class StoreData
 
 		public bool maxlevel;
 
+		public bool isUpgradable = true;
+
 		public bool isConsumable;
 
 		public bool isNew;
@@ -92,6 +94,8 @@ public class StoreData
 		public Texture2D icon { get; set; }
 
 		public Texture2D secondIcon { get; set; }
+
+		public Item() {}
 
 		public Item(Action execFunc)
 		{
@@ -308,9 +312,18 @@ public class StoreData
 
 		public bool UpgradeDisplayAsText { get; set; }
 
+		public void AddStat(string iconFile, string value)
+		{
+			if (value != "0")
+			{
+				string[] valueArr = new string[1] { value };
+				mStats.Add(new KeyValuePair<string, string[]>(iconFile, valueArr));
+			}
+		}
+
 		public void AddStat(string iconFile, string val1, string val2)
 		{
-			if (!(val1 == "0") || !(val2 == "0"))
+			if (val1 != "0" || val2 != "0")
 			{
 				string[] value = new string[2] { val1, val2 };
 				mStats.Add(new KeyValuePair<string, string[]>(iconFile, value));

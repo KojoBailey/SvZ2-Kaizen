@@ -101,70 +101,58 @@ public class StoreAvailability
 	private static void GetHero(string heroId, List<StoreData.Item> items)
 	{
 		HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[heroId];
-		StoreData.Item item = new StoreData.Item(delegate
-		{
-			LevelUpHero(heroId, true);
-		});
-		bool purchased = heroSchema.Purchased;
-		// item.details.SetColumns(CurrentHeroLevel, num);
-		item.details.AddStat("health_stats", heroSchema.health.ToString(), heroSchema.health.ToString());
 
-		item.id = heroId;
-		item.LoadIcon(heroSchema.IconPath);
-		// item.title = string.Format(StringUtils.GetStringFromStringRef(heroSchema.store_levelup), num);
-		item.details.Name = item.title;
-		item.details.AddSmallDescription(StringUtils.GetStringFromStringRef(heroSchema.desc));
-		item.analyticsEvent = "UpgradePurchased";
-		item.analyticsParams = new Dictionary<string, object>();
-		item.analyticsParams["ItemName"] = heroId + ".CurrentHeroLevel";
-		string stringFromStringRef = StringUtils.GetStringFromStringRef(heroSchema.displayName);
-		if (true)
 		{
-			item.maxlevel = true;
-			item.title = string.Format(StringUtils.GetStringFromStringRef("LocalizedStrings", "store_upgrades_complete"), stringFromStringRef);
-			item.details.Name = stringFromStringRef;
+			StoreData.Item item = new StoreData.Item
+			{
+				id = heroId,
+				title = "Hero " + StringUtils.GetStringFromStringRef(heroSchema.displayName),
+			};
+			item.LoadIcon(heroSchema.IconPath);
+			item.details.Name = item.title;
+			item.details.AddSmallDescription(StringUtils.GetStringFromStringRef(heroSchema.desc));
+			item.details.AddStat("health_stats", heroSchema.health.ToString());
+			item.details.AddStat("duration", heroSchema.speed.ToString());
+			item.isUpgradable = false;
+			items.Add(item);
 		}
-		items.Add(item);
+
 		GetLeadership(heroId, items);
+
 		GetWeapon(heroSchema.MeleeWeapon, Singleton<Profile>.Instance.GetMeleeWeaponLevel(heroId), heroId, items);
+
 		if (heroSchema.ArmorLevels != null)
 		{
 			GetArmor(heroSchema.ArmorLevels, Singleton<Profile>.Instance.GetArmorLevel(heroId), heroId, items);
 		}
-		else if (!DataBundleRecordKey.IsNullOrEmpty(heroSchema.rangedWeapon))
+		
+		if (!DataBundleRecordKey.IsNullOrEmpty(heroSchema.rangedWeapon))
 		{
 			GetWeapon(heroSchema.RangedWeapon, Singleton<Profile>.Instance.GetRangedWeaponLevel(heroId), heroId, items);
 		}
-		if (heroId.Equals("HeroBalanced"))
+
+		if (heroId == "HeroBalanced")
 		{
 			StoreAvailability_Helpers.Get("Mount_Balanced", true, items);
 		}
+		
 		StoreAvailability_Abilities.GetHeroAbilities(heroSchema, items);
-		foreach (StoreData.Item item2 in items)
+
+		foreach (StoreData.Item item in items)
 		{
 			if (heroSchema.Locked)
 			{
-				item2.locked = true;
-				if (purchased)
-				{
-					item2.unlockAtWave = heroSchema.waveToUnlock;
-					item2.unlockCondition = string.Format(StringUtils.GetStringFromStringRef("LocalizedStrings", "store_unlockatwave"), heroSchema.waveToUnlock);
-				}
-				else
-				{
-					item2.unlockAtWave = 0;
-					item2.unlockCondition = StringUtils.GetStringFromStringRef("LocalizedStrings", "store_purchase_with_iap");
-					item2.customButtonAction = delegate
-					{
-						SingletonSpawningMonoBehaviour<GluiPersistentDataCache>.Instance.Save("IAP_TAB", "LocalizedStrings.iap_special_tab");
-						GluiActionSender.SendGluiAction("POPUP_IAP", null, null);
-					};
-				}
-				item2.unlockTitle = item2.details.Name;
+				item.locked = true;
+				item.unlockAtWave = heroSchema.waveToUnlock;
+				item.unlockCondition = string.Format(
+					StringUtils.GetStringFromStringRef("LocalizedStrings", "store_unlockatwave"), heroSchema.waveToUnlock);
+				item.unlockTitle = item.details.Name;
 			}
 			else if (heroSchema.waveToUnlock == Singleton<Profile>.Instance.highestUnlockedWave)
 			{
-				item2.isNew = !SingletonMonoBehaviour<StoreMenuImpl>.Exists || !SingletonMonoBehaviour<StoreMenuImpl>.Instance.HasViewedNewItem(item2.id);
+				item.isNew =
+					!SingletonMonoBehaviour<StoreMenuImpl>.Exists ||
+					!SingletonMonoBehaviour<StoreMenuImpl>.Instance.HasViewedNewItem(item.id);
 			}
 		}
 	}

@@ -3,10 +3,6 @@ using UnityEngine;
 [DataBundleClass(Category = "Design")]
 public class HeroSchema
 {
-	public delegate float InfiniteUpgradeAccessor(HeroSchema s);
-
-	public delegate float LevelValueAccessor(HeroLevelSchema ls);
-
 	[DataBundleKey]
 	public string id;
 

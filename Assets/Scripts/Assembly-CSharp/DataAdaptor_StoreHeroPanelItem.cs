@@ -32,11 +32,10 @@ public class DataAdaptor_StoreHeroPanelItem : DataAdaptorBase
 
 	public override void SetData(object data)
 	{
-		if (!(data is StoreData.Item))
-		{
-			return;
-		}
+		if (!(data is StoreData.Item)) return;
+
 		item = data as StoreData.Item;
+
 		if (priceHandler == null)
 		{
 			originalTextYOffset = text_Name.transform.localPosition;
@@ -46,12 +45,14 @@ public class DataAdaptor_StoreHeroPanelItem : DataAdaptorBase
 			gameObject.transform.localPosition = Vector3.zero;
 			priceHandler = gameObject.GetComponent<WidgetPriceHandler>();
 		}
+
 		button.GetActionData = () => item;
 		button.action = item.customButtonAction;
 		if (button.action != null)
 		{
 			button.onReleaseActions = null;
 		}
+
 		if (!item.locked)
 		{
 			if (!item.maxlevel)
@@ -70,6 +71,7 @@ public class DataAdaptor_StoreHeroPanelItem : DataAdaptorBase
 			SetGluiTextInChild(text_Name, item.unlockCondition);
 			priceHandler.cost = default(Cost);
 		}
+
 		if (sprite_secondIcon != null)
 		{
 			if (item.secondIcon != null)
@@ -82,17 +84,23 @@ public class DataAdaptor_StoreHeroPanelItem : DataAdaptorBase
 				sprite_secondIcon.SetActive(false);
 			}
 		}
+		
 		text_Name.transform.localPosition = new Vector3(originalTextYOffset.x, originalTextYOffset.y - priceHandler.height, originalTextYOffset.z);
+		
 		SetGluiSpriteInChild(sprite_icon, item.icon);
+
 		if (root_newBadge != null)
 		{
 			root_newBadge.SetActive(item.isNew);
 		}
+
 		if (root_maxUpgradeBadge != null)
 		{
 			root_maxUpgradeBadge.SetActive(item.maxlevel);
 		}
+
 		button.Locked = item.locked;
+		
 		if (button != null)
 		{
 			if (item.bundleContent.Count > 0)
@@ -104,6 +112,7 @@ public class DataAdaptor_StoreHeroPanelItem : DataAdaptorBase
 				button.onReleaseActions = new string[1] { "POPUP_CONFIRMPURCHASE" };
 			}
 		}
+
 		if (item.id == "mysterybox")
 		{
 			if (mMysteryBoxEffect != null)
