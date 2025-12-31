@@ -21,9 +21,6 @@ public class HeroSchema
 	[DataBundleSchemaFilter(typeof(CharacterSchema), false)]
 	public DataBundleRecordKey resources;
 
-	[DataBundleSchemaFilter(typeof(CharacterSchema), false)]
-	public DataBundleRecordKey resourcesGhost;
-
 	[DataBundleField(StaticResource = true, Group = DataBundleResourceGroup.All)]
 	public Texture2D icon;
 
