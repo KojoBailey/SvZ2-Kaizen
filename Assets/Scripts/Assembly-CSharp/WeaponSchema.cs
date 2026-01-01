@@ -3,90 +3,78 @@ using UnityEngine;
 [DataBundleClass(Category = "Design")]
 public class WeaponSchema
 {
-	public delegate float InfiniteUpgradeAccessor(WeaponSchema s);
-
-	public delegate float LevelValueAccessor(WeaponLevelSchema ls);
-
 	[DataBundleKey]
 	public string id;
 
+	[DataBundleField]
 	public bool isRanged;
 
+	[DataBundleField]
 	public bool isBladeWeapon;
 
+	[DataBundleField]
 	public bool isDualWield;
 
-	public string infiniteUpgradeCost;
+	[DataBundleField]
+	public float attackRange;
 
-	public float infiniteUpgradeDamage;
+	[DataBundleField]
+	public float attackFrequency;
 
-	[DataBundleSchemaFilter(typeof(WeaponLevelSchema), false)]
-	public DataBundleRecordTable levels;
+	[DataBundleField]
+	public float damage;
+
+	[DataBundleField]
+	public int knockbackPower;
+
+	[DataBundleField]
+	public float DOTDamageRatio;
+
+	[DataBundleField]
+	public float DOTDuration;
+
+	[DataBundleField]
+	public float DOTInterval;
+
+	[DataBundleField(StaticResource = true, Group = (DataBundleResourceGroup.InGame | DataBundleResourceGroup.Preview))]
+	public GameObject prefab;
+
+	[DataBundleRecordTableFilter("Projectile")]
+	[DataBundleSchemaFilter(typeof(DynamicEnum), false)]
+	public DataBundleRecordKey projectile;
+
+	[DataBundleField(StaticResource = true, Group = DataBundleResourceGroup.None)]
+	public Texture2D icon;
+
+	[DataBundleField(StaticResource = true, Group = DataBundleResourceGroup.None)]
+	public Texture2D iconNoText;
+
+	[DataBundleSchemaFilter(typeof(TaggedString), false)]
+	[DataBundleRecordTableFilter("LocalizedStrings")]
+	public DataBundleRecordKey desc;
+
+	[DataBundleSchemaFilter(typeof(TaggedString), false)]
+	[DataBundleRecordTableFilter("LocalizedStrings")]
+	public DataBundleRecordKey title;
 
 	public int defenseRating;
 
-	public WeaponLevelSchema[] Levels { get; set; }
-
-	public WeaponLevelSchema GetLevel(int level)
-	{
-		if (Levels != null && Levels.Length > 0)
-		{
-			return Levels[Mathf.Clamp(level - 1, 0, Levels.Length - 1)];
-		}
-		return null;
-	}
-
-	public float Damage(int level)
-	{
-		int num = Levels.Length;
-		if (level <= num)
-		{
-			return Levels[level - 1].damage;
-		}
-		return InfiniteUpgrades.Extrapolate(Levels[num - 1].damage, infiniteUpgradeDamage, level - num);
-	}
-
-	public float Extrapolate(int level, LevelValueAccessor accessor, InfiniteUpgradeAccessor upgradeAccessor)
-	{
-		level = Mathf.Max(0, level - 1);
-		int num = Levels.Length - 1;
-		if (level <= num)
-		{
-			return accessor(Levels[level]);
-		}
-		return InfiniteUpgrades.Extrapolate(accessor(Levels[num]), upgradeAccessor(this), level - num);
-	}
+	public string IconPath { get; private set; }
 
 	public void Initialize()
 	{
-		Levels = levels.InitializeRecords<WeaponLevelSchema>();
-		WeaponLevelSchema[] array = Levels;
-		foreach (WeaponLevelSchema weaponLevelSchema in array)
-		{
-			weaponLevelSchema.Initialize(levels.RecordTable);
-		}
+		IconPath = DataBundleRuntime.Instance.GetValue<string>(typeof(WeaponSchema), "Weapons", id, "icon", true);
 	}
 
 	public void LoadCachedResources(int level)
 	{
-		WeaponLevelSchema level2 = GetLevel(level);
-		if (level2 != null)
-		{
-			string tableRecordKey = DataBundleRuntime.TableRecordKey(levels.RecordTable, level2.level.ToString());
-			ResourceCache.LoadCachedResources(level2, tableRecordKey);
-		}
+		string tableRecordKey = DataBundleRuntime.TableRecordKey("Weapons", id);
+		ResourceCache.LoadCachedResources(this, tableRecordKey);
 	}
 
 	public void UnloadCachedResources()
 	{
-		if (Levels != null)
-		{
-			WeaponLevelSchema[] array = Levels;
-			foreach (WeaponLevelSchema weaponLevelSchema in array)
-			{
-				string tableRecordKey = DataBundleRuntime.TableRecordKey(levels.RecordTable, weaponLevelSchema.level.ToString());
-				ResourceCache.UnloadCachedResources(weaponLevelSchema, tableRecordKey);
-			}
-		}
+		string tableRecordKey = DataBundleRuntime.TableRecordKey("Weapons", id);
+		ResourceCache.UnloadCachedResources(this, tableRecordKey);
 	}
 }

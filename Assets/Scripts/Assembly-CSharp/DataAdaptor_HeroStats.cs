@@ -31,7 +31,7 @@ public class DataAdaptor_HeroStats : DataAdaptorBase
 		context = data;
 		if (!(data is HeroSchema)) return;
 
-		HeroSchema heroSchema = (HeroSchema)data;
+		HeroSchema heroSchema = data as HeroSchema;
 		if (heroSchema != null)
 		{
 			heroName.Text = StringUtils.GetStringFromStringRef(heroSchema.displayName);

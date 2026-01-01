@@ -137,10 +137,10 @@ public class DataAdaptor_ResultsLoot : DataAdaptorBase
 					texture2D = heroSchema2.icon;
 					break;
 				case "rangedweapon":
-					texture2D = ResourceCache.GetCachedResource(heroSchema2.RangedWeapon.Levels[keyValuePair.Value].IconPath, 1).Resource as Texture2D;
+					texture2D = ResourceCache.GetCachedResource(heroSchema2.RangedWeapon.IconPath, 1).Resource as Texture2D;
 					break;
 				case "meleeweapon":
-					texture2D = ResourceCache.GetCachedResource(heroSchema2.MeleeWeapon.Levels[keyValuePair.Value].IconPath, 1).Resource as Texture2D;
+					texture2D = ResourceCache.GetCachedResource(heroSchema2.MeleeWeapon.IconPath, 1).Resource as Texture2D;
 					break;
 				case "armor":
 					texture2D = heroSchema2.GetArmorLevel(keyValuePair.Value).icon;

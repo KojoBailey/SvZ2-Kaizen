@@ -123,7 +123,7 @@ public class StoreAvailability
 		GetLeadership(heroId, items);
 		GetSoulJar(heroId, items);
 
-		GetWeapon(heroSchema.MeleeWeapon, Singleton<Profile>.Instance.GetMeleeWeaponLevel(heroId), heroId, items);
+		GetWeapon(heroSchema.MeleeWeapon, heroId, items);
 
 		if (heroSchema.ArmorLevels != null)
 		{
@@ -132,7 +132,7 @@ public class StoreAvailability
 		
 		if (!DataBundleRecordKey.IsNullOrEmpty(heroSchema.rangedWeapon))
 		{
-			GetWeapon(heroSchema.RangedWeapon, Singleton<Profile>.Instance.GetRangedWeaponLevel(heroId), heroId, items);
+			GetWeapon(heroSchema.RangedWeapon, heroId, items);
 		}
 
 		if (heroId == "HeroBalanced")
@@ -161,45 +161,19 @@ public class StoreAvailability
 		}
 	}
 
-	private static void GetWeapon(WeaponSchema mainData, int curLevel, string heroId, List<StoreData.Item> items)
+	private static void GetWeapon(WeaponSchema weaponSchema, string heroId, List<StoreData.Item> items)
 	{
-		int num = curLevel + 1;
-		int num2 = mainData.Levels.Length;
-		bool isLastUpgrade = num == num2;
-		bool isRanged = mainData.isRanged;
-		StoreData.Item item = new StoreData.Item(delegate
+		bool isRanged = weaponSchema.isRanged;
+		StoreData.Item item = new StoreData.Item
 		{
-			if (isRanged)
-			{
-				LevelUpBow(heroId, isLastUpgrade);
-			}
-			else
-			{
-				LevelUpSword(heroId, isLastUpgrade);
-			}
-		});
-		item.details.SetColumns(curLevel, num);
-		item.details.AddStat("strength_stats", Mathf.RoundToInt(mainData.Extrapolate(curLevel, (WeaponLevelSchema ls) => ls.damage, (WeaponSchema s) => s.infiniteUpgradeDamage)).ToString(), Mathf.RoundToInt(mainData.Extrapolate(num, (WeaponLevelSchema ls) => ls.damage, (WeaponSchema s) => s.infiniteUpgradeDamage)).ToString());
-		WeaponLevelSchema weaponLevelSchema = mainData.Levels[Mathf.Clamp(num - 1, 0, num2 - 1)];
-		string iconPath = weaponLevelSchema.IconPath;
-		item.LoadIcon(iconPath);
-		item.details.AddSmallDescription(StringUtils.GetStringFromStringRef(weaponLevelSchema.desc));
-		item.title = string.Format(StringUtils.GetStringFromStringRef(weaponLevelSchema.title), num);
+			id = weaponSchema.id,
+			isUpgradable = false,
+			title = StringUtils.GetStringFromStringRef(weaponSchema.title),
+		};
+		item.LoadIcon(weaponSchema.IconPath);
+		item.details.AddSmallDescription(StringUtils.GetStringFromStringRef(weaponSchema.desc));
 		item.details.Name = item.title;
-		float salePercentage = SaleItemSchema.FindActiveSaleForItem(heroId + ((!isRanged) ? ".MeleeWeapon" : ".RangedWeapon"));
-		if (num <= num2)
-		{
-			item.cost = new Cost(weaponLevelSchema.cost, salePercentage);
-		}
-		else
-		{
-			item.cost = new Cost(mainData.infiniteUpgradeCost, salePercentage);
-		}
-		item.id = mainData.id;
-		item.analyticsEvent = "UpgradePurchased";
-		item.analyticsParams = new Dictionary<string, object>();
-		item.analyticsParams["ItemName"] = heroId + ((!isRanged) ? ".MeleeWeapon" : ".RangedWeapon");
-		item.analyticsParams["UpgradeLevel"] = num;
+		item.details.AddStat("strength_stats", weaponSchema.damage.ToString());
 		items.Add(item);
 	}
 

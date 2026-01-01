@@ -318,9 +318,9 @@
 	crossbow_desc:
 		tag = crossbow_desc
 		stringValue = Your hero's ranged weapon. Step back in battle to use.
-	store_format_bow_levelup:
-		tag = store_format_bow_levelup
-		stringValue = Upgrade Bow to Level {0}
+	crossbow_title:
+		tag = crossbow_title
+		stringValue = Bow
 	crossbowfire_desc:
 		tag = crossbowfire_desc
 		stringValue = Your hero's ranged weapon. Step back in battle to use. Now with Fire!
@@ -336,9 +336,9 @@
 	katana_desc:
 		tag = katana_desc
 		stringValue = Your hero's main weapon. Get up close to use.
-	store_format_sword_levelup:
-		tag = store_format_sword_levelup
-		stringValue = Upgrade Sword to Level {0}
+	katana_title:
+		tag = katana_title
+		stringValue = Katana
 	katanafire_desc:
 		tag = katanafire_desc
 		stringValue = Your hero's main weapon. Added Fire Damage!

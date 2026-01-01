@@ -45,8 +45,10 @@ public class FrontEnd : SingletonMonoBehaviour<FrontEnd>
 			LoadingScreen.LogStep("HelpersDatabase.Instance.LoadFrontEndData");
 			Singleton<EnemiesDatabase>.Instance.LoadFrontEndData();
 			LoadingScreen.LogStep("EnemiesDatabase.Instance.LoadFrontEndData");
+
 			Singleton<HeroesDatabase>.Instance.LoadFrontEndData();
 			LoadingScreen.LogStep("HeroesDatabase.Instance.LoadFrontEndData");
+			
 			Singleton<PotionsDatabase>.Instance.LoadFrontEndData();
 			LoadingScreen.LogStep("PotionsDatabase.Instance.LoadFrontEndData");
 			Singleton<Profile>.Instance.LoadFrontEndData();

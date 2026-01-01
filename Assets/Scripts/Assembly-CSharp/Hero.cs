@@ -139,10 +139,10 @@ public class Hero : Character
 		result.speed = mainData.speed;
 		WeaponSchema meleeWeapon = mainData.MeleeWeapon;
 		result.meleeWeaponIsABlade = meleeWeapon.isBladeWeapon;
-		result.meleeAttackRange = meleeWeapon.GetLevel(level).attackRange;
-		result.meleeAttackDamage += meleeWeapon.Damage(level);
-		result.meleeAttackFrequency = meleeWeapon.GetLevel(level).attackFrequency;
-		result.knockbackPower = meleeWeapon.GetLevel(level).knockbackPower;
+		result.meleeAttackRange = meleeWeapon.attackRange;
+		result.meleeAttackDamage += meleeWeapon.damage;
+		result.meleeAttackFrequency = meleeWeapon.attackFrequency;
+		result.knockbackPower = meleeWeapon.knockbackPower;
 		switch ((ownerId != 0) ? Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.swordsCollected : Singleton<Profile>.Instance.MultiplayerData.CollectionLevel("Sword"))
 		{
 		case 1:
@@ -163,15 +163,15 @@ public class Hero : Character
 		if (flag)
 		{
 			WeaponSchema rangedWeapon = mainData.RangedWeapon;
-			result.bowAttackRange = rangedWeapon.GetLevel(bowLevel).attackRange;
-			result.bowAttackDamage = rangedWeapon.Damage(bowLevel);
-			result.bowAttackFrequency = rangedWeapon.GetLevel(bowLevel).attackFrequency;
-			result.projectile = rangedWeapon.GetLevel(bowLevel).projectile.Key;
-			result.knockbackPowerRanged = rangedWeapon.GetLevel(bowLevel).knockbackPower;
+			result.bowAttackRange = rangedWeapon.attackRange;
+			result.bowAttackDamage = rangedWeapon.damage;
+			result.bowAttackFrequency = rangedWeapon.attackFrequency;
+			result.projectile = rangedWeapon.projectile.Key;
+			result.knockbackPowerRanged = rangedWeapon.knockbackPower;
 			var dOTInfo = default(DOTInfo);
-			dOTInfo.ratio = rangedWeapon.GetLevel(bowLevel).DOTDamageRatio;
-			dOTInfo.duration = rangedWeapon.GetLevel(bowLevel).DOTDuration;
-			dOTInfo.interval = rangedWeapon.GetLevel(bowLevel).DOTInterval;
+			dOTInfo.ratio = rangedWeapon.DOTDamageRatio;
+			dOTInfo.duration = rangedWeapon.DOTDuration;
+			dOTInfo.interval = rangedWeapon.DOTInterval;
 			result.dotInfo = dOTInfo;
 			switch ((ownerId != 0) ? Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.bowsCollected : Singleton<Profile>.Instance.MultiplayerData.CollectionLevel("bow"))
 			{
@@ -1065,16 +1065,10 @@ public class Hero : Character
 	{
 		DestroyMeleeWeaponPrefabs();
 		WeaponSchema meleeWeapon = mainData.MeleeWeapon;
-		var list = new List<GameObject>();
-		int level = Singleton<Profile>.Instance.SwordLevel;
-		if (base.ownerId != 0)
-		{
-			level = Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.meleeLevel;
-		}
-		list.Add(meleeWeapon.GetLevel(level).prefab);
+		var list = new List<GameObject>{meleeWeapon.prefab};
 		if (meleeWeapon.isDualWield)
 		{
-			list.Add(meleeWeapon.GetLevel(level).prefab);
+			list.Add(meleeWeapon.prefab);
 		}
 		base.meleeWeaponPrefabAsList = list;
 	}
@@ -1083,12 +1077,7 @@ public class Hero : Character
 	{
 		Object.Destroy(base.rangedWeaponPrefab);
 		WeaponSchema rangedWeapon = mainData.RangedWeapon;
-		int bowLevel = Singleton<Profile>.Instance.BowLevel;
-		if (base.ownerId != 0)
-		{
-			bowLevel = Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.bowLevel;
-		}
-		base.rangedWeaponPrefab = rangedWeapon.GetLevel(bowLevel).prefab;
+		base.rangedWeaponPrefab = rangedWeapon.prefab;
 	}
 
 	public void onMoveLeft()

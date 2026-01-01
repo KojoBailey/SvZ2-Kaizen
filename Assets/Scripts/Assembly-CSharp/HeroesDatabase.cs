@@ -72,10 +72,7 @@ public class HeroesDatabase : Singleton<HeroesDatabase>
 		{
 			mDatum.Load(DataBundleResourceGroup.FrontEnd, false, delegate(HeroSchema s)
 			{
-				int meleeWeaponLevel = Singleton<Profile>.Instance.GetMeleeWeaponLevel(s.id);
-				int rangedWeaponLevel = Singleton<Profile>.Instance.GetRangedWeaponLevel(s.id);
-				int armorLevel = Singleton<Profile>.Instance.GetArmorLevel(s.id);
-				s.LoadCachedResources(meleeWeaponLevel, rangedWeaponLevel, armorLevel, true);
+				s.LoadCachedResources(true);
 			});
 		}
 	}
@@ -89,18 +86,9 @@ public class HeroesDatabase : Singleton<HeroesDatabase>
 		{
 			if (string.Equals(id, mDatum.Data.id))
 			{
-				int swordLevel = (ownerId != 0)
-					? Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.meleeLevel
-					: Singleton<Profile>.Instance.GetMeleeWeaponLevel(mDatum.Data.id);
-				int bowLevel = (ownerId != 0)
-					? Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.bowLevel
-					: Singleton<Profile>.Instance.GetRangedWeaponLevel(mDatum.Data.id);
-				int armorLevel = (ownerId != 0)
-					? Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.armorLevel
-					: Singleton<Profile>.Instance.GetArmorLevel(mDatum.Data.id);
 				mDatum.Load(groupToLoad, true, delegate(HeroSchema s)
 				{
-					s.LoadCachedResources(swordLevel, bowLevel, armorLevel, false);
+					s.LoadCachedResources(false);
 				});
 			}
 		}
@@ -115,10 +103,6 @@ public class HeroesDatabase : Singleton<HeroesDatabase>
 			{
 				SingletonSpawningMonoBehaviour<USoundThemeManager>.Instance.UnloadSoundTheme(characterSchema.soundTheme);
 			}
-			int meleeWeaponLevel = Singleton<Profile>.Instance.GetMeleeWeaponLevel(mDatum.Data.id);
-			int rangedWeaponLevel = Singleton<Profile>.Instance.GetRangedWeaponLevel(mDatum.Data.id);
-			int armorLevel = Singleton<Profile>.Instance.GetArmorLevel(mDatum.Data.id);
-			mDatum.Data.UnloadCachedResources(meleeWeaponLevel, rangedWeaponLevel, armorLevel);
 			mDatum.Unload();
 		}
 	}

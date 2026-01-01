@@ -107,52 +107,6 @@ public class HelpersDatabase : Singleton<HelpersDatabase>
 		return false;
 	}
 
-	public int GetMaxLevel(string helperID)
-	{
-		HelperSchema helperSchema = Seek(helperID);
-		if (helperSchema != null)
-		{
-			if (helperSchema.Levels == null)
-			{
-				return 1;
-			}
-			return helperSchema.Levels.Length;
-		}
-		return -1;
-	}
-
-	public HelperLevelSchema GetHelperLevelData(HelperSchema data)
-	{
-		if (data == null)
-		{
-			return null;
-		}
-		string key = data.levelMatchOtherHelper.Key;
-		int num = 0;
-		num = ((!(key != string.Empty)) ? Singleton<Profile>.Instance.GetHelperLevel(data.id) : Singleton<Profile>.Instance.GetHelperLevel(key));
-		if (num == 0)
-		{
-			if (data.Levels != null && data.Levels.Length > 0)
-			{
-				return data.Levels[0];
-			}
-			return null;
-		}
-		return data.Levels[num - 1];
-	}
-
-	public int EnsureProperInitialHelperLevel(string helperID)
-	{
-		int num = Singleton<Profile>.Instance.GetHelperLevel(helperID);
-		if (num == 0)
-		{
-			num++;
-			Singleton<Profile>.Instance.SetHelperLevel(helperID, num);
-			Singleton<Profile>.Instance.Save();
-		}
-		return num;
-	}
-
 	public void LoadFrontEndData()
 	{
 		mData.Load(DataBundleResourceGroup.FrontEnd, false, null);
@@ -194,7 +148,7 @@ public class HelpersDatabase : Singleton<HelpersDatabase>
 		DataBundleRecordHandle<CharacterSchema> dataBundleRecordHandle = null;
 		GameObject newCharacterObject = null;
 		HelperSchema helperSchema = Seek(id);
-		string text = (string.IsNullOrEmpty(upgradedFrom) ? id : upgradedFrom);
+		string text = string.IsNullOrEmpty(upgradedFrom) ? id : upgradedFrom;
 		HelperSchema helperSchema2 = this[text];
 		bool flag = Singleton<Profile>.Instance.GetHelperLevel(text) > Helper.kPlatinumLevel;
 		bool flag2 = Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent != null && Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.GetHelperLevel(text) > Helper.kPlatinumLevel;

@@ -140,16 +140,19 @@ public class HeroSchema
 				Abilities[i] = Singleton<AbilitiesDatabase>.Instance[array[i].ability.Key];
 			}
 		}
+
 		MeleeWeapon = meleeWeapon.InitializeRecord<WeaponSchema>();
 		if (MeleeWeapon != null)
 		{
 			MeleeWeapon.Initialize();
 		}
+
 		RangedWeapon = rangedWeapon.InitializeRecord<WeaponSchema>();
 		if (RangedWeapon != null)
 		{
 			RangedWeapon.Initialize();
 		}
+
 		if (!DataBundleRecordTable.IsNullOrEmpty(armorLevels))
 		{
 			ArmorLevels = armorLevels.InitializeRecords<ArmorLevelSchema>();
@@ -159,33 +162,33 @@ public class HeroSchema
 				armorLevelSchema.Initialize(armorLevels.RecordTable);
 			}
 		}
+
 		IconPath = DataBundleRuntime.Instance.GetValue<string>(typeof(HeroSchema), tableName, id, "icon", true);
+
 		HeroStarsSchema = DataBundleRuntime.Instance.InitializeRecord<HeroStarsSchema>("HeroStars", id);
 	}
 
-	public void LoadCachedResources(int meleeLevel, int rangedLevel, int armorLevel, bool frontEnd)
+	public void LoadCachedResources(bool frontEnd)
 	{
 		if (MeleeWeapon != null)
 		{
-			MeleeWeapon.LoadCachedResources(meleeLevel);
+			MeleeWeapon.LoadCachedResources(0);
 			if (frontEnd)
 			{
-				WeaponLevelSchema weaponLevelSchema = MeleeWeapon.Levels[Mathf.Clamp(meleeLevel, 0, MeleeWeapon.Levels.Length - 1)];
-				string iconPath = weaponLevelSchema.IconPath;
-				ResourceCache.GetCachedResource(iconPath, 1);
+				ResourceCache.GetCachedResource(MeleeWeapon.IconPath, 1);
 			}
 		}
+
 		if (RangedWeapon != null)
 		{
-			RangedWeapon.LoadCachedResources(rangedLevel);
+			RangedWeapon.LoadCachedResources(0);
 			if (frontEnd)
 			{
-				WeaponLevelSchema weaponLevelSchema2 = RangedWeapon.Levels[Mathf.Clamp(rangedLevel, 0, RangedWeapon.Levels.Length - 1)];
-				string iconPath2 = weaponLevelSchema2.IconPath;
-				ResourceCache.GetCachedResource(iconPath2, 1);
+				ResourceCache.GetCachedResource(RangedWeapon.IconPath, 1);
 			}
 		}
-		ArmorLevelSchema armorLevel2 = GetArmorLevel(armorLevel);
+
+		ArmorLevelSchema armorLevel2 = GetArmorLevel(1);
 		if (armorLevel2 != null)
 		{
 			string tableRecordKey = DataBundleRuntime.TableRecordKey(armorLevels.RecordTable, armorLevel2.level.ToString());
@@ -198,22 +201,22 @@ public class HeroSchema
 		}
 	}
 
-	public void UnloadCachedResources(int meleeLevel, int rangedLevel, int armorLevel)
+	public void UnloadCachedResources()
 	{
 		if (MeleeWeapon != null)
 		{
-			MeleeWeapon.UnloadCachedResources();
-			WeaponLevelSchema weaponLevelSchema = MeleeWeapon.Levels[Mathf.Clamp(meleeLevel, 0, MeleeWeapon.Levels.Length - 1)];
-			string iconPath = weaponLevelSchema.IconPath;
-			ResourceCache.UnCache(iconPath);
+			string tableRecordKey = DataBundleRuntime.TableRecordKey("Weapons", MeleeWeapon.id);
+			ResourceCache.UnloadCachedResources(MeleeWeapon, tableRecordKey);
+			ResourceCache.UnCache(MeleeWeapon.IconPath);
 		}
+
 		if (RangedWeapon != null)
 		{
-			RangedWeapon.UnloadCachedResources();
-			WeaponLevelSchema weaponLevelSchema2 = RangedWeapon.Levels[Mathf.Clamp(rangedLevel, 0, RangedWeapon.Levels.Length - 1)];
-			string iconPath2 = weaponLevelSchema2.IconPath;
-			ResourceCache.UnCache(iconPath2);
+			string tableRecordKey = DataBundleRuntime.TableRecordKey("Weapons", RangedWeapon.id);
+			ResourceCache.UnloadCachedResources(MeleeWeapon, tableRecordKey);
+			ResourceCache.UnCache(RangedWeapon.IconPath);
 		}
+		
 		if (ArmorLevels != null)
 		{
 			ArmorLevelSchema[] array = ArmorLevels;
@@ -222,7 +225,7 @@ public class HeroSchema
 				string tableRecordKey = DataBundleRuntime.TableRecordKey(armorLevels.RecordTable, armorLevelSchema.level.ToString());
 				ResourceCache.UnloadCachedResources(armorLevelSchema, tableRecordKey);
 			}
-			ArmorLevelSchema armorLevel2 = GetArmorLevel(armorLevel);
+			ArmorLevelSchema armorLevel2 = GetArmorLevel(0);
 			if (armorLevel2 != null)
 			{
 				string iconPath3 = armorLevel2.IconPath;
