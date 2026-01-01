@@ -40,48 +40,98 @@ public class HelperSchema
 	[DataBundleSchemaFilter(typeof(DynamicEnum), false)]
 	public DataBundleRecordKey lane;
 
+	[DataBundleField]
 	public int waveToUnlock;
 
+	[DataBundleField]
 	public int availableAtWave;
 
+	[DataBundleField]
 	public float resourcesCost;
 
+	[DataBundleField]
 	public float cooldownTimer;
 
+	[DataBundleField]
+	public float health;
+
+	[DataBundleField]
+	public float speed;
+
+	[DataBundleField]
 	public float attackFrequency;
 
+	[DataBundleField]
+	public float meleeRange;
+
+	[DataBundleField]
+	public float meleeDamage;
+
+	[DataBundleSchemaFilter(typeof(DynamicEnum), false)]
+	[DataBundleRecordTableFilter("Projectile")]
+	public DataBundleRecordKey projectile;
+
+	[DataBundleField]
+	public float bowRange;
+
+	[DataBundleField]
+	public float bowDamage;
+
+	[DataBundleField]
+	public float knockbackPower;
+
+	[DataBundleField]
+	public float knockbackResistance;
+
+	[DataBundleField]
 	public bool usesBladeWeapon;
 
+	[DataBundleField]
 	public bool hideInStore;
 
+	[DataBundleField]
 	public bool hideInEquip;
 
+	[DataBundleField]
 	public bool unique;
 
+	[DataBundleField]
 	public bool exploseOnMelee;
 
+	[DataBundleField]
 	public bool enemyIgnoresMe;
 
+	[DataBundleField]
 	public bool canMeleeFliers;
 
+	[DataBundleField]
 	public bool canMeleeProjectiles;
 
+	[DataBundleField]
 	public bool isMount;
 
+	[DataBundleField]
 	public bool isMounted;
 
+	[DataBundleField]
 	public bool blocksHeroMovement;
 
+	[DataBundleField]
 	public bool canBeEaten;
 
+	[DataBundleField]
 	public bool isCharger;
 
+	[DataBundleField]
 	public int award;
 
+	[DataBundleField]
 	public int resourceDropMin;
 
+	[DataBundleField]
 	public int resourceDropMax;
 
+	[DataBundleField]
 	public int valueInCoins;
 
 	[DataBundleSchemaFilter(typeof(HelperSchema), false)]

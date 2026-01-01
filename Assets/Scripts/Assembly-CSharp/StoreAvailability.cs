@@ -8,15 +8,21 @@ public class StoreAvailability
 
 	public const string kDealPackTable = "DealPacks";
 
-	public static List<StoreData.Item> GetList(string g)
+	public static List<StoreData.Item> GetList(string contentType)
 	{
-		List<StoreData.Item> list = new List<StoreData.Item>();
-		PostSortProcessing postSortProcessing = null;
-		if (!Singleton<Profile>.Exists || !Singleton<Profile>.Instance.Initialized)
+		if (string.IsNullOrEmpty(contentType))
 		{
-			return list;
+			UnityEngine.Debug.LogError("No content type provided.");
+			return null;
 		}
-		if (g == StringUtils.GetStringFromStringRef("MenuFixedStrings", "store_items_global"))
+		
+		List<StoreData.Item> list = new List<StoreData.Item>();
+
+		if (!Singleton<Profile>.Exists || !Singleton<Profile>.Instance.Initialized) return list;
+
+		PostSortProcessing postSortProcessing = null;
+
+		if (contentType == StringUtils.GetStringFromStringRef("MenuFixedStrings", "store_items_global"))
 		{
 			GetMysteryBox(list);
 			GetUpgrades(list, true);
@@ -29,12 +35,12 @@ public class StoreAvailability
 			StoreAvailability_Abilities.GetGlobalAbilities(list);
 			EndSortedGroup(list, 3);
 		}
-		else if (string.Compare(g, "Helpers", true) == 0 || string.Compare(g, "Allies", true) == 0)
+		else if (string.Compare(contentType, "Helpers", true) == 0 || string.Compare(contentType, "Allies", true) == 0)
 		{
 			GetMysteryBox(list);
 			StoreAvailability_Helpers.Get(list);
 		}
-		else if (string.Compare(g, "Champions", true) == 0)
+		else if (string.Compare(contentType, "Champions", true) == 0)
 		{
 			GetMysteryBox(list);
 			StoreAvailability_Helpers.GetChampions(list);
@@ -47,43 +53,45 @@ public class StoreAvailability
 				}
 			};
 		}
-		else if (string.Compare(g, "Consumables", true) == 0 || string.Compare(g, StringUtils.GetStringFromStringRef("MenuFixedStrings", "Boost_Consumables"), true) == 0)
+		else if (string.Compare(contentType, "Consumables", true) == 0 || string.Compare(contentType, StringUtils.GetStringFromStringRef("MenuFixedStrings", "Boost_Consumables"), true) == 0)
 		{
 			GetMysteryBox(list);
 			GetDealPacks(list);
 			GetPotions(list);
 		}
-		else if (string.Compare(g, "Upgrades", true) == 0 || string.Compare(g, StringUtils.GetStringFromStringRef("MenuFixedStrings", "Boost_Upgrades"), true) == 0)
+		else if (string.Compare(contentType, "Upgrades", true) == 0 || string.Compare(contentType, StringUtils.GetStringFromStringRef("MenuFixedStrings", "Boost_Upgrades"), true) == 0)
 		{
 			GetUpgrades(list, false);
 		}
-		else if (string.Compare(g, "Charms", true) == 0 || string.Compare(g, StringUtils.GetStringFromStringRef("MenuFixedStrings", "Boost_Charms"), true) == 0)
+		else if (string.Compare(contentType, "Charms", true) == 0 || string.Compare(contentType, StringUtils.GetStringFromStringRef("MenuFixedStrings", "Boost_Charms"), true) == 0)
 		{
 			GetCharms(list);
 		}
 		else
 		{
-			if (Array.Find(Singleton<HeroesDatabase>.Instance.AllIDs, (string s) => string.Equals(s, g)) == null)
-			{
+			if (Array.Find(Singleton<HeroesDatabase>.Instance.AllIDs, (string s) => string.Equals(s, contentType)) == null)
 				return null;
-			}
-			HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[g];
+			
+			HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[contentType];
 			if (heroSchema != null && !heroSchema.Locked)
 			{
-				GetHeroMysteryBox(g, list);
+				GetHeroMysteryBox(contentType, list);
 			}
-			GetHero(g, list);
+			GetHero(contentType, list);
 		}
+
 		int num = 0;
 		foreach (StoreData.Item item2 in list)
 		{
 			item2._originalSortIndex = num++;
 		}
+
 		list.Sort(new StoreData.ItemsListSorter());
 		if (postSortProcessing != null)
 		{
 			postSortProcessing(list);
 		}
+
 		return list;
 	}
 

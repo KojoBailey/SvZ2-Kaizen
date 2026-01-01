@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using UnityEngine;
 
 [Serializable]
@@ -76,15 +77,16 @@ public class DataAdaptor_StoreHeroPanel : DataAdaptorBase
 			button.gameObject.SetActive(false);
 			if (data is string)
 			{
-				string strA = (string)data;
+				var strA = data as string;
 				Texture2D texture2D = null;
-				texture2D = ((string.Compare(strA, "Allies", true) == 0) ? (ResourceCache.GetCachedResource("UI/Textures/DynamicIcons/Misc/Store_PortraitAllies", 1).Resource as Texture2D) : ((string.Compare(strA, "Champions", true) == 0) ? (ResourceCache.GetCachedResource("UI/Textures/DynamicIcons/Misc/Store_PortraitChampions", 1).Resource as Texture2D) : ((string.Compare(strA, "Consumables", true) == 0) ? (ResourceCache.GetCachedResource("UI/Textures/DynamicIcons/Misc/Store_PortraitExtras", 1).Resource as Texture2D) : ((string.Compare(strA, "Upgrades", true) == 0) ? (ResourceCache.GetCachedResource("UI/Textures/DynamicIcons/Misc/Store_PortraitUpgrades", 1).Resource as Texture2D) : ((string.Compare(strA, "Charms", true) != 0) ? (ResourceCache.GetCachedResource("UI/Textures/DynamicIcons/Misc/Store_PortraitGlobal", 1).Resource as Texture2D) : (ResourceCache.GetCachedResource("UI/Textures/DynamicIcons/Misc/Store_PortraitCharms", 1).Resource as Texture2D))))));
+				texture2D = (string.Compare(strA, "Allies", true) == 0) ? (ResourceCache.GetCachedResource("UI/Textures/DynamicIcons/Misc/Store_PortraitAllies", 1).Resource as Texture2D) : ((string.Compare(strA, "Champions", true) == 0) ? (ResourceCache.GetCachedResource("UI/Textures/DynamicIcons/Misc/Store_PortraitChampions", 1).Resource as Texture2D) : ((string.Compare(strA, "Consumables", true) == 0) ? (ResourceCache.GetCachedResource("UI/Textures/DynamicIcons/Misc/Store_PortraitExtras", 1).Resource as Texture2D) : ((string.Compare(strA, "Upgrades", true) == 0) ? (ResourceCache.GetCachedResource("UI/Textures/DynamicIcons/Misc/Store_PortraitUpgrades", 1).Resource as Texture2D) : ((string.Compare(strA, "Charms", true) != 0) ? (ResourceCache.GetCachedResource("UI/Textures/DynamicIcons/Misc/Store_PortraitGlobal", 1).Resource as Texture2D) : (ResourceCache.GetCachedResource("UI/Textures/DynamicIcons/Misc/Store_PortraitCharms", 1).Resource as Texture2D)))));
 				if (texture2D != null)
 				{
 					SetGluiSpriteInChild(sprite_Portrait, texture2D);
 				}
 			}
 		}
+
 		string text3 = data as string;
 		if (text3 != null)
 		{

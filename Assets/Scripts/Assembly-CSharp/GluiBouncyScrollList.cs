@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using GluiCollections;
 using UnityEngine;
@@ -173,10 +174,8 @@ public class GluiBouncyScrollList : GluiWidget, IInputContainer
 
 	public void Update()
 	{
-		if (!Application.isPlaying)
-		{
-			return;
-        }
+		if (!Application.isPlaying) return;
+
 #if UNITY_STANDALONE || UNITY_EDITOR
         mScrollInput.ScrollUpdate(direction == Direction.Vertical);
 #endif
@@ -185,6 +184,7 @@ public class GluiBouncyScrollList : GluiWidget, IInputContainer
 			Redraw();
 			return;
 		}
+
 		if (mScrollInput != null)
 		{
 			mScrollInput.Area = Area;
@@ -216,6 +216,7 @@ public class GluiBouncyScrollList : GluiWidget, IInputContainer
 		{
 			AcquireController();
 		}
+
 		if (mCtrl != null)
 		{
 			mCtrl.ReloadData(arg);
@@ -236,6 +237,7 @@ public class GluiBouncyScrollList : GluiWidget, IInputContainer
 			{
 				return;
 			}
+			
 			if (direction == Direction.Horizontal)
 			{
 				float x = Mathf.Clamp(num - Area.width / 2f + mCellPool.GetAny(mCtrl.GetCellPrefabForDataIndex(index)).Size.x / 2f, 0f, mScrollInput.ScrollMax.x);
@@ -272,12 +274,10 @@ public class GluiBouncyScrollList : GluiWidget, IInputContainer
 
 	private void AcquireController()
 	{
-		if (!(mCtrl == null))
-		{
-			return;
-		}
+		if (mCtrl != null) return;
+
 		mCtrl = base.gameObject.GetComponent<Controller>();
-		if (!(mCtrl == null))
+		if (mCtrl != null)
 		{
 			mCtrl.parentList = this;
 			if (mCellPool != null)
@@ -285,6 +285,10 @@ public class GluiBouncyScrollList : GluiWidget, IInputContainer
 				mCellPool.Destroy();
 			}
 			mCellPool = new CellPool();
+		}
+		else
+		{
+			UnityEngine.Debug.LogError("Failed to get Controller component.");
 		}
 	}
 

@@ -59,7 +59,6 @@
 		desc = LocalizedStrings.HeroAbilities_desc
 		store_levelup = LocalizedStrings.store_format_level_hero
 		resources = Character.HeroAbilities
-		resourcesGhost = 
 		icon = Assets/Game/Resources/UI/Textures/DynamicIcons/Upgrades/Sorceress_Hero.png
 		storePortrait = Assets/Game/Resources/UI/Textures/DynamicIcons/Misc/Store_PortraitSorceress.png
 		waveToUnlock = 41

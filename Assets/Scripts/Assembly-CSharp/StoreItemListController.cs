@@ -12,7 +12,7 @@ public class StoreItemListController : GluiSimpleCollectionController
 			object[] array = mData;
 			foreach (object obj in array)
 			{
-				StoreData.Item item = (StoreData.Item)obj;
+				var item = obj as StoreData.Item;
 				if (item.isNew)
 				{
 					return num;
@@ -26,10 +26,12 @@ public class StoreItemListController : GluiSimpleCollectionController
 	public override void ReloadData(object arg)
 	{
 		string text = contentType;
+
 		if (arg != null && arg is string)
 		{
-			text = (string)arg;
+			text = arg as string;
 		}
+
 		if (text != null)
 		{
 			List<StoreData.Item> list = StoreAvailability.GetList(text);
