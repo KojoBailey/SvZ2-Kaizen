@@ -109,7 +109,6 @@ public class StoreAvailability
 	private static void GetHero(string heroId, List<StoreData.Item> items)
 	{
 		HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[heroId];
-		if (heroSchema.waveToUnlock > 10) return;
 
 		{
 			string displayName = "Hero " + StringUtils.GetStringFromStringRef(heroSchema.displayName);
@@ -128,7 +127,7 @@ public class StoreAvailability
 		}
 
 		GetLeadership(heroId, items);
-		GetSoulJar(heroId, items);
+		// GetSoulJar(heroId, items);
 
 		GetWeapon(heroSchema.MeleeWeapon, Singleton<Profile>.Instance.GetMeleeWeaponLevel(heroId), heroId, items);
 
