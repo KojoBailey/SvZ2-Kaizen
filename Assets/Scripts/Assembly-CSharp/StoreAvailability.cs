@@ -127,7 +127,7 @@ public class StoreAvailability
 		}
 
 		GetLeadership(heroId, items);
-		// GetSoulJar(heroId, items);
+		GetSoulJar(heroId, items);
 
 		GetWeapon(heroSchema.MeleeWeapon, Singleton<Profile>.Instance.GetMeleeWeaponLevel(heroId), heroId, items);
 
