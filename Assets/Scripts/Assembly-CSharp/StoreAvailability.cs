@@ -109,19 +109,21 @@ public class StoreAvailability
 	private static void GetHero(string heroId, List<StoreData.Item> items)
 	{
 		HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[heroId];
+		if (heroSchema.waveToUnlock > 10) return;
 
 		{
+			string displayName = "Hero " + StringUtils.GetStringFromStringRef(heroSchema.displayName);
 			StoreData.Item item = new StoreData.Item
 			{
 				id = heroId,
-				title = "Hero " + StringUtils.GetStringFromStringRef(heroSchema.displayName),
+				isUpgradable = false,
+				title = displayName,
 			};
 			item.LoadIcon(heroSchema.IconPath);
-			item.details.Name = item.title;
+			item.details.Name = displayName;
 			item.details.AddSmallDescription(StringUtils.GetStringFromStringRef(heroSchema.desc));
 			item.details.AddStat("health_stats", heroSchema.health.ToString());
 			item.details.AddStat("speed", heroSchema.speed.ToString());
-			item.isUpgradable = false;
 			items.Add(item);
 		}
 

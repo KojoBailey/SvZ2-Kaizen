@@ -164,11 +164,13 @@ public class GluiBouncyScrollList : GluiWidget, IInputContainer
 			mCellPool.Destroy();
 			mCellPool = null;
 		}
+
 		if (mActiveCells != null)
 		{
 			mActiveCells.Clear();
 			mActiveCells = null;
 		}
+		
 		base.OnDestroy();
 	}
 
@@ -237,7 +239,7 @@ public class GluiBouncyScrollList : GluiWidget, IInputContainer
 			{
 				return;
 			}
-			
+
 			if (direction == Direction.Horizontal)
 			{
 				float x = Mathf.Clamp(num - Area.width / 2f + mCellPool.GetAny(mCtrl.GetCellPrefabForDataIndex(index)).Size.x / 2f, 0f, mScrollInput.ScrollMax.x);

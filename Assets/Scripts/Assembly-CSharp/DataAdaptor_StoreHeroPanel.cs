@@ -38,20 +38,20 @@ public class DataAdaptor_StoreHeroPanel : DataAdaptorBase
 			id = hero.id;
 			SetGluiTextInChild(text_Name, StringUtils.GetStringFromStringRef(hero.displayName));
 			SetGluiSpriteInChild(sprite_Portrait, hero.storePortrait);
-			string text = "\\n";
+			string newline = "\\n";
 			string text2 = StringUtils.GetStringFromStringRef("LocalizedStrings", "chapter_wave_num");
 			do
 			{
-				text2 = text2.Replace(text, " ");
+				text2 = text2.Replace(newline, " ");
 			}
-			while (text2.Contains(text));
+			while (text2.Contains(newline));
+
 			for (int i = Singleton<Profile>.Instance.CurrentStoryWave; i < Mathf.Min(999, Singleton<Profile>.Instance.CurrentStoryWave + 10); i++)
 			{
 				WaveSchema waveData = WaveManager.GetWaveData(i, WaveManager.WaveType.Wave_SinglePlayer);
 				if (!waveData.recommendedHeroIsRequired || !(DataBundleRuntime.RecordKey(waveData.recommendedHero) == id))
-				{
 					continue;
-				}
+
 				if (i != Singleton<Profile>.Instance.CurrentStoryWave)
 				{
 					if (requiredFutureObject != null)
