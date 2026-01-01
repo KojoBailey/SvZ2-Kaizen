@@ -7,7 +7,7 @@ public class InvincibilityHandler : AbilityHandlerComponent
 
 	private void Start()
 	{
-		mDuration = Extrapolate((AbilityLevelSchema als) => als.duration);
+		mDuration = abilitySchema.duration;
 		Hero hero = mExecutor as Hero;
 		if (hero != null)
 		{

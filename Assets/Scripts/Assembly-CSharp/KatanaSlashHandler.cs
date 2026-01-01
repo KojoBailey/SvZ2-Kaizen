@@ -19,10 +19,10 @@ public class KatanaSlashHandler : AbilityHandler
 		var hero = executor as Hero;
 		if (hero == null) return;
 
-		float damage = Extrapolate((AbilityLevelSchema als) => als.damage);
-		float damageMultEachTarget = Extrapolate((AbilityLevelSchema als) => als.damageMultEachTarget);
-		float radius = Extrapolate((AbilityLevelSchema als) => als.radius);
-		var knockback = (int)Extrapolate((AbilityLevelSchema als) => als.effectModifier);
+		float damage = schema.damage;
+		float damageMultEachTarget = schema.damageMultEachTarget;
+		float radius = schema.radius;
+		var knockback = (int)schema.effectModifier;
 
 		List<Character> enemiesAhead = hero.GetEnemiesAhead(radius);
 		foreach (Character item in enemiesAhead)

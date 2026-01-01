@@ -51,22 +51,18 @@ public class CashIn
 				SingletonSpawningMonoBehaviour<GluiAgent_CentralDispatch>.Instance.SendSimpleOrder("Store", "Charms", GluiAgentBase.Order.Redraw, null, null);
 				break;
 			case ItemType.Helper:
-				if (keyValuePair.Value >= 1 && Singleton<Profile>.Instance.GetHelperLevel(keyValuePair.Key) == 0)
+				HelperSchema helperSchema = Singleton<HelpersDatabase>.Instance[keyValuePair.Key];
+				if (!string.IsNullOrEmpty(helperSchema.unlockPlayhavenRequest))
 				{
-					HelperSchema helperSchema = Singleton<HelpersDatabase>.Instance[keyValuePair.Key];
-					if (!string.IsNullOrEmpty(helperSchema.unlockPlayhavenRequest))
+					if (!SingletonMonoBehaviour<StoreMenuImpl>.Exists)
 					{
-						if (!SingletonMonoBehaviour<StoreMenuImpl>.Exists)
-						{
-							StoreMenuImpl.queuedPlayhavenRequest = helperSchema.unlockPlayhavenRequest;
-						}
-						else
-						{
-							ApplicationUtilities.MakePlayHavenContentRequest(helperSchema.unlockPlayhavenRequest);
-						}
+						StoreMenuImpl.queuedPlayhavenRequest = helperSchema.unlockPlayhavenRequest;
+					}
+					else
+					{
+						ApplicationUtilities.MakePlayHavenContentRequest(helperSchema.unlockPlayhavenRequest);
 					}
 				}
-				Singleton<Profile>.Instance.SetHelperLevel(keyValuePair.Key, Singleton<Profile>.Instance.GetHelperLevel(keyValuePair.Key) + keyValuePair.Value);
 				break;
 			case ItemType.Ability:
 				Singleton<Profile>.Instance.SetAbilityLevel(keyValuePair.Key, Singleton<Profile>.Instance.GetAbilityLevel(keyValuePair.Key) + keyValuePair.Value);

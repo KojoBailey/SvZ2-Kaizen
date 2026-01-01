@@ -16,10 +16,10 @@ public class MysticFlameHandler : AbilityHandlerComponent
 
 	protected virtual void Start()
 	{
-		mRemainingDuration = Extrapolate((AbilityLevelSchema als) => als.duration);
-		mDamagePerHit = levelDamage / (mRemainingDuration / 0.15f);
+		mRemainingDuration = abilitySchema.duration;
+		mDamagePerHit = abilitySchema.damage / (mRemainingDuration / 0.15f);
 		mTimeUntilNextDamage = 0f;
-		mRadius = Extrapolate((AbilityLevelSchema als) => als.radius);
+		mRadius = abilitySchema.radius;
 	}
 
 	protected virtual Character GetAttacker()

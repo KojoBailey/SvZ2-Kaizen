@@ -205,7 +205,6 @@ public class CharacterData
 
 	private void Load(HelperSchema data, int level)
 	{
-		HelperLevelSchema level2 = data.GetLevel(level);
 		id = data.id;
 		displayName = data.displayName;
 		record = data.resources;
@@ -213,9 +212,9 @@ public class CharacterData
 		championIcon = data.TryGetChampionIcon();
 		leadershipCost = new Leadership.LeadershipCost(data.resourcesCost);
 		currentCooldown = data.cooldownTimer;
-		health = level2.health;
-		speedMin = (baseSpeedMin = level2.speedMin);
-		speedMax = (baseSpeedMax = level2.speedMax);
+		health = data.health;
+		speedMin = baseSpeedMin = data.speed;
+		speedMax = baseSpeedMax = data.speed;
 		unique = data.unique;
 		isMount = data.isMount;
 		isMounted = data.isMounted;
@@ -224,7 +223,7 @@ public class CharacterData
 		exploseOnMelee = data.exploseOnMelee;
 		enemyIgnoresMe = data.enemyIgnoresMe;
 		canBeEaten = data.canBeEaten;
-		BuffSchema buffSchema = level2.buffSchema;
+		BuffSchema buffSchema = data.buffSchema;
 		if (buffSchema != null)
 		{
 			damageBuffPercent = buffSchema.damageBuffPercent;
@@ -235,36 +234,36 @@ public class CharacterData
 		meleeWeaponPrefab = data.meleeWeaponPrefab;
 		rangedWeaponPrefab = data.rangedWeaponPrefab;
 		bladedWeapon = data.usesBladeWeapon;
-		attackFrequency = (baseAttackFrequency = data.attackFrequency);
-		knockbackPower = level2.knockbackPower;
-		knockbackable = level2.knockbackable;
-		knockbackResistance = level2.knockbackResistance;
+		attackFrequency = baseAttackFrequency = data.attackFrequency;
+		knockbackPower = data.knockbackPower;
+		knockbackable = data.knockbackable;
+		knockbackResistance = data.knockbackResistance;
 		totalCooldown = data.cooldownTimer;
-		swordAttackRange = level2.meleeRange;
-		meleeDamage = level2.meleeDamage;
-		bowAttackRange = level2.bowRange;
-		bowDamage = level2.bowDamage;
+		swordAttackRange = data.meleeRange;
+		meleeDamage = data.meleeDamage;
+		bowAttackRange = data.bowRange;
+		bowDamage = data.bowDamage;
 		blocksHeroMovement = data.blocksHeroMovement;
 		isCharger = data.isCharger;
 		award = data.award;
 		resourceDropMax = data.resourceDropMax;
 		resourceDropMin = data.resourceDropMin;
 		summonAchievementMask = data.summonIndex;
-		if (!DataBundleRecordKey.IsNullOrEmpty(level2.projectile))
+		if (!DataBundleRecordKey.IsNullOrEmpty(data.projectile))
 		{
-			projectile = level2.projectile.Key;
+			projectile = data.projectile.Key;
 		}
 		if (!DataBundleRecordKey.IsNullOrEmpty(data.lane))
 		{
 			lanePref = (CharactersManager.ELanePreference)(int)Enum.Parse(typeof(CharactersManager.ELanePreference), data.lane.Key);
 		}
-		if (!DataBundleRecordKey.IsNullOrEmpty(level2.upgradeAlliesFrom))
+		if (!DataBundleRecordKey.IsNullOrEmpty(data.upgradeAlliesFrom))
 		{
-			upgradeAlliesFrom = level2.upgradeAlliesFrom.Key;
+			upgradeAlliesFrom = data.upgradeAlliesFrom.Key;
 		}
-		if (!DataBundleRecordKey.IsNullOrEmpty(level2.upgradeAlliesTo))
+		if (!DataBundleRecordKey.IsNullOrEmpty(data.upgradeAlliesTo))
 		{
-			upgradeAlliesTo = level2.upgradeAlliesTo.Key;
+			upgradeAlliesTo = data.upgradeAlliesTo.Key;
 		}
 	}
 

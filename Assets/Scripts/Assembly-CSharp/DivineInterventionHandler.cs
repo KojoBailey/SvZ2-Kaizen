@@ -26,7 +26,7 @@ public class DivineInterventionHandler : AbilityHandler
 			return;
 		}
 		Leadership leadership = WeakGlobalMonoBehavior<InGameImpl>.Instance.GetLeadership(hero.ownerId);
-		float num = Mathf.Max(Extrapolate((AbilityLevelSchema als) => als.effectModifier), 1f);
+		float num = Mathf.Max(schema.effectModifier, 1f);
 		List<Leadership.HelperTypeData> availableHelperTypes = leadership.availableHelperTypes;
 		BoxCollider helperSpawnArea = leadership.helperSpawnArea;
 		float num2 = schema.spawnOffsetHorizontal;

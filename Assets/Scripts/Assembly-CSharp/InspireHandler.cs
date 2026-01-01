@@ -12,9 +12,9 @@ public class InspireHandler : AbilityHandlerComponent
 
 	private void Start()
 	{
-		mRemainingDuration = Extrapolate((AbilityLevelSchema als) => als.effectDuration);
-		mDamageBonus = Extrapolate((AbilityLevelSchema als) => als.damageMultEachTarget);
-		mSpeedBonus = Extrapolate((AbilityLevelSchema als) => als.speed);
+		mRemainingDuration = abilitySchema.effectDuration;
+		mDamageBonus = abilitySchema.damageMultEachTarget;
+		mSpeedBonus = abilitySchema.speed;
 		Hero hero = mExecutor as Hero;
 		if (hero != null)
 		{

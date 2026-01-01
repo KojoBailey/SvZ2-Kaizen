@@ -415,22 +415,9 @@ public class Leadership : WeakGlobalInstance<Leadership>
 	{
 		if (h != null && !(h.health <= 0f))
 		{
-			int val = ((mOwnerId != 0) ? 1 : Singleton<Profile>.Instance.GetHelperLevel(helperID));
-			if (mOwnerId == 0)
-			{
-				Singleton<Profile>.Instance.SetHelperLevel(helperID, Singleton<Profile>.Instance.GetHelperLevel(h.uniqueID), false);
-			}
-			else
-			{
-				Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.SetHelperLevel(helperID, Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.GetHelperLevel(h.uniqueID));
-			}
 			HelperTypeData data = LoadHelperData(helperID);
 			h.ReinitializeModel(data.data);
 			InitializeHelper(ref data, h, true);
-			if (mOwnerId == 0)
-			{
-				Singleton<Profile>.Instance.SetHelperLevel(helperID, val, false);
-			}
 		}
 	}
 
@@ -473,14 +460,6 @@ public class Leadership : WeakGlobalInstance<Leadership>
 		if (!mHelperDataCache.ContainsKey(helperID))
 		{
 			int num = 1;
-			if (Singleton<HelpersDatabase>.Instance.Contains(helperID))
-			{
-				num = Singleton<Profile>.Instance.GetHelperLevel(helperID);
-				if (mOwnerId > 0)
-				{
-					num = Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.GetHelperLevel(helperID);
-				}
-			}
 			HelperTypeData helperTypeData = new HelperTypeData(helperID, num);
 			mHelperDataCache.Add(helperID, helperTypeData);
 			List<string> spawnOnDeathTypes = helperTypeData.data.spawnOnDeathTypes;

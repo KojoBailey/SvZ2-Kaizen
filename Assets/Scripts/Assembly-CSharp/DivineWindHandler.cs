@@ -19,8 +19,8 @@ public class DivineWindHandler : AbilityHandlerComponent
 	private void Start()
 	{
 		mEmitters = GetComponentsInChildren<ParticleEmitter>();
-		mRemainingDuration = Extrapolate((AbilityLevelSchema als) => als.duration);
-		mDamagePerHit = levelDamage / (mRemainingDuration / 0.25f);
+		mRemainingDuration = abilitySchema.duration;
+		mDamagePerHit = abilitySchema.damage / (mRemainingDuration / 0.25f);
 		mTimeUntilNextDamage = 0f;
 		mStoppedEmitting = false;
 	}

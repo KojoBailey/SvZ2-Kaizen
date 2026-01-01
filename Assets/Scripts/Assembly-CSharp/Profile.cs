@@ -930,15 +930,14 @@ public class Profile : Singleton<Profile>
 			{
 				string id = dailyChallengeHelpers[num2];
 				HelperSchema helperSchema2 = Singleton<HelpersDatabase>.Instance[id];
-				HelperLevelSchema curLevel = helperSchema2.CurLevel;
-				DataBundleRecordKey upgradeAlliesFrom = curLevel.upgradeAlliesFrom;
+				DataBundleRecordKey upgradeAlliesFrom = helperSchema2.upgradeAlliesFrom;
 				bool flag = !DataBundleRecordKey.IsNullOrEmpty(upgradeAlliesFrom);
-				BuffSchema buffSchema = curLevel.buffSchema;
+				BuffSchema buffSchema = helperSchema2.buffSchema;
 				bool flag2 = false;
 				if (buffSchema != null || flag)
 				{
 					flag2 = true;
-					string text2 = ((!flag) ? null : DataBundleRuntime.RecordKey(upgradeAlliesFrom));
+					string text2 = flag ? DataBundleRuntime.RecordKey(upgradeAlliesFrom) : null;
 					for (int j = 0; j < dailyChallengeHelpers.Count; j++)
 					{
 						string text3 = dailyChallengeHelpers[j];
@@ -1410,9 +1409,8 @@ public class Profile : Singleton<Profile>
 		string[] allIDs2 = Singleton<HelpersDatabase>.Instance.allIDs;
 		foreach (string helperID in allIDs2)
 		{
-			int num4 = GetHelperLevel(helperID) * 10;
-			num += num4;
-			array[5] += num4;
+			num += 10;
+			array[5] += 10;
 		}
 		string[] allIDs3 = Singleton<AbilitiesDatabase>.Instance.allIDs;
 		foreach (string text2 in allIDs3)
@@ -1670,32 +1668,6 @@ public class Profile : Singleton<Profile>
 	public void SetEventRewardsGiven(string eventRewardID)
 	{
 		ActiveSavedData.SetDictionaryValue("eventRewards", eventRewardID, true);
-	}
-
-	public int GetHelperLevel(string helperID)
-	{
-		return Mathf.Clamp(ActiveSavedData.GetDictionaryValue<int>("helperLevels", helperID, playModeSubSection), 0, Singleton<HelpersDatabase>.Instance.GetMaxLevel(helperID));
-	}
-
-	public int GetRawHelperLevel(string helperID)
-	{
-		return ActiveSavedData.GetDictionaryValue<int>("helperLevels", helperID, playModeSubSection);
-	}
-
-	public void SetHelperLevel(string helperID, int val, bool autoFillSelectedHelpers = true)
-	{
-		val = Mathf.Clamp(val, 0, Singleton<HelpersDatabase>.Instance.GetMaxLevel(helperID));
-		if (autoFillSelectedHelpers && GetHelperLevel(helperID) == 0 && val > 0)
-		{
-			List<string> selectedHelpers = GetSelectedHelpers();
-			if (selectedHelpers.Count < maxSelectedHelpers)
-			{
-				selectedHelpers.Add(helperID);
-				SetSelectedHelpers(selectedHelpers);
-			}
-		}
-		ActiveSavedData.SetDictionaryValue("helperLevels", helperID, val, playModeSubSection);
-		CalculateAttackRating();
 	}
 
 	public List<string> GetSelectedHelpers()

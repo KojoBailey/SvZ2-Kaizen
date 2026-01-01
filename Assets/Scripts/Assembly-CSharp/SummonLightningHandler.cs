@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 
 [AddComponentMenu("Game/SummonLightningHandler")]
@@ -11,7 +12,7 @@ public class SummonLightningHandler : AbilityHandler
 
 	public override void Execute(Character executor)
 	{
-		float range = Extrapolate((AbilityLevelSchema als) => als.radius);
+		float range = schema.radius;
 		Hero hero = executor as Hero;
 		if (hero != null)
 		{
@@ -22,10 +23,10 @@ public class SummonLightningHandler : AbilityHandler
 
 	protected void DoEffectOnCharacters(List<Character> opponents, Hero hero, Character attacker)
 	{
-		float num = Extrapolate((AbilityLevelSchema als) => als.DOTDuration);
-		float damage = levelDamage;
-		float damagePerTick = Extrapolate((AbilityLevelSchema als) => als.DOTDamage);
-		float tickFrequency = Extrapolate((AbilityLevelSchema als) => als.DOTFrequency);
+		float num = schema.DOTDuration;
+		float damage = schema.damage;
+		float damagePerTick = schema.DOTDamage;
+		float tickFrequency = schema.DOTFrequency;
 		float fadeInTime = float.Parse(Singleton<AbilitiesDatabase>.Instance.GetAttribute(schema.id, "ColorEffectFadeIn"));
 		float fadeOutTime = float.Parse(Singleton<AbilitiesDatabase>.Instance.GetAttribute(schema.id, "ColorEffectFadeOut"));
 		float holdTime = float.Parse(Singleton<AbilitiesDatabase>.Instance.GetAttribute(schema.id, "ColorEffectHoldColor"));

@@ -21,11 +21,11 @@ public class SetTrapHandler : AbilityHandlerComponent
 
 	private void Start()
 	{
-		mRemainingDuration = Extrapolate((AbilityLevelSchema als) => als.duration);
-		mEffectDuration = Extrapolate((AbilityLevelSchema als) => als.effectDuration);
-		mSpeedModifier = Extrapolate((AbilityLevelSchema als) => als.effectModifier);
-		mRadius = Extrapolate((AbilityLevelSchema als) => als.radius);
-		mTriggerRadius = Extrapolate((AbilityLevelSchema als) => als.distance);
+		mRemainingDuration = abilitySchema.duration;
+		mEffectDuration = abilitySchema.effectDuration;
+		mSpeedModifier = abilitySchema.effectModifier;
+		mRadius = abilitySchema.radius;
+		mTriggerRadius = abilitySchema.distance;
 		mTriggerTimer = -1f;
 		mTriggered = false;
 		mFinished = false;
@@ -83,7 +83,7 @@ public class SetTrapHandler : AbilityHandlerComponent
 		{
 			if (!item2.isBase && !item2.isFlying)
 			{
-				item2.RecievedAttack(EAttackType.Blade, levelDamage, GetAttacker());
+				item2.RecievedAttack(EAttackType.Blade, abilitySchema.damage, GetAttacker());
 				item2.ApplyBuff(0f, mSpeedModifier, mEffectDuration, base.gameObject, resultFX, "head_effect");
 				item2.MaterialColorFadeInOut(color, 0.2f, mEffectDuration, 0.2f);
 			}

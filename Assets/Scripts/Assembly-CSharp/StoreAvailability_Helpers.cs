@@ -107,38 +107,9 @@ public class StoreAvailability_Helpers
 		return !helperSchema.hideInStore && !string.IsNullOrEmpty(helperSchema.goldenHelperCostToUnlock) && !Singleton<Profile>.Instance.GetGoldenHelperUnlocked(helperSchema.id);
 	}
 
-	private static void LevelUpHelper(Cost cost, string helperID, bool isLastUpgrade)
-	{
-		int val = Singleton<Profile>.Instance.GetHelperLevel(helperID) + 1;
-		Singleton<Profile>.Instance.SetHelperLevel(helperID, val);
-		if (string.Equals(helperID, "Mount_Balanced"))
-		{
-			SingletonSpawningMonoBehaviour<GluiAgent_CentralDispatch>.Instance.SendSimpleOrder("Store", "HeroBalanced", GluiAgentBase.Order.Redraw, null, null);
-		}
-		else
-		{
-			SingletonSpawningMonoBehaviour<GluiAgent_CentralDispatch>.Instance.SendSimpleOrder("Store", "Allies", GluiAgentBase.Order.Redraw, null, null);
-		}
-		HelperSchema helperSchema = Singleton<HelpersDatabase>.Instance[helperID];
-		if (helperSchema != null)
-		{
-			Singleton<Analytics>.Instance.LogEvent("AbilityUpgradePurchased", Analytics.Param("ItemName", helperID), Analytics.Param("UpgradeLevel", Singleton<Profile>.Instance.GetHelperLevel(helperID)), Analytics.Param("Cost", cost.price), Analytics.Param("Currency", cost.currencyAnalyticCode), Analytics.Param("PlayerLevel", Singleton<Profile>.Instance.playerLevel));
-			if (isLastUpgrade && helperSchema.upgradeAchievement != null && !string.IsNullOrEmpty(helperSchema.upgradeAchievement.Key))
-			{
-				Singleton<Achievements>.Instance.SetAchievementCompletionCount(helperSchema.upgradeAchievement.Key, 1);
-				Singleton<Achievements>.Instance.CheckMetaAchievement("AllUpgrades");
-			}
-		}
-		Singleton<Profile>.Instance.Save();
-	}
-
 	private static void UnlockChampion(string helperID)
 	{
 		Singleton<Profile>.Instance.SetGoldenHelperUnlocked(helperID, true);
-		if (Singleton<Profile>.Instance.GetHelperLevel(helperID) == 0)
-		{
-			Singleton<Profile>.Instance.SetHelperLevel(helperID, 1);
-		}
 		SingletonSpawningMonoBehaviour<GluiAgent_CentralDispatch>.Instance.SendSimpleOrder("Store", "Champions", GluiAgentBase.Order.Redraw, null, null);
 		SingletonSpawningMonoBehaviour<GluiAgent_CentralDispatch>.Instance.SendSimpleOrder("Store", "Allies", GluiAgentBase.Order.Redraw, null, null);
 		Singleton<Profile>.Instance.Save();

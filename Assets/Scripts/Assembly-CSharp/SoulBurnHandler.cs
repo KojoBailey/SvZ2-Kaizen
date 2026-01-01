@@ -38,9 +38,9 @@ public class SoulBurnHandler : AbilityHandlerComponent
 		mTargetXForm = null;
 		mState = State.ES_Projectile;
 		mHeroExecutor = mExecutor as Hero;
-		float num = Extrapolate((AbilityLevelSchema als) => als.distance);
+		float num = abilitySchema.distance;
 		mDistanceRemaining = num - schema.spawnOffsetHorizontal;
-		mSpeed = Extrapolate((AbilityLevelSchema als) => als.speed);
+		mSpeed = abilitySchema.speed;
 		Renderer[] componentsInChildren = base.gameObject.GetComponentsInChildren<Renderer>();
 		foreach (Renderer renderer in componentsInChildren)
 		{
@@ -114,8 +114,8 @@ public class SoulBurnHandler : AbilityHandlerComponent
 		if (mTarget != null && mTarget.health > 0f && ((!mHeroExecutor.LeftToRight) ? (z - num < mTargetXForm.position.z) : (z + num > mTargetXForm.position.z)))
 		{
 			mState = State.ES_Stunning;
-			mRemainingBurnTime = Extrapolate((AbilityLevelSchema als) => als.duration);
-			mRemainingStunTime = Extrapolate((AbilityLevelSchema als) => als.effectDuration);
+			mRemainingBurnTime = abilitySchema.duration;
+			mRemainingStunTime = abilitySchema.effectDuration;
 			mTarget.controller.impactPauseTime = 0f;
 			mTarget.controller.stunnedTimer = mRemainingBurnTime + mRemainingStunTime;
 			mTarget.controller.LoopStunAnim("stun");
@@ -146,7 +146,7 @@ public class SoulBurnHandler : AbilityHandlerComponent
 		if (mRemainingStunTime <= 0f)
 		{
 			mState = State.ES_Burning;
-			mDPS = Extrapolate((AbilityLevelSchema als) => als.DOTDamage);
+			mDPS = abilitySchema.DOTDamage;
 			mTarget.SetDamageOverTimeSpecialType(mDPS * 0.15f, 0.15f, mRemainingBurnTime, mHeroExecutor, 0f, EAttackType.SoulBurn);
 		}
 	}
@@ -161,12 +161,12 @@ public class SoulBurnHandler : AbilityHandlerComponent
 		float deltaTime = Time.deltaTime;
 		if (mTarget.health <= 0f)
 		{
-			float num = Extrapolate((AbilityLevelSchema als) => als.radius);
+			float num = abilitySchema.radius;
 			GameObject obj = GameObjectPool.DefaultObjectPool.Acquire(schema.resultFX, mTargetXForm.position, Quaternion.identity);
 			GameObjectPool.DefaultObjectPool.Release(obj, 2f);
 			float z = mTargetXForm.position.z;
 			List<Character> charactersInRange = WeakGlobalInstance<CharactersManager>.Instance.GetCharactersInRange(z - num, z + num, 1 - mExecutor.ownerId);
-			float damage = Extrapolate((AbilityLevelSchema als) => als.damage);
+			float damage = abilitySchema.damage;
 			foreach (Character item in charactersInRange)
 			{
 				if (item.ownerId != mHeroExecutor.ownerId && item != mTarget)

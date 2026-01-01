@@ -85,73 +85,73 @@ public class StoreAvailability_Abilities
 		items.Add(abilityUpgrade);
 	}
 
-	public static void GetAbilityUpgrade_NightOfTheDead(string abilityID, List<StoreData.Item> items)
-	{
-		AbilitySchema abilitySchema;
-		StoreData.Item abilityUpgrade = GetAbilityUpgrade(abilityID, out abilitySchema);
-		int abilityLevel = Singleton<Profile>.Instance.GetAbilityLevel(abilityID);
-		int num = abilityLevel + 1;
-		if (num > 1)
-		{
-			float secs = abilitySchema.Extrapolate(abilityLevel, (AbilityLevelSchema als) => als.duration);
-			float secs2 = abilitySchema.Extrapolate(num, (AbilityLevelSchema als) => als.duration);
-			abilityUpgrade.details.AddStat("duration", GetSecondsString(secs), GetSecondsString(secs2));
-			abilityUpgrade.details.SetColumns(abilityLevel, num);
-		}
-		abilityUpgrade.analyticsEvent = "UpgradePurchased";
-		abilityUpgrade.analyticsParams = new Dictionary<string, object>();
-		abilityUpgrade.analyticsParams["ItemName"] = "Ability_" + abilityUpgrade.id;
-		abilityUpgrade.analyticsParams["UpgradeLevel"] = num;
-		items.Add(abilityUpgrade);
-	}
+	// public static void GetAbilityUpgrade_NightOfTheDead(string abilityID, List<StoreData.Item> items)
+	// {
+	// 	AbilitySchema abilitySchema;
+	// 	StoreData.Item abilityUpgrade = GetAbilityUpgrade(abilityID, out abilitySchema);
+	// 	int abilityLevel = Singleton<Profile>.Instance.GetAbilityLevel(abilityID);
+	// 	int num = abilityLevel + 1;
+	// 	if (num > 1)
+	// 	{
+	// 		float secs = abilitySchema.duration;
+	// 		float secs2 = abilitySchema.duration;
+	// 		abilityUpgrade.details.AddStat("duration", GetSecondsString(secs), GetSecondsString(secs2));
+	// 		abilityUpgrade.details.SetColumns(abilityLevel, num);
+	// 	}
+	// 	abilityUpgrade.analyticsEvent = "UpgradePurchased";
+	// 	abilityUpgrade.analyticsParams = new Dictionary<string, object>();
+	// 	abilityUpgrade.analyticsParams["ItemName"] = "Ability_" + abilityUpgrade.id;
+	// 	abilityUpgrade.analyticsParams["UpgradeLevel"] = num;
+	// 	items.Add(abilityUpgrade);
+	// }
 
-	public static void GetAbilityUpgrade_FlashBomb(string abilityID, List<StoreData.Item> items)
-	{
-		AbilitySchema abilitySchema;
-		StoreData.Item abilityUpgrade = GetAbilityUpgrade(abilityID, out abilitySchema);
-		int abilityLevel = Singleton<Profile>.Instance.GetAbilityLevel(abilityID);
-		int num = abilityLevel + 1;
-		if (num > 1)
-		{
-			float secs = abilitySchema.Extrapolate(abilityLevel, (AbilityLevelSchema als) => als.effectDuration);
-			float secs2 = abilitySchema.Extrapolate(num, (AbilityLevelSchema als) => als.effectDuration);
-			abilityUpgrade.details.AddStat("duration", GetSecondsString(secs), GetSecondsString(secs2));
-			abilityUpgrade.details.AddStat("strength_stats", Mathf.RoundToInt(abilitySchema.Extrapolate(abilityLevel, (AbilityLevelSchema als) => als.damage)).ToString(), Mathf.RoundToInt(abilitySchema.Extrapolate(num, (AbilityLevelSchema als) => als.damage)).ToString());
-			abilityUpgrade.details.SetColumns(abilityLevel, num);
-		}
-		items.Add(abilityUpgrade);
-	}
+	// public static void GetAbilityUpgrade_FlashBomb(string abilityID, List<StoreData.Item> items)
+	// {
+	// 	AbilitySchema abilitySchema;
+	// 	StoreData.Item abilityUpgrade = GetAbilityUpgrade(abilityID, out abilitySchema);
+	// 	int abilityLevel = Singleton<Profile>.Instance.GetAbilityLevel(abilityID);
+	// 	int num = abilityLevel + 1;
+	// 	if (num > 1)
+	// 	{
+	// 		float secs = abilitySchema.effectDuration;
+	// 		float secs2 = abilitySchema.effectDuration;
+	// 		abilityUpgrade.details.AddStat("duration", GetSecondsString(secs), GetSecondsString(secs2));
+	// 		abilityUpgrade.details.AddStat("strength_stats", Mathf.RoundToInt(abilitySchema.Extrapolate(abilityLevel, (AbilityLevelSchema als) => als.damage)).ToString(), Mathf.RoundToInt(abilitySchema.damage)).ToString();
+	// 		abilityUpgrade.details.SetColumns(abilityLevel, num);
+	// 	}
+	// 	items.Add(abilityUpgrade);
+	// }
 
-	public static void GetAbilityUpgrade_SetTrap(string abilityID, List<StoreData.Item> items)
-	{
-		AbilitySchema abilitySchema;
-		StoreData.Item abilityUpgrade = GetAbilityUpgrade(abilityID, out abilitySchema);
-		int abilityLevel = Singleton<Profile>.Instance.GetAbilityLevel(abilityID);
-		int num = abilityLevel + 1;
-		if (num > 1)
-		{
-			float secs = abilitySchema.Extrapolate(abilityLevel, (AbilityLevelSchema als) => als.effectDuration);
-			float secs2 = abilitySchema.Extrapolate(num, (AbilityLevelSchema als) => als.effectDuration);
-			abilityUpgrade.details.AddStat("duration", GetSecondsString(secs), GetSecondsString(secs2));
-			abilityUpgrade.details.AddStat("strength_stats", Mathf.RoundToInt(abilitySchema.Extrapolate(abilityLevel, (AbilityLevelSchema als) => als.damage)).ToString(), Mathf.RoundToInt(abilitySchema.Extrapolate(num, (AbilityLevelSchema als) => als.damage)).ToString());
-			abilityUpgrade.details.SetColumns(abilityLevel, num);
-		}
-		items.Add(abilityUpgrade);
-	}
+	// public static void GetAbilityUpgrade_SetTrap(string abilityID, List<StoreData.Item> items)
+	// {
+	// 	AbilitySchema abilitySchema;
+	// 	StoreData.Item abilityUpgrade = GetAbilityUpgrade(abilityID, out abilitySchema);
+	// 	int abilityLevel = Singleton<Profile>.Instance.GetAbilityLevel(abilityID);
+	// 	int num = abilityLevel + 1;
+	// 	if (num > 1)
+	// 	{
+	// 		float secs = abilitySchema.effectDuration;
+	// 		float secs2 = abilitySchema.effectDuration;
+	// 		abilityUpgrade.details.AddStat("duration", GetSecondsString(secs), GetSecondsString(secs2));
+	// 		abilityUpgrade.details.AddStat("strength_stats", Mathf.RoundToInt(abilitySchema.Extrapolate(abilityLevel, (AbilityLevelSchema als) => als.damage)).ToString(), Mathf.RoundToInt(abilitySchema.damage)).ToString();
+	// 		abilityUpgrade.details.SetColumns(abilityLevel, num);
+	// 	}
+	// 	items.Add(abilityUpgrade);
+	// }
 
-	public static void GetAbilityUpgrade_Inspire(string abilityID, List<StoreData.Item> items)
-	{
-		AbilitySchema abilitySchema;
-		StoreData.Item abilityUpgrade = GetAbilityUpgrade(abilityID, out abilitySchema);
-		int abilityLevel = Singleton<Profile>.Instance.GetAbilityLevel(abilityID);
-		int num = abilityLevel + 1;
-		if (num > 1)
-		{
-			abilityUpgrade.details.SetColumns(abilityLevel, num);
-			abilityUpgrade.details.AddStat("strength_stats", Mathf.RoundToInt(abilitySchema.Extrapolate(abilityLevel, (AbilityLevelSchema als) => als.damageMultEachTarget)).ToString(), Mathf.RoundToInt(abilitySchema.Extrapolate(num, (AbilityLevelSchema als) => als.damageMultEachTarget)).ToString());
-		}
-		items.Add(abilityUpgrade);
-	}
+	// public static void GetAbilityUpgrade_Inspire(string abilityID, List<StoreData.Item> items)
+	// {
+	// 	AbilitySchema abilitySchema;
+	// 	StoreData.Item abilityUpgrade = GetAbilityUpgrade(abilityID, out abilitySchema);
+	// 	int abilityLevel = Singleton<Profile>.Instance.GetAbilityLevel(abilityID);
+	// 	int num = abilityLevel + 1;
+	// 	if (num > 1)
+	// 	{
+	// 		abilityUpgrade.details.SetColumns(abilityLevel, num);
+	// 		abilityUpgrade.details.AddStat("strength_stats", Mathf.RoundToInt(abilitySchema.Extrapolate(abilityLevel, (AbilityLevelSchema als) => als.damageMultEachTarget)).ToString(), Mathf.RoundToInt(abilitySchema.damageMultEachTarget)).ToString();
+	// 	}
+	// 	items.Add(abilityUpgrade);
+	// }
 
 	private static string GetPercentString(float rawVal)
 	{

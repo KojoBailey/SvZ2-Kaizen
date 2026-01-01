@@ -151,10 +151,6 @@ public class AbilitySchema
 
 	public void Initialize(string tableName)
 	{
-		if (!DataBundleRecordTable.IsNullOrEmpty(abilityLevelData))
-		{
-			levelData = abilityLevelData.InitializeRecords<AbilityLevelSchema>();
-		}
 		SoundEvent = soundEvent.InitializeRecord<DynamicEnum>();
 		IconPath = LocalizedTextureSchema.GetLocalizedPath("Icons", DataBundleRuntime.Instance.GetValue<string>(typeof(AbilitySchema), tableName, id, "icon", true));
 	}
@@ -162,16 +158,5 @@ public class AbilitySchema
 	public AbilitySchema ShallowCopy()
 	{
 		return (AbilitySchema)MemberwiseClone();
-	}
-
-	public float Extrapolate(int abLevel, LevelValueAccessor accessor)
-	{
-		abLevel = Mathf.Max(0, abLevel - 1);
-		int num = levelData.Length - 1;
-		if (abLevel <= num)
-		{
-			return accessor(levelData[abLevel]);
-		}
-		return InfiniteUpgrades.Extrapolate(accessor(levelData[num]), infiniteUpgradeMagnitude, abLevel - num);
 	}
 }

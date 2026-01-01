@@ -15,9 +15,9 @@ public class LegendaryStrikeArrowHandler : AbilityHandlerComponent
 
 	private void Start()
 	{
-		GameObjectPool.DefaultObjectPool.Release(base.gameObject, Extrapolate((AbilityLevelSchema als) => als.duration) + 0.5f);
-		mDamagePerHit = levelDamage / (float)mArrows.Capacity;
-		Vector3 vector = new Vector3(0f, 0f, Extrapolate((AbilityLevelSchema als) => als.speed));
+		GameObjectPool.DefaultObjectPool.Release(base.gameObject, abilitySchema.duration + 0.5f);
+		mDamagePerHit = abilitySchema.damage / (float)mArrows.Capacity;
+		Vector3 vector = new Vector3(0f, 0f, abilitySchema.speed);
 		arrowFX = schema.prop;
 		bool flag = false;
 		Character character = null;
@@ -62,7 +62,7 @@ public class LegendaryStrikeArrowHandler : AbilityHandlerComponent
 		mSpawnPos.y += schema.spawnOffsetVertical;
 		mArrows.Clear();
 		mArrowVelocity.Clear();
-		float num = Extrapolate((AbilityLevelSchema als) => als.distance);
+		float num = abilitySchema.distance;
 		for (int i = 0; i < mArrows.Capacity; i++)
 		{
 			float num2 = 180f - (float)mArrows.Count * num / (float)(mArrows.Capacity - 1);
@@ -72,7 +72,7 @@ public class LegendaryStrikeArrowHandler : AbilityHandlerComponent
 			}
 			Quaternion quaternion = Quaternion.Euler(num2, 0f, 0f);
 			GameObject gameObject = GameObjectPool.DefaultObjectPool.Acquire(arrowFX, mSpawnPos, quaternion);
-			GameObjectPool.DefaultObjectPool.Release(gameObject, Extrapolate((AbilityLevelSchema als) => als.duration));
+			GameObjectPool.DefaultObjectPool.Release(gameObject, abilitySchema.duration);
 			gameObject.transform.parent = null;
 			mArrows.Add(gameObject);
 			mArrowVelocity.Add(quaternion * vector);
@@ -81,7 +81,7 @@ public class LegendaryStrikeArrowHandler : AbilityHandlerComponent
 
 	private void Update()
 	{
-		float num = Extrapolate((AbilityLevelSchema als) => als.radius);
+		float num = abilitySchema.radius;
 		int num2 = 0;
 		foreach (GameObject mArrow in mArrows)
 		{

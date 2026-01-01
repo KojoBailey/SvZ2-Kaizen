@@ -20,24 +20,6 @@ public class AbilityHandler : IAbilityHandler
 		get { return schema.id; }
 	}
 
-	public float levelDamage
-	{
-		get
-		{
-			float num = Extrapolate((AbilityLevelSchema als) => als.damage);
-			if (activatingPlayer != 0 && Singleton<Profile>.Instance.MultiplayerData.TweakValues != null)
-			{
-				num *= Singleton<Profile>.Instance.MultiplayerData.TweakValues.heroAbilityDamage;
-			}
-			return num;
-		}
-	}
-
-	public int abilityLevel
-	{
-		get { return AbilityLevel(schema); }
-	}
-
 	public int activatingPlayer { get; set; }
 
 	public virtual void Activate(Character executor)
@@ -46,18 +28,4 @@ public class AbilityHandler : IAbilityHandler
 	}
 
 	public virtual void Execute(Character executor) {}
-
-	private int AbilityLevel(AbilitySchema schema)
-	{
-		if (activatingPlayer == 0)
-		{
-			return Singleton<Profile>.Instance.GetAbilityLevel(schema.id);
-		}
-		return Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.GetAbilityLevel(schema.id);
-	}
-
-	public float Extrapolate(LevelValueAccessor accessor)
-	{
-		return schema.Extrapolate(AbilityLevel(schema), accessor);
-	}
 }

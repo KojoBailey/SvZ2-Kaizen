@@ -7,10 +7,4 @@ public interface IAbilityHandler
 	AbilitySchema schema { get; }
 
 	string id { get; }
-
-	float levelDamage { get; }
-
-	int abilityLevel { get; }
-
-	float Extrapolate(LevelValueAccessor accessor);
 }

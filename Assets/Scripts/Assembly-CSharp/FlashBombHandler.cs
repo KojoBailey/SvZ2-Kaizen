@@ -8,8 +8,8 @@ public class FlashBombHandler : AbilityHandlerComponent
 
 	private void Start()
 	{
-		float num = Mathf.Max(0.0001f, Extrapolate((AbilityLevelSchema als) => als.duration));
-		mVelocity.z = Extrapolate((AbilityLevelSchema als) => als.distance) / num;
+		float num = Mathf.Max(0.0001f, abilitySchema.duration);
+		mVelocity.z = abilitySchema.distance / num;
 		if (!leftToRightGameplay)
 		{
 			mVelocity.z = 0f - mVelocity.z;
@@ -22,19 +22,19 @@ public class FlashBombHandler : AbilityHandlerComponent
 		Vector3 translation = mVelocity * Time.deltaTime;
 		base.transform.Translate(translation);
 		float y = WeakGlobalInstance<RailManager>.Instance.GetY(base.transform.position.z);
-		float num = Extrapolate((AbilityLevelSchema als) => als.radius);
+		float num = abilitySchema.radius;
 		if (base.transform.position.y < y)
 		{
 			base.transform.Translate(0f, y - base.transform.position.y, 0f);
 			List<Character> charactersInRange = WeakGlobalInstance<CharactersManager>.Instance.GetCharactersInRange(base.transform.position.z - num, base.transform.position.z + num, 1 - base.handlerObject.activatingPlayer);
-			float num2 = Extrapolate((AbilityLevelSchema als) => als.damage);
-			float healAmount = num2 * Extrapolate((AbilityLevelSchema als) => als.lifeSteal);
+			float num2 = abilitySchema.damage;
+			float healAmount = num2 * abilitySchema.lifeSteal;
 			bool flag = false;
 			foreach (Character item in charactersInRange)
 			{
 				if (item != null)
 				{
-					item.controller.stunnedTimer = Extrapolate((AbilityLevelSchema als) => als.effectDuration);
+					item.controller.stunnedTimer = abilitySchema.effectDuration;
 					item.RecievedAttack(EAttackType.Flash, num2, mExecutor);
 					flag = true;
 				}

@@ -8,9 +8,9 @@ public class LethargyHandler : AbilityHandlerComponent
 
 	private void Start()
 	{
-		mRemainingDuration = Extrapolate((AbilityLevelSchema als) => als.effectDuration);
+		mRemainingDuration = abilitySchema.effectDuration;
 		List<Character> playerCharacters = WeakGlobalInstance<CharactersManager>.Instance.GetPlayerCharacters(1 - base.handlerObject.activatingPlayer);
-		float speedModifier = Extrapolate((AbilityLevelSchema als) => als.effectModifier);
+		float speedModifier = abilitySchema.effectModifier;
 		float fadeInTime = float.Parse(Singleton<AbilitiesDatabase>.Instance.GetAttribute(schema.id, "ColorEffectFadeIn"));
 		float fadeOutTime = float.Parse(Singleton<AbilitiesDatabase>.Instance.GetAttribute(schema.id, "ColorEffectFadeOut"));
 		GameObject resultFX = schema.resultFX;

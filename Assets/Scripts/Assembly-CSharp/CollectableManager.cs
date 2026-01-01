@@ -406,7 +406,7 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 				return true;
 			}
 		}
-		else if (Singleton<HelpersDatabase>.Instance.Contains(theItemName) && Singleton<Profile>.Instance.GetHelperLevel(theItemName) > 0)
+		else if (Singleton<HelpersDatabase>.Instance.Contains(theItemName))
 		{
 			return true;
 		}

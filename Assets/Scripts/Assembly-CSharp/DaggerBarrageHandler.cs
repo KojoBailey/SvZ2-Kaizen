@@ -18,7 +18,7 @@ public class DaggerBarrageHandler : AbilityHandlerComponent
 
 	private void Start()
 	{
-		int capacity = (int)((Extrapolate((AbilityLevelSchema als) => als.distance) + 1f) / 45f) * 6;
+		int capacity = (int)((abilitySchema.distance + 1f) / 45f) * 6;
 		if (mDaggers == null)
 		{
 			mDaggers = new List<GameObject>(capacity);
@@ -27,10 +27,10 @@ public class DaggerBarrageHandler : AbilityHandlerComponent
 		{
 			mDaggers.Clear();
 		}
-		float num = Extrapolate((AbilityLevelSchema als) => als.duration);
+		float num = abilitySchema.duration;
 		GameObjectPool.DefaultObjectPool.Release(base.gameObject, num + 0.5f);
-		mDamagePerHit = levelDamage / 6f;
-		float num2 = Extrapolate((AbilityLevelSchema als) => als.speed);
+		mDamagePerHit = abilitySchema.damage / 6f;
+		float num2 = abilitySchema.speed;
 		float num3 = num2 * num;
 		mDaggerVelocity.z = (num3 - schema.spawnOffsetHorizontal) / num;
 		daggerFX = schema.prop;
@@ -39,14 +39,14 @@ public class DaggerBarrageHandler : AbilityHandlerComponent
 		mSpawnPos.x += schema.spawnOffsetVertical;
 		for (int i = 0; i < mDaggers.Capacity; i++)
 		{
-			float num4 = (float)mDaggers.Count * (0f - Extrapolate((AbilityLevelSchema als) => als.distance)) / (float)(mDaggers.Capacity - 1);
+			float num4 = (float)mDaggers.Count * (0f - abilitySchema.distance) / (float)(mDaggers.Capacity - 1);
 			if (mExecutor != null && !mExecutor.LeftToRight)
 			{
 				num4 = 180f - num4;
 			}
 			Quaternion value = Quaternion.Euler(num4, 0f, 0f);
 			GameObject gameObject = GameObjectPool.DefaultObjectPool.Acquire(daggerFX, mSpawnPos, value);
-			GameObjectPool.DefaultObjectPool.Release(gameObject, Extrapolate((AbilityLevelSchema als) => als.duration));
+			GameObjectPool.DefaultObjectPool.Release(gameObject, abilitySchema.duration);
 			gameObject.transform.parent = null;
 			mDaggers.Add(gameObject);
 		}
@@ -54,7 +54,7 @@ public class DaggerBarrageHandler : AbilityHandlerComponent
 
 	private void Update()
 	{
-		float num = Extrapolate((AbilityLevelSchema als) => als.radius);
+		float num = abilitySchema.radius;
 		foreach (GameObject mDagger in mDaggers)
 		{
 			if (!(mDagger != null))

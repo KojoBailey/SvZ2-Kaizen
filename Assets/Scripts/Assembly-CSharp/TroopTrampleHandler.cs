@@ -11,7 +11,7 @@ public class TroopTrampleHandler : AbilityHandlerComponent
 		float z = WeakGlobalMonoBehavior<InGameImpl>.Instance.GetLeadership(base.handlerObject.activatingPlayer).helperSpawnArea.transform.position.z;
 		float y = WeakGlobalInstance<RailManager>.Instance.GetY(z);
 		base.transform.Translate(0f, y - base.transform.position.y, z - base.transform.position.z);
-		mRemainingDamage = levelDamage;
+		mRemainingDamage = abilitySchema.damage;
 	}
 
 	private void Update()
@@ -25,7 +25,7 @@ public class TroopTrampleHandler : AbilityHandlerComponent
 			return;
 		}
 		float num = 2f;
-		float num2 = Extrapolate((AbilityLevelSchema als) => als.speed) * ((!leftToRightGameplay) ? (0f - Time.deltaTime) : Time.deltaTime);
+		float num2 = abilitySchema.speed * ((!leftToRightGameplay) ? (0f - Time.deltaTime) : Time.deltaTime);
 		float num3 = base.transform.position.z;
 		float num4 = base.transform.position.z;
 		float num5 = num2 + num;

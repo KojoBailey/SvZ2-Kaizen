@@ -9,8 +9,8 @@ public class ExplosiveCartHandler : AbilityHandler
 		if (executor != null)
 		{
 			Character character = WeakGlobalMonoBehavior<InGameImpl>.Instance.GetLeadership(executor.ownerId).ForceSpawn("CartOfDoom");
-			character.meleeDamage = levelDamage;
-			float radius = Extrapolate((AbilityLevelSchema als) => als.radius);
+			character.meleeDamage = schema.damage;
+			float radius = schema.radius;
 			character.explosionRange = () => radius;
 		}
 	}

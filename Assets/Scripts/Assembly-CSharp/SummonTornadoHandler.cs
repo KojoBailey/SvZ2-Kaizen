@@ -14,8 +14,8 @@ public class SummonTornadoHandler : AbilityHandlerComponent
 
 	protected virtual void Start()
 	{
-		mRemainingDuration = Extrapolate((AbilityLevelSchema als) => als.duration);
-		mDamagePerHit = levelDamage / (mRemainingDuration / 0.25f);
+		mRemainingDuration = abilitySchema.duration;
+		mDamagePerHit = abilitySchema.damage / (mRemainingDuration / 0.25f);
 		mTimeUntilNextDamage = 0f;
 	}
 
@@ -28,11 +28,11 @@ public class SummonTornadoHandler : AbilityHandlerComponent
 	{
 		if (mRemainingDuration > 0f)
 		{
-			float num = Extrapolate((AbilityLevelSchema als) => als.radius);
+			float num = abilitySchema.radius;
 			mRemainingDuration -= Time.deltaTime;
 			mTimeUntilNextDamage -= Time.deltaTime;
 			List<Character> charactersInRange = WeakGlobalInstance<CharactersManager>.Instance.GetCharactersInRange(base.transform.position.z - num, base.transform.position.z + num, 1 - base.handlerObject.activatingPlayer);
-			float num2 = Extrapolate((AbilityLevelSchema als) => als.flyerDamageMultiplier);
+			float num2 = abilitySchema.flyerDamageMultiplier;
 			while (mTimeUntilNextDamage <= 0f)
 			{
 				mTimeUntilNextDamage += 0.25f;

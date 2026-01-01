@@ -120,7 +120,6 @@ public class MultiplayerProfileLoadout
 				HelperSelectionInfo helperSelectionInfo = new HelperSelectionInfo();
 				helperSelectionInfo.helperId = helperSchema.id;
 				helperSelectionInfo.summonId = helperSchema.summonIndex;
-				helperSelectionInfo.level = Singleton<Profile>.Instance.GetHelperLevel(helperSchema.id);
 				helperSelectionInfo.golden = Singleton<Profile>.Instance.GetGoldenHelperUnlocked(helperSchema.id);
 				selectedHelpers[num] = helperSelectionInfo;
 				num++;
@@ -333,11 +332,9 @@ public class MultiplayerProfileLoadout
 		selectedHelpers[selectionIndex] = selection;
 		selectionIndex++;
 		HelperSchema helperSchema = Singleton<HelpersDatabase>.Instance[selection.helperId];
-		if (string.IsNullOrEmpty(helperSchema.GetLevel(selection.level).upgradeAlliesFrom))
-		{
-			return;
-		}
-		string key = helperSchema.GetLevel(selection.level).upgradeAlliesFrom.Key;
+		if (string.IsNullOrEmpty(helperSchema.upgradeAlliesFrom)) return;
+
+		string key = helperSchema.upgradeAlliesFrom.Key;
 		foreach (HelperSelectionInfo availableHelper in availableHelpers)
 		{
 			if (availableHelper.helperId == key)

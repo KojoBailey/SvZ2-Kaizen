@@ -6,14 +6,16 @@ public abstract class AbilityHandlerComponent : MonoBehaviour, IAbilityHandler
 
 	protected AbilityHandler handlerObject { get; set; }
 
+	protected AbilitySchema abilitySchema
+	{
+		get { return handlerObject.schema; }
+	}
+
 	public float gravityAccel
 	{
 		get
 		{
 			return handlerObject.gravityAccel;
-		}
-		private set
-		{
 		}
 	}
 
@@ -49,28 +51,6 @@ public abstract class AbilityHandlerComponent : MonoBehaviour, IAbilityHandler
 		}
 	}
 
-	public float levelDamage
-	{
-		get
-		{
-			return handlerObject.levelDamage;
-		}
-		private set
-		{
-		}
-	}
-
-	public int abilityLevel
-	{
-		get
-		{
-			return handlerObject.abilityLevel;
-		}
-		private set
-		{
-		}
-	}
-
 	public void Init(AbilitySchema sch, Character executor)
 	{
 		mExecutor = executor;
@@ -101,10 +81,5 @@ public abstract class AbilityHandlerComponent : MonoBehaviour, IAbilityHandler
 			return executor.transform.position;
 		}
 		return WeakGlobalMonoBehavior<InGameImpl>.Instance.hero.transform.position;
-	}
-
-	public float Extrapolate(LevelValueAccessor accessor)
-	{
-		return handlerObject.Extrapolate(accessor);
 	}
 }

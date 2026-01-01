@@ -150,13 +150,11 @@ public class HelpersDatabase : Singleton<HelpersDatabase>
 		HelperSchema helperSchema = Seek(id);
 		string text = string.IsNullOrEmpty(upgradedFrom) ? id : upgradedFrom;
 		HelperSchema helperSchema2 = this[text];
-		bool flag = Singleton<Profile>.Instance.GetHelperLevel(text) > Helper.kPlatinumLevel;
-		bool flag2 = Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent != null && Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.GetHelperLevel(text) > Helper.kPlatinumLevel;
 		bool flag3 = helperSchema2.isMount || helperSchema2.isMounted;
 		bool flag4 = flag3 && Singleton<Profile>.Instance.MultiplayerData.CollectionLevel("Horse") > 0;
 		bool flag5 = flag3 && Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent != null && Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.horsesCollected > 0;
 		GameObject newCharacterObject2 = null;
-		string newCharacterName = string.Concat(helperSchema.resources, (!flag) ? string.Empty : "_Platinum", (!flag4) ? string.Empty : "_Nightmare");
+		string newCharacterName = string.Concat(helperSchema.resources, (!flag4) ? string.Empty : "_Nightmare");
 		DataBundleRecordHandle<CharacterSchema> dataBundleRecordHandle2 = BuildCharacter(newCharacterName, out newCharacterObject2, helperSchema.resources.Key);
 		if (newCharacterObject2 != null)
 		{
@@ -191,7 +189,7 @@ public class HelpersDatabase : Singleton<HelpersDatabase>
 		{
 			return;
 		}
-		string text2 = string.Concat(helperSchema.resources, (!flag2) ? string.Empty : "_Platinum", (!flag5) ? string.Empty : "_Nightmare");
+		string text2 = string.Concat(helperSchema.resources, (!flag5) ? string.Empty : "_Nightmare");
 		if (dataBundleRecordHandle2 == null || text2 != dataBundleRecordHandle2.TableRecordKey)
 		{
 			dataBundleRecordHandle2 = BuildCharacter(text2, out newCharacterObject2, helperSchema.resources.Key);
@@ -225,18 +223,12 @@ public class HelpersDatabase : Singleton<HelpersDatabase>
 		foreach (string selectedHelper in selectedHelpers)
 		{
 			HelperSchema helperSchema = Seek(selectedHelper);
-			if (helperSchema == null)
+			if (helperSchema == null) continue;
+
+			DataBundleRecordKey upgradeAlliesFrom = hSchema.upgradeAlliesFrom;
+			if (upgradeAlliesFrom != null && !string.IsNullOrEmpty(upgradeAlliesFrom.Key) && selectedHelpers.Contains(upgradeAlliesFrom.Key) && hSchema.id == helperSchema.upgradeAlliesTo.Key)
 			{
-				continue;
-			}
-			HelperLevelSchema curLevel = helperSchema.CurLevel;
-			if (curLevel != null)
-			{
-				DataBundleRecordKey upgradeAlliesFrom = curLevel.upgradeAlliesFrom;
-				if (upgradeAlliesFrom != null && !string.IsNullOrEmpty(upgradeAlliesFrom.Key) && selectedHelpers.Contains(upgradeAlliesFrom.Key) && hSchema.id == helperSchema.CurLevel.upgradeAlliesTo.Key)
-				{
-					return upgradeAlliesFrom.Key;
-				}
+				return upgradeAlliesFrom.Key;
 			}
 		}
 		return string.Empty;

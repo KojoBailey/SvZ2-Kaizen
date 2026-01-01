@@ -18,9 +18,9 @@ public class DestructionHandler : AbilityHandlerComponent
 
 	private void Start()
 	{
-		mDuration = Extrapolate((AbilityLevelSchema als) => als.duration);
-		mDamage = Extrapolate((AbilityLevelSchema als) => als.damage) / mDuration;
-		mRadius = Extrapolate((AbilityLevelSchema als) => als.radius);
+		mDuration = abilitySchema.duration;
+		mDamage = abilitySchema.damage / mDuration;
+		mRadius = abilitySchema.radius;
 		mExplosionInterval = mDuration / 10f;
 		mNextExplosionTime = mExplosionInterval;
 	}

@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using UnityEngine;
 
 [DataBundleClass(Category = "Design")]
@@ -78,10 +79,27 @@ public class HelperSchema
 	public float bowDamage;
 
 	[DataBundleField]
-	public float knockbackPower;
+	[DataBundleDefaultValue(true)]
+	public bool knockbackable;
 
 	[DataBundleField]
-	public float knockbackResistance;
+	public int knockbackPower;
+
+	[DataBundleField]
+	public int knockbackResistance;
+
+	[DataBundleSchemaFilter(typeof(HelperSchema), false)]
+	public DataBundleRecordKey upgradeAlliesFrom;
+
+	[DataBundleSchemaFilter(typeof(HelperSchema), false)]
+	public DataBundleRecordKey upgradeAlliesTo;
+
+	[DataBundleRecordTableFilter("LocalizedStrings")]
+	[DataBundleSchemaFilter(typeof(TaggedString), false)]
+	public DataBundleRecordKey specialUnlockText;
+
+	[DataBundleSchemaFilter(typeof(BuffSchema), false)]
+	public DataBundleRecordKey buffRecordKey;
 
 	[DataBundleField]
 	public bool usesBladeWeapon;
@@ -137,9 +155,6 @@ public class HelperSchema
 	[DataBundleSchemaFilter(typeof(HelperSchema), false)]
 	public DataBundleRecordKey levelMatchOtherHelper;
 
-	[DataBundleSchemaFilter(typeof(HelperLevelSchema), false)]
-	public DataBundleRecordTable levels;
-
 	[DataBundleSchemaFilter(typeof(HeroSchema), false)]
 	public DataBundleRecordKey requiredHero;
 
@@ -162,35 +177,9 @@ public class HelperSchema
 
 	public int defenseRating;
 
-	public HelperLevelSchema[] Levels { get; set; }
-
-	public HelperLevelSchema CurLevel
-	{
-		get
-		{
-			return Singleton<HelpersDatabase>.Instance.GetHelperLevelData(this);
-		}
-	}
-
-	public HelperLevelSchema NextLevel
-	{
-		get
-		{
-			int num = Mathf.Clamp(Singleton<Profile>.Instance.GetRawHelperLevel(id), 0, Levels.Length - 1);
-			return Levels[num];
-		}
-	}
-
 	public bool Locked
 	{
-		get
-		{
-			if (Singleton<Profile>.Instance.GetRawHelperLevel(id) == 0 && Singleton<Profile>.Instance.highestUnlockedWave < waveToUnlock)
-			{
-				return true;
-			}
-			return false;
-		}
+		get { return Singleton<Profile>.Instance.highestUnlockedWave < waveToUnlock; }
 	}
 
 	public string IconPath { get; private set; }
@@ -201,11 +190,7 @@ public class HelperSchema
 
 	public string ChampionIconPath { get; private set; }
 
-	public HelperLevelSchema GetLevel(int level)
-	{
-		level = Mathf.Clamp(level - 1, 0, Levels.Length - 1);
-		return Levels[level];
-	}
+	public BuffSchema buffSchema { get; private set; }
 
 	public Texture2D TryGetChampionIcon()
 	{
@@ -213,10 +198,12 @@ public class HelperSchema
 		{
 			return championIcon;
 		}
+
 		if (!string.IsNullOrEmpty(ChampionIconPath))
 		{
 			return LoadIcon(ChampionIconPath);
 		}
+
 		return null;
 	}
 
@@ -226,18 +213,22 @@ public class HelperSchema
 		{
 			return lockedIcon;
 		}
+
 		if (!string.IsNullOrEmpty(LockedIconPath))
 		{
 			return LoadIcon(LockedIconPath);
 		}
+
 		if (HUDIcon != null)
 		{
 			return HUDIcon;
 		}
+
 		if (!string.IsNullOrEmpty(IconPath))
 		{
 			return LoadIcon(IconPath);
 		}
+
 		return null;
 	}
 
@@ -247,35 +238,37 @@ public class HelperSchema
 		{
 			return platinumIcon;
 		}
+
 		if (!string.IsNullOrEmpty(PlatinumIconPath))
 		{
 			return LoadIcon(PlatinumIconPath);
 		}
+
 		if (HUDIcon != null)
 		{
 			return HUDIcon;
 		}
+
 		if (!string.IsNullOrEmpty(IconPath))
 		{
 			return LoadIcon(IconPath);
 		}
+
 		return null;
 	}
 
 	public Texture2D TryGetHUDIcon()
 	{
-		if (Singleton<Profile>.Instance.GetHelperLevel(id) > Helper.kPlatinumLevel)
-		{
-			return TryGetPlatinumIcon();
-		}
 		if (HUDIcon != null)
 		{
 			return HUDIcon;
 		}
+
 		if (!string.IsNullOrEmpty(IconPath))
 		{
 			return LoadIcon(IconPath);
 		}
+
 		return null;
 	}
 
@@ -291,18 +284,14 @@ public class HelperSchema
 
 	public void Initialize(string tableName)
 	{
-		if (!DataBundleRecordTable.IsNullOrEmpty(levels))
-		{
-			Levels = levels.InitializeRecords<HelperLevelSchema>();
-			HelperLevelSchema[] array = Levels;
-			foreach (HelperLevelSchema helperLevelSchema in array)
-			{
-				helperLevelSchema.Initialize(tableName);
-			}
-		}
 		IconPath = DataBundleRuntime.Instance.GetValue<string>(typeof(HelperSchema), tableName, id, "HUDIcon", true);
 		LockedIconPath = DataBundleRuntime.Instance.GetValue<string>(typeof(HelperSchema), tableName, id, "lockedIcon", true);
 		PlatinumIconPath = DataBundleRuntime.Instance.GetValue<string>(typeof(HelperSchema), tableName, id, "platinumIcon", true);
 		ChampionIconPath = DataBundleRuntime.Instance.GetValue<string>(typeof(HelperSchema), tableName, id, "championIcon", true);
+
+		if (!string.IsNullOrEmpty(buffRecordKey.Key))
+		{
+			buffSchema = DataBundleRuntime.Instance.InitializeRecord<BuffSchema>(buffRecordKey);
+		}
 	}
 }

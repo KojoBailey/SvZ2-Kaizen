@@ -9,7 +9,7 @@ public class DragonDamageHandler : AbilityHandler
 		if (executor != null)
 		{
 			Character character = WeakGlobalMonoBehavior<InGameImpl>.Instance.GetLeadership(executor.ownerId).ForceSpawn("DragonDamageHelper");
-			character.meleeDamage = levelDamage;
+			character.meleeDamage = schema.damage;
 		}
 	}
 }
