@@ -94,7 +94,7 @@ public class EquipListController : GluiSimpleCollectionController
 			{
 				if (a.EquipLocked)
 				{
-					return (int)(a.levelToUnlock - b.levelToUnlock);
+					return (int)(a.waveToUnlock - b.waveToUnlock);
 				}
 				if (!string.IsNullOrEmpty(a.exclusiveHero) && string.IsNullOrEmpty(b.exclusiveHero))
 				{

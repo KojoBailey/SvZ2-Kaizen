@@ -28,7 +28,7 @@ public class StoreAvailability_Abilities
 	{
 		bool flag = false;
 		mainData = Singleton<AbilitiesDatabase>.Instance[abilityID];
-		if ((float)Singleton<Profile>.Instance.highestUnlockedWave < mainData.levelToUnlock)
+		if ((float)Singleton<Profile>.Instance.highestUnlockedWave < mainData.waveToUnlock)
 		{
 			flag = true;
 		}
@@ -67,8 +67,8 @@ public class StoreAvailability_Abilities
 		string iconPath = mainData.IconPath;
 		item.LoadIcon(iconPath);
 		item.locked = flag;
-		item.unlockAtWave = (int)mainData.levelToUnlock;
-		item.isNew = (float)Singleton<Profile>.Instance.highestUnlockedWave == mainData.levelToUnlock && (!SingletonMonoBehaviour<StoreMenuImpl>.Exists || !SingletonMonoBehaviour<StoreMenuImpl>.Instance.HasViewedNewItem(item.id));
+		item.unlockAtWave = (int)mainData.waveToUnlock;
+		item.isNew = (float)Singleton<Profile>.Instance.highestUnlockedWave == mainData.waveToUnlock && (!SingletonMonoBehaviour<StoreMenuImpl>.Exists || !SingletonMonoBehaviour<StoreMenuImpl>.Instance.HasViewedNewItem(item.id));
 		if (flag)
 		{
 			item.unlockCondition = string.Format(StringUtils.GetStringFromStringRef("LocalizedStrings", "store_unlockatwave"), item.unlockAtWave);

@@ -181,7 +181,7 @@ public class ResultsMenuImpl : UIHandler<ResultsMenuImpl>, IGluiActionHandler
 		foreach (string id in allIDs)
 		{
 			AbilitySchema abilitySchema = Singleton<AbilitiesDatabase>.Instance[id];
-			if (abilitySchema.levelToUnlock == (float)(wavePlayed + 1))
+			if (abilitySchema.waveToUnlock == (float)(wavePlayed + 1))
 			{
 				UnlockedFeature unlockedFeature = new UnlockedFeature();
 				unlockedFeature.id = id;

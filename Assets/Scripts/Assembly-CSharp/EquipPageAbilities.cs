@@ -77,7 +77,7 @@ public class EquipPageAbilities : EquipPage, UIHandlerComponent
 				AbilitySchema abilitySchema = (AbilitySchema)mDataSet[i];
 				if (string.Compare(abilitySchema.id, item, true) == 0)
 				{
-					if (Singleton<Profile>.Instance.IsInDailyChallenge || (float)Singleton<Profile>.Instance.highestUnlockedWave >= abilitySchema.levelToUnlock)
+					if (Singleton<Profile>.Instance.IsInDailyChallenge || (float)Singleton<Profile>.Instance.highestUnlockedWave >= abilitySchema.waveToUnlock)
 					{
 						list.Add(i);
 					}

@@ -48,7 +48,7 @@ public class AbilitySchema
 	public float AIMaxRange;
 
 	[DataBundleField]
-	public float levelToUnlock;
+	public float waveToUnlock;
 
 	[DataBundleField]
 	public string animName;

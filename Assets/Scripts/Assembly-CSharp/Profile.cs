@@ -1808,7 +1808,7 @@ public class Profile : Singleton<Profile>
 		foreach (string text in allIDs)
 		{
 			AbilitySchema abilitySchema = Singleton<AbilitiesDatabase>.Instance[text];
-			if ((abilitySchema.levelToUnlock != (float)waveIndex && abilitySchema.levelToUnlock != 0f) || (abilitySchema.levelToUnlock == 0f && heroJustUnlocked == null))
+			if ((abilitySchema.waveToUnlock != (float)waveIndex && abilitySchema.waveToUnlock != 0f) || (abilitySchema.waveToUnlock == 0f && heroJustUnlocked == null))
 			{
 				continue;
 			}
@@ -1822,7 +1822,7 @@ public class Profile : Singleton<Profile>
 			{
 				CurrentHeroId = item.id;
 				List<string> selectedAbilities = GetSelectedAbilities();
-				if ((abilitySchema.levelToUnlock != 0f || !(CurrentHeroId != heroJustUnlocked)) && selectedAbilities.Count < maxSelectedAbilities)
+				if ((abilitySchema.waveToUnlock != 0f || !(CurrentHeroId != heroJustUnlocked)) && selectedAbilities.Count < maxSelectedAbilities)
 				{
 					selectedAbilities.Add(text);
 					SetSelectedAbilities(selectedAbilities);
