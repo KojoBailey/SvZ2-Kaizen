@@ -11,17 +11,15 @@
 		waveToUnlock = 2
 		resourcesCost = 5
 		cooldownTimer = 1
-		health = 42
-		speed = 1
+		health = 200
+		speed = 1.25
 		attackFrequency = 1
 		meleeRange = 1
-		meleeDamage = 12
-		knockbackPower = 1
-		knockbackResistance = 3
+		meleeDamage = 25
+		knockbackPower = 0
+		knockbackResistance = 4
 		usesBladeWeapon = True
 		canBeEaten = True
-		award = 15
-		resourceDropMax = 2
 		summonIndex = 1
 		defenseRating = 5
 	Samurai:
@@ -36,17 +34,15 @@
 		waveToUnlock = 4
 		resourcesCost = 10
 		cooldownTimer = 2
-		health = 300
+		health = 800
 		speed = 1
 		attackFrequency = 2
 		meleeRange = 1.05
-		meleeDamage = 9
+		meleeDamage = 70
 		knockbackPower = 2
-		knockbackResistance = 10
+		knockbackResistance = 15
 		usesBladeWeapon = True
 		canBeEaten = True
-		award = 25
-		resourceDropMax = 3
 		summonIndex = 8
 		defenseRating = 8
 	SamuraiArcher:
@@ -61,15 +57,15 @@
 		waveToUnlock = 5
 		resourcesCost = 10
 		cooldownTimer = 3
-		health = 29
+		health = 200
 		speed = 1
 		attackFrequency = 2
 		bowRange = 4.5
-		bowDamage = 12
+		bowDamage = 30
+		knockbackPower = 1
+		knockbackResistance = 8
 		projectile = Projectile.Arrow
 		canBeEaten = True
-		award = 20
-		resourceDropMax = 3
 		summonIndex = 9
 		defenseRating = 10
 	SpearSamurai:
@@ -84,18 +80,16 @@
 		waveToUnlock = 9
 		resourcesCost = 15
 		cooldownTimer = 3
-		health = 42
+		health = 300
 		speed = 1
 		attackFrequency = 2
 		meleeRange = 2.5
-		meleeDamage = 20
-		knockbackPower = 20
-		knockbackResistance = 15
+		meleeDamage = 100
+		knockbackPower = 4
+		knockbackResistance = 8
 		usesBladeWeapon = True
 		hideInEquip = False
 		canBeEaten = True
-		award = 40
-		resourceDropMax = 3
 		summonIndex = 12
 		defenseRating = 10
 	# CharmAssassin:

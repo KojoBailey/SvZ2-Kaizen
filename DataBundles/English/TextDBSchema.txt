@@ -184,7 +184,7 @@
 		value = 0
 	001~health:
 		key = 001~health
-		value = 250
+		value = 1000
 	002~icon:
 		key = 002~icon
 		value = UI/Textures/DynamicIcons/Upgrades/Global_GateHealth
@@ -193,7 +193,7 @@
 		value = 1000
 	002~health:
 		key = 002~health
-		value = 1000
+		value = 5000
 	003~icon:
 		key = 003~icon
 		value = UI/Textures/DynamicIcons/Upgrades/Global_GateHealth
@@ -202,7 +202,7 @@
 		value = 10000
 	003~health:
 		key = 003~health
-		value = 5000
+		value = 10000
 	004~icon:
 		key = 004~icon
 		value = UI/Textures/DynamicIcons/Upgrades/Global_GateHealth
@@ -211,7 +211,7 @@
 		value = 30000
 	004~health:
 		key = 004~health
-		value = 10000
+		value = 50000
 [HeroAbilityMysteryBox]
 	title:
 		key = title
