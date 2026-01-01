@@ -133,10 +133,7 @@ public class AbilitySchema
 
 	public bool EquipLocked
 	{
-		get
-		{
-			return Singleton<Profile>.Instance.GetAbilityLevel(id) == 0;
-		}
+		get { return Singleton<Profile>.Instance.highestUnlockedWave < waveToUnlock; }
 	}
 
 	public static AbilitySchema Initialize(DataBundleRecordKey record)
