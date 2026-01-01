@@ -25,7 +25,7 @@ public class TroopTrampleHandler : AbilityHandlerComponent
 			return;
 		}
 		float num = 2f;
-		float num2 = abilitySchema.speed * ((!leftToRightGameplay) ? (0f - Time.deltaTime) : Time.deltaTime);
+		float num2 = abilitySchema.speed * (!leftToRightGameplay ? (0f - Time.deltaTime) : Time.deltaTime);
 		float num3 = base.transform.position.z;
 		float num4 = base.transform.position.z;
 		float num5 = num2 + num;
