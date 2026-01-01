@@ -50,14 +50,14 @@
     ability = Abilities.SummonLightning
   Lethargy:
     ability = Abilities.Lethargy
-  DivineIntervention:
-    ability = Abilities.DivineIntervention
-  ExplosiveCart:
-    ability = Abilities.ExplosiveCart
-  SummonTornado:
-    ability = Abilities.SummonTornado
-  GiantWave:
-    ability = Abilities.GiantWave
+  # DivineIntervention:
+  #   ability = Abilities.DivineIntervention
+  # ExplosiveCart:
+  #   ability = Abilities.ExplosiveCart
+  # SummonTornado:
+  #   ability = Abilities.SummonTornado
+  # GiantWave:
+  #   ability = Abilities.GiantWave
 [AbilitiesHeroDefense]
   DivineWind:
     ability = Abilities.DivineWind

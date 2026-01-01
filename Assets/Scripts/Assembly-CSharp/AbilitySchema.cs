@@ -42,13 +42,52 @@ public class AbilitySchema
 	public float cooldown;
 
 	[DataBundleField]
+	public float damage;
+
+	[DataBundleField]
+	public float damageMultEachTarget;
+
+	[DataBundleField]
+	public float DOTDamage;
+
+	[DataBundleField]
+	public float DOTFrequency;
+
+	[DataBundleField]
+	public float DOTDuration;
+
+	[DataBundleField]
+	public float radius;
+
+	[DataBundleField]
+	public float speed;
+
+	[DataBundleField]
+	public float distance;
+
+	[DataBundleField]
+	public float duration;
+
+	[DataBundleField]
+	public float effectDuration;
+
+	[DataBundleField]
+	public float effectModifier;
+
+	[DataBundleField]
+	public float lifeSteal;
+
+	[DataBundleField]
+	public float flyerDamageMultiplier;
+
+	[DataBundleField]
 	public float AIMinRange;
 
 	[DataBundleField]
 	public float AIMaxRange;
 
 	[DataBundleField]
-	public float waveToUnlock;
+	public int waveToUnlock;
 
 	[DataBundleField]
 	public string animName;

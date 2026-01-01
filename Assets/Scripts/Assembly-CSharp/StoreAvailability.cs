@@ -10,12 +10,6 @@ public class StoreAvailability
 
 	public static List<StoreData.Item> GetList(string contentType)
 	{
-		if (string.IsNullOrEmpty(contentType))
-		{
-			UnityEngine.Debug.LogError("No content type provided.");
-			return null;
-		}
-		
 		List<StoreData.Item> list = new List<StoreData.Item>();
 
 		if (!Singleton<Profile>.Exists || !Singleton<Profile>.Instance.Initialized) return list;
