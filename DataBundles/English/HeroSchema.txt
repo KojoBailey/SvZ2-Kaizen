@@ -9,8 +9,8 @@
 		storePortrait = Assets/Game/Resources/UI/Textures/DynamicIcons/Misc/Store_PortraitSamurai.png
 		meleeWeapon = Weapons.Katana
 		rangedWeapon = Weapons.Bow
-		health = 200
-		healthRecovery = 4
+		health = 1000
+		healthRecovery = 20
 		speed = 3
 		allySlots = 5
 		abilitySlots = 2
@@ -26,8 +26,8 @@
 	# 	waveToUnlock = 11
 	# 	meleeWeapon = Weapons.Kunoichi_Blades
 	# 	rangedWeapon = Weapons.Kunoichi_Dagger
-	# 	health = 100
-	# 	healthRecovery = 6
+	# 	health = 500
+	# 	healthRecovery = 30
 	# 	speed = 5
 	# 	backPedalTime = 0.7
 	# 	allySlots = 4
@@ -44,8 +44,8 @@
 	# 	waveToUnlock = 21
 	# 	meleeWeapon = Weapons.Ronin_Blade
 	# 	rangedWeapon = Weapons.Ronin_Blade
-	# 	health = 400
-	# 	healthRecovery = 8
+	# 	health = 2000
+	# 	healthRecovery = 40
 	# 	speed = 1.5
 	# 	armorLevels = RoninArmor
 	# 	allySlots = 4
@@ -64,8 +64,8 @@
 	# 	waveToUnlock = 41
 	# 	meleeWeapon = Weapons.Sorceress_Staff
 	# 	rangedWeapon = Weapons.Sorceress_Fireball
-	# 	health = 250
-	# 	healthRecovery = 5
+	# 	health = 1250
+	# 	healthRecovery = 25
 	# 	speed = 4
 	# 	backPedalTime = 0.7
 	# 	allySlots = 3
@@ -82,8 +82,8 @@
 	# 	waveToUnlock = 51
 	# 	meleeWeapon = Weapons.Daimyo_Sword
 	# 	rangedWeapon = Weapons.Daimyo_Pistol
-	# 	health = 300
-	# 	healthRecovery = 5
+	# 	health = 1500
+	# 	healthRecovery = 25
 	# 	speed = 3.5
 	# 	backPedalTime = 1
 	# 	allySlots = 6
