@@ -192,6 +192,7 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 		foreach (var resourceSchema in mResourceSchemas)
 		{
 			if (!Singleton<Profile>.Instance.GetIsWaveUnlocked(resourceSchema.notBeforeWave) ||
+				resourceSchema.dropRate != 1 &&
 				UnityEngine.Random.value > resourceSchema.dropRate)
 				continue;
 			
@@ -297,16 +298,16 @@ public class CollectableManager : WeakGlobalInstance<CollectableManager>
 			{
 				currentWaveSpoils.coins += amount;
 			}
-			break;
+			return;
 		case ECollectableType.soul:
 			WeakGlobalInstance<Souls>.Instance.souls += amount;
-			break;
+			return;
 		case ECollectableType.leadership:
 			WeakGlobalInstance<Leadership>.Instance.resources += amount;
-			break;
+			return;
 		case ECollectableType.pachinkoBall:
 			currentWaveSpoils.pachinkoBalls += amount;
-			break;
+			return;
 		// case ECollectableType.presentA:
 		// case ECollectableType.presentB:
 		// case ECollectableType.presentC:

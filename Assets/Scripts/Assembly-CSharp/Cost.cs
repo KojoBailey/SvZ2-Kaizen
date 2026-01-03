@@ -150,17 +150,16 @@ public struct Cost
 
 	public void Spend()
 	{
+		if (price <= 0) return;
+
 		switch (currency)
 		{
 		case Currency.Coin:
 			Singleton<Profile>.Instance.SpendCoins(price);
 			break;
-		case Currency.Soul:
-			Singleton<Profile>.Instance.souls -= price;
-			break;
-		}
-		if (price <= 0)
-		{
+		// case Currency.Soul:
+		// 	Singleton<Profile>.Instance.souls -= price;
+		// 	break;
 		}
 	}
 
