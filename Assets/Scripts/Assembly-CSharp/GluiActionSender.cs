@@ -4,10 +4,8 @@ public class GluiActionSender
 {
 	public static void SendGluiAction(string action, GameObject sender, object data)
 	{
-		if (string.IsNullOrEmpty(action))
-		{
-			return;
-		}
+		if (string.IsNullOrEmpty(action)) return;
+
 		string senderName = (sender != null) ? sender.name : "[Destroyed]";
 		if (GluiGlobalActionHandler.Instance != null && GluiGlobalActionHandler.Instance.Filter(action, sender, data))
 		{

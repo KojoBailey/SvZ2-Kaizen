@@ -91,6 +91,13 @@ public class HUD : UIHandler<HUD>, IGluiActionHandler
 	{
 		if (!WeakGlobalMonoBehavior<InGameImpl>.Instance.gamePaused || action == "PAUSE")
 		{
+			// [TODO] Discover why this doesn't work automatically.
+			// I had to add these 3 lines manually for pause button to work.
+			if (action == "POPUP_PAUSEMENU")
+			{
+				GluiActionSender.SendGluiAction(action, null, null);
+			}
+
 			return OnUIEvent(action);
 		}
 		return false;

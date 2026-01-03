@@ -31,9 +31,7 @@ public class HUDPauser : MonoBehaviour, IGluiActionHandler
 		}
 	}
 
-	private void Update()
-	{
-	}
+	private void Update() {}
 
 	public bool HandleAction(string action, GameObject sender, object data)
 	{
