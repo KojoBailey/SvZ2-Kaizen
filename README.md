@@ -6,7 +6,7 @@
 ***Samurai vs Zombies Defense 2: Kaizen*** is a mod of the original SvZ2, redesigning it to be more balanced, challenging, and fun!
 
 ## How To Play
-As I only began work on this mod very recently, there's still quite a bit I need to implement system-wise before I can start releasing playable builds, for testing or otherwise. However, expect an alpha release in the near future!
+As I only began work on this mod fairly recently, there's still quite a bit I need to implement system-wise before I can start releasing playable builds, for testing or otherwise. However, expect an alpha release in the near future!
 
 ## Changes
 Below is a list of changes that have already been implemented, at least partially:
