@@ -10,7 +10,8 @@
     soundEvent = SoundThemeEnum.Start
     exclusiveHero = Heroes.HeroBalanced
     waveToUnlock = 0
-    cost = 3
+    isSpecialAttack = true
+    cost = 0
     cooldown = 4
     damage = 150
     damageMultEachTarget = 0.8

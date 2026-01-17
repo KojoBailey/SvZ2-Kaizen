@@ -22,6 +22,8 @@ public class CharacterData
 
 	public float health;
 
+	public float armor;
+
 	public float speedMin;
 
 	public float speedMax;
@@ -51,6 +53,8 @@ public class CharacterData
 	public float bowAttackRange;
 
 	public float meleeDamage;
+
+	public bool isArmorPiercing;
 
 	public float bowDamage;
 
@@ -170,6 +174,7 @@ public class CharacterData
 		c.bowAttackRange = bowAttackRange;
 		c.bowProjectile = projectile;
 		c.meleeDamage = meleeDamage;
+		c.isArmorPiercing = isArmorPiercing;
 		c.bowDamage = bowDamage;
 		c.knockbackPower = knockbackPower;
 		c.knockbackable = knockbackable;
@@ -186,6 +191,7 @@ public class CharacterData
 		c.spawnFriendID = spawnFriendID;
 		c.maxHealth = health;
 		c.health = health;
+		c.armor = armor;
 		c.damageBuffPercent = damageBuffPercent;
 		c.canBuffFunc = canBuffFunc;
 		c.upgradeAlliesFrom = upgradeAlliesFrom;
@@ -213,6 +219,7 @@ public class CharacterData
 		leadershipCost = new Leadership.LeadershipCost(data.resourcesCost);
 		currentCooldown = data.cooldownTimer;
 		health = data.health;
+		armor = data.armor;
 		speedMin = baseSpeedMin = data.speed;
 		speedMax = baseSpeedMax = data.speed;
 		unique = data.unique;
@@ -241,6 +248,7 @@ public class CharacterData
 		totalCooldown = data.cooldownTimer;
 		swordAttackRange = data.meleeRange;
 		meleeDamage = data.meleeDamage;
+		isArmorPiercing = data.isArmorPiercing;
 		bowAttackRange = data.bowRange;
 		bowDamage = data.bowDamage;
 		blocksHeroMovement = data.blocksHeroMovement;
@@ -273,6 +281,7 @@ public class CharacterData
 		displayName = data.displayName;
 		record = data.resources;
 		health = data.health;
+		armor = data.armor;
 		speedMin = (baseSpeedMin = data.speedMin);
 		speedMax = (baseSpeedMax = data.speedMax);
 		gateRusher = data.gateRusher;
@@ -291,6 +300,7 @@ public class CharacterData
 		knockbackResistance = data.knockbackResistance;
 		swordAttackRange = data.meleeRange;
 		meleeDamage = data.meleeDamage;
+		isArmorPiercing = data.isArmorPiercing;
 		bowAttackRange = data.bowRange;
 		bowDamage = data.bowDamage;
 		blocksHeroMovement = data.blocksHeroMovement;

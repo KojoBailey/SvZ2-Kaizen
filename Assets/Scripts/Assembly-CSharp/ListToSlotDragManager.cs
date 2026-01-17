@@ -26,10 +26,7 @@ public class ListToSlotDragManager : UIHandlerComponent
 
 		public bool selected
 		{
-			get
-			{
-				return mSelected;
-			}
+			get { return mSelected; }
 			set
 			{
 				mSelected = value;
@@ -65,10 +62,7 @@ public class ListToSlotDragManager : UIHandlerComponent
 
 		public int dataIndex
 		{
-			get
-			{
-				return mDataIndex;
-			}
+			get { return mDataIndex; }
 		}
 
 		public Slot(Transform t, GameObject slotPrefab, string buttonEventID)
@@ -294,17 +288,15 @@ public class ListToSlotDragManager : UIHandlerComponent
 	private void AddListItemToSlot(int listItemIndex)
 	{
 		if (onCheckAvailability != null && !onCheckAvailability(listItemIndex))
-		{
 			return;
-		}
+
 		if (mSlots.Count == 1)
 		{
 			mSlotDataIndex.Clear();
 		}
 		if (mSlotDataIndex.Count >= mSlots.Count)
-		{
 			return;
-		}
+			
 		if (!mAllowDups)
 		{
 			foreach (int item in mSlotDataIndex)

@@ -6,7 +6,7 @@
   Chochinobake:
     key = 1
     swapFrom = Enemies.Zombie_Split
-    swapTo = Enemies.CrawlingTorso
+    swapTo = Enemies.HoppingTorso
   Zombie_Split_2:
     key = 2
     swapFrom = Enemies.Zombie_Split_2
@@ -14,7 +14,7 @@
   evil_chochinobake:
     key = 3
     swapFrom = Enemies.Zombie_Split_2
-    swapTo = Enemies.CrawlingTorso_Hard
+    swapTo = Enemies.HoppingTorso_Hard
   Zombie_Split_Tutorial:
     key = 3
     swapFrom = Enemies.Zombie_Split_Tutorial
@@ -22,4 +22,4 @@
   evil_farmer:
     key = 4
     swapFrom = Enemies.Zombie_Split_Tutorial
-    swapTo = Enemies.CrawlingTorsoTutorial
+    swapTo = Enemies.HoppingTorsoTutorial

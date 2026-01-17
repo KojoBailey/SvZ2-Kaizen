@@ -2728,11 +2728,11 @@
 		priority = 128
 		bus = SoundEventBuses.Character
 		excludeOnLowEnd = True
-[EnemyCrawlingTorso]
+[EnemyHoppingTorso]
 	Footstep:
 		type = SoundThemeEnum.Footstep
 		singleClip = 
-		clipset = Enemy_CrawlingTorso_Walk
+		clipset = Enemy_HoppingTorso_Walk
 		volume = 0.25
 		pitchVariance = 0.2
 		percentSilent = 0

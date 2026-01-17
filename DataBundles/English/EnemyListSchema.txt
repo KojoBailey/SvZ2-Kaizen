@@ -3,5 +3,5 @@
     enemy = Enemies.h_zombie_sword
   LZombieWarHammer:
     enemy = Enemies.LZombieWarHammer
-  CrawlingTorso:
-    enemy = Enemies.CrawlingTorso
+  HoppingTorso:
+    enemy = Enemies.HoppingTorso

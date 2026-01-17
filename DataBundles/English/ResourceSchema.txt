@@ -28,4 +28,5 @@
 		type = soul
 		constValue = 1
 		dropRate = 1
+		notBeforeWave = 3
 		prefab = Assets/Game/Resources/FX/SoulsIcon.prefab

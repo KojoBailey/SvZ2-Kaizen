@@ -858,7 +858,7 @@ public class InGameImpl : WeakGlobalMonoBehavior<InGameImpl>
 					{
 						List<Character> enemiesInSight = WeakGlobalInstance<CharactersManager>.Instance.GetCharactersInRangeMaxCount(
 							hero.controller.position.z, hero.controller.position.z + 4f, 1, 1f);
-						if (enemiesInSight.Count >= 2 && WeakGlobalInstance<Souls>.Instance.souls >= 3)
+						if (enemiesInSight.Count >= 2)
 						{
 							ProfileData.SetSelectedAbilities(new List<string>(new string[1] { "KatanaSlash" }));
 							WeakGlobalMonoBehavior<HUD>.Instance.abilitiesEnabled = true;

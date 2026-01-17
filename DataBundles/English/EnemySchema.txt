@@ -1,8 +1,8 @@
 [Enemies]
-  CrawlingTorso:
-    id = CrawlingTorso
-    displayName = LocalizedStrings.Enemy_Info_13_name
-    resources = Character.CrawlingTorso
+  HoppingTorso:
+    id = HoppingTorso
+    displayName = LocalizedStrings.HoppingTorso_Name
+    resources = Character.HoppingTorso
     meleeWeaponPrefab = Assets/Game/Resources/Props/Weapons/crawlingtorsosword.fbx
     health = 60
     speedMin = 1
@@ -15,7 +15,7 @@
     usesBladeWeapon = True
   LZombieMelee:
     id = LZombieMelee
-    displayName = LocalizedStrings.Enemy_Info_01_name
+    displayName = LocalizedStrings.ZombieBrawler_Name
     resources = Character.LZombie
     health = 110
     speedMin = 0.85
@@ -63,6 +63,7 @@
     speedMax = 0.8
     meleeRange = 1.75
     meleeDamage = 90
+    isArmorPiercing = True
     attackFrequency = 2.5
     knockbackPower = 4
     knockbackResistance = 8

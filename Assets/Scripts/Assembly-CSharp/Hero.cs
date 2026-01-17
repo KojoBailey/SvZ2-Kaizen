@@ -1171,20 +1171,6 @@ public class Hero : Character
 		return WeakGlobalInstance<CharactersManager>.Instance.GetCharactersInRange(base.controller.position.z - range, base.controller.position.z + range, 1 - base.ownerId);
 	}
 
-	private bool CheckAbilitySelected(string abilityID)
-	{
-		string[] array = ((base.ownerId != 0) ? Singleton<Profile>.Instance.MultiplayerData.CurrentOpponent.loadout.abilityIdList.ToArray() : Singleton<Profile>.Instance.GetSelectedAbilities().ToArray());
-		string[] array2 = array;
-		foreach (string text in array2)
-		{
-			if (abilityID == text)
-			{
-				return true;
-			}
-		}
-		return false;
-	}
-
 	protected override GameObject GetMeleeUpgradeEffect()
 	{
 		return mMPMeleeWeaponUpgradePrefab;

@@ -23,7 +23,11 @@ public class EnemySchema
 	[DataBundleRecordTableFilter("Projectile")]
 	public DataBundleRecordKey projectile;
 
+	[DataBundleField]
 	public int health;
+
+	[DataBundleField]
+	public float armor;
 
 	public float speedMin;
 
@@ -34,6 +38,9 @@ public class EnemySchema
 	public float bowRange;
 
 	public int meleeDamage;
+
+	[DataBundleField]
+	public bool isArmorPiercing;
 
 	public int bowDamage;
 

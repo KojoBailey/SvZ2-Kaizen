@@ -282,10 +282,7 @@ public class Character : Weakable
 
 	public float health
 	{
-		get
-		{
-			return mStats.health;
-		}
+		get { return mStats.health; }
 		set
 		{
 			if (value < mStats.health)
@@ -342,6 +339,12 @@ public class Character : Weakable
 			mStats.maxHealth = Mathf.Max(0f, value);
 			mStats.health = Mathf.Min(mStats.health, mStats.maxHealth);
 		}
+	}
+
+	public float armor
+	{
+		get { return mStats.armor; }
+		set { mStats.armor = value; }
 	}
 
 	public float autoHealthRecovery
@@ -964,6 +967,12 @@ public class Character : Weakable
 		}
 	}
 
+	public bool isArmorPiercing
+	{
+		get { return mStats.meleeWeaponIsArmorPiercing; }
+		set { mStats.meleeWeaponIsArmorPiercing = value; }
+	}
+
 	public float damageBuffPercent
 	{
 		get
@@ -1395,6 +1404,7 @@ public class Character : Weakable
 				mHasDOT = false;
 			}
 		}
+
 		if (health <= 0f)
 		{
 			buffIcon.Hide("Assets/Game/Resources/FX/BuffIcon.prefab");
@@ -1639,7 +1649,7 @@ public class Character : Weakable
 
 	public virtual void RecievedAttack(EAttackType attackType, float damage, Character attacker, bool canReflect)
 	{
-		if (!(health <= 0f) && !invuln && !enemyIgnoresMe)
+		if (health > 0f && !invuln && !enemyIgnoresMe)
 		{
 			lastAttackTypeHitWith = attackType;
 			RecievedAttackFX(attackType, damage, attacker);
@@ -1647,7 +1657,16 @@ public class Character : Weakable
 			{
 				Singleton<PlayerWaveEventData>.Instance.AccumulateDamage(Mathf.Min(health, damage));
 			}
-			health -= damage;
+			
+			UnityEngine.Debug.Log(string.Format("Armour Piercing: {0}\nArmour: {1}", attacker.isArmorPiercing, mStats.armor));
+			if (attacker.isArmorPiercing)
+			{
+				health -= damage;
+			}
+			else
+			{
+				health -= damage * (1 - mStats.armor);
+			}
 		}
 	}
 

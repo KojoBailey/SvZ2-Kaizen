@@ -1530,7 +1530,7 @@
 		offsetScaleX = 0
 		offsetScaleY = 0
 		offsetScaleZ = 0
-[CrawlingTorso]
+[HoppingTorso]
 	impact_target:
 		label = JointLabel.impact_target
 		jointName = crawlingtorso:crawlingtorso_spine_low_jnt

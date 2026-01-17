@@ -684,7 +684,7 @@
 		UnimportantKey = 3
 		audioClip = Assets/Game/Resources/Sounds/Enemies/Amanojaku/SFX_Enemy_Amanojaku_Spawn_02.wav
 		excludeOnLowEnd = True
-[Enemy_CrawlingTorso_Walk]
+[Enemy_HoppingTorso_Walk]
 	1:
 		UnimportantKey = 1
 		audioClip = Assets/Game/Resources/Sounds/Enemies/CrawlingTorso/SFX_Enemy_Torso_Walk_01.wav

@@ -34,6 +34,8 @@ public struct CharacterStats
 
 	public float maxHealth;
 
+	public float armor;
+
 	public float autoHealthRecovery;
 
 	public int knockbackPower;
@@ -51,6 +53,8 @@ public struct CharacterStats
 	public float meleeAttackFrequency;
 
 	public bool meleeWeaponIsABlade;
+
+	public bool meleeWeaponIsArmorPiercing;
 
 	public float bowAttackRange;
 

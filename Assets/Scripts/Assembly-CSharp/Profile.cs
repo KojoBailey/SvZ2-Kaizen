@@ -661,6 +661,7 @@ public class Profile : Singleton<Profile>
 		get
 		{
 			int num = Singleton<HeroesDatabase>.Instance[CurrentHeroId].abilitySlots;
+			// [TODO] Keep?
 			if (GetUpgradeLevel("AbilitySlot") > 0)
 			{
 				num++;
@@ -1781,14 +1782,11 @@ public class Profile : Singleton<Profile>
 		{
 			AbilitySchema abilitySchema = Singleton<AbilitiesDatabase>.Instance[text];
 			if ((abilitySchema.waveToUnlock != (float)waveIndex && abilitySchema.waveToUnlock != 0f) || (abilitySchema.waveToUnlock == 0f && heroJustUnlocked == null))
-			{
 				continue;
-			}
+			
 			List<HeroSchema> list = Singleton<AbilitiesDatabase>.Instance.HeroesUsingAbility(text);
-			if (list.Count <= 0)
-			{
-				continue;
-			}
+			if (list.Count <= 0) continue;
+
 			string text2 = CurrentHeroId;
 			foreach (HeroSchema item in list)
 			{

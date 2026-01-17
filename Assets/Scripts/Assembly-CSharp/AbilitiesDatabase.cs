@@ -119,10 +119,7 @@ public class AbilitiesDatabase : Singleton<AbilitiesDatabase>
 
 	public static string UdamanTableName
 	{
-		get
-		{
-			return "Abilities";
-		}
+		get { return "Abilities"; }
 	}
 
 	public string[] allIDs

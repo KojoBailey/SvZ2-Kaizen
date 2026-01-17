@@ -105,7 +105,7 @@
     index = 4
     minWaitTime = 1
     maxWaitTime = 1
-    enemy_1 = Enemies.CrawlingTorso_Hard
+    enemy_1 = Enemies.HoppingTorso_Hard
     quantity_1 = 5
     enemy_2 = Enemies.horseman
     quantity_2 = 3

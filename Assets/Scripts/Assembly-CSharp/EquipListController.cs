@@ -109,8 +109,7 @@ public class EquipListController : GluiSimpleCollectionController
 			return a.EquipLocked ? 1 : (-1);
 		});
 		mFirstToShow = 0;
-		AbilitySchema[] array2 = array;
-		foreach (AbilitySchema abilitySchema in array2)
+		foreach (AbilitySchema abilitySchema in array)
 		{
 			if (abilitySchema.EquipLocked)
 			{

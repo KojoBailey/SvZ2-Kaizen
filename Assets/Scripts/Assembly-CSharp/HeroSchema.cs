@@ -35,6 +35,9 @@ public class HeroSchema
 	[DataBundleRecordTableFilter("Weapons")]
 	public DataBundleRecordKey rangedWeapon;
 
+	[DataBundleSchemaFilter(typeof(AbilitySchema), false)]
+	public DataBundleRecordKey signature;
+
 	[DataBundleSchemaFilter(typeof(AbilitiesListSchema), false)]
 	public DataBundleRecordTable PotentialAbilties;
 

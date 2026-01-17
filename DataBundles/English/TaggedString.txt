@@ -1593,8 +1593,8 @@
 	legal_file:
 		tag = legal_file
 		stringValue = DefaultLegal
-	New_Enemy_CrawlingTorso:
-		tag = New_Enemy_CrawlingTorso
+	New_Enemy_HoppingTorso:
+		tag = New_Enemy_HoppingTorso
 		stringValue = Crawling Torso
 	New_Enemy_GhostRonin:
 		tag = New_Enemy_GhostRonin
@@ -2886,9 +2886,9 @@
 	Achievement_Desc_B_84:
 		tag = Achievement_Desc_B_84
 		stringValue = Fully Upgraded everything
-	Enemy_Info_01_name:
-		tag = Enemy_Info_01_name
-		stringValue = Light Zombie
+	ZombieBrawler_Name:
+		tag = ZombieBrawler_Name
+		stringValue = Zombie Brawler
 	Enemy_Info_01_desc:
 		tag = Enemy_Info_01_desc
 		stringValue = A standard Zombie, slow and shambling.
@@ -2958,8 +2958,8 @@
 	Enemy_Info_12_desc:
 		tag = Enemy_Info_12_desc
 		stringValue = Only half a Zombie, but still just as dangerous.	Attacks in fast moving waves.
-	Enemy_Info_13_name:
-		tag = Enemy_Info_13_name
+	HoppingTorso_Name:
+		tag = HoppingTorso_Name
 		stringValue = Hopping Torso
 	Enemy_Info_13_desc:
 		tag = Enemy_Info_13_desc

@@ -35,6 +35,7 @@
 		resourcesCost = 10
 		cooldownTimer = 2
 		health = 800
+		armor = 0.4
 		speed = 1
 		attackFrequency = 2
 		meleeRange = 1.05
@@ -58,6 +59,7 @@
 		resourcesCost = 10
 		cooldownTimer = 3
 		health = 200
+		armor = 0.1
 		speed = 1
 		attackFrequency = 2
 		bowRange = 4.5
@@ -81,14 +83,15 @@
 		resourcesCost = 15
 		cooldownTimer = 3
 		health = 300
+		armor = 0.1
 		speed = 1
 		attackFrequency = 2
 		meleeRange = 2.5
 		meleeDamage = 100
+		isArmorPiercing = True
 		knockbackPower = 4
 		knockbackResistance = 8
 		usesBladeWeapon = True
-		hideInEquip = False
 		canBeEaten = True
 		summonIndex = 12
 		defenseRating = 10

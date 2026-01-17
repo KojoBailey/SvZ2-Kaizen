@@ -80,7 +80,14 @@ public class HUDAbilities : UIHandlerComponent
 
             mSoulsCostText = mGameObject.FindChildComponent<GluiText>("SwapText_Souls");
             mSoulsCost = abData.cost;
-            mSoulsCostText.Text = mSoulsCost.ToString();
+			if (mSoulsCost == 0)
+			{
+				mSoulsCostText.gameObject.SetActive(false);
+			}
+			else
+			{
+				mSoulsCostText.Text = mSoulsCost.ToString();
+			}
 
 			Texture2D texture = (!BundleUtils.GetSystemLanguage().StartsWith("English") && !(abData.iconNoText == null))
 				? abData.iconNoText

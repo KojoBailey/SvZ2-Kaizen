@@ -44,8 +44,8 @@
   GiantWave:
     ability = Abilities.GiantWave
 [AbilitiesHeroBalanced]
-  KatanaSlash:
-    ability = Abilities.KatanaSlash
+  # KatanaSlash:
+  #   ability = Abilities.KatanaSlash
   SummonLightning:
     ability = Abilities.SummonLightning
   Lethargy:

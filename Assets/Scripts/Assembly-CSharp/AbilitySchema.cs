@@ -36,6 +36,10 @@ public class AbilitySchema
 	public Texture2D iconNoText;
 
 	[DataBundleField]
+	[DataBundleDefaultValue(false)]
+	public bool isSpecialAttack;
+
+	[DataBundleField]
 	public int cost;
 
 	[DataBundleField]

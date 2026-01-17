@@ -39,8 +39,8 @@
     bluntImpactEffect = 
     bluntCriticalImpactEffect = 
     snapToGround = True
-  CrawlingTorso:
-    id = CrawlingTorso
+  HoppingTorso:
+    id = HoppingTorso
     animatedWalkSpeed = 1
     randomAnimSets = 
     arrowImpactEffect = Assets/Game/Resources/FX/BloodSplatMedium.prefab

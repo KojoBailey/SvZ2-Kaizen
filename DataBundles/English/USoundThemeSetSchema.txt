@@ -51,10 +51,10 @@
 		ThemeName = EnemyNobusama
 		parentThemeKey = Themes.Base
 		events = EnemyNobusama
-	EnemyCrawlingTorso:
-		ThemeName = EnemyCrawlingTorso
+	EnemyHoppingTorso:
+		ThemeName = EnemyHoppingTorso
 		parentThemeKey = Themes.Base
-		events = EnemyCrawlingTorso
+		events = EnemyHoppingTorso
 	EnemyNecromancer:
 		ThemeName = EnemyNecromancer
 		parentThemeKey = Themes.Base

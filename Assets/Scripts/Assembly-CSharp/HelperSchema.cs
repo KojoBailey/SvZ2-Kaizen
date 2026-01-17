@@ -57,6 +57,9 @@ public class HelperSchema
 	public float health;
 
 	[DataBundleField]
+	public float armor;
+
+	[DataBundleField]
 	public float speed;
 
 	[DataBundleField]
@@ -67,6 +70,9 @@ public class HelperSchema
 
 	[DataBundleField]
 	public float meleeDamage;
+
+	[DataBundleField]
+	public bool isArmorPiercing;
 
 	[DataBundleSchemaFilter(typeof(DynamicEnum), false)]
 	[DataBundleRecordTableFilter("Projectile")]

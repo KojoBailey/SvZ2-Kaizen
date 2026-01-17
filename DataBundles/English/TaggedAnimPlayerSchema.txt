@@ -19,8 +19,8 @@
 		defaultBlendSpeed = 0.1
 		specificAnimSettings = 
 		alsoPlayOnAllChildren = True
-	CrawlingTorso:
-		id = CrawlingTorso
+	HoppingTorso:
+		id = HoppingTorso
 		defaultBlendSpeed = 0.1
 		specificAnimSettings = 
 		alsoPlayOnAllChildren = True

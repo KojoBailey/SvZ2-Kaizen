@@ -47,18 +47,18 @@
     paperdollData = ChochinobakeAlt
     characterModelControllerData = Character.ChochinobakeAlt
     soundTheme = Themes.EnemyPossessedLantern
-  CrawlingTorso:
-    id = CrawlingTorso
+  HoppingTorso:
+    id = HoppingTorso
     prefab = Assets/Game/Resources/Characters/CharacterPrefab.prefab
     model = Assets/Game/Resources/Characters/CrawlingTorso/crawlingtorso.prefab
     material = Assets/Game/Resources/Characters/CrawlingTorso/Materials/crawling_torso_D.mat
     scaleX = 1
     scaleY = 1
     scaleZ = 1
-    taggedAnimPlayerData = Character.CrawlingTorso
-    paperdollData = CrawlingTorso
-    characterModelControllerData = Character.CrawlingTorso
-    soundTheme = Themes.EnemyCrawlingTorso
+    taggedAnimPlayerData = Character.HoppingTorso
+    paperdollData = HoppingTorso
+    characterModelControllerData = Character.HoppingTorso
+    soundTheme = Themes.EnemyHoppingTorso
   DragonDamage:
     id = DragonDamage
     prefab = Assets/Game/Resources/Characters/CharacterPrefab.prefab
@@ -1138,8 +1138,8 @@
     paperdollData = Akaname
     characterModelControllerData = Character.Akaname
     soundTheme = Themes.EnemyAkaname
-  CrawlingTorsoTutorial:
-    id = CrawlingTorsoTutorial
+  HoppingTorsoTutorial:
+    id = HoppingTorsoTutorial
     prefab = Assets/Game/Resources/Characters/CharacterPrefab.prefab
     model = Assets/Game/Resources/Characters/CrawlingTorso/crawlingtorso.prefab
     material = Assets/Game/Resources/Characters/CrawlingTorso/Materials/crawling_torso_blue_D.mat
@@ -1147,12 +1147,12 @@
     scaleY = 1
     scaleZ = 1
     animTagRoot = NULL
-    taggedAnimPlayerData = Character.CrawlingTorso
-    paperdollData = CrawlingTorso
-    characterModelControllerData = Character.CrawlingTorso
-    soundTheme = Themes.EnemyCrawlingTorso
-  CrawlingTorso_2:
-    id = CrawlingTorso_2
+    taggedAnimPlayerData = Character.HoppingTorso
+    paperdollData = HoppingTorso
+    characterModelControllerData = Character.HoppingTorso
+    soundTheme = Themes.EnemyHoppingTorso
+  HoppingTorso_2:
+    id = HoppingTorso_2
     prefab = Assets/Game/Resources/Characters/CharacterPrefab.prefab
     model = Assets/Game/Resources/Characters/CrawlingTorso/crawlingtorso.prefab
     material = Assets/Game/Resources/Characters/CrawlingTorso/Materials/crawling_torso_red_D.mat
@@ -1160,10 +1160,10 @@
     scaleY = 1
     scaleZ = 1
     animTagRoot = NULL
-    taggedAnimPlayerData = Character.CrawlingTorso
-    paperdollData = CrawlingTorso
-    characterModelControllerData = Character.CrawlingTorso
-    soundTheme = Themes.EnemyCrawlingTorso
+    taggedAnimPlayerData = Character.HoppingTorso
+    paperdollData = HoppingTorso
+    characterModelControllerData = Character.HoppingTorso
+    soundTheme = Themes.EnemyHoppingTorso
   RockyTMan:
     id = RockyTMan
     prefab = Assets/Game/Resources/Characters/CharacterPrefab.prefab
@@ -1319,7 +1319,7 @@
     taggedAnimPlayerData = Character.CrawlingBody
     paperdollData = CrawlingBody
     characterModelControllerData = Character.CrawlingBody
-    soundTheme = Themes.EnemyCrawlingTorso
+    soundTheme = Themes.EnemyHoppingTorso
   CrawlingLegs:
     id = CrawlingLegs
     prefab = Assets/Game/Resources/Characters/CharacterPrefab.prefab
@@ -1332,7 +1332,7 @@
     taggedAnimPlayerData = Character.CrawlingLegs
     paperdollData = CrawlingLegs
     characterModelControllerData = Character.CrawlingLegs
-    soundTheme = Themes.EnemyCrawlingTorso
+    soundTheme = Themes.EnemyHoppingTorso
   CrawlingBody_2:
     id = CrawlingBody_2
     prefab = Assets/Game/Resources/Characters/CharacterPrefab.prefab
@@ -1345,7 +1345,7 @@
     taggedAnimPlayerData = Character.CrawlingBody
     paperdollData = CrawlingBody
     characterModelControllerData = Character.CrawlingBody
-    soundTheme = Themes.EnemyCrawlingTorso
+    soundTheme = Themes.EnemyHoppingTorso
   CrawlingLegs_2:
     id = CrawlingLegs_2
     prefab = Assets/Game/Resources/Characters/CharacterPrefab.prefab
@@ -1358,7 +1358,7 @@
     taggedAnimPlayerData = Character.CrawlingLegs
     paperdollData = CrawlingLegs
     characterModelControllerData = Character.CrawlingLegs
-    soundTheme = Themes.EnemyCrawlingTorso
+    soundTheme = Themes.EnemyHoppingTorso
   CrawlingBody_Tutorial:
     id = CrawlingBody_Tutorial
     prefab = Assets/Game/Resources/Characters/CharacterPrefab.prefab
@@ -1371,7 +1371,7 @@
     taggedAnimPlayerData = Character.CrawlingBody
     paperdollData = CrawlingBody
     characterModelControllerData = Character.CrawlingBody
-    soundTheme = Themes.EnemyCrawlingTorso
+    soundTheme = Themes.EnemyHoppingTorso
   CrawlingLegs_Tutorial:
     id = CrawlingLegs_Tutorial
     prefab = Assets/Game/Resources/Characters/CharacterPrefab.prefab
@@ -1384,7 +1384,7 @@
     taggedAnimPlayerData = Character.CrawlingLegs
     paperdollData = CrawlingLegs
     characterModelControllerData = Character.CrawlingLegs
-    soundTheme = Themes.EnemyCrawlingTorso
+    soundTheme = Themes.EnemyHoppingTorso
   Corrupt_Panzer:
     id = Corrupt_Panzer
     prefab = Assets/Game/Resources/Characters/CharacterPrefab.prefab

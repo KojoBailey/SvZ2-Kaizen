@@ -17,13 +17,20 @@ public class EquipPageAbilities : EquipPage, UIHandlerComponent
 		{
 			WeakGlobalInstance<EnemiesShowCase>.Instance.highlight = false;
 		}
+
 		mScrollListRef = uiParent.FindChildComponent<GluiBouncyScrollList>("ScrollList_Abilities_Available");
+
 		AcquireSlotTransforms(uiParent, Singleton<Profile>.Instance.maxSelectedAbilities);
+
 		mDataSet = uiParent.FindChildComponent<EquipListController>("ScrollList_Abilities_Available").data;
+
 		mListSlotManager = new ListToSlotDragManager(mSlotTransformsRef, mScrollListRef, mDataSet);
 		mListSlotManager.onCheckAvailability = CheckIfAvailable;
+
 		Load();
+
 		Singleton<Profile>.Instance.ForceOnboardingStage("OnboardingStep14_AbilitySelect");
+
 		mListSlotManager.AutoSave = Save;
 	}
 
@@ -41,9 +48,7 @@ public class EquipPageAbilities : EquipPage, UIHandlerComponent
 		return false;
 	}
 
-	public void OnPause(bool pause)
-	{
-	}
+	public void OnPause(bool pause) {}
 
 	public void Save()
 	{
@@ -53,6 +58,7 @@ public class EquipPageAbilities : EquipPage, UIHandlerComponent
 		{
 			list.Add(((AbilitySchema)mDataSet[item]).id);
 		}
+		list.Add("KatanaSlash"); // [TODO] Make flexible for other Heroes
 		Singleton<Profile>.Instance.SetSelectedAbilities(ReverseList(list));
 	}
 
@@ -69,6 +75,7 @@ public class EquipPageAbilities : EquipPage, UIHandlerComponent
 			original = Singleton<Profile>.Instance.GetSelectedAbilities();
 		}
 		original = ReverseList(original);
+
 		List<int> list = new List<int>(original.Count);
 		foreach (string item in original)
 		{
@@ -77,7 +84,8 @@ public class EquipPageAbilities : EquipPage, UIHandlerComponent
 				AbilitySchema abilitySchema = (AbilitySchema)mDataSet[i];
 				if (string.Compare(abilitySchema.id, item, true) == 0)
 				{
-					if (Singleton<Profile>.Instance.IsInDailyChallenge || (float)Singleton<Profile>.Instance.highestUnlockedWave >= abilitySchema.waveToUnlock)
+					if (Singleton<Profile>.Instance.IsInDailyChallenge
+						|| (float)Singleton<Profile>.Instance.highestUnlockedWave >= abilitySchema.waveToUnlock)
 					{
 						list.Add(i);
 					}
