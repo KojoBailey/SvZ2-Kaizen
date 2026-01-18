@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: ground_rock_3
+  m_Shader: {fileID: 4800000, guid: 2509690843ebe0a459ed6f3b58873f60, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BlendTex1:
+        m_Texture: {fileID: 2800000, guid: 570bb4a5954746d41bd3f810e33daad7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LightMap:
+        m_Texture: {fileID: 2800000, guid: b970df2575e41674c8aecccbc72dfac4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: de821014168e36c4ba2a954f279aabf0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SecondTex:
+        m_Texture: {fileID: 2800000, guid: 570bb4a5954746d41bd3f810e33daad7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ColorIntensity: 1
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _MainColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SecondColor: {r: 1, g: 1, b: 1, a: 1}

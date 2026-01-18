@@ -30,66 +30,40 @@ internal class MusicSource
 
 	public float Volume
 	{
-		get
-		{
-			return volume;
-		}
-		set
-		{
-			volume = Mathf.Clamp(value, 0f, 1f);
-		}
+		get { return volume; }
+		set { volume = Mathf.Clamp(value, 0f, 1f); }
+	 
 	}
 
 	public float VolumeFadePercent
 	{
-		get
-		{
-			return volumeFadePercent;
-		}
-		set
-		{
-			volumeFadePercent = Mathf.Clamp(value, 0f, 1f);
-		}
+		get { return volumeFadePercent; }
+		set { volumeFadePercent = Mathf.Clamp(value, 0f, 1f); }
 	}
 
 	public bool IsIdle
 	{
-		get
-		{
-			return IsFlagSet(State.Idle);
-		}
+		get { return IsFlagSet(State.Idle); }
 	}
 
 	public bool IsPlaying
 	{
-		get
-		{
-			return audioSource.isPlaying;
-		}
+		get { return audioSource.isPlaying; }
 	}
 
 	public bool IsPaused
 	{
-		get
-		{
-			return IsFlagSet(State.Paused);
-		}
+		get { return IsFlagSet(State.Paused); }
 	}
 
 	public bool IsExternalPaused
 	{
-		get
-		{
-			return IsFlagSet(State.ExternalPause);
-		}
+		get { return IsFlagSet(State.ExternalPause); }
 	}
 
 	public bool FadingIn
 	{
-		get
-		{
-			return IsFlagSet(State.FadeIn);
-		}
+		get { return IsFlagSet(State.FadeIn); }
 		set
 		{
 			state &= ~State.FadeIn;
@@ -102,10 +76,7 @@ internal class MusicSource
 
 	public bool FadingOut
 	{
-		get
-		{
-			return IsFlagSet(State.FadeOut);
-		}
+		get { return IsFlagSet(State.FadeOut); }
 		set
 		{
 			state &= ~State.FadeOut;
@@ -124,10 +95,9 @@ internal class MusicSource
 		Transform transform = gameObject.transform;
 		transform.parent = parentTran;
 		transform.localPosition = Vector3.zero;
-		UnityEngine.Object.DontDestroyOnLoad(gameObject);
 	}
 
-	public void UpdateMusic()
+	public void UpdateMusic()	
 	{
 		if ((bool)audioSource)
 		{
@@ -138,16 +108,13 @@ internal class MusicSource
 	public void BeginPlayback(UMusicEventSchema musicEvent)
 	{
 		if (!musicEvent || musicEvent.musicClip == null || string.IsNullOrEmpty(musicEvent.musicClip))
-		{
 			return;
-		}
+
 		Stop();
 		musicEventName = musicEvent.eventName;
 		handle = new DataBundleRecordHandle<UMusicSchema>(musicEvent.musicClip);
-		if (handle == null)
-		{
-			return;
-		}
+		if (handle == null) return;
+
 		handle.Load(delegate(UMusicSchema music)
 		{
 			if ((bool)music.musicClip)

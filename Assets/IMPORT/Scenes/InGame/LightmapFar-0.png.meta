@@ -1,0 +1,38 @@
+fileFormatVersion: 2
+guid: 6daddfd382943f8459f1d7a6a6892e6c
+timeCreated: 1733908355
+licenseType: Free
+TextureImporter:
+  serializedVersion: 2
+  name:
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  textureFormat: 34
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 1
+    aniso: 3
+    mipBias: 0
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  textureType: 0
+  buildTargetSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    compressionQuality: 50

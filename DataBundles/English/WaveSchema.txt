@@ -58,7 +58,7 @@
 		recommendedHeroIsRequired = False
 	8:
 		title = Bismillah Kebabish
-		scene = ZenGarden_day
+		scene = Summer_Day
 		music = MusicEvents.BGM_ZenGarden_Day
 		rewards = 
 		commands = Wave_008

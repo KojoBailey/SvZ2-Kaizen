@@ -2,30 +2,45 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1045 &1
 EditorBuildSettings:
-  serializedVersion: 2
   m_ObjectHideFlags: 0
+  serializedVersion: 2
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/LoadingScreen.unity
+    guid: 03af78ce404013643b825da76dd1455c
   - enabled: 1
     path: Assets/Scenes/Menus/AllMenus.unity
+    guid: 0c854d9029b33a54ea81431d60f56e76
   - enabled: 1
     path: Assets/Scenes/BundleBuildConfig.unity
+    guid: 01cbd0cd7afb62b4cadee26e1cf159a0
   - enabled: 1
     path: Assets/Scenes/MountainOutlook.unity
+    guid: 024d52e2cede0654caebaad97e46e6ce
   - enabled: 1
     path: Assets/Scenes/MountainOutlook_Night.unity
+    guid: e472614f3f9930b4690922f441780402
   - enabled: 1
     path: Assets/Scenes/ZenGarden_day.unity
+    guid: 5ece465d89aa09d43906fe83a998282b
   - enabled: 1
     path: Assets/Scenes/ZenGarden_night.unity
+    guid: b25d2671b3ecafa41afdef0d483e9574
   - enabled: 1
     path: Assets/Scenes/WalledFortress.unity
+    guid: 4c02429e3edab5f4daf91ca8ecd3fce0
   - enabled: 1
     path: Assets/Scenes/WalledFortress_Night.unity
+    guid: 1f0cf9a496877bf4696926e616c17d0b
   - enabled: 1
     path: Assets/Scenes/MountainLookout.unity
+    guid: 4b221801a6a7efd4681816dba7870588
   - enabled: 1
     path: Assets/Scenes/MountainLookout_Night.unity
+    guid: e632fde642135444bac2ac35e28a2e0a
   - enabled: 1
     path: Assets/Scenes/Battlefield.unity
+    guid: 53de3429092c9f34480d0b9023c9aa14
+  - enabled: 1
+    path: Assets/Scenes/Summer_Day.unity
+    guid: 3a4fa21d7d22c0e41847d84af3101fb8

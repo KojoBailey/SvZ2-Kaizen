@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 
 [AddComponentMenu("Audio/Udaman Music Manager")]
@@ -33,10 +34,31 @@ public class UMusicManager : SingletonSpawningMonoBehaviour<UMusicManager>
 	protected override void Awake()
 	{
 		base.Awake();
+
 		Transform parentTran = base.transform;
 		for (int i = 0; i < 3; i++)
 		{
 			activeMusic[i] = new MusicSource(parentTran);
+		}
+		DontDestroyOnLoad(parentTran);
+
+		CleanUpDuplicateListeners();
+	}
+
+	private void CleanUpDuplicateListeners()
+	{
+		AudioListener[] listeners = FindObjectsOfType<AudioListener>();
+		
+		if (listeners.Length <= 1) return;
+
+		AudioListener keeper = Camera.main != null ? Camera.main.GetComponent<AudioListener>() : listeners[0];
+
+		foreach (var listener in listeners)
+		{
+			if (listener != keeper)
+			{
+				Destroy(listener);
+			}
 		}
 	}
 
