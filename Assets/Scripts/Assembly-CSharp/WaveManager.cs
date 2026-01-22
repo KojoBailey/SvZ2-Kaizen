@@ -60,7 +60,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 			delay = _delay;
 		}
 	}
-	private Queue<QueueItem> mSpawnQueue = new Queue<QueueItem>();
+	private Queue<QueueItem>[] mSpawnQueue = new Queue<QueueItem>[10];
 
 	private int mNextCommandIndex;
 
@@ -118,10 +118,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	public bool isDone
 	{
-		get
-		{
-			return mNextCommandIndex >= waveRootData.Commands.Length && specialBossName == string.Empty;
-		}
+		get { return mNextCommandIndex >= waveRootData.Commands.Length && specialBossName == string.Empty; }
 	}
 
 	public bool areCommandsDone
@@ -131,32 +128,20 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	public bool isWaveComplete
 	{
-		get
-		{
-			return areCommandsDone && mEnemiesKilledSoFar >= mTotalNumEnemies;
-		}
+		get { return areCommandsDone && mEnemiesKilledSoFar >= mTotalNumEnemies; }
 	}
 
 	public WaveSchema Data
 	{
-		get
-		{
-			return waveRootData;
-		}
+		get { return waveRootData; }
 	}
 
 	public DataBundleRecordKey WaveRecordKey { get; private set; }
 
 	public int totalEnemies
 	{
-		get
-		{
-			return mTotalNumEnemies;
-		}
-		set
-		{
-			mTotalNumEnemies = value;
-		}
+		get { return mTotalNumEnemies; }
+		set { mTotalNumEnemies = value; }
 	}
 
 	public int enemiesKilledSoFar
@@ -166,26 +151,17 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	public List<string> allDifferentEnemies
 	{
-		get
-		{
-			return mAllDifferentEnemies;
-		}
+		get { return mAllDifferentEnemies; }
 	}
 
 	public BoxCollider enemiesSpawnArea
 	{
-		get
-		{
-			return mEnemiesSpawnArea;
-		}
+		get { return mEnemiesSpawnArea; }
 	}
 
 	public int waveLevel
 	{
-		get
-		{
-			return mWaveIndex;
-		}
+		get { return mWaveIndex; }
 	}
 
 	public string tutorial
@@ -195,37 +171,22 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	public WaveRecyclingMultipliers multipliers
 	{
-		get
-		{
-			return mLevelMultipliers;
-		}
+		get { return mLevelMultipliers; }
 	}
 
 	public int villageArchersLevel
 	{
-		get
-		{
-			return mVillageArchersLevel;
-		}
+		get { return mVillageArchersLevel; }
 	}
 
 	public int bellLevel
 	{
-		get
-		{
-			return mBellLevel;
-		}
+		get { return mBellLevel; }
 	}
 
 	public HelperEnemySwapSchema[] helperEnemySwaps
 	{
-		get
-		{
-			return mCorruptionSwapData.Data;
-		}
-		set
-		{
-		}
+		get { return mCorruptionSwapData.Data; }
 	}
 
 	private GameObject corruptionSpawnEffect { get; set; }
@@ -321,20 +282,21 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	public void AddSpecialRewardsToCollectables()
 	{
-		if (waveRootData.Rewards != null && Singleton<Profile>.Instance.GetIsWaveUnlocked(mWaveIndex))
-		{
-			WeakGlobalInstance<CollectableManager>.Instance.GiveResource(ECollectableType.copperCoin, waveRootData.Rewards.coins); // [TODO] support all coin types
-			WeakGlobalInstance<CollectableManager>.Instance.GiveResource(ECollectableType.pachinkoBall, waveRootData.Rewards.pachinkoBalls);
-			// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("revivePotion", waveRootData.Rewards.revive);
-			// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("power", waveRootData.Rewards.power);
-			// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("luck", waveRootData.Rewards.luck);
-			// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("friendship", waveRootData.Rewards.friendship);
-			// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("wealth", waveRootData.Rewards.wealth);
-			// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("haste", waveRootData.Rewards.haste);
-			// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("peace", waveRootData.Rewards.peace);
-			// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("healthPotion", waveRootData.Rewards.sushi);
-			// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("leadershipPotion", waveRootData.Rewards.tea);
-		}
+		if (waveRootData.Rewards == null || !Singleton<Profile>.Instance.GetIsWaveUnlocked(mWaveIndex))
+			return;
+
+		// [TODO] support all coin types
+		WeakGlobalInstance<CollectableManager>.Instance.GiveResource(ECollectableType.copperCoin, waveRootData.Rewards.coins);
+		WeakGlobalInstance<CollectableManager>.Instance.GiveResource(ECollectableType.pachinkoBall, waveRootData.Rewards.pachinkoBalls);
+		// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("revivePotion", waveRootData.Rewards.revive);
+		// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("power", waveRootData.Rewards.power);
+		// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("luck", waveRootData.Rewards.luck);
+		// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("friendship", waveRootData.Rewards.friendship);
+		// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("wealth", waveRootData.Rewards.wealth);
+		// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("haste", waveRootData.Rewards.haste);
+		// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("peace", waveRootData.Rewards.peace);
+		// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("healthPotion", waveRootData.Rewards.sushi);
+		// WeakGlobalInstance<CollectableManager>.Instance.GiveSpecificPresent("leadershipPotion", waveRootData.Rewards.tea);
 	}
 
 	public static void LoadSceneForWave()
@@ -601,6 +563,9 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 	{
 		string enemy = command.enemy.Key;
 		if (enemy == string.Empty) return;
+
+		if (command.simultaneous)
+			UnityEngine.Debug.Log("simultaneous");
 
 		int count = (command.count > 1) ? command.count : 1;
 		for (int i = 0; i < count; i++)
