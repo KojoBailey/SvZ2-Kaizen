@@ -13,6 +13,35 @@
     knockbackPower = 1
     knockbackResistance = 4
     usesBladeWeapon = True
+  Unstoppable:
+    id = Unstoppable
+    displayName = LocalizedStrings.Enemy_Info_35_name
+    resources = Character.CrawlingBody
+    meleeWeaponPrefab = Assets/Game/Resources/Props/Weapons/mace.fbx
+    health = 60
+    speedMin = 1
+    speedMax = 1
+    meleeRange = 1
+    meleeDamage = 30
+    attackFrequency = 1
+    knockbackPower = 40
+    knockbackResistance = 50
+    damageBuffPercent = 0
+    usesBladeWeapon = False
+  ZombieLegs:
+    id = ZombieLegs
+    displayName = 
+    resources = Character.CrawlingLegs
+    health = 80
+    speedMin = 2
+    speedMax = 2
+    meleeRange = 1
+    meleeDamage = 25
+    attackFrequency = 1.5
+    knockbackPower = 20
+    knockbackResistance = 45
+    usesBladeWeapon = False
+    gateRusher = True
   LZombieMelee:
     id = LZombieMelee
     displayName = LocalizedStrings.ZombieBrawler_Name

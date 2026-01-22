@@ -1,5 +1,5 @@
 [Wave_001]
-# Introduce basic gameplay, showing: movement, melee attacking, Souls and using Abilities.
+# Introduce the Hero's movement and attacking, as well as Zombies and portal relocation.
 	*:
 		# Give some time for player to read tutorial and test movement.
 		type = Delay
@@ -42,7 +42,13 @@
 		count = 3
 		spacing = Tight
 [Wave_002]
-# Introduce the Ally and Leadership mechanic, ramping up difficulty to encourage use of Ally support.
+# Introduce the Ally and Leadership mechanics.
+# Unstoppable Zombies distract the Hero from the main horde, encouraging the use of Ashigaru to cover.
+	*:
+		type = Spawn
+		enemy = Enemies.Unstoppable
+		count = 10
+		spacing = Loose
 	*:
 		type = Spawn
 		enemy = Enemies.HoppingTorso
@@ -56,6 +62,11 @@
 	*:
 		type = Spawn
 		enemy = Enemies.LZombieSword
+		count = 2
+		spacing = Moderate
+	*:
+		type = Spawn
+		enemy = Enemies.Unstoppable
 		count = 2
 		spacing = Moderate
 	*:
@@ -1006,3 +1017,43 @@
 		count = 7
 		spacing = Tight
 		spawnAt = NoDelay
+[Wave_010]
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieSword
+		count = 6
+		spacing = Tight
+		spawnAt = NoDelay
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieArcher
+		count = 4
+		spacing = Tight
+		spawnAt = Death
+	*:
+		type = Spawn
+		enemy = Enemies.OniSmall
+		count = 2
+		spacing = Loose
+		spawnAt = NoDelay
+		simultaneous = True
+	*:
+		type = Spawn
+		enemy = Enemies.Nobusuma
+		count = 7
+		spacing = Moderate
+		spawnAt = NoDelay
+		simultaneous = True
+	*:
+		type = Spawn
+		enemy = Enemies.LZombieSword
+		count = 6
+		spacing = Loose
+		spawnAt = NoDelay
+		simultaneous = True
+	*:
+		type = Spawn
+		enemy = Enemies.OniSmall
+		count = 2
+		spacing = Loose
+		spawnAt = Death
