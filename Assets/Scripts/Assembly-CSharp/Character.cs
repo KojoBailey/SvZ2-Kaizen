@@ -1658,7 +1658,6 @@ public class Character : Weakable
 				Singleton<PlayerWaveEventData>.Instance.AccumulateDamage(Mathf.Min(health, damage));
 			}
 			
-			UnityEngine.Debug.Log(string.Format("Armour Piercing: {0}\nArmour: {1}", attacker.isArmorPiercing, mStats.armor));
 			if (attacker.isArmorPiercing)
 			{
 				health -= damage;
