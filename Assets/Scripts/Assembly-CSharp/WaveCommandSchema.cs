@@ -84,6 +84,10 @@ public class WaveCommandSchema
 		get { return MaxDelayToSeconds(maxDelay); }
 	}
 
+	[DataBundleField]
+	[DataBundleDefaultValue(false)]
+	public bool simultaneous;
+
 	[DataBundleField(ColumnWidth = 200)]
 	public string banner;
 

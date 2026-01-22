@@ -49,18 +49,7 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 	private WaveRecyclingMultipliers mLevelMultipliers = new WaveRecyclingMultipliers();
 
-	private class QueueItem
-	{
-		public string enemy;
-		public float delay;
-
-		public QueueItem(string _enemy, float _delay)
-		{
-			enemy = _enemy;
-			delay = _delay;
-		}
-	}
-	private Queue<QueueItem>[] mSpawnQueue = new Queue<QueueItem>[10];
+	private WaveSpawnManager mWaveSpawnManager = new WaveSpawnManager();
 
 	private int mNextCommandIndex;
 
@@ -69,38 +58,10 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 		get { return !areCommandsDone ? waveRootData.Commands[mNextCommandIndex] : null; }
 	}
 
-	private class Timer
+	public WaveCommandSchema NextCommand
 	{
-		private float mTimer = 0f;
-
-		public float Value
-		{
-			get { return Mathf.Max(mTimer, 0f); }
-		}
-
-		public bool IsDone
-		{
-			get { return mTimer <= 0f; }
-		}
-
-		public void Reset()
-		{
-			mTimer = 0f;
-		}
-
-		public void Update()
-		{
-			mTimer -= Time.deltaTime;
-		}
-
-		public void IncreaseBy(float duration)
-		{
-			mTimer += Mathf.Max(0f, duration);
-		}
+		get { return mNextCommand; }
 	}
-
-	private Timer mSpawnTimer = new Timer();
-	private Timer mQueueTimer = new Timer();
 
 	private string mTutorial = string.Empty;
 
@@ -508,23 +469,24 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 	{
 		if (isWaveComplete) return;
 
-		mSpawnTimer.Update();
-		mQueueTimer.Update();
+		mWaveSpawnManager.Update();
 
-		if (!mSpawnTimer.IsDone) return;
+		if (mNextCommand == null) return;
 
-		if (mNextCommand != null &&
-			(mQueueTimer.IsDone || mSpawnQueue.Count == 0 && mRemainingEnemyHealthPercent <= mNextCommand.spawnAtPercent))
+		bool isEnemyHealthSufficientlyDepleted =
+			!mWaveSpawnManager.IsSpawning && mRemainingEnemyHealthPercent <= mNextCommand.spawnAtPercent;
+
+		if (mWaveSpawnManager.IsNextGroupReady || mNextCommand.simultaneous || isEnemyHealthSufficientlyDepleted)
 		{
-			mQueueTimer.Reset();
+			mWaveSpawnManager.ResetQueueTimer();
 
 			switch (mNextCommand.type)
 			{
 			case WaveCommandSchema.Type.Spawn:
-				QueueSpawns(mNextCommand);
+				mWaveSpawnManager.QueueSpawns(mNextCommand);
 				break;
 			case WaveCommandSchema.Type.Delay:
-				mSpawnTimer.IncreaseBy(mNextCommand.duration);
+				mWaveSpawnManager.DelaySpawn(mNextCommand.duration);
 				break;
 			case WaveCommandSchema.Type.Banner:
 				FlashBanner(mNextCommand.banner);
@@ -538,43 +500,6 @@ public class WaveManager : WeakGlobalInstance<WaveManager>
 
 			mNextCommandIndex++;
 		}
-
-		SpawnNext();
-	}
-
-	private void SpawnNext()
-	{
-		if (mSpawnQueue.Count == 0) return;
-
-		mSpawnTimer.Reset();
-
-		var queueItem = mSpawnQueue.Dequeue();
-
-		if (queueItem.enemy != string.Empty)
-		{
-			var enemy = ConstructEnemy(queueItem.enemy);
-			WeakGlobalInstance<CharactersManager>.Instance.AddCharacter(enemy);
-		}
-
-		mSpawnTimer.IncreaseBy(queueItem.delay);
-	}
-
-	private void QueueSpawns(WaveCommandSchema command)
-	{
-		string enemy = command.enemy.Key;
-		if (enemy == string.Empty) return;
-
-		if (command.simultaneous)
-			UnityEngine.Debug.Log("simultaneous");
-
-		int count = (command.count > 1) ? command.count : 1;
-		for (int i = 0; i < count; i++)
-		{
-			float delay = (i < count - 1) ? command.spacingSeconds : 2.0f;
-			mSpawnQueue.Enqueue(new QueueItem(enemy, delay));
-		}
-
-		mQueueTimer.IncreaseBy(mNextCommand.maxDelaySeconds);
 	}
 
 	private void FlashBanner(string banner)
