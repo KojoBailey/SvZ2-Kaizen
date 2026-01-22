@@ -276,7 +276,7 @@ public class StoreMenuImpl : SingletonMonoBehaviour<StoreMenuImpl>, IGluiActionH
 			GetData_Allies(list);
 			break;
 		case "PowerUps":
-			GetData_PowerUps(list);
+			// GetData_PowerUps(list);
 			break;
 		default:
 			list.AddRange(StoreAvailability.GetList(dataFilterKey).ConvertAll((Converter<StoreData.Item, object>)((StoreData.Item i) => i)));

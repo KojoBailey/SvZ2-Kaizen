@@ -50,16 +50,16 @@ public class StoreAvailability
 		else if (string.Compare(contentType, "Consumables", true) == 0 || string.Compare(contentType, StringUtils.GetStringFromStringRef("MenuFixedStrings", "Boost_Consumables"), true) == 0)
 		{
 			// GetMysteryBox(list);
-			GetDealPacks(list);
-			GetPotions(list);
+			// GetDealPacks(list);
+			// GetPotions(list);
 		}
 		else if (string.Compare(contentType, "Upgrades", true) == 0 || string.Compare(contentType, StringUtils.GetStringFromStringRef("MenuFixedStrings", "Boost_Upgrades"), true) == 0)
 		{
-			GetUpgrades(list, false);
+			// GetUpgrades(list, false);
 		}
 		else if (string.Compare(contentType, "Charms", true) == 0 || string.Compare(contentType, StringUtils.GetStringFromStringRef("MenuFixedStrings", "Boost_Charms"), true) == 0)
 		{
-			GetCharms(list);
+			// GetCharms(list);
 		}
 		else
 		{

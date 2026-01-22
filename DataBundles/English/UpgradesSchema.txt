@@ -91,20 +91,20 @@
 		costLevel3 = NULL
 		iconLevel3 = 
 		descLevel3 = 
-	AbilitySlot:
-		id = AbilitySlot
-		globalStoreGroup = True
-		numUpgradeLevels = 1
-		name = LocalizedStrings.Upgrade_Ability_Slot
-		amountLevel1 = 0
-		costLevel1 = 0,100
-		iconLevel1 = Assets/Game/Resources/UI/Textures/DynamicIcons/Upgrades/Global_MasterfulSkill.png
-		descLevel1 = LocalizedStrings.Upgrade_Ability_Slot_desc
-		amountLevel2 = 0
-		costLevel2 = NULL
-		iconLevel2 = 
-		descLevel2 = 
-		amountLevel3 = 0
-		costLevel3 = NULL
-		iconLevel3 = 
-		descLevel3 = 
+	# AbilitySlot:
+	# 	id = AbilitySlot
+	# 	globalStoreGroup = True
+	# 	numUpgradeLevels = 1
+	# 	name = LocalizedStrings.Upgrade_Ability_Slot
+	# 	amountLevel1 = 0
+	# 	costLevel1 = 0,100
+	# 	iconLevel1 = Assets/Game/Resources/UI/Textures/DynamicIcons/Upgrades/Global_MasterfulSkill.png
+	# 	descLevel1 = LocalizedStrings.Upgrade_Ability_Slot_desc
+	# 	amountLevel2 = 0
+	# 	costLevel2 = NULL
+	# 	iconLevel2 = 
+	# 	descLevel2 = 
+	# 	amountLevel3 = 0
+	# 	costLevel3 = NULL
+	# 	iconLevel3 = 
+	# 	descLevel3 = 
