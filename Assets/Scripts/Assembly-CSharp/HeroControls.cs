@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,7 +25,7 @@ public class HeroControls : IDisposable
 
     private List<int> activeInputs = new List<int>();
     
-    private KeyCode mCurrentKey = KeyCode.LeftArrow;
+    private int mCurrentDirection = 0;
 
     public HeroControls()
     {
@@ -37,62 +38,61 @@ public class HeroControls : IDisposable
     {
         return kMoveLeftTouchArea.Contains(pt) || kMoveRightTouchArea.Contains(pt);
     }
+
+    private string GetMoveHeroString(int direction)
+    {
+        switch (direction)
+        {
+        case  1: return "Move Hero Right";
+        case -1: return "Move Hero Left";
+        }
+        return "";
+    }
+
+    private void RunMovementAction(int direction)
+    {
+        switch (direction)
+        {
+        case  1: onMoveRight(); return;
+        case -1: onMoveLeft(); return;
+        }
+        onDontMove();
+    }
     
     private void UpdatePCControls()
 	{
-		//flips the else statements depending on the key you last pressed
-		//this is so if you're holding d and you press a, you'll go backwards. and vice versa. instead of d just taking priority over a.
-		//I did this in brawlers as well. it makes the controls feel a lot less clunky.
-		if (mCurrentKey == KeyCode.LeftArrow)
-		{
-			if (Input.GetKey(KeyCode.RightArrow))
-			{
-				onMoveRight();
+		// If you're holding left and press right, you'll keep moving left,
+        // and vice versa (instead of one taking priority over the other).
 
-				if (!Input.GetKey(mCurrentKey))
-				{
-					mCurrentKey = KeyCode.RightArrow;
-				}
-			}
-			else if (Input.GetKey(KeyCode.LeftArrow))
-			{
-				onMoveLeft();
-				
-				if (!Input.GetKey(mCurrentKey))
-				{
-					mCurrentKey = KeyCode.LeftArrow;
-				}
-			}
-			else
-			{
-				onDontMove();
-			}
-		}
-		else if (mCurrentKey == KeyCode.RightArrow)
-		{
-			if (Input.GetKey(KeyCode.LeftArrow))
-			{
-				onMoveLeft();
-				
-				if (!Input.GetKey(mCurrentKey))
-				{
-					mCurrentKey = KeyCode.LeftArrow;
-				}
-			}
-			else if (Input.GetKey(KeyCode.RightArrow))
-			{
-				onMoveRight();
+        var otherDirection = mCurrentDirection * -1;
 
-				if (!Input.GetKey(mCurrentKey))
-				{
-					mCurrentKey = KeyCode.RightArrow;
-				}
-			}
-			else
-			{
-				onDontMove();
-			}
-		}
+        if (mCurrentDirection != 0)
+        {
+            if (!Input.GetButton(GetMoveHeroString(mCurrentDirection)))
+            {
+                if (Input.GetButton(GetMoveHeroString(otherDirection)))
+                {
+                    mCurrentDirection = otherDirection;
+                }
+                else
+                {
+                    mCurrentDirection = 0;
+                }
+            }
+        }
+        else
+        {
+            if (Input.GetButton(GetMoveHeroString(1)))
+            {
+                mCurrentDirection = 1;
+            }
+            else if (Input.GetButton(GetMoveHeroString(-1)))
+            {
+                mCurrentDirection = -1;
+            }
+        }
+
+        RunMovementAction(mCurrentDirection);
 	}
 
     private void UpdateMobileControls()
