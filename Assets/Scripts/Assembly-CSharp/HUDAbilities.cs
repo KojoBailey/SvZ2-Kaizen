@@ -160,10 +160,7 @@ public class HUDAbilities : UIHandlerComponent
 
 	public bool enabled
 	{
-		get
-		{
-			return mEnabled;
-		}
+		get { return mEnabled; }
 		set
 		{
 			mEnabled = value;
@@ -182,9 +179,8 @@ public class HUDAbilities : UIHandlerComponent
 			string name = string.Format("Locator_Ability_{0}", num);
 			Transform transform = ObjectUtils.FindTransformInChildren(uiParent.transform, name);
 			if (transform == null)
-			{
 				break;
-			}
+
 			mAbilitiesLocations.Add(transform);
 			num++;
 		}
@@ -234,6 +230,7 @@ public class HUDAbilities : UIHandlerComponent
 		catch (Exception)
 		{
 		}
+
 		if (Singleton<Profile>.Instance.IsInMultiplayerWave)
 		{
 			mLegendaryStrike = HUDLegendaryStrike.Create(mAbilitiesLocations[0].gameObject);
