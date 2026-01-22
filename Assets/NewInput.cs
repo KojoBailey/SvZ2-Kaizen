@@ -31,7 +31,7 @@ public class NewInput : MonoBehaviour
 
     public static bool UseAbility(int index, int length)
     {
-        return Input.GetButtonDown("Ability " + (length - index));
+        return Input.GetButtonDown("Ability " + (index + 1));
     }
 
     public static bool UseConsumable(int index)
