@@ -18,7 +18,7 @@ public class StoreAvailability
 
 		if (contentType == StringUtils.GetStringFromStringRef("MenuFixedStrings", "store_items_global"))
 		{
-			GetMysteryBox(list);
+			// GetMysteryBox(list);
 			GetUpgrades(list, true);
 			EndSortedGroup(list, 1);
 			GetGateUpgrade(list);
@@ -31,12 +31,12 @@ public class StoreAvailability
 		}
 		else if (string.Compare(contentType, "Helpers", true) == 0 || string.Compare(contentType, "Allies", true) == 0)
 		{
-			GetMysteryBox(list);
+			// GetMysteryBox(list);
 			StoreAvailability_Helpers.Get(list);
 		}
 		else if (string.Compare(contentType, "Champions", true) == 0)
 		{
-			GetMysteryBox(list);
+			// GetMysteryBox(list);
 			StoreAvailability_Helpers.GetChampions(list);
 			postSortProcessing = delegate(List<StoreData.Item> all)
 			{
@@ -49,7 +49,7 @@ public class StoreAvailability
 		}
 		else if (string.Compare(contentType, "Consumables", true) == 0 || string.Compare(contentType, StringUtils.GetStringFromStringRef("MenuFixedStrings", "Boost_Consumables"), true) == 0)
 		{
-			GetMysteryBox(list);
+			// GetMysteryBox(list);
 			GetDealPacks(list);
 			GetPotions(list);
 		}
@@ -69,7 +69,7 @@ public class StoreAvailability
 			HeroSchema heroSchema = Singleton<HeroesDatabase>.Instance[contentType];
 			if (heroSchema != null && !heroSchema.Locked)
 			{
-				GetHeroMysteryBox(contentType, list);
+				// GetHeroMysteryBox(contentType, list);
 			}
 			GetHero(contentType, list);
 		}
