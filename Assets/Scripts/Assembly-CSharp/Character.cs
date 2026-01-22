@@ -1649,24 +1649,20 @@ public class Character : Weakable
 
 	public virtual void RecievedAttack(EAttackType attackType, float damage, Character attacker, bool canReflect)
 	{
-		if (health > 0f && !invuln && !enemyIgnoresMe)
+		if (health <= 0f || invuln && enemyIgnoresMe) return;
+
+		lastAttackTypeHitWith = attackType;
+
+		float trueDamage = attacker.isArmorPiercing
+			? damage
+			: damage * (1 - mStats.armor);
+
+		RecievedAttackFX(attackType, trueDamage, attacker);
+		if (attacker == WeakGlobalMonoBehavior<InGameImpl>.Instance.hero)
 		{
-			lastAttackTypeHitWith = attackType;
-			RecievedAttackFX(attackType, damage, attacker);
-			if (attacker == WeakGlobalMonoBehavior<InGameImpl>.Instance.hero)
-			{
-				Singleton<PlayerWaveEventData>.Instance.AccumulateDamage(Mathf.Min(health, damage));
-			}
-			
-			if (attacker.isArmorPiercing)
-			{
-				health -= damage;
-			}
-			else
-			{
-				health -= damage * (1 - mStats.armor);
-			}
+			Singleton<PlayerWaveEventData>.Instance.AccumulateDamage(Mathf.Min(health, trueDamage));
 		}
+		health -= trueDamage;
 	}
 
 	public virtual void RecievedHealing(float healAmount)
