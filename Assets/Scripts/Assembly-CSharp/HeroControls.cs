@@ -24,7 +24,7 @@ public class HeroControls : IDisposable
 
     private List<int> activeInputs = new List<int>();
     
-    private KeyCode mCurrentKey = KeyCode.A;
+    private KeyCode mCurrentKey = KeyCode.LeftArrow;
 
     public HeroControls()
     {
@@ -43,24 +43,24 @@ public class HeroControls : IDisposable
 		//flips the else statements depending on the key you last pressed
 		//this is so if you're holding d and you press a, you'll go backwards. and vice versa. instead of d just taking priority over a.
 		//I did this in brawlers as well. it makes the controls feel a lot less clunky.
-		if (mCurrentKey == KeyCode.A)
+		if (mCurrentKey == KeyCode.LeftArrow)
 		{
-			if (Input.GetKey(KeyCode.D))
+			if (Input.GetKey(KeyCode.RightArrow))
 			{
 				onMoveRight();
 
 				if (!Input.GetKey(mCurrentKey))
 				{
-					mCurrentKey = KeyCode.D;
+					mCurrentKey = KeyCode.RightArrow;
 				}
 			}
-			else if (Input.GetKey(KeyCode.A))
+			else if (Input.GetKey(KeyCode.LeftArrow))
 			{
 				onMoveLeft();
 				
 				if (!Input.GetKey(mCurrentKey))
 				{
-					mCurrentKey = KeyCode.A;
+					mCurrentKey = KeyCode.LeftArrow;
 				}
 			}
 			else
@@ -68,24 +68,24 @@ public class HeroControls : IDisposable
 				onDontMove();
 			}
 		}
-		else if (mCurrentKey == KeyCode.D)
+		else if (mCurrentKey == KeyCode.RightArrow)
 		{
-			if (Input.GetKey(KeyCode.A))
+			if (Input.GetKey(KeyCode.LeftArrow))
 			{
 				onMoveLeft();
 				
 				if (!Input.GetKey(mCurrentKey))
 				{
-					mCurrentKey = KeyCode.A;
+					mCurrentKey = KeyCode.LeftArrow;
 				}
 			}
-			else if (Input.GetKey(KeyCode.D))
+			else if (Input.GetKey(KeyCode.RightArrow))
 			{
 				onMoveRight();
 
 				if (!Input.GetKey(mCurrentKey))
 				{
-					mCurrentKey = KeyCode.D;
+					mCurrentKey = KeyCode.RightArrow;
 				}
 			}
 			else
