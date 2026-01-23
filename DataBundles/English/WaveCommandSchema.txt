@@ -47,12 +47,7 @@
 	*:
 		type = Spawn
 		enemy = Enemies.Unstoppable
-		count = 10
-		spacing = Loose
-	*:
-		type = Spawn
-		enemy = Enemies.HoppingTorso
-		count = 2
+		count = 3
 		spacing = Loose
 	*:
 		type = Spawn
@@ -95,7 +90,8 @@
 		count = 3
 		spacing = Moderate
 [Wave_003]
-# Begin to build more structured enemy formations, with spearmen behind the tanker enemies.
+# Test the player's ability to split focus between the Hero and Allies even further
+# by introducing the fast-moving Chōchinobake.
 	*:
 		type = Spawn
 		enemy = Enemies.HoppingTorso
